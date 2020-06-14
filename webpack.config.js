@@ -16,7 +16,7 @@ module.exports = {
     ],
   },
   output: {
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
   },
   devtool: isDev ? 'source-map' : '',
@@ -33,12 +33,6 @@ module.exports = {
     new CleanWebpackPlugin(),
     new HTMLWebpackPlugin({
       template: './src/index.html',
-      minify: isProd,
-      favicon: './src/favicon.ico',
-    }),
-    new HTMLWebpackPlugin({
-      template: './src/primary.html',
-      filename: 'primary.html',
       minify: isProd,
       favicon: './src/favicon.ico',
     }),
