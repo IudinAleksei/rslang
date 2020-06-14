@@ -1,0 +1,11 @@
+@import "~normalize.scss";
+@import "abstract/constants";
+@import "abstract/placeholders";
+@import "base/buttons";
+@import "layout/wrapper";
+@import "layout/header";
+@import "layout/footer";
+
+html {
+  font-size: 10px;
+}

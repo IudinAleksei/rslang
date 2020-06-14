@@ -9,10 +9,15 @@ const isProd = !isDev;
 
 module.exports = {
   entry: {
-    main: [
+    landing: [
       '@babel/polyfill',
       './src/index.js',
       './src/sass/index.scss',
+    ],
+    main: [
+      '@babel/polyfill',
+      './src/main.js',
+      './src/sass/main.scss',
     ],
   },
   output: {
@@ -33,14 +38,24 @@ module.exports = {
     new CleanWebpackPlugin(),
     new HTMLWebpackPlugin({
       template: './src/index.html',
+      filename: 'index.html',
       minify: isProd,
       favicon: './src/favicon.ico',
+      chunks: ['landing'],
+    }),
+    new HTMLWebpackPlugin({
+      template: './src/main.html',
+      filename: 'main.html',
+      minify: isProd,
+      favicon: './src/favicon.ico',
+      chunks: ['main'],
     }),
     new CopyWebpackPlugin([
       { from: './src/assets', to: 'assets' },
     ]),
     new MiniCssExtractPlugin({
-      filename: isDev ? 'style.css' : 'style.[hash].css',
+      filename: isDev ? '[name].css' : '[name].[hash].css',
+      chunkFilename: '[id].css',
     }),
   ],
   module: {
