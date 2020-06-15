@@ -11,13 +11,13 @@ module.exports = {
   entry: {
     landing: [
       '@babel/polyfill',
-      './src/index.js',
       './src/sass/index.scss',
+      './src/index.js',
     ],
     main: [
       '@babel/polyfill',
-      './src/main.js',
       './src/sass/main.scss',
+      './src/main.js',
     ],
   },
   output: {
