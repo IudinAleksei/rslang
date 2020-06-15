@@ -10,12 +10,10 @@ const isProd = !isDev;
 module.exports = {
   entry: {
     landing: [
-      '@babel/polyfill',
       './src/sass/index.scss',
       './src/index.js',
     ],
     main: [
-      '@babel/polyfill',
       './src/sass/main.scss',
       './src/main.js',
     ],
@@ -101,25 +99,9 @@ module.exports = {
           'sass-loader'],
       },
       {
-        enforce: 'pre',
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'eslint-loader',
-      },
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: {
-          loader: 'babel-loader',
-          options: {
-            presets: [
-              '@babel/preset-env',
-            ],
-            plugins: [
-              '@babel/plugin-proposal-class-properties',
-            ],
-          },
-        },
       },
     ],
   },
