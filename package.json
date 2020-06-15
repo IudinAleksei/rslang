@@ -1,0 +1,56 @@
+{
+  "name": "rslang",
+  "version": "1.0.0",
+  "description": "RSSchool task",
+  "main": "index.js",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development webpack --mode development",
+    "build": "cross-env NODE_ENV=production webpack --mode production",
+    "watch": "cross-env NODE_ENV=development webpack --mode development --watch",
+    "start": "cross-env NODE_ENV=development webpack-dev-server --mode development --open",
+    "test": "jest"
+  },
+  "browserslist": "> 0.25%, not dead",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/IudinAleksei/rslang"
+  },
+  "keywords": [
+    "rsschool",
+    "english"
+  ],
+  "author": "rss2020q1-52_team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IudinAleksei/rslang/issues"
+  },
+  "homepage": "https://rss2020q1-52_team-rslang.netlify.app",
+  "devDependencies": {    
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^5.1.1",
+    "cross-env": "^7.0.2",
+    "css-loader": "^3.5.1",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-import": "^2.20.2",
+    "file-loader": "^6.0.0",
+    "html-loader": "^1.1.0",
+    "html-webpack-plugin": "^4.0.4",
+    "jest": "^25.5.4",
+    "mini-css-extract-plugin": "^0.9.0",
+    "node-sass": "^4.14.1",
+    "sass-loader": "^8.0.2",
+    "stylelint": "^13.6.0",
+    "stylelint-config-standard": "^20.0.0",
+    "stylelint-webpack-plugin": "^2.0.0",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "dependencies": {    
+    "eslint-plugin-jest": "^23.10.0",
+    "normalize.css": "^8.0.1",
+    "normalize.scss": "^0.1.0"
+  }
+}
