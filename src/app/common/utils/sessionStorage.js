@@ -15,9 +15,9 @@ const setDefaultSessionData = () => {
 
 export const setSessionData = (data = {}) => {
   if (data) {
-    const keyArray = Object.keys(DEFAULT_SESSION_DATA);
-    keyArray.forEach((key) => {
-      window.sessionStorage.setItem(key, data[key]);
+    const dataArray = Object.entries(data);
+    dataArray.forEach((entry) => {
+      window.sessionStorage.setItem(...entry);
     });
   }
   return !!data;
