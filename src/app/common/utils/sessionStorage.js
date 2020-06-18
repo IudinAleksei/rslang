@@ -1,36 +1,39 @@
-import { PARAMS, DEFAULT_PARAMS } from '../constants';
+import { DEFAULT_SESSION_DATA } from '../constants';
 
-const hasSavedParams = () => {
-  const paramsArray = Object.values(PARAMS);
-  const result = paramsArray.every((param) => !!window.sessionStorage.getItem(param));
+const hasSavedSessionData = () => {
+  const dataNameArray = Object.keys(DEFAULT_SESSION_DATA);
+  const result = dataNameArray.every((entry) => !!window.sessionStorage.getItem(entry));
   return result;
 };
 
-const setDefaultParams = () => {
-  const defaultArray = Object.entries(DEFAULT_PARAMS);
-  defaultArray.forEach((defParam) => {
-    window.sessionStorage.setItem(...defParam);
+const setDefaultSessionData = () => {
+  const defaultArray = Object.entries(DEFAULT_SESSION_DATA);
+  defaultArray.forEach((defEntry) => {
+    window.sessionStorage.setItem(...defEntry);
   });
 };
 
-export const setParams = (score = 0) => {
-  if (score) {
-    window.sessionStorage.setItem([PARAMS.score], score);
+export const setSessionData = (data = {}) => {
+  if (data) {
+    const keyArray = Object.keys(DEFAULT_SESSION_DATA);
+    keyArray.forEach((key) => {
+      window.sessionStorage.setItem(key, data[key]);
+    });
   }
-  return !!score;
+  return !!data;
 };
 
-export const getParams = () => {
-  const paramsArray = Object.values(PARAMS);
-  const result = paramsArray.map((param) => window.sessionStorage.getItem(param));
+export const getSessionData = () => {
+  const dataNameArray = Object.keys(DEFAULT_SESSION_DATA);
+  const result = dataNameArray.map((param) => window.sessionStorage.getItem(param));
   return result;
 };
 
-export const getAndInitParams = () => {
-  if (!hasSavedParams()) {
-    setDefaultParams();
+export const getAndInitSessionData = () => {
+  if (!hasSavedSessionData()) {
+    setDefaultSessionData();
   }
 
-  const params = getParams();
-  return params;
+  const sessionData = getSessionData();
+  return sessionData;
 };

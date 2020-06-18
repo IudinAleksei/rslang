@@ -1,7 +1,4 @@
-export const PARAMS = Object.freeze({
-  score: 'score',
-});
-
-export const DEFAULT_PARAMS = Object.freeze({
-  [PARAMS.score]: 0,
+/* eslint-disable import/prefer-default-export */
+export const DEFAULT_SESSION_DATA = Object.freeze({
+  score: 0,
 });

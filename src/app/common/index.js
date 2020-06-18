@@ -1,1 +1,1 @@
-export { setParams, getParams, getAndInitParams } from './utils/sessionStorage';
+export { setSessionData, getSessionData, getAndInitSessionData } from './utils/sessionStorage';
