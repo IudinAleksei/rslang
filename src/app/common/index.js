@@ -1,0 +1,1 @@
+export { getWords,  getCountWords,  getWordById,  createUser,  loginUser,  updateUser,  deleteUser,  createUserWord,  getAllUserWords,  getUserWordById,  deleteUserWordById,  updateUserWord,  getUserStatistic,  upsertUserStatistic,  getUserSettings,  upsertUserSettings } from './network/backendWords/backendWords';
