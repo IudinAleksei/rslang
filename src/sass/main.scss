@@ -1,11 +1,15 @@
 @import "~normalize.scss";
 @import "abstract/constants";
 @import "abstract/placeholders";
+@import "abstract/mixins";
 @import "base/buttons";
 @import "layout/wrapper";
 @import "layout/header";
 @import "layout/footer";
+@import "layout/registration-window";
+@import "layout/select";
 
 html {
+  height: 100%;
   font-size: 10px;
 }

@@ -1,0 +1,78 @@
+
+.main__about-us{
+  @include position();
+  @include background(url('../assets/img/back-about.jpg'), $background-repeat: no-repeat);
+  @include flex();
+  .logo-about-us {
+    height: 80px;
+    margin-top: 50px;
+    font-family: $heading_font;
+    font-size: 50px;
+    text-transform: uppercase;
+    letter-spacing: 7px;
+    font-weight: 700;
+    color: $heading_color;
+  }
+};
+.wrap-cards {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 87rem;
+}
+.about-us__wrap {
+  width: 300px;
+  height: 280px;
+  border-radius: 8px;
+  box-shadow: $button_shadow;
+  background: white;
+  margin: 50px;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .photo {
+    border-radius: 32px;
+    border: 2px solid white;
+    width: 145px;
+    height: 145px;
+    object-fit: cover;
+    z-index: 1;
+    position: absolute;
+    top: -15%;
+  }
+  .wrap-name {
+    margin: 115px 15px 15px 15px;
+    .name {
+      margin-bottom: 15px;
+      text-align: center;
+      font-family: $body_font;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: black;
+    }
+    .text {
+      text-align: justify;
+      font-family: $body_font;
+      font-size: 1rem;
+      font-weight: 400;
+      color: black;
+    }
+  }
+  .contact {
+    width: 100px;
+    height: 80px;
+    box-shadow: $button_shadow;
+    display: flex;
+    .telegtam {
+      width: 50px;
+      height: 50px;
+    }
+    .github {
+      width: 50px;
+      height: 50px;
+    }
+  }
+};

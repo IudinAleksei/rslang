@@ -1,0 +1,165 @@
+.header {
+  display: none;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 45px;
+  max-width: 1350px;
+  margin: 40px auto 0;
+}
+
+.log-in {
+  p {
+  text-align: center;
+  font-family: $body_font;
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin-right: 10px;
+  margin-bottom: 0px;
+  margin-top: 1px;
+  }
+}
+
+.burger-icon {
+  width: 37px;
+  height: 23px;
+  cursor: pointer;
+  position: relative;
+  margin: 40px 0 25px 45px;
+  .burger-line {
+    display: block;
+    width: 100%;
+    height: 8px;
+    background: $menu_icons_color;
+    position: absolute;
+    left: 0;
+    transition: .3s all linear;
+    border-radius: 3px;
+  }
+  .burger-line-first {
+    top: 0;
+    height: 4px;
+  }
+  .burger-line-second, .burger-line-third {
+    top: 50%;
+    transform: translateY(-50%);
+    height: 4px;
+  }
+  .burger-line-forth {
+    bottom: 0;
+    height: 4px;
+  }
+}
+.burger-active {
+  .burger-line-first, .burger-line-forth {
+    opacity: 0;
+  }
+  .burger-line-second {
+    transform: translateY(-50%) rotate(45deg);
+  }
+  .burger-line-third {
+    transform: translateY(-50%) rotate(-45deg);
+  }
+}
+.nav {
+  padding: 0;
+  margin: 30px 50px;
+  transition: 0.3s ease;
+  display: none;
+  .settings-item::after {
+    content: "\f013";
+    font-family: FontAwesome;
+    margin-left: 5px;
+    color: $white_color;
+  }
+  .games-subMenu {
+    padding-left: 25px;
+  }
+  li {
+    list-style: none;
+    padding: 12px 0;
+  }
+  .menu-item {
+    color: white;
+    text-decoration: none;
+    &:hover {
+      color: $selected_menu_item;
+    }
+  }
+  .game-item::before {
+    content: "\f11b";
+    font-family: FontAwesome;
+    margin-right: 5px;
+    color: $selected_menu_item;
+  }
+}
+.burger-active {
+  display: block;
+}
+.active-menu-element {
+  border-bottom: 2px solid $selected_menu_item;
+}
+.menu-bg {
+  z-index: 1;
+  width: 0;
+  height: 0;
+  background: $menu_color;
+  box-shadow: 14px 17px 22px -9px rgba(0,0,0,0.51);
+  transition: 0.3s ease;
+  border-radius: 50%;
+  margin: 41px 0 27px 46px;
+  top: 0;
+  left: 0;
+  position: absolute;
+}
+.menu-bg-active {
+  width: 547px;
+  height: 650px;
+  transform: translate(-57%, -11%);
+  transition: .7s ease;
+}
+.header-elements {
+  top: 0;
+  left: 0;
+  position: absolute;
+  z-index: 2;
+}
+
+.authorization {
+  .log-in {
+    color: $menu_icons_color;
+    text-decoration: none;
+    font-weight: 700;
+    margin: 40px 45px 25px 0;
+    margin-top: 41px;
+    &::before {
+      content: "\f007";
+      font-family: FontAwesome;
+      margin-right: 5px;
+      color: $menu_icons_color;
+    }
+  }
+}
+.welcome-header {
+  text-align: center;
+  font-size: -webkit-xxx-large;
+}
+
+.settings-info {
+  margin-top: 50px;
+  .settings-title {
+    @include headingText();
+  }
+  .settings-important-information {
+    text-align: center;
+    font-size: medium;
+    &::before {
+      content: "\f12a";
+      font-family: FontAwesome;
+      margin-right: 5px;
+      color: $color_red;
+    }
+  }
+}

@@ -1,0 +1,72 @@
+.main__wrap-registration-window.none{
+  display: none;
+}
+
+#wrapper, label, #arrow,.button-sign span { transition: all .5s cubic-bezier(.6,0,.4,1); }
+
+#wrapper { overflow: hidden; }
+
+#signin:checked ~ #wrapper { height: 176px; }
+#signin:checked ~ #wrapper #arrow { left: 32px; }
+#signin:checked ~ .button-sign span { transform: translate3d(0,-72px,0); }
+
+#signup:checked ~ #wrapper { height: 176px; }
+#signup:checked ~ #wrapper #arrow { left: 137px; }
+#signup:checked ~ .button-sign span { transform: translate3d(0,-144px,0); }
+
+.main__wrap-registration-window {
+  @include position();
+  @include flex();
+  @include background(url('../assets/img/start-page-background.jpg'), $background-repeat: no-repeat);
+};
+
+form {
+  width: 450px;
+  height: 370px;
+  margin: -185px -225px;
+  text-align: start;
+}
+input[type=radio] { display: none; }
+
+label {
+  cursor: pointer;
+  display: inline-block;
+  font-size: 22px;
+  font-weight: 800;
+  opacity: .5;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+}
+label:hover {
+  transition: all .3s cubic-bezier(.6,0,.4,1);
+  opacity: 1;
+}
+label[for="signin"] { margin-right: 20px; }
+
+input[type=radio]:checked + label { opacity: 1; }
+
+input[type=email],
+input[type=password] {
+  background: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 27px;
+  font-family: $body_font;
+  height: 72px;
+  width: 99.5%;
+  margin-bottom: 10px;
+  opacity: 1;
+  text-indent: 20px;
+  transition: all .2s ease-in-out;
+}
+#arrow {
+  height: 0;
+  width: 0;
+  border-bottom: 10px solid #fff;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  position: relative;
+  left: 32px;
+}
+input:invalid:not(:placeholder-shown) {border: 1px solid red;}
+input:valid:not(:placeholder-shown) {border: 1px solid green;}
