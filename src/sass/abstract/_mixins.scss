@@ -14,12 +14,12 @@
 }
 
 @mixin background($background-image, $background-repeat, $background-size: cover,) {
-  background:  $background_liner_gradient, $background-image;
+  background: $background_liner_gradient, $background-image;
   background-repeat: $background-repeat;
   background-size: $background-size;
 };
 
-@mixin button ($background-color: $button_color, $width: 180px, $heigth: 50px,) {
+@mixin button ($background-color: $button_color, $width: 180px, $heigth: 50px) {
   display: inline-block;
   font-family: $body_font;
   border: 1px solid $button_color;
