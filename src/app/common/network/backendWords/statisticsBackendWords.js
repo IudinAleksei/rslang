@@ -1,3 +1,6 @@
+/* eslint-disable padded-blocks */
+/* eslint-disable comma-dangle */
+/* eslint-disable quote-props */
 import { fetchUrl } from './commonFetch';
 
 export async function getUserStatistic(token, userId) {

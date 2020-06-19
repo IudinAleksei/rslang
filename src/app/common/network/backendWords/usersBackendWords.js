@@ -1,3 +1,6 @@
+/* eslint-disable comma-dangle */
+/* eslint-disable quote-props */
+/* eslint-disable quotes */
 import { fetchUrl } from './commonFetch';
 
 export async function createUser(user) {
@@ -39,7 +42,6 @@ export async function updateUser(token, userId, user) {
   });
   return content;
 }
-
 
 export async function deleteUser(token, userId) {
   const urlWords = `https://afternoon-falls-25894.herokuapp.com/users//${userId}`;

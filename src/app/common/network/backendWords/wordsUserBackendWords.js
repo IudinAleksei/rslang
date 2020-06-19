@@ -1,3 +1,7 @@
+/* eslint-disable padded-blocks */
+/* eslint-disable no-multiple-empty-lines */
+/* eslint-disable comma-dangle */
+/* eslint-disable quote-props */
 import { fetchUrl } from './commonFetch';
 
 export async function getAllUserWords(token, userId) {
@@ -57,7 +61,7 @@ export async function getUserWordById(token, userId, wordId) {
     }
   });
   return content;
- 
+
 }
 
 export async function deleteUserWordById(token, userId, wordId) {

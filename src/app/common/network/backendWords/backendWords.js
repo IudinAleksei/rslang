@@ -1,3 +1,5 @@
+/* eslint-disable object-curly-newline */
+/* eslint-disable no-multi-spaces */
 export { getWords, getCountWords, getWordById } from './wordsBackendWords';
 export { createUser,  loginUser, deleteUser } from './usersBackendWords';
 export { getAllUserWords,  createUserWord, updateUserWord, getUserWordById,  deleteUserWordById } from './wordsUserBackendWords';

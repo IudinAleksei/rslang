@@ -1,3 +1,4 @@
+/* eslint-disable quote-props */
 import { fetchUrl } from './commonFetch';
 
 export async function getWords(group, page) {

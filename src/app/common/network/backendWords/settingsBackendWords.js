@@ -1,3 +1,5 @@
+/* eslint-disable comma-dangle */
+/* eslint-disable quote-props */
 import { fetchUrl } from './commonFetch';
 
 export async function getUserSettings(token, userId) {
