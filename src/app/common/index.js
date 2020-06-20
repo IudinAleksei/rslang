@@ -1,3 +1,5 @@
+export { default as getMedia } from './utils/githubMedia';
+
 export {
   getWords, getCountWords, getWordById, createUser, loginUser, deleteUser,
   createUserWord, getAllUserWords, getUserWordById, deleteUserWordById, updateUserWord,
