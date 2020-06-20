@@ -1,17 +1,10 @@
-.header-container{
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    height: 45px;
-    max-width: 1350px;
-    margin: 40px auto 0;
-}
 .menu__icon {
     width: 37px;
     height: 23px;
     cursor: pointer;
     position: relative;
     margin: 40px 0 25px 45px;
+
 .menu__icon__line {
     display: block;
     width: 100%;
@@ -22,36 +15,44 @@
     transition: .3s all linear;
     border-radius: 3px;
 }
+
 .menu__icon__first-line {
     top: 0;
     height: 4px;
 }
+
 .menu__icon__second-line, .menu__icon__third-line {
     top: 50%;
     transform: translateY(-50%);
     height: 4px;
 }
+
 .menu__icon__forth-line {
     bottom: 0;
     height: 4px;
 }
 }
-.menu-active {
+
+.menu_active {
 .menu__icon__first-line, .menu__icon__forth-line {
     opacity: 0;
 }
+
 .menu__icon__second-line {
     transform: translateY(-50%) rotate(45deg);
 }
+
 .menu__icon__third-line {
     transform: translateY(-50%) rotate(-45deg);
 }
 }
+
 .menu__items {
     padding: 0;
     margin: 40px 50px;
     transition: 0.3s ease;
     display: none;
+
 .menu__items__settings-item {
     position: absolute;
     margin-top: -20px;
@@ -62,12 +63,15 @@
     top: 4px;
     }
 }
+
 .menu__items__games-subMenu {
     padding-left: 25px;
 }
+
 .menu__items__item_active {
     color: $selected_menu_item;;
 }
+
 .menu__items__games-subMenu__game {
     position: relative;
     &::before {
@@ -94,7 +98,8 @@
     color: $selected_menu_item;
 }
 }
-.menu-active {
+
+.menu_active {
     display: block;
 }
 
@@ -111,18 +116,21 @@
     left: 0;
     position: absolute;
 }
-.menu__bg-active {
+
+.menu__bg_active {
     width: 540px;
     height: 600px;
     transform: translate(-57%, -11%);
     transition: .7s ease;
 }
+
 .menu__elements {
     top: 0;
     left: 0;
     position: absolute;
     z-index: 2;
 }
+
 .authorization {
     .authorization__log-out {
     position: relative;
