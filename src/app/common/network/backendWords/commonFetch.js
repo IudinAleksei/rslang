@@ -1,4 +1,4 @@
-export async function fetchUrl(url, options) {
+export default async function fetchUrl(url, options) {
   try {
     const response = await fetch(url, options);
     const content = (response.status === 200) ? await response.json() : null;
