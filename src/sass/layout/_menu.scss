@@ -3,7 +3,7 @@
     height: 23px;
     cursor: pointer;
     position: relative;
-    margin: 40px 0 25px 45px;
+    margin: 0 0 25px 45px;
 
 .menu__icon__line {
     display: block;
@@ -85,7 +85,7 @@
 
 .menu__items li {
     list-style: none;
-    padding: 10px 0;
+    padding: 12px 0;
 }
 
 .menu__items a {
@@ -127,7 +127,7 @@
 .menu__elements {
     top: 0;
     left: 0;
-    position: absolute;
+    position: relative;
     z-index: 2;
 }
 
