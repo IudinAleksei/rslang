@@ -1,11 +1,14 @@
 @import "~normalize.scss";
 @import "abstract/constants";
 @import "abstract/placeholders";
+@import "abstract/mixins";
 @import "base/buttons";
+@import "base/fonts";
 @import "layout/wrapper";
 @import "layout/header";
 @import "layout/footer";
 
 html {
+  height: 100%;
   font-size: 10px;
 }
