@@ -25,7 +25,7 @@
     "url": "https://github.com/IudinAleksei/rslang/issues"
   },
   "homepage": "https://rss2020q1-52_team-rslang.netlify.app",
-  "devDependencies": {    
+  "devDependencies": {
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^5.1.1",
     "cross-env": "^7.0.2",
@@ -41,14 +41,17 @@
     "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.14.1",
     "sass-loader": "^8.0.2",
-    "stylelint": "^13.6.0",
+    "stylelint": "^13.6.1",
+    "stylelint-config-recommended": "^3.0.0",
+    "stylelint-config-recommended-scss": "^4.2.0",
     "stylelint-config-standard": "^20.0.0",
+    "stylelint-scss": "^3.18.0",
     "stylelint-webpack-plugin": "^2.0.0",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.11.0"
   },
-  "dependencies": {    
+  "dependencies": {
     "eslint-plugin-jest": "^23.10.0",
     "normalize.css": "^8.0.1",
     "normalize.scss": "^0.1.0"
