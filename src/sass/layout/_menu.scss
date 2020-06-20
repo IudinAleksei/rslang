@@ -1,0 +1,139 @@
+.header-container{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 45px;
+    max-width: 1350px;
+    margin: 40px auto 0;
+}
+.menu__icon {
+    width: 37px;
+    height: 23px;
+    cursor: pointer;
+    position: relative;
+    margin: 40px 0 25px 45px;
+.menu__icon__line {
+    display: block;
+    width: 100%;
+    height: 8px;
+    background: $header_icons_color;
+    position: absolute;
+    left: 0;
+    transition: .3s all linear;
+    border-radius: 3px;
+}
+.menu__icon__first-line {
+    top: 0;
+    height: 4px;
+}
+.menu__icon__second-line, .menu__icon__third-line {
+    top: 50%;
+    transform: translateY(-50%);
+    height: 4px;
+}
+.menu__icon__forth-line {
+    bottom: 0;
+    height: 4px;
+}
+}
+.menu-active {
+.menu__icon__first-line, .menu__icon__forth-line {
+    opacity: 0;
+}
+.menu__icon__second-line {
+    transform: translateY(-50%) rotate(45deg);
+}
+.menu__icon__third-line {
+    transform: translateY(-50%) rotate(-45deg);
+}
+}
+.menu__items {
+    padding: 0;
+    margin: 40px 50px;
+    transition: 0.3s ease;
+    display: none;
+.menu__items__settings-item {
+    position: absolute;
+    margin-top: -20px;
+    &::after {
+    position: relative;
+    content: url(/src/assets/icons/header/gear-fill.svg);
+    left: 5px;
+    top: 4px;
+    }
+}
+.menu__items__games-subMenu {
+    padding-left: 25px;
+}
+li {
+    list-style: none;
+    padding: 10px 0;
+}
+.menu__active-element {
+    color: $selected_menu_item;;
+}
+a {
+    color: $white_color;
+    text-decoration: none;
+    font-family: $body_font;
+    font-size: 12px;
+    text-transform: uppercase;
+    &:hover {
+    color: $selected_menu_item;
+}
+}
+.menu__items__games-subMenu__game {
+    position: relative;
+    &::before {
+    content: url(/src/assets/icons/header/dot.svg);
+    position: absolute;
+    top: -4px;
+    left: -25px;
+    }
+}
+}
+.menu-active {
+    display: block;
+}
+
+.menu-bg {
+    z-index: 1;
+    width: 0;
+    height: 0;
+    background: $menu_color;
+    box-shadow: 14px 17px 22px -9px rgba(0,0,0,0.51);
+    transition: 0.3s ease;
+    border-radius: 50%;
+    margin: 41px 0 27px 46px;
+    top: 0;
+    left: 0;
+    position: absolute;
+}
+.menu__bg-active {
+    width: 540px;
+    height: 600px;
+    transform: translate(-57%, -11%);
+    transition: .7s ease;
+}
+.menu__elements {
+    top: 0;
+    left: 0;
+    position: absolute;
+    z-index: 2;
+}
+.authorization {
+    .authorization__log-out {
+    position: relative;
+    color: $header_icons_color;
+    text-decoration: none;
+    font-family: $body_font;
+    margin: 41px 45px 25px 0;
+    font-size: 15px;
+    &::before {
+        position: absolute;
+    content: url(/src/assets/icons/header/box-arrow-left.svg);
+    right: 60px;
+    top: 3px;
+    }
+    }
+}
