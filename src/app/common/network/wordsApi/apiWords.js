@@ -1,1 +1,1 @@
-export { wordInfo, similarTo } from './wordInfo';
+export { wordInfo, partOfSpeech } from './wordInfo';

@@ -8,4 +8,4 @@ export {
 
 export { setSessionData, getSessionData, getAndInitSessionData } from './utils/sessionStorage';
 
-export { wordInfo, similarTo } from './network/wordsApi/apiWords';
+export { wordInfo, partOfSpeech } from './network/wordsApi/apiWords';
