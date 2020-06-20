@@ -7,3 +7,5 @@ export {
 } from './network/backendWords/backendWords';
 
 export { setSessionData, getSessionData, getAndInitSessionData } from './utils/sessionStorage';
+
+export { wordInfo, partOfSpeech } from './network/wordsApi/apiWords';
