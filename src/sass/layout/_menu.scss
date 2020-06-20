@@ -65,22 +65,8 @@
 .menu__items__games-subMenu {
     padding-left: 25px;
 }
-li {
-    list-style: none;
-    padding: 10px 0;
-}
-.menu__active-element {
+.menu__items__item_active {
     color: $selected_menu_item;;
-}
-a {
-    color: $white_color;
-    text-decoration: none;
-    font-family: $body_font;
-    font-size: 12px;
-    text-transform: uppercase;
-    &:hover {
-    color: $selected_menu_item;
-}
 }
 .menu__items__games-subMenu__game {
     position: relative;
@@ -90,6 +76,22 @@ a {
     top: -4px;
     left: -25px;
     }
+}
+}
+
+.menu__items li {
+    list-style: none;
+    padding: 10px 0;
+}
+
+.menu__items a {
+    color: $white_color;
+    text-decoration: none;
+    font-family: $body_font;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    &:hover {
+    color: $selected_menu_item;
 }
 }
 .menu-active {
@@ -128,7 +130,7 @@ a {
     text-decoration: none;
     font-family: $body_font;
     margin: 41px 45px 25px 0;
-    font-size: 15px;
+    font-size: 1.5rem;
     &::before {
         position: absolute;
     content: url(/src/assets/icons/header/box-arrow-left.svg);
