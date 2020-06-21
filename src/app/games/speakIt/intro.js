@@ -1,6 +1,4 @@
 export default class Intro {
-  constructor() {}
-
   getIntro() {
     this.intro = document.createElement('div');
     this.intro.classList.add('intro');
@@ -23,16 +21,12 @@ export default class Intro {
     }
   }
 
-  isClickOnIntro(event) {
-    if (event.target.classList.contains('intro-btn')) {
-      return true;
-    }
+  static isClickOnIntro(event) {
+    return event.target.classList.contains('intro-btn');
   }
 
   clickOnIntro() {
     this.intro.classList.add('hidden');
     document.querySelector('.container').classList.remove('hidden');
   }
-
-
 }

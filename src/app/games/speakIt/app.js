@@ -68,7 +68,7 @@ export default class App {
     }
   }
 
-  isClickOnPoints(event) {
+  static isClickOnPoints(event) {
     return event.target.parentNode.classList.contains('points');
   }
 
@@ -111,6 +111,7 @@ export default class App {
         return true;
       }
     }
+    return false;
   }
 
   clickOnWords() {
@@ -130,12 +131,11 @@ export default class App {
     this.getInfoByWord(this.wordActive);
   }
 
-  isClickOnButtonSpeak(event) {
+  static isClickOnButtonSpeak(event) {
     if (event.target.classList.contains('user-speach')) {
-      if (!document.querySelector('.translation').classList.contains('none')) {
-        return true;
-      }
+      return document.querySelector('.translation').classList.contains('none');
     }
+    return false;
   }
 
   clickOnButtonSpeak() {
@@ -187,7 +187,7 @@ export default class App {
     return result;
   }
 
-  getActiveItem(target) {
+  static getActiveItem(target) {
     const items = document.querySelectorAll('.item');
     for (let i = 0; i < items.length; i = +1) {
       items[i].classList.remove('activeItem');
@@ -195,7 +195,7 @@ export default class App {
     target.classList.add('activeItem');
   }
 
-  isClickOnButtonRestart(event) {
+  static isClickOnButtonRestart(event) {
     return event.target.classList.contains('restart');
   }
 
@@ -209,37 +209,31 @@ export default class App {
     const image = document.querySelector('.img');
     image.setAttribute('src', './assets/img/blank.jpg');
     const items = document.querySelectorAll('.item');
-    for (let i = 0; i < items.length; i++) {
+    for (let i = 0; i < items.length; i = +1) {
       items[i].classList.remove('activeItem');
     }
   }
 
-  isClickOnButtonResult() {
-    if (event.target.classList.contains('result')) {
-      return true;
-    }
+  static isClickOnButtonResult(event) {
+    return event.target.classList.contains('result');
   }
 
-  clickOnButtonResult() {
+  static clickOnButtonResult() {
     document.querySelector('.results').classList.remove('hidden');
     document.querySelector('.container').classList.add('hidden');
   }
 
-  isClickOnButtonReturn() {
-    if (event.target.classList.contains('return')) {
-      return true;
-    }
+  static isClickOnButtonReturn(event) {
+    return event.target.classList.contains('return');
   }
 
-  clickOnButtonReturn() {
+  static clickOnButtonReturn() {
     document.querySelector('.results').classList.add('hidden');
     document.querySelector('.container').classList.remove('hidden');
   }
 
-  isClickOnButtonNewGame() {
-    if (event.target.classList.contains('new-game')) {
-      return true;
-    }
+  static isClickOnButtonNewGame(event) {
+    return event.target.classList.contains('new-game');
   }
 
   clickOnButtonNewGame() {
@@ -249,12 +243,13 @@ export default class App {
     this.clickOnButtonRestart();
   }
 
-  async getTranslation(word) {
+  static async getTranslation(word) {
     const key = 'trnsl.1.1.20200424T174558Z.39de9cd79c70e957.6d82f0080ca311d8fb2ae17aad1c3d9661aa636b';
     const url = `https://translate.yandex.net/api/v1.5/tr.json/translate?key=${key}&text=${word}&lang=en-ru`;
     const res = await fetch(url);
     const data = await res.json();
-    this.translation = data.text[0];
+    const buf = data.text[0];
+    return buf;
   }
 
   async initWords(group) {
@@ -264,7 +259,7 @@ export default class App {
     const res = await fetch(url);
     this.json = await res.json();
     for (let i = 0; i < this.json.length / 2; i = +1) {
-      await this.getTranslation(this.json[i].word);
+      // this.translation = await this.getTranslation(this.json[i].word);
       arrayWords.push({
         word: this.json[i].word,
         translation: this.translation,
@@ -274,24 +269,17 @@ export default class App {
         audio: this.json[i].audio,
         current: this.getDataCurrent(this.json[i].image),
       });
-
-      // let keyValue = `<div class="item" data-current="${data_current}"><span class="audio-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="currentColor" d="M15.788 13.007a3 3 0 110 5.985c.571 3.312 2.064 5.675 3.815 5.675 2.244 0 4.064-3.88 4.064-8.667 0-4.786-1.82-8.667-4.064-8.667-1.751 0-3.244 2.363-3.815 5.674zM19 26c-3.314 0-12-4.144-12-10S15.686 6 19 6s6 4.477 6 10-2.686 10-6 10z" fill-rule="evenodd"></path></svg></span><p class="word">${this.json[i].word}</p><p class="transcription">${this.json[i].transcription}</p><p class="translation">${this.translation}</p></div>`;
-      // this.items.insertAdjacentHTML('beforeend', keyValue);
-      // let translation = this.appcontainer.querySelector('.translation');
-      // translation.div.insertAdjacentHTML('beforebegin', 'words.translation');
     }
-    const arrr = await Promise.resolve(arrayWords);
-
     return arrayWords;
   }
 
-  getRandomArbitrary(min, max) {
+  static getRandomArbitrary(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-  getDataCurrent(stringCurrent) {
-    stringCurrent = stringCurrent.substring(9, 13);
-    stringCurrent = parseFloat(stringCurrent);
-    return stringCurrent;
+  static getDataCurrent(stringCurrent) {
+    let buf = stringCurrent.substring(9, 13);
+    buf = parseFloat(stringCurrent);
+    return buf;
   }
 }
