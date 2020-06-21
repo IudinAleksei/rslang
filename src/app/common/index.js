@@ -8,4 +8,4 @@ export {
 
 export { setSessionData, getSessionData, getAndInitSessionData } from './utils/sessionStorage';
 
-export { wordInfo, partOfSpeech } from './network/wordsApi/apiWords';
+export { getWordsInfo, getWordInfoById } from './network/skyengApi/apiWords';
