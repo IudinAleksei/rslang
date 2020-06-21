@@ -3,7 +3,7 @@
     height: 23px;
     cursor: pointer;
     position: relative;
-    margin: 0 0 25px 45px;
+    //margin: 40px 0 25px 45px;
 
 .menu__icon__line {
     display: block;
@@ -49,13 +49,14 @@
 
 .menu__items {
     padding: 0;
-    margin: 40px 50px;
+    position: absolute;
+   // margin: 40px 50px;
     transition: 0.3s ease;
     display: none;
 
 .menu__items__settings-item {
-    position: absolute;
-    margin-top: -20px;
+    //position: absolute;
+   // margin-top: -20px;
     &::after {
     position: relative;
     content: url(/src/assets/icons/header/gear-fill.svg);
@@ -85,14 +86,16 @@
 
 .menu__items li {
     list-style: none;
-    padding: 12px 0;
+    padding: 10px 0;
+    white-space: nowrap;
 }
 
 .menu__items a {
     color: $white_color;
     text-decoration: none;
     font-family: $body_font;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
+    letter-spacing: 0.2rem;
     text-transform: uppercase;
     &:hover {
     color: $selected_menu_item;
@@ -111,9 +114,9 @@
     box-shadow: 14px 17px 22px -9px rgba(0,0,0,0.51);
     transition: 0.3s ease;
     border-radius: 50%;
-    margin: 41px 0 27px 46px;
-    top: 0;
-    left: 0;
+    //margin: 41px 0 27px 46px;
+    top: 41px;
+    left: 46px;
     position: absolute;
 }
 
@@ -137,8 +140,8 @@
     color: $header_icons_color;
     text-decoration: none;
     font-family: $body_font;
-    margin: 41px 45px 25px 0;
-    font-size: 1.5rem;
+    //margin: 41px 45px 25px 0;
+    font-size: 1.6rem;
     &::before {
         position: absolute;
     content: url(/src/assets/icons/header/box-arrow-left.svg);
