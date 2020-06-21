@@ -1,3 +1,3 @@
-import { createWordList, createAudio } from './view/wordList';
+export { createWordList, getWordArr } from './view/wordList';
 
-export { createWordList, createAudio };
+export { getWord, createAudio } from './view/createAudio';
