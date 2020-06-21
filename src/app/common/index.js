@@ -9,3 +9,5 @@ export {
 export { setSessionData, getSessionData, getAndInitSessionData } from './utils/sessionStorage';
 
 export { getWordsInfo, getWordInfoById } from './network/skyengApi/apiWords';
+
+export { default as getRandomInteger } from './utils/randomInteger';
