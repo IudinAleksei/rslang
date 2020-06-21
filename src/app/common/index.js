@@ -9,3 +9,5 @@ export {
 export { setSessionData, getSessionData, getAndInitSessionData } from './utils/sessionStorage';
 
 export { wordInfo, partOfSpeech } from './network/wordsApi/apiWords';
+
+export { translateEngToRus, translateRusToEng } from './network/translationAPI';
