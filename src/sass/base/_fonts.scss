@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'Comic Neue';
-  src: url(/src/assets/fonts/Comic_Neue/ComicNeue-Bold.ttf);
+  src: url('/src/assets/fonts/Comic_Neue/ComicNeue-Bold.ttf') format('truetype');
   font-weight: 700;
 }
 @font-face {
   font-family: 'Open Sans';
-  src: url(/src/assets/fonts/Open_Sans/OpenSans-Regular.ttf);
+  src: url('/src/assets/fonts/Open_Sans/OpenSans-Regular.ttf') format('truetype');
   font-weight: 400;
 }
