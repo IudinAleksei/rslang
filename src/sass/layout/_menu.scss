@@ -3,7 +3,6 @@
     height: 23px;
     cursor: pointer;
     position: relative;
-    //margin: 40px 0 25px 45px;
 
 .menu__icon__line {
     display: block;
@@ -50,13 +49,10 @@
 .menu__items {
     padding: 0;
     position: absolute;
-   // margin: 40px 50px;
     transition: 0.3s ease;
     display: none;
 
 .menu__items__settings-item {
-    //position: absolute;
-   // margin-top: -20px;
     &::after {
     position: relative;
     content: url(/src/assets/icons/header/gear-fill.svg);
@@ -114,7 +110,6 @@
     box-shadow: 14px 17px 22px -9px rgba(0,0,0,0.51);
     transition: 0.3s ease;
     border-radius: 50%;
-    //margin: 41px 0 27px 46px;
     top: 41px;
     left: 46px;
     position: absolute;
@@ -140,7 +135,6 @@
     color: $header_icons_color;
     text-decoration: none;
     font-family: $body_font;
-    //margin: 41px 45px 25px 0;
     font-size: 1.6rem;
     &::before {
         position: absolute;
