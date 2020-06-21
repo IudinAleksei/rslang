@@ -1,0 +1,130 @@
+@import "../../../../sass/abstract/constants";
+@import "../../../../sass/abstract/mixins";
+
+body{
+  font-family: $body_font;
+  @include background(url('/src/assets/img/start-page-background..jpg'), $background-repeat: no-repeat);
+};
+
+.main-container{
+  height: 85vh;
+  @include flex();
+}
+#wrapper,
+label,
+#arrow,
+.button-sign span { transition: all 0.5s cubic-bezier(0.6, 0, 0.4, 1); }
+
+#wrapper { overflow: hidden; }
+
+
+#signin:checked ~ #wrapper #arrow { left: 32px; }
+#signin:checked ~ .button-sign span { transform: translate3d(0, -72px, 0); }
+
+
+#signup:checked ~ #wrapper #arrow { left: 137px; }
+#signup:checked ~ .button-sign span { transform: translate3d(0, -144px, 0); }
+
+form {
+  width: 450px;
+
+}
+
+input[type=radio] { display: none; }
+
+label {
+  cursor: pointer;
+  display: inline-block;
+  font-size: 22px;
+  font-weight: 800;
+  opacity: 0.5;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+label:hover {
+  transition: all 0.3s cubic-bezier(0.6, 0, 0.4, 1);
+  opacity: 1;
+}
+label[for="signin"] { margin-right: 20px; }
+
+input[type=radio]:checked + label { opacity: 1; }
+
+input[type=email],
+input[type=password] {
+  background: #fff;
+  border: 1px solid #fff;
+  outline: none;
+  border-radius: 8px;
+  font-size: 27px;
+
+  height: 72px;
+  width:98%;
+  margin-bottom: 10px;
+  opacity: 1;
+  text-indent: 20px;
+  transition: all 0.2s ease-in-out;
+}
+
+.button-sign {
+  background: $button_color;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 27px;
+  height: 72px;
+  width: 99.5%;
+  margin-bottom: 10px;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.6, 0, 0.4, 1);
+  outline: none;
+  span {
+    display: block;
+    line-height: 72px;
+    position: relative;
+    top: 72px;
+    transform: translate3d(0, 0, 0);
+  }
+
+  &:hover {
+    background: green;
+  }
+}
+
+#arrow {
+  height: 0;
+  width: 0;
+  border-bottom: 10px solid #fff;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  position: relative;
+  left: 32px;
+}
+
+input:invalid:not(:placeholder-shown) {
+  border: 1px solid rgba(255, 0, 0, 0.5);
+}
+
+input:valid:not(:placeholder-shown) {
+  border: 1px solid rgba(0, 128, 0, 0.5);
+}
+@media only screen
+   and (max-width : 500px) {
+  form{
+    width: 300px;
+  }
+
+  input[type=email],
+input[type=password],
+.button-sign{
+  height: 50px;
+  font-size: 23px;
+}
+
+label {
+  font-size: 18px;
+}
+#signin:checked ~ .button-sign span { transform: translate3d(0, -85px, 0); }
+#signup:checked ~ .button-sign span { transform: translate3d(0, -157px, 0); }
+}
