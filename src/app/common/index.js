@@ -11,3 +11,5 @@ export { setSessionData, getSessionData, getAndInitSessionData } from './utils/s
 export { getWordsInfo, getWordInfoById } from './network/skyengApi/apiWords';
 
 export { default as getRandomInteger } from './utils/randomInteger';
+
+export { translateEngToRus, translateRusToEng } from './network/translationAPI';
