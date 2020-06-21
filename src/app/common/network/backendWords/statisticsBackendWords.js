@@ -1,4 +1,4 @@
-import { fetchUrl } from './commonFetch';
+import fetchUrl from './commonFetch';
 
 export async function getUserStatistic(token, userId) {
   const urlWords = `https://afternoon-falls-25894.herokuapp.com/users/${userId}/statistics`;
@@ -6,9 +6,9 @@ export async function getUserStatistic(token, userId) {
     method: 'GET',
     withCredentials: true,
     headers: {
-      'Authorization': `Bearer ${token}`,
-      'accept': 'application/json',
-    }
+      Authorization: `Bearer ${token}`,
+      accept: 'application/json',
+    },
   });
   return content;
 }
@@ -19,12 +19,11 @@ export async function upsertUserStatistic(token, userId, learnedWords) {
     method: 'PUT',
     withCredentials: true,
     headers: {
-      'Authorization': `Bearer ${token}`,
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      Authorization: `Bearer ${token}`,
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
     },
-    body: JSON.stringify(learnedWords)
+    body: JSON.stringify(learnedWords),
   });
   return content;
-
 }
