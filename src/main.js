@@ -1,6 +1,5 @@
-import { createWordList, createAudio } from './app/games/audiochallenge/index';
+import menuHandling from './app/main/menu/menu';
 
 window.onload = () => {
-  createWordList();
-  setTimeout(createAudio, 2000);
+  menuHandling();
 };
