@@ -1,63 +1,61 @@
 @import "../../../../sass/abstract/constants";
 @import "../../../../sass/abstract/mixins";
 
-body{
-  font-family: $body_font;
+.authorization-form__body__background{
   @include background(url('/src/assets/img/start-page-background..jpg'), $background-repeat: no-repeat);
 };
 
-.main-container{
+.main-container__form{
   height: 85vh;
-  @include flex();
+  @include flex() ;
 }
-#wrapper,
-label,
-#arrow,
-.button-sign span { transition: all 0.5s cubic-bezier(0.6, 0, 0.4, 1); }
+.authorization-form__wrapper,
+.authorization-form__label,
+.authorization-form__arrow,
+.authorization-form__button .authorization-form__button__item { transition: all 0.5s cubic-bezier(0.6, 0, 0.4, 1); }
 
-#wrapper { overflow: hidden; }
-
-
-#signin:checked ~ #wrapper #arrow { left: 32px; }
-#signin:checked ~ .button-sign span { transform: translate3d(0, -72px, 0); }
+.authorization-form__wrapper { overflow: hidden; }
 
 
-#signup:checked ~ #wrapper #arrow { left: 137px; }
-#signup:checked ~ .button-sign span { transform: translate3d(0, -144px, 0); }
+.authorization-form__radio__input__signin:checked ~ .authorization-form__wrapper .authorization-form__arrow { left: 32px; }
+.authorization-form__radio__input__signin:checked ~ .authorization-form__button .authorization-form__button__item { transform: translate3d(0, -72px, 0); }
 
-form {
+
+.authorization-form__radio__input__signup:checked ~ .authorization-form__wrapper .authorization-form__arrow { left: 137px; }
+.authorization-form__radio__input__signup:checked ~ .authorization-form__button .authorization-form__button__item { transform: translate3d(0, -144px, 0); }
+
+.authorization-form {
   width: 450px;
 
 }
 
-input[type=radio] { display: none; }
+.authorization-form__radio__input__signin,
+.authorization-form__radio__input__signup { display: none; }
 
-label {
+.authorization-form__label {
   cursor: pointer;
   display: inline-block;
-  font-size: 22px;
+  font-size: 2.2rem;
   font-weight: 800;
   opacity: 0.5;
   margin-bottom: 10px;
   text-transform: uppercase;
 }
 
-label:hover {
+.authorization-form__label:hover {
   transition: all 0.3s cubic-bezier(0.6, 0, 0.4, 1);
   opacity: 1;
 }
-label[for="signin"] { margin-right: 20px; }
+.authorization-form__label { margin-right: 20px; }
 
-input[type=radio]:checked + label { opacity: 1; }
+input[type=radio]:checked + .authorization-form__label { opacity: 1; }
 
-input[type=email],
-input[type=password] {
+.authorization-form__input {
   background: #fff;
   border: 1px solid #fff;
   outline: none;
   border-radius: 8px;
-  font-size: 27px;
-
+  font-size: 2.7rem;
   height: 72px;
   width:98%;
   margin-bottom: 10px;
@@ -66,20 +64,20 @@ input[type=password] {
   transition: all 0.2s ease-in-out;
 }
 
-.button-sign {
+.authorization-form__button {
   background: $button_color;
   border: none;
   border-radius: 8px;
   color: #fff;
   cursor: pointer;
-  font-size: 27px;
+  font-size: 2.7rem;
   height: 72px;
   width: 99.5%;
   margin-bottom: 10px;
   overflow: hidden;
   transition: all 0.3s cubic-bezier(0.6, 0, 0.4, 1);
   outline: none;
-  span {
+  .authorization-form__button__item {
     display: block;
     line-height: 72px;
     position: relative;
@@ -92,7 +90,7 @@ input[type=password] {
   }
 }
 
-#arrow {
+.authorization-form__arrow {
   height: 0;
   width: 0;
   border-bottom: 10px solid #fff;
@@ -102,29 +100,42 @@ input[type=password] {
   left: 32px;
 }
 
-input:invalid:not(:placeholder-shown) {
+.authorization-form__input:invalid:not(:placeholder-shown) {
   border: 1px solid rgba(255, 0, 0, 0.5);
 }
 
-input:valid:not(:placeholder-shown) {
+.authorization-form__input:valid:not(:placeholder-shown) {
   border: 1px solid rgba(0, 128, 0, 0.5);
 }
 @media only screen
    and (max-width : 500px) {
-  form{
+  .authorization-form{
     width: 300px;
   }
 
-  input[type=email],
-input[type=password],
-.button-sign{
+.authorization-form__input,
+.authorization-form__button{
   height: 50px;
-  font-size: 23px;
+  font-size: 2.3rem;
 }
 
-label {
-  font-size: 18px;
+.authorization-form__label {
+  font-size: 1.8rem;
 }
-#signin:checked ~ .button-sign span { transform: translate3d(0, -85px, 0); }
-#signup:checked ~ .button-sign span { transform: translate3d(0, -157px, 0); }
+.authorization-form__radio__input__signin:checked ~ .authorization-form__button .authorization-form__button__item { transform: translate3d(0, -85px, 0); }
+.authorization-form__radio__input__signup:checked ~ .authorization-form__button .authorization-form__button__item { transform: translate3d(0, -157px, 0); }
+}
+
+.error{
+  max-width: 280px;
+  position: fixed;
+  border-radius: 8px;
+  top: 50%;  /* position the top  edge of the element at the middle of the parent */
+  left: 50%; /* position the left edge of the element at the middle of the parent */
+  border: 1px solid rgba(255,0,0,0.5);
+  transform: translate(-50%, -50%);
+  padding: 10px;
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  font-size: 2.5rem;
 }
