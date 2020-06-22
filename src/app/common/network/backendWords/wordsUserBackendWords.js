@@ -1,4 +1,4 @@
-import { fetchUrl } from './commonFetch';
+import fetchUrl from './commonFetch';
 
 export async function getAllUserWords(token, userId) {
   const urlWords = `https://afternoon-falls-25894.herokuapp.com/users/${userId}/words`;
@@ -6,14 +6,13 @@ export async function getAllUserWords(token, userId) {
     method: 'GET',
     withCredentials: true,
     headers: {
-      'Authorization': `Bearer ${token}`,
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      Authorization: `Bearer ${token}`,
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
     },
   });
   return content;
 }
-
 
 export async function createUserWord(token, userId, wordId, word) {
   const urlWords = `https://afternoon-falls-25894.herokuapp.com/users/${userId}/words/${wordId}`;
@@ -21,15 +20,14 @@ export async function createUserWord(token, userId, wordId, word) {
     method: 'POST',
     withCredentials: true,
     headers: {
-      'Authorization': `Bearer ${token}`,
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      Authorization: `Bearer ${token}`,
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
     },
-    body: JSON.stringify(word)
+    body: JSON.stringify(word),
   });
   return content;
 }
-
 
 export async function updateUserWord(token, userId, wordId, word) {
   const urlWords = `https://afternoon-falls-25894.herokuapp.com/users/${userId}/words/${wordId}`;
@@ -37,11 +35,11 @@ export async function updateUserWord(token, userId, wordId, word) {
     method: 'PUT',
     withCredentials: true,
     headers: {
-      'Authorization': `Bearer ${token}`,
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      Authorization: `Bearer ${token}`,
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
     },
-    body: JSON.stringify(word)
+    body: JSON.stringify(word),
   });
   return content;
 }
@@ -52,12 +50,11 @@ export async function getUserWordById(token, userId, wordId) {
     method: 'GET',
     withCredentials: true,
     headers: {
-      'Authorization': `Bearer ${token}`,
-      'accept': 'application/json',
-    }
+      Authorization: `Bearer ${token}`,
+      accept: 'application/json',
+    },
   });
   return content;
- 
 }
 
 export async function deleteUserWordById(token, userId, wordId) {
@@ -66,10 +63,9 @@ export async function deleteUserWordById(token, userId, wordId) {
     method: 'DELETE',
     withCredentials: true,
     headers: {
-      'accept': '*/*',
-      'Authorization': `Bearer ${token}`,
-    }
+      accept: '*/*',
+      Authorization: `Bearer ${token}`,
+    },
   });
   return content;
-
 }
