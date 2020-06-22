@@ -24,6 +24,7 @@ async function getWordArr() {
   shuffle(sliceArr);
 
   const ul = document.createElement('ul');
+  ul.classList.add('word-list');
 
   for (let i = 0; i < 5; i += 1) {
     const li = document.createElement('li');
