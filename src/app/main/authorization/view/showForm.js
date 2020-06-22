@@ -1,35 +1,39 @@
-export const MAIN_CONTAINER = document.querySelector('.main-container');
-
-export const showForm = () => {
+const showForm = () => {
   const form = document.createElement('form');
   form.id = 'authorization';
-  MAIN_CONTAINER.append(form);
+  form.className = 'authorization-form';
+  document.querySelector('.main-container').append(form);
   const inputSignIn = document.createElement('input');
   inputSignIn.checked = '0';
   inputSignIn.id = 'signin';
+  inputSignIn.className = 'authorization-form__radio__input__signin';
   inputSignIn.name = 'action';
   inputSignIn.type = 'radio';
   form.append(inputSignIn);
   const labelSignIn = document.createElement('label');
+  labelSignIn.className = 'authorization-form__label';
   labelSignIn.htmlFor = 'signin';
   labelSignIn.innerText = 'Sign in';
   form.append(labelSignIn);
   const inputSignUp = document.createElement('input');
   inputSignUp.id = 'signup';
+  inputSignUp.className = 'authorization-form__radio__input__signup';
   inputSignUp.name = 'action';
   inputSignUp.type = 'radio';
   form.append(inputSignUp);
   const labelSignUp = document.createElement('label');
+  labelSignUp.className = 'authorization-form__label';
   labelSignUp.htmlFor = 'signup';
   labelSignUp.innerText = 'Sign up';
   form.append(labelSignUp);
   const wrapper = document.createElement('div');
-  wrapper.id = 'wrapper';
+  wrapper.className = 'authorization-form__wrapper';
   form.append(wrapper);
   const arrow = document.createElement('div');
-  arrow.id = 'arrow';
+  arrow.className = 'authorization-form__arrow';
   wrapper.append(arrow);
   const inputEmail = document.createElement('input');
+  inputEmail.className = 'authorization-form__input';
   inputEmail.type = 'email';
   inputEmail.id = 'email';
   inputEmail.placeholder = 'Enter email';
@@ -37,6 +41,7 @@ export const showForm = () => {
   inputEmail.required = 'required';
   wrapper.append(inputEmail);
   const inputPassword = document.createElement('input');
+  inputPassword.className = 'authorization-form__input';
   inputPassword.type = 'password';
   inputPassword.id = 'password';
   inputPassword.placeholder = 'Enter password';
@@ -46,12 +51,18 @@ export const showForm = () => {
   wrapper.append(inputPassword);
   const button = document.createElement('button');
   button.type = 'submit';
-  button.className = 'button-sign';
+  button.className = 'authorization-form__button';
   const spanIn = document.createElement('span');
+  spanIn.className = 'authorization-form__button__item';
   spanIn.innerText = 'Sign In';
   button.append(spanIn);
   const spanUp = document.createElement('span');
+  spanUp.className = 'authorization-form__button__item';
   spanUp.innerText = 'Sign Up';
   button.append(spanUp);
   form.append(button);
+  document.querySelector('body').classList.add('authorization-form__body__background');
+  document.querySelector('.main-container').classList.add('main-container__form');
 };
+
+export default showForm;
