@@ -48,7 +48,7 @@ export default class App {
       this.clickOnWords();
     }
 
-    if (this.isClickOnButtonSpeak(event)) {
+    if (App.isClickOnButtonSpeak(event)) {
       this.clickOnButtonSpeak();
     }
 
@@ -253,7 +253,7 @@ export default class App {
   }
 
   async initWords(group) {
-    const page = this.getRandomArbitrary(0, 29);
+    const page = App.getRandomArbitrary(0, 29);
     const arrayWords = [];
     const url = `https://afternoon-falls-25894.herokuapp.com/words?page=${page}&group=${group}`;
     const res = await fetch(url);
@@ -267,7 +267,7 @@ export default class App {
         transcription: this.json[i].transcription,
         image: this.json[i].image,
         audio: this.json[i].audio,
-        current: this.getDataCurrent(this.json[i].image),
+        current: App.getDataCurrent(this.json[i].image),
       });
     }
     return arrayWords;

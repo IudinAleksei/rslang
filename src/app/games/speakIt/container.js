@@ -13,7 +13,7 @@ export default class Appcontainer {
     let keyValue = '<div class="res"><ul class="points"><li class="point activePoint"></li><li class="point"></li><li class="point"></li><li class="point"></li><li class="point"></li><li class="point"></li> </ul> <div class="score"></div></div>';
     this.appcontainer.insertAdjacentHTML('beforeend', keyValue);
 
-    keyValue = '<div class="images"><img class="img" src="./assets/img/blank.jpg" alt=""> <p class="translation"></p> <input type="text" class="input none" readonly=""> </div>';
+    keyValue = '<div class="images"><img class="img" src="./assets/img/speakit/blank.jpg" alt=""> <p class="translation"></p> <input type="text" class="input none" readonly=""> </div>';
     this.appcontainer.insertAdjacentHTML('beforeend', keyValue);
 
     const items = this.getItems(array);

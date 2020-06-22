@@ -13,13 +13,13 @@ export default class Results {
 
     this.resultContainer.append(this.getCountSucces());
     this.resultContainer.append(this.getSucces(array));
-    this.resultContainer.append(this.getButtons());
+    this.resultContainer.append(Results.getButtons());
 
     this.results.append(this.resultContainer);
     return this.results;
   }
 
-  static checkSucses(countErrors) {
+  checkSucses(countErrors) {
     this.countErrors = countErrors;
     this.countSucces = 10 - countErrors;
   }

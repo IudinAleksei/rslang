@@ -16,7 +16,7 @@ export default class Intro {
   }
 
   handlerClick(event) {
-    if (this.isClickOnIntro(event)) {
+    if (Intro.isClickOnIntro(event)) {
       this.clickOnIntro();
     }
   }
