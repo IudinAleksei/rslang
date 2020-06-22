@@ -1,23 +1,23 @@
 export default function addSettingsHtml() {
   const mainContainer = document.querySelector('.main-container');
-  mainContainer.innerHTML = `<div class="select">
+  mainContainer.innerHTML = `<div class="settings-select">
     <div class="settings-info" id="settings-info">
       <p class="settings-title">Choose setting</p>
-      <div class="wrap-slider-container">
-        <div class="slider-container">
-          <div class="slider-container__text">
+      <div class="wrap__settings__slider-container">
+        <div class="settings__slider-container">
+          <div class="settings__slider-container__text">
             <p>New words to learn:</p>
           </div>
-          <div class="slider-container__input">
+          <div class="settings__slider-container__input">
             <input class="range-slider__words slider" type="range" name="" value="1" min="1" max="100">
             <label class="range-value__words slider-value" id="range-value-new-words">1</label>
           </div>
         </div>
-        <div class="slider-container">
-          <div class="slider-container__text">
+        <div class="settings__slider-container">
+          <div class="settings__slider-container__text">
             <p>Max number of Cards:</p>
           </div>
-          <div class="slider-container__input">
+          <div class="settings__slider-container__input">
             <input class="range-slider__cards slider" type="range" name="" value="1" min="1" max="100">
             <label class="range-value__cards slider-value" id="range-value-cards">1</label>
           </div>
@@ -100,8 +100,8 @@ export default function addSettingsHtml() {
         </div>
       </div>
       <p class="settings-important-information">At least one option should be selected</p></div>
-      <div class="button">
-        <button class="play-button">PLAY</button>
+      <div class="settings__buttons">
+        <button class="settings__play-button">PLAY</button>
       </div>
    </div>
   </div>`;

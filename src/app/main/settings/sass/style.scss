@@ -1,19 +1,13 @@
 @import "../../../../sass/abstract/constants";
 @import "../../../../sass/abstract/mixins";
-// .main-container.none {
-//     display: none;
-//   }
   
   .main-container {
     @include position();
     @include background(url('/src/assets/img/rs-lang.jpg') center fixed, $background-size: cover, $background-repeat: no-repeat);
   };
-  .wrap-slider-container {
-    margin-bottom: 30px;
+  .wrap__settings__slider-container {
+    margin: 0 10px 30px 0;
   }
-//   .wrap-select {
-//     margin-top: 30px;
-//   }
   .settings-wrapper {
     font-size: 1.4rem;
     display: flex;
@@ -35,7 +29,7 @@
     }
   }
 
-  .select {
+  .settings-select {
     //width: 1000px;
     margin: 0 auto;
     .settings-title {
@@ -56,19 +50,19 @@
       }
     }
   }
-  .slider-container {
+  .settings__slider-container {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 10px 10px;
     font-size: 1.2rem;
-    .slider-container__text{
+    .settings__slider-container__text{
       width: 15rem;
       p {
         font-family: $body_font;
       }
     }
-    .slider-container__input {
+    .settings__slider-container__input {
       display: flex;
       align-items: center;
       margin-left: 20px;
@@ -152,10 +146,10 @@
     border-left: 3px solid $button_hover_color;
   };
 
-  .button{
+  .settings__buttons{
     text-align: center;
     padding: 30px 0;
-    .play-button {
+    .settings__play-button {
       @include button();
       &:hover {
         background-color: $button_hover_color;
