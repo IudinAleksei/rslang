@@ -10,25 +10,28 @@ function showError() {
   }, 4000);
 }
 
-function getSign(email, password) {
+async function getSign(email, password) {
+  let loginResponse = null;
   if (document.getElementById('signin').checked) {
-    loginUser({ email: `${email}`, password: `${password}` }).then((data) => data.token);
+    loginResponse = await loginUser({ email: `${email}`, password: `${password}` });
+    return loginResponse;
   }
   if (document.getElementById('signup').checked) {
-    createUser({ email: `${email}`, password: `${password}` }).then((data) => {
-      if (data === null) {
-        showError();
-      } else {
-        loginUser({ email: `${email}`, password: `${password}` }).then((result) => result.token);
-      }
-    });
+    const result = createUser({ email: `${email}`, password: `${password}` });
+    if (result === null) {
+      showError();
+      return null;
+    }
+    loginResponse = await loginUser({ email: `${email}`, password: `${password}` });
   }
+  return loginResponse;
 }
 export default function formHandling() {
-  document.getElementById('authorization').addEventListener('submit', (event) => {
+  document.getElementById('authorization').addEventListener('submit', async (event) => {
     event.preventDefault();
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
-    getSign(email, password);
+    const loginResponse = await getSign(email, password);
+    return loginResponse;
   });
 }
