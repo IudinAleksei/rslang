@@ -9,3 +9,7 @@ export const API_KEYS = Object.freeze({
 export const API_REQUEST = Object.freeze({
   yandexTranslation: 'https://translate.yandex.net/api/v1.5/tr.json/translate?',
 });
+
+export const DEFAULT_LOCAL_DATA = Object.freeze({
+  currentState: '',
+});
