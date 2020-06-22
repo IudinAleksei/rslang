@@ -40,7 +40,7 @@ export default class App {
   }
 
   handlerClick(event) {
-    if (this.isClickOnPoints(event)) {
+    if (App.isClickOnPoints(event)) {
       this.clickOnPoints(event);
     }
 
@@ -52,18 +52,18 @@ export default class App {
       this.clickOnButtonSpeak();
     }
 
-    if (this.isClickOnButtonRestart(event)) {
+    if (App.isClickOnButtonRestart(event)) {
       this.clickOnButtonRestart();
     }
 
-    if (this.isClickOnButtonResult(event)) {
+    if (App.isClickOnButtonResult(event)) {
       this.clickOnButtonResult();
     }
-    if (this.isClickOnButtonReturn(event)) {
+    if (App.isClickOnButtonReturn(event)) {
       this.clickOnButtonReturn();
     }
 
-    if (this.isClickOnButtonNewGame(event)) {
+    if (App.isClickOnButtonNewGame(event)) {
       this.clickOnButtonNewGame();
     }
   }
@@ -144,7 +144,7 @@ export default class App {
     const image = document.querySelector('.img');
     image.setAttribute('src', './assets/img/blank.jpg');
     const items = document.querySelectorAll('.item');
-    for (let i = 0; i < items.length; i = +1) {
+    for (let i = 0; i < items.length; i += 1) {
       items[i].classList.remove('activeItem');
     }
 
@@ -165,7 +165,7 @@ export default class App {
   checkedTrueWord(word) {
     const images = document.querySelector('.img');
     const items = document.querySelectorAll('.word');
-    for (let i = 0; i < items.length; i = +1) {
+    for (let i = 0; i < items.length; i += 1) {
       if (word === items[i].innerText) {
         items[i].parentElement.classList.add('activeItem');
         const result = this.getInfoByWord(word);
@@ -178,7 +178,7 @@ export default class App {
 
   getInfoByWord(word) {
     const result = [];
-    for (let i = 0; i < this.json.length / 2; i = +1) {
+    for (let i = 0; i < this.json.length / 2; i += 1) {
       if (this.json[i].word === word) {
         result.push(this.json[i].image);
         result.push(this.json[i].audio);
@@ -189,7 +189,7 @@ export default class App {
 
   static getActiveItem(target) {
     const items = document.querySelectorAll('.item');
-    for (let i = 0; i < items.length; i = +1) {
+    for (let i = 0; i < items.length; i += 1) {
       items[i].classList.remove('activeItem');
     }
     target.classList.add('activeItem');
@@ -209,7 +209,7 @@ export default class App {
     const image = document.querySelector('.img');
     image.setAttribute('src', './assets/img/blank.jpg');
     const items = document.querySelectorAll('.item');
-    for (let i = 0; i < items.length; i = +1) {
+    for (let i = 0; i < items.length; i += 1) {
       items[i].classList.remove('activeItem');
     }
   }
@@ -258,8 +258,9 @@ export default class App {
     const url = `https://afternoon-falls-25894.herokuapp.com/words?page=${page}&group=${group}`;
     const res = await fetch(url);
     this.json = await res.json();
-    for (let i = 0; i < this.json.length / 2; i = +1) {
-      // this.translation = await this.getTranslation(this.json[i].word);
+    for (let i = 0; i < this.json.length / 2; i += 1) {
+      console.log(i);
+      // await this.getTranslation(this.json[i].word);
       arrayWords.push({
         word: this.json[i].word,
         translation: this.translation,
@@ -270,6 +271,9 @@ export default class App {
         current: App.getDataCurrent(this.json[i].image),
       });
     }
+    const arrr = await Promise.resolve(arrayWords);
+    console.log(arrr);
+
     return arrayWords;
   }
 
