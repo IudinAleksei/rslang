@@ -259,7 +259,6 @@ export default class App {
     const res = await fetch(url);
     this.json = await res.json();
     for (let i = 0; i < this.json.length / 2; i += 1) {
-      console.log(i);
       // await this.getTranslation(this.json[i].word);
       arrayWords.push({
         word: this.json[i].word,
@@ -271,9 +270,6 @@ export default class App {
         current: App.getDataCurrent(this.json[i].image),
       });
     }
-    const arrr = await Promise.resolve(arrayWords);
-    console.log(arrr);
-
     return arrayWords;
   }
 
