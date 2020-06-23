@@ -1,6 +1,8 @@
 export default class Appcontainer {
   constructor() {
     this.complexity = 0;
+    this.maxPoint = 6;
+    this.activePoint = 0;
     // this.src = 'https://raw.githubusercontent.com/SkaymanT/rslang-data/master/data/';
     this.src = 'https://raw.githubusercontent.com/irinainina/rslang/rslang-data/data/';
   }
@@ -10,10 +12,29 @@ export default class Appcontainer {
     this.appcontainer.classList.add('container');
     this.appcontainer.classList.add('hidden');
 
-    let keyValue = '<div class="res"><ul class="points"><li class="point activePoint"></li><li class="point"></li><li class="point"></li><li class="point"></li><li class="point"></li><li class="point"></li> </ul> <div class="score"></div></div>';
-    this.appcontainer.insertAdjacentHTML('beforeend', keyValue);
+    // const resulthContainer = document.createElement('div');
+    // resulthContainer.classList.add('res');
 
-    keyValue = '<div class="images"><img class="img" src="./assets/img/speakit/blank.jpg" alt=""> <p class="translation"></p> <input type="text" class="input none" readonly=""> </div>';
+    // const pointsContainer = document.createElement('ul');
+    // pointsContainer.classList.add('points');
+    // resulthContainer.append(pointsContainer);
+
+    // for (let i = 0; i < this.maxPoint; i += 1) {
+    //   const pointContainer = document.createElement('li');
+    //   pointContainer.classList.add('point');
+    //   pointsContainer.append(pointContainer);
+    //   if (i === this.activePoint) {
+    //     pointContainer.classList.add('activePoint');
+    //   }
+    // }
+
+    // const scoreContainer = document.createElement('div');
+    // scoreContainer.classList.add('score');
+    // resulthContainer.append(scoreContainer);
+
+    this.appcontainer.append(this.getHeaderResult());
+
+    let keyValue = '<div class="images"><img class="img" src="./assets/img/speakit/blank.jpg" alt=""> <p class="translation"></p> <input type="text" class="input none" readonly=""> </div>';
     this.appcontainer.insertAdjacentHTML('beforeend', keyValue);
 
     const items = this.getItems(array);
@@ -35,6 +56,29 @@ export default class Appcontainer {
         this.items.insertAdjacentHTML('beforeend', keyValue);
       }
     })();
+    return this.items;
+  }
+
+  getHeaderResult() {
+    const resulthContainer = document.createElement('div');
+    resulthContainer.classList.add('res');
+
+    const pointsContainer = document.createElement('ul');
+    pointsContainer.classList.add('points');
+    resulthContainer.append(pointsContainer);
+
+    for (let i = 0; i < this.maxPoint; i += 1) {
+      const pointContainer = document.createElement('li');
+      pointContainer.classList.add('point');
+      pointsContainer.append(pointContainer);
+      if (i === this.activePoint) {
+        pointContainer.classList.add('activePoint');
+      }
+    }
+
+    const scoreContainer = document.createElement('div');
+    scoreContainer.classList.add('score');
+    resulthContainer.append(scoreContainer);
     return this.items;
   }
 }

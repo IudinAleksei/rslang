@@ -1,0 +1,42 @@
+.intro {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  padding: 10px;
+  transition: .5s;
+  background-image: url(/src/assets/img/speakit/bg.png);
+  background-size: cover;
+
+  .title {
+    font-size: 40px;
+    margin: -100px auto 40px;
+    color: #6cffde;
+    opacity: .8;
+    text-transform: uppercase;
+    letter-spacing: 13px;
+    font-weight: 300;
+  }
+
+  .intro-text {
+    max-width: 600px;
+    margin: 0 auto 60px;
+    font-size: 18px;
+    line-height: 1.4;
+    font-weight: 300;
+    color: #fff;
+    opacity: .8;
+  }
+
+  .hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+}

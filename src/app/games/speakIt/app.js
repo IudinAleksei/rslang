@@ -11,10 +11,9 @@ export default class App {
   }
 
   initApp() {
-    const body = document.querySelector('body');
-    this.main = document.createElement('main');
-    this.main.classList.add('main');
-
+    const body = document.querySelector('.main');
+    this.main = document.createElement('div');
+    this.main.id = 'speakit';
     this.intro = new Intro();
     this.main.prepend(this.intro.getIntro());
 
@@ -25,21 +24,20 @@ export default class App {
     this.results = new Results();
     this.main.append(this.results.render(response));
 
-    const keyValue = ' <audio class="audio" src=""></audio>';
-    this.main.insertAdjacentHTML('beforeend', keyValue);
+    const audioContainer = document.createElement('audio');
+    audioContainer.classList.add('audio');
+    audioContainer.src = '';
+    this.main.append(audioContainer);
     body.prepend(this.main);
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (SpeechRecognition) {
       this.recognition = new SpeechRecognition();
     }
-  }
-
-  addListeners() {
-    document.addEventListener('click', (event) => this.handlerClick(event));
-    window.addEventListener('hashchange', () => this.navigate());
+    this.main.addEventListener('click', (event) => this.handlerClick(event));
   }
 
   handlerClick(event) {
+    console.log('clickOnpoint');
     if (App.isClickOnPoints(event)) {
       this.clickOnPoints(event);
     }
@@ -69,11 +67,13 @@ export default class App {
   }
 
   static isClickOnPoints(event) {
+    console.log('clickOnpoint');
     return event.target.parentNode.classList.contains('points');
   }
 
   clickOnPoints(event) {
-    const group = this.getRandomArbitrary(0, 5);
+    const group = App.getRandomArbitrary(0, 5);
+    console.log('clickOnpoint');
     const response = this.initWords(group);
     this.items = document.querySelector('.items');
     this.items.innerHTML = '';

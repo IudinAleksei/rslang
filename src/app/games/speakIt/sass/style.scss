@@ -1,3 +1,5 @@
+@import "./components/intro";
+
 * {
   box-sizing: border-box;
 }
@@ -6,11 +8,10 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Open Sans', sans-serif;
-  // overflow: hidden; 
+  // overflow: hidden;
   min-height: 100vh;
 }
 
-.intro,
 .results {
   display: flex;
   align-items: center;
@@ -26,26 +27,6 @@ body {
   transition: .5s;
   // background-image: url(../assets/img/bg.png);
   background-size: cover;
-}
-
-.title {
-  font-size: 40px;
-  margin: -100px auto 40px;
-  color: #6cffde;
-  opacity: .8;
-  text-transform: uppercase;
-  letter-spacing: 13px;
-  font-weight: 300;
-}
-
-.intro-text {
-  max-width: 600px;
-  margin: 0 auto 60px;
-  font-size: 18px;
-  line-height: 1.4;
-  font-weight: 300;
-  color: #fff;
-  opacity: .8;
 }
 
 .main {
