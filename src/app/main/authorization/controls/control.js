@@ -26,12 +26,14 @@ async function getSign(email, password) {
   }
   return loginResponse;
 }
-export default function formHandling() {
+export default function formHandling(nextPageFunction) {
   document.getElementById('authorization').addEventListener('submit', async (event) => {
     event.preventDefault();
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     const loginResponse = await getSign(email, password);
-    return loginResponse;
+    if (loginResponse) {
+      nextPageFunction(loginResponse);
+    }
   });
 }

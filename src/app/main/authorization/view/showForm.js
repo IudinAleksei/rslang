@@ -1,8 +1,10 @@
 const showForm = () => {
+  const mainContainer = document.querySelector('.main-container');
+  mainContainer.innerHTML = '';
   const form = document.createElement('form');
   form.id = 'authorization';
   form.className = 'authorization-form';
-  document.querySelector('.main-container').append(form);
+  mainContainer.append(form);
   const inputSignIn = document.createElement('input');
   inputSignIn.checked = '0';
   inputSignIn.id = 'signin';
@@ -37,7 +39,7 @@ const showForm = () => {
   inputEmail.type = 'email';
   inputEmail.id = 'email';
   inputEmail.placeholder = 'Enter email';
-  inputEmail.pattern = '[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$';
+  inputEmail.pattern = '[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$';
   inputEmail.required = 'required';
   wrapper.append(inputEmail);
   const inputPassword = document.createElement('input');
