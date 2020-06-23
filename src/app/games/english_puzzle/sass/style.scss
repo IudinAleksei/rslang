@@ -1,4 +1,10 @@
-.header {
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.puzzle-game__header {
   height: 50px;
   display: flex;
   flex-direction: row;
@@ -58,7 +64,7 @@
   height: 40px;
   border: 1px solid black;
   color: white;
-  padding-top: 7px;
+
 }
 
 .box {

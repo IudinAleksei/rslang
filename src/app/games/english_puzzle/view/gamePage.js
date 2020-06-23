@@ -1,9 +1,7 @@
-const BODY = document.querySelector('body');
-
 export default function showGamePage() {
   const header = document.createElement('div');
-  header.className = 'header';
-  BODY.append(header);
+  header.className = 'puzzle-game__header';
+  document.querySelector('.main-container').append(header);
   const controlPanel = document.createElement('div');
   controlPanel.className = 'control-panel';
   const levels = document.createElement('p');
@@ -55,6 +53,6 @@ export default function showGamePage() {
 
   const container = document.createElement('div');
   container.className = 'container-game';
-  BODY.append(container);
+  document.querySelector('.main-container').append(container);
   container.innerHTML = '<div class="container-puzzle"><div class="translate"><div class="translate-text"></div></div><div class="block-puzzle"></div><div id="text" class="text" draggable="true"></div><div class="buttons-puzzle"><button id="know">I dont know</button><button id="check">Check</button><button id="continue">Continue</button><button id="results">Results</button></div></div>';
 }
