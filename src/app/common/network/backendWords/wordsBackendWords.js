@@ -1,4 +1,4 @@
-import { fetchUrl } from './commonFetch';
+import fetchUrl from './commonFetch';
 
 export async function getWords(group, page) {
   const urlWords = `https://afternoon-falls-25894.herokuapp.com/words?page=${page}&group=${group}`;
@@ -11,7 +11,7 @@ export async function getCountWords(group, wordsPerExampleSentence, wordsPerPage
   const content = fetchUrl(urlWords, {
     method: 'GET',
     headers: {
-      'Accept': 'application/json',
+      Accept: 'application/json',
     },
   });
   return content;
