@@ -149,14 +149,17 @@
   .settings__buttons{
     text-align: center;
     padding: 30px 0;
-    .settings__play-button {
+    .settings__play-button_enabled {
       @include button();
       &:hover {
         background-color: $button_hover_color;
         border: 1px solid $button_hover_color;
       }
     }
+    .settings__play-button_enabled:disabled {
+      @include button($background-color: $header_icons_color, $opacity: .5, $cursor: default);
   }
+}
 
   @media screen and (max-width: 600px) {
     .settings-wrapper{

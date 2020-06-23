@@ -77,7 +77,7 @@ export default function addSettingsHtml() {
             </div>
           </div>
           <div class="settings-container">
-            <input class="settings-checkbox" type="checkbox" id="show-picture">
+            <input class="settings-checkbox" type="checkbox" id="show-picture" checked>
             <label for="show-picture"></label>
             <div class="settings-container__text">
               <p>Show Picture</p>
@@ -101,7 +101,7 @@ export default function addSettingsHtml() {
       </div>
       <p class="settings-important-information">At least one option should be selected</p></div>
       <div class="settings__buttons">
-        <button class="settings__play-button">PLAY</button>
+        <button class=" settings__play-button settings__play-button_enabled">PLAY</button>
       </div>
    </div>
   </div>`;

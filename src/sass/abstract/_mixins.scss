@@ -19,7 +19,7 @@
   background-size: $background-size;
 };
 
-@mixin button($background-color: $button_color, $width: 180px, $heigth: 50px) {
+@mixin button($background-color: $button_color, $width: 180px, $heigth: 50px, $opacity: 1, $cursor: pointer) {
   display: inline-block;
   font-family: $body_font;
   border: 1px solid $button_color;
@@ -29,12 +29,13 @@
   color: $color_text_button;
   box-shadow: $button_shadow;
   transition-duration: 0.4s;
-  cursor: pointer;
+  cursor: $cursor;
   font-size: 20px;
   text-transform: uppercase;
   text-align: center;
   border-radius: 8px;
   visibility: visible;
+  opacity: $opacity;
 }
 @mixin headingText () {
   font-family: $heading_font;
