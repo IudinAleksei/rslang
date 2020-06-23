@@ -12,36 +12,13 @@ export default class Appcontainer {
     this.appcontainer.classList.add('container');
     this.appcontainer.classList.add('hidden');
 
-    // const resulthContainer = document.createElement('div');
-    // resulthContainer.classList.add('res');
-
-    // const pointsContainer = document.createElement('ul');
-    // pointsContainer.classList.add('points');
-    // resulthContainer.append(pointsContainer);
-
-    // for (let i = 0; i < this.maxPoint; i += 1) {
-    //   const pointContainer = document.createElement('li');
-    //   pointContainer.classList.add('point');
-    //   pointsContainer.append(pointContainer);
-    //   if (i === this.activePoint) {
-    //     pointContainer.classList.add('activePoint');
-    //   }
-    // }
-
-    // const scoreContainer = document.createElement('div');
-    // scoreContainer.classList.add('score');
-    // resulthContainer.append(scoreContainer);
-
     this.appcontainer.append(this.getHeaderResult());
-
-    let keyValue = '<div class="images"><img class="img" src="./assets/img/speakit/blank.jpg" alt=""> <p class="translation"></p> <input type="text" class="input none" readonly=""> </div>';
-    this.appcontainer.insertAdjacentHTML('beforeend', keyValue);
+    this.appcontainer.append(Appcontainer.getImage());
 
     const items = this.getItems(array);
 
     this.appcontainer.append(items);
-    keyValue = '<div class="btns"><a href="#" class="btn restart">Restart</a><a href="#" class="btn voice user-speach">Speak please</a><a href="#" class="btn result">Results</a></div>';
-    this.appcontainer.insertAdjacentHTML('beforeend', keyValue);
+    this.appcontainer.append(Appcontainer.getButtons());
 
     return this.appcontainer;
   }
@@ -60,12 +37,12 @@ export default class Appcontainer {
   }
 
   getHeaderResult() {
-    const resulthContainer = document.createElement('div');
-    resulthContainer.classList.add('res');
+    const resultContainer = document.createElement('div');
+    resultContainer.classList.add('res');
 
     const pointsContainer = document.createElement('ul');
     pointsContainer.classList.add('points');
-    resulthContainer.append(pointsContainer);
+    resultContainer.append(pointsContainer);
 
     for (let i = 0; i < this.maxPoint; i += 1) {
       const pointContainer = document.createElement('li');
@@ -78,7 +55,59 @@ export default class Appcontainer {
 
     const scoreContainer = document.createElement('div');
     scoreContainer.classList.add('score');
-    resulthContainer.append(scoreContainer);
-    return this.items;
+    resultContainer.append(scoreContainer);
+
+    return resultContainer;
+  }
+
+  static getImage() {
+    const imagesContainer = document.createElement('div');
+    imagesContainer.classList.add('images');
+    const imagesFont = document.createElement('img');
+    imagesFont.classList.add('img');
+    imagesFont.src = './assets/img/speakit/blank.jpg';
+    imagesFont.alt = 'blank';
+    imagesContainer.append(imagesFont);
+    const translationContainer = document.createElement('p');
+    translationContainer.classList.add('translation');
+    imagesContainer.append(translationContainer);
+
+    const inputContainer = document.createElement('input');
+    inputContainer.type = 'text';
+    inputContainer.classList.add('input');
+    inputContainer.classList.add('none');
+    inputContainer.readOnly = true;
+    imagesContainer.append(inputContainer);
+
+    return imagesContainer;
+  }
+
+  static getButtons() {
+    const buttonsContainer = document.createElement('div');
+    buttonsContainer.classList.add('btns');
+
+    const buttonRestart = document.createElement('a');
+    buttonRestart.href = '#';
+    buttonRestart.classList.add('btn');
+    buttonRestart.classList.add('restart');
+    buttonRestart.innerHTML = 'Restart';
+    buttonsContainer.append(buttonRestart);
+
+    const buttonVoice = document.createElement('a');
+    buttonVoice.href = '#';
+    buttonVoice.classList.add('btn');
+    buttonVoice.classList.add('voice');
+    buttonVoice.classList.add('user-speach');
+    buttonVoice.innerHTML = 'Speak please';
+    buttonsContainer.append(buttonVoice);
+
+    const buttonResult = document.createElement('a');
+    buttonResult.href = '#';
+    buttonResult.classList.add('btn');
+    buttonResult.classList.add('result');
+    buttonResult.innerHTML = 'Results';
+    buttonsContainer.append(buttonResult);
+
+    return buttonsContainer;
   }
 }
