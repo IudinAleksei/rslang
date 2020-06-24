@@ -2,9 +2,10 @@
 @import "../../../../sass/abstract/mixins";
   
   .main-container {
-    @include position();
-    @include background(url('/src/assets/img/rs-lang.jpg') center fixed, $background-size: cover, $background-repeat: no-repeat);
+   @include position();
+   @include background(url('/src/assets/img/rs-lang.jpg') center fixed, $background-size: cover, $background-repeat: no-repeat);
   };
+
   .wrap__settings__slider-container {
     margin: 0 10px 30px 0;
   }
@@ -30,8 +31,8 @@
   }
 
   .settings-select {
-    //width: 1000px;
     margin: 0 auto;
+  }
     .settings-title {
       @include headingText();
     }
@@ -44,12 +45,13 @@
       margin: auto;
       &::before {
         content: url(/src/assets/icons/settings/exclamation.svg);
+        width: 26px;
         position: absolute;
         left: -4px;
         top: -4px;
       }
     }
-  }
+  
   .settings__slider-container {
     display: flex;
     justify-content: center;
@@ -94,7 +96,7 @@
       border-radius: 8px;
       margin: 0;
       color: white;
-      line-height: 20px;
+      line-height: 2.3rem;
       &::before {
         content: '';
         position: absolute;
@@ -105,12 +107,11 @@
         height: 12px;
         background: $button_color;
         font-size: 1.3rem;
-        line-height: 22px;
+        line-height: 2.2rem;
       }
     }
   }
-  input[type="checkbox"] + label{
-    // z-index: 15;
+  .settings-checkbox + label{
     position: absolute;
     left: 0;
     top: 5px;
@@ -123,8 +124,7 @@
     height: 20px;
     margin: 0;
   }
-  input[type="checkbox"]:checked + label{
-    // z-index: 15;
+  .settings-checkbox:checked + label{
     display: inline-block;
     transform: rotate(-50deg) translate(5px,-9px);
     transition: all 0.3s ease;
@@ -136,7 +136,7 @@
     height: 20px;
   }
   
-  input[type="checkbox"]:checked + label:before{
+  .settings-checkbox:checked + label:before{
     content: "";
     position: absolute;
     right: 0;
@@ -149,14 +149,14 @@
   .settings__buttons{
     text-align: center;
     padding: 30px 0;
-    .settings__play-button_enabled {
-      @include button();
+    .settings__play-button {
+      @include button($color_text: $white_color);
       &:hover {
         background-color: $button_hover_color;
         border: 1px solid $button_hover_color;
       }
     }
-    .settings__play-button_enabled:disabled {
+    .settings__play-button:disabled {
       @include button($background-color: $header_icons_color, $opacity: .5, $cursor: default);
   }
 }
@@ -165,6 +165,10 @@
     .settings-wrapper{
         display: block;
       }
+     .settings-title {
+      @include headingText($font-size: 3.5rem);
+     } 
+
   }
 
   @media screen and (max-width: 450px) {
@@ -176,6 +180,9 @@
         .slider {
             width: 105px;
         }
+    } 
+    .settings-title {
+      @include headingText($font-size: 2.5rem)
     } 
 
   }

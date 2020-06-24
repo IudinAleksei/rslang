@@ -9,8 +9,8 @@ export default function addSettingsHtml() {
             <p>New words to learn:</p>
           </div>
           <div class="settings__slider-container__input">
-            <input class="range-slider__words slider" type="range" name="" value="1" min="1" max="100">
-            <label class="range-value__words slider-value" id="range-value-new-words">1</label>
+            <input class="range-slider__words slider" type="range" id="words-slider" name="" value="1" min="2" max="30">
+            <label class="range-value__words slider-value" for="words-slider" id="range-value-new-words">10</label>
           </div>
         </div>
         <div class="settings__slider-container">
@@ -18,8 +18,8 @@ export default function addSettingsHtml() {
             <p>Max number of Cards:</p>
           </div>
           <div class="settings__slider-container__input">
-            <input class="range-slider__cards slider" type="range" name="" value="1" min="1" max="100">
-            <label class="range-value__cards slider-value" id="range-value-cards">1</label>
+            <input class="range-slider__cards slider" type="range" id="cards-slider" name="" value="1" min="4" max="40">
+            <label class="range-value__cards slider-value" for="cards-slider" id="range-value-cards">4</label>
           </div>
         </div>
       </div>
@@ -101,7 +101,7 @@ export default function addSettingsHtml() {
       </div>
       <p class="settings-important-information">At least one option should be selected</p></div>
       <div class="settings__buttons">
-        <button class=" settings__play-button settings__play-button_enabled">PLAY</button>
+        <button class="settings__play-button">PLAY</button>
       </div>
    </div>
   </div>`;

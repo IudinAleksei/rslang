@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 export default function sliderSettingsPageHandling() {
   const sliderNewWords = document.querySelector('.range-slider__words');
   const sliderCounterNewWords = document.querySelector('.range-value__words');
@@ -5,17 +6,16 @@ export default function sliderSettingsPageHandling() {
   const sliderCounterCards = document.querySelector('.range-value__cards');
 
   // slider on the settings page
-  function slidingProgressNewWords() {
-    sliderCounterNewWords.innerHTML = sliderNewWords.value;
+  function getSliderHandler(element) {
+    return function assignInnerHtml(event) {
+      element.innerHTML = event.target.value;
+    };
   }
 
-  function slidingProgressCards() {
-    sliderCounterCards.innerHTML = sliderCards.value;
-  }
-  sliderNewWords.addEventListener('input', slidingProgressNewWords);
-  sliderCards.addEventListener('input', slidingProgressCards);
+  sliderNewWords.addEventListener('input', getSliderHandler(sliderCounterNewWords));
+  sliderCards.addEventListener('input', getSliderHandler(sliderCounterCards));
 
-  const inputs = document.querySelectorAll('input[type=checkbox]');
+  const inputs = document.querySelectorAll('.settings-checkbox');
   const playButton = document.querySelector('.settings__play-button');
 
   function checkSelectedCheckboxes() {
