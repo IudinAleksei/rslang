@@ -1,7 +1,7 @@
 export const DEFAULT_SESSION_DATA = Object.freeze({
   score: 0,
-  puzzleCounterBox: 0,
-  puzzleCounterWord: 0,
+  puzzleCounterBox: 1,
+  puzzleCounterWord: 1,
 });
 
 export const API_KEYS = Object.freeze({
