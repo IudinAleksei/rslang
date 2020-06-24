@@ -54,18 +54,18 @@ const card = (img, name, text, telegramLink, githubLink) => `<img src="${img}" c
 
 const logo = '<p class="logo-about-us">About us</p>';
 
-export const generatePageAboutUs = () => {
-  document.querySelector('.main-container').appendChild(divAboutUs);
+const generatePageAboutUs = () => {
   const divAboutUs = document.createElement('div');
   divAboutUs.className = 'main__about-us';
 
+  document.querySelector('.main-container').appendChild(divAboutUs);
+  divAboutUs.insertAdjacentHTML('beforebegin', logo);
+
   const divWrapCards = document.createElement('div');
   divWrapCards.className = 'wrap-cards';
-  divAboutUs.insertAdjacentHTML('beforebegin', logo);
+  divAboutUs.appendChild(divWrapCards);
 
   for (let i = 0; i < param.length; i += 1) {
     divWrapCards.insertAdjacentHTML('beforebegin', card(param[i].img, param[i].name, param[i].text, param[i].telegramLink, param[i].githubLink));
   }
-  divWrapCards.appendChild(divAboutUs);
-  document.querySelector('.main-container').appendChild(divAboutUs);
 };
