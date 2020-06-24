@@ -49,8 +49,8 @@ const card = (img, name, text, telegramLink, githubLink) => `<div class="about-u
     <p class="text">${text}</p>
   </div>
   <div class="contact">
-    <a href="${telegramLink}"><img src="file:///G:/assets/telegram-icon.png" class="telegtam"></a>
-    <a href="${githubLink}"><img src="file:///G:/assets/github-icon.jpg" class="github"></a>
+    <a href="${telegramLink}"><img src="assets/img/about-us/telegram.svg" class="telegtam"></a>
+    <a href="${githubLink}"><img src="assets/img/about-us/logo.svg" class="github"></a>
   </div>
 </div>`;
 
