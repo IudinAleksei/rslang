@@ -55,6 +55,7 @@ const card = (img, name, text, telegramLink, githubLink) => `<img src="${img}" c
 const logo = '<p class="logo-about-us">About us</p>';
 
 export const generatePageAboutUs = () => {
+  document.querySelector('.main-container').appendChild(divAboutUs);
   const divAboutUs = document.createElement('div');
   divAboutUs.className = 'main__about-us';
 
@@ -66,4 +67,5 @@ export const generatePageAboutUs = () => {
     divWrapCards.insertAdjacentHTML('beforebegin', card(param[i].img, param[i].name, param[i].text, param[i].telegramLink, param[i].githubLink));
   }
   divWrapCards.appendChild(divAboutUs);
+  document.querySelector('.main-container').appendChild(divAboutUs);
 };
