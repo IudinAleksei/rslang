@@ -25,7 +25,11 @@ export const setSessionData = (data = {}) => {
 
 export const getSessionData = () => {
   const dataNameArray = Object.keys(DEFAULT_SESSION_DATA);
-  const result = dataNameArray.map((param) => window.sessionStorage.getItem(param));
+  const result = dataNameArray.reduce((acc, param) => {
+    const entry = {};
+    entry[param] = window.sessionStorage.getItem(param);
+    return Object.assign(acc, entry);
+  }, {});
   return result;
 };
 
