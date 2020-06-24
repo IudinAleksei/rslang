@@ -5,3 +5,4 @@ export {
 } from './wordsUserBackendWords';
 export { getUserStatistic, upsertUserStatistic } from './statisticsBackendWords';
 export { getUserSettings, upsertUserSettings } from './settingsBackendWords';
+export { getAllAggregatedWords, getAggregatedWordsById } from './aggregatedWords';

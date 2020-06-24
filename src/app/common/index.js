@@ -3,7 +3,8 @@ export { default as getMedia } from './utils/githubMedia';
 export {
   getWords, getCountWords, getWordById, createUser, loginUser, deleteUser,
   createUserWord, getAllUserWords, getUserWordById, deleteUserWordById, updateUserWord,
-  getUserStatistic, upsertUserStatistic, getUserSettings, upsertUserSettings,
+  getUserStatistic, upsertUserStatistic, getUserSettings, upsertUserSettings, getAllAggregatedWords,
+  getAggregatedWordsById,
 } from './network/backendWords/backendWords';
 
 export { setSessionData, getSessionData, getAndInitSessionData } from './utils/sessionStorage';
