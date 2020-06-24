@@ -14,10 +14,9 @@ export default class Appcontainer {
 
     this.appcontainer.append(this.getHeaderResult());
     this.appcontainer.append(Appcontainer.getImage());
-
     const items = this.getItems(array);
-
     this.appcontainer.append(items);
+
     this.appcontainer.append(Appcontainer.getButtons());
 
     return this.appcontainer;

@@ -1,7 +1,10 @@
 import './sass/style.scss';
-import Intro from './intro';
-import Appcontainer from './container';
-import Results from './results';
+import Intro from './components/intro';
+import Appcontainer from './components/container';
+import Results from './components/results';
+import {
+  getWords,
+} from '../../common/index';
 
 export default class App {
   constructor() {
@@ -10,7 +13,7 @@ export default class App {
     this.src = 'https://raw.githubusercontent.com/irinainina/rslang/rslang-data/data/';
   }
 
-  initApp() {
+  async initApp() {
     const body = document.querySelector('.main');
     this.main = document.createElement('div');
     this.main.id = 'speakit';
@@ -18,7 +21,7 @@ export default class App {
     this.main.prepend(this.intro.getIntro());
 
     this.appcontainer = new Appcontainer();
-    const response = this.initWords(this.group);
+    const response = await App.getRandomWords(this.group);
     this.main.append(this.appcontainer.render(response));
 
     this.results = new Results();
@@ -37,7 +40,6 @@ export default class App {
   }
 
   handlerClick(event) {
-    console.log('clickOnpoint');
     if (App.isClickOnPoints(event)) {
       this.clickOnPoints(event);
     }
@@ -67,14 +69,13 @@ export default class App {
   }
 
   static isClickOnPoints(event) {
-    console.log('clickOnpoint');
     return event.target.parentNode.classList.contains('points');
   }
 
   clickOnPoints(event) {
     const group = App.getRandomArbitrary(0, 5);
-    console.log('clickOnpoint');
-    const response = this.initWords(group);
+    const response = App.getRandomWords(group);
+
     this.items = document.querySelector('.items');
     this.items.innerHTML = '';
     this.items.append(this.appcontainer.getItems(response));
@@ -95,19 +96,19 @@ export default class App {
       if (event.target.parentNode.classList.contains('item')) {
         this.wordActive = event.target.parentNode.querySelector('.word').textContent;
         this.translationActive = event.target.parentNode.querySelector('.translation').textContent;
-        this.getActiveItem(event.target.parentNode);
+        App.getActiveItem(event.target.parentNode);
         return true;
       }
       if (event.target.parentNode.parentNode.parentNode.classList.contains('item')) {
         this.wordActive = event.target.parentNode.parentNode.parentNode.querySelector('.word').textContent;
         this.translationActive = event.target.parentNode.parentNode.parentNode.querySelector('.translation').textContent;
-        this.getActiveItem(event.target.parentNode.parentNode.parentNode);
+        App.getActiveItem(event.target.parentNode.parentNode.parentNode);
         return true;
       }
       if (event.target.classList.contains('item')) {
         this.wordActive = event.target.querySelector('.word').textContent;
         this.translationActive = event.target.querySelector('.translation').textContent;
-        this.getActiveItem(event.target);
+        App.getActiveItem(event.target);
         return true;
       }
     }
@@ -170,18 +171,19 @@ export default class App {
         items[i].parentElement.classList.add('activeItem');
         const result = this.getInfoByWord(word);
         images.setAttribute('src', this.src + result[0]);
-        const keyValue = '<div class="star"></div>';
-        document.querySelector('.score').insertAdjacentHTML('beforeend', keyValue);
+        const starContainer = document.createElement('div');
+        starContainer.classList.add('star');
+        document.querySelector('.score').append(starContainer);
       }
     }
   }
 
   getInfoByWord(word) {
     const result = [];
-    for (let i = 0; i < this.json.length / 2; i += 1) {
-      if (this.json[i].word === word) {
-        result.push(this.json[i].image);
-        result.push(this.json[i].audio);
+    for (let i = 0; i < this.activeWords.length / 2; i += 1) {
+      if (this.activeWords[i].word === word) {
+        result.push(this.activeWords[i].image);
+        result.push(this.activeWords[i].audio);
       }
     }
     return result;
@@ -243,31 +245,18 @@ export default class App {
     this.clickOnButtonRestart();
   }
 
-  static async getTranslation(word) {
-    const key = 'trnsl.1.1.20200424T174558Z.39de9cd79c70e957.6d82f0080ca311d8fb2ae17aad1c3d9661aa636b';
-    const url = `https://translate.yandex.net/api/v1.5/tr.json/translate?key=${key}&text=${word}&lang=en-ru`;
-    const res = await fetch(url);
-    const data = await res.json();
-    const buf = data.text[0];
-    return buf;
-  }
-
-  async initWords(group) {
+  static async getRandomWords(group) {
     const page = App.getRandomArbitrary(0, 29);
     const arrayWords = [];
-    const url = `https://afternoon-falls-25894.herokuapp.com/words?page=${page}&group=${group}`;
-    const res = await fetch(url);
-    this.json = await res.json();
-    for (let i = 0; i < this.json.length / 2; i += 1) {
-      // await this.getTranslation(this.json[i].word);
+    this.activeWords = await getWords(group, page);
+    for (let i = 0; i < this.activeWords.length / 2; i += 1) {
       arrayWords.push({
-        word: this.json[i].word,
-        translation: this.translation,
+        word: this.activeWords[i].word,
         isGuess: false,
-        transcription: this.json[i].transcription,
-        image: this.json[i].image,
-        audio: this.json[i].audio,
-        current: App.getDataCurrent(this.json[i].image),
+        transcription: this.activeWords[i].transcription,
+        image: this.activeWords.image,
+        audio: this.activeWords[i].audio,
+        current: App.getDataCurrent(this.activeWords[i].image),
       });
     }
     return arrayWords;

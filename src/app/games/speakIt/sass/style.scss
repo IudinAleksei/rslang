@@ -9,7 +9,7 @@ body {
   padding: 0;
   font-family: 'Open Sans', sans-serif;
   // overflow: hidden;
-  min-height: 100vh;
+  min-height: 100%;
 }
 
 .results {
@@ -371,4 +371,28 @@ body {
 .results .item .translation {
   min-height: 30px;
   margin-bottom: 0;
+}
+
+@media (min-width:1800px) {
+  html {
+    font-size: 100%;
+  }
+}
+
+@media (min-width:1200px) {
+  html {
+    font-size: 75%
+  }
+}
+
+@media (min-width:900px) {
+  html {
+    font-size: 75%
+  }
+}
+
+@media (min-width:600px) {
+  html {
+    font-size: 75%
+  }
 }
