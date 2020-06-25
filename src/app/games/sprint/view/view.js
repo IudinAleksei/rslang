@@ -1,6 +1,6 @@
-export default function renderGame(elem) {
-  // eslint-disable-next-line no-param-reassign
-  elem.innerHTML = `<div class="card-container">
+export default function renderGame() {
+  const mainContainer = document.querySelector('.main-container');
+  mainContainer.innerHTML = `<div class="card-container">
     <div class="word-section">
       <div class="question-wrapper">
         <div class="sound-button"></div>
