@@ -2,7 +2,7 @@
 import menuHandling from './app/main/menu/menu';
 
 import {
-  createLayout, createAudio, getWordArr, listener, createSpeakIcon,
+  createLayout, createAudio, getWordArr, wordListlistener, createSpeakIcon,
 } from './app/games/audiochallenge/index';
 
 window.onload = () => {
@@ -12,9 +12,9 @@ window.onload = () => {
 async function createPage() {
   createLayout();
   createSpeakIcon();
-  await createAudio();
   await getWordArr();
-  listener();
+  await createAudio();
+  wordListlistener();
 }
 
 createPage();

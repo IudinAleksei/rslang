@@ -1,6 +1,8 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-console */
-import { getWordsInfo, getWordInfoById } from '../../../common/index';
+import {
+  getWordsInfo, getWordInfoById, getWords, getRandomInteger,
+} from '../../../common/index';
 
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i -= 1) {
@@ -9,14 +11,21 @@ function shuffle(array) {
   }
 }
 
-export default async function getWordArr() {
-  const wordData = document.querySelector('.word-audio').dataset.word;
-  const wordTranslate = document.querySelector('.word-audio').dataset.translate;
-  const wordInfo = await getWordsInfo(wordData);
-  const ids = wordInfo[0].meanings[0].id;
-  const infoId = await getWordInfoById(ids);
+async function getWord() {
+  const wordsArr = await getWords(0, getRandomInteger(0, 29));
+  const word = wordsArr[getRandomInteger(0, wordsArr.length - 1)];
+  return word;
+}
 
-  const arr = infoId[0].alternativeTranslations;
+export default async function getWordArr() {
+  const {
+    word, wordTranslate, audio, image,
+  } = await getWord();
+  const wordInfo = await getWordsInfo(word);
+  const { id } = wordInfo[0].meanings[0];
+  const [wordObj] = await getWordInfoById(id);
+
+  const arr = wordObj.alternativeTranslations;
   const newArr = [];
   arr.map((el) => newArr.push(el.translation.text));
   const sliceArr = newArr.slice(0, 4);
@@ -28,9 +37,17 @@ export default async function getWordArr() {
 
   for (let i = 0; i < 5; i += 1) {
     const li = document.createElement('li');
-    li.innerText = sliceArr[i];
+    li.classList.add('word-list__item');
+    if (sliceArr[i] === wordTranslate) {
+      li.innerText = sliceArr[i];
+      li.setAttribute('data-audio', audio);
+      li.setAttribute('data-image', image);
+    } else {
+      li.innerText = sliceArr[i];
+    }
     ol.append(li);
   }
 
+  document.querySelector('.audiochallenge-list').innerHTML = '';
   document.querySelector('.audiochallenge-list').append(ol);
 }

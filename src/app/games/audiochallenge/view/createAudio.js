@@ -10,14 +10,14 @@ async function getWord() {
 }
 
 async function createAudio() {
-  const word = await getWord();
   const audio = document.createElement('audio');
   audio.classList.add('word-audio');
-  audio.src = getMedia(word.audio);
-  audio.setAttribute('data-word', word.word);
-  audio.setAttribute('data-translate', word.wordTranslate);
-  document.querySelector('.audiochallenge-assets').prepend(audio);
-  // audio.play();
+  const srcElem = document.querySelector('[data-audio]');
+  audio.src = getMedia(srcElem.dataset.audio);
+  audio.setAttribute('data-translate', srcElem.textContent);
+  document.querySelector('.audio__wrapper').innerHTML = '';
+  document.querySelector('.audio__wrapper').append(audio);
+  audio.play();
 }
 
 export { getWord, createAudio };
