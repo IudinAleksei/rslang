@@ -1,22 +1,22 @@
 /* eslint-disable no-console */
-import { createAudio, createWordList } from '../index';
+import { createAudio } from '../view/createAudio';
+import getWordArr from '../view/wordList';
 
 export default function listener() {
   const audioTranslate = document.querySelector('audio').dataset.translate;
 
   document.querySelector('.word-list').addEventListener('click', (event) => {
     if (event.target.textContent === audioTranslate) {
-      console.log('audioTranslate');
-      document.querySelector('.main-container').innerHTML = '';
+      document.querySelector('.word-list').innerHTML = '';
       createAudio();
       setTimeout(() => {
-        createWordList();
+        getWordArr();
       }, 1000);
       setTimeout(() => {
         listener();
-      }, 3000);
+      }, 2000);
     } else {
-      console.log('try');
+      console.log('try again');
     }
   });
 }

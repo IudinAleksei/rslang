@@ -9,7 +9,7 @@ function shuffle(array) {
   }
 }
 
-async function getWordArr() {
+export default async function getWordArr() {
   const wordData = document.querySelector('.word-audio').dataset.word;
   const wordTranslate = document.querySelector('.word-audio').dataset.translate;
   const wordInfo = await getWordsInfo(wordData);
@@ -23,20 +23,14 @@ async function getWordArr() {
   sliceArr.push(wordTranslate);
   shuffle(sliceArr);
 
-  const ul = document.createElement('ul');
-  ul.classList.add('word-list');
+  const ol = document.createElement('ol');
+  ol.classList.add('word-list');
 
   for (let i = 0; i < 5; i += 1) {
     const li = document.createElement('li');
     li.innerText = sliceArr[i];
-    ul.append(li);
+    ol.append(li);
   }
 
-  document.querySelector('.main-container').append(ul);
+  document.querySelector('.audiochallenge-list').append(ol);
 }
-
-async function createWordList() {
-  getWordArr();
-}
-
-export { createWordList, getWordArr };

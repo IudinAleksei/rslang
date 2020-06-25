@@ -16,8 +16,8 @@ async function createAudio() {
   audio.src = getMedia(word.audio);
   audio.setAttribute('data-word', word.word);
   audio.setAttribute('data-translate', word.wordTranslate);
-  document.querySelector('.main-container').prepend(audio);
-  audio.play();
+  document.querySelector('.audiochallenge-assets').prepend(audio);
+  // audio.play();
 }
 
 export { getWord, createAudio };
