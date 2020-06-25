@@ -1,9 +1,12 @@
 @import "../../../../sass/abstract/constants";
 @import "../../../../sass/abstract/mixins";
-  
+
+.body__settings-page {
+  @include background(url('/src/assets/img/rs-lang.jpg') center fixed, $background-size: cover, $background-repeat: repeat);
+}
 .main-container {
-   @include position();
-   @include background(url('/src/assets/img/rs-lang.jpg') center fixed, $background-size: cover, $background-repeat: no-repeat);
+  width: 100vw;
+  min-height: calc(100vh - 80px);
 };
 
 .wrap__settings__slider-container {

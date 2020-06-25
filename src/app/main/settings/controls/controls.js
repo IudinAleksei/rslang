@@ -4,7 +4,9 @@ export default function sliderSettingsPageHandling() {
   const sliderCounterNewWords = document.querySelector('.range-value__words');
   const sliderCards = document.querySelector('.range-slider__cards');
   const sliderCounterCards = document.querySelector('.range-value__cards');
+  const body = document.querySelector('body');
 
+  body.classList.add('body__settings-page');
   // slider on the settings page
   function getSliderHandler(element) {
     return function assignInnerHtml(event) {
