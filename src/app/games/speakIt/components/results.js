@@ -1,4 +1,8 @@
 export default class Results {
+  constructor(clickOnButtonRestart) {
+    this.clickOnButtonRestart = clickOnButtonRestart;
+  }
+
   render(array) {
     this.results = document.createElement('div');
     this.results.classList.add('results');
@@ -14,9 +18,20 @@ export default class Results {
     this.resultContainer.append(this.getCountSucces());
     this.resultContainer.append(this.getSucces(array));
     this.resultContainer.append(Results.getButtons());
-
     this.results.append(this.resultContainer);
+
+    this.results.addEventListener('click', (event) => this.handlerClick(event));
     return this.results;
+  }
+
+  handlerClick(event) {
+    if (Results.isClickOnButtonReturn(event)) {
+      Results.clickOnButtonReturn();
+    }
+
+    if (Results.isClickOnButtonNewGame(event)) {
+      this.clickOnButtonNewGame();
+    }
   }
 
   checkSucses(countErrors) {
@@ -97,5 +112,25 @@ export default class Results {
       }
     }
     return result;
+  }
+
+  static isClickOnButtonReturn(event) {
+    return event.target.classList.contains('return');
+  }
+
+  static clickOnButtonReturn() {
+    document.querySelector('.results').classList.add('hidden');
+    document.querySelector('.container').classList.remove('hidden');
+  }
+
+  static isClickOnButtonNewGame(event) {
+    return event.target.classList.contains('new-game');
+  }
+
+  clickOnButtonNewGame() {
+    document.querySelector('.results').classList.add('hidden');
+    document.querySelector('.container').classList.remove('hidden');
+    document.querySelector('.translation').classList.remove('none');
+    this.clickOnButtonRestart();
   }
 }

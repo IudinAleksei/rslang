@@ -2,8 +2,10 @@ import './sass/style.scss';
 import Intro from './components/intro';
 import Appcontainer from './components/container';
 import Results from './components/results';
+import { getLoader, spinnerOn, spinnerOff } from './components/loader';
 import {
   getWords,
+  translateEngToRus,
 } from '../../common/index';
 
 export default class App {
@@ -14,28 +16,30 @@ export default class App {
   }
 
   async initApp() {
-    const body = document.querySelector('.main');
+    const main = document.querySelector('.main');
     this.main = document.createElement('div');
     this.main.id = 'speakit';
+    App.initPreloader(this.main);
     this.intro = new Intro();
     this.main.prepend(this.intro.getIntro());
 
     this.appcontainer = new Appcontainer();
-    const response = await App.getRandomWords(this.group);
-    this.main.append(this.appcontainer.render(response));
+    this.arrayWords = await App.getRandomWords(this.group);
+    this.main.append(this.appcontainer.render(this.arrayWords));
 
-    this.results = new Results();
-    this.main.append(this.results.render(response));
+    this.results = new Results(this.clickOnButtonRestart.bind(this));
+    this.main.append(this.results.render(this.arrayWords));
 
     const audioContainer = document.createElement('audio');
     audioContainer.classList.add('audio');
     audioContainer.src = '';
     this.main.append(audioContainer);
-    body.prepend(this.main);
+    main.prepend(this.main);
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (SpeechRecognition) {
       this.recognition = new SpeechRecognition();
     }
+    spinnerOff();
     this.main.addEventListener('click', (event) => this.handlerClick(event));
   }
 
@@ -57,14 +61,7 @@ export default class App {
     }
 
     if (App.isClickOnButtonResult(event)) {
-      this.clickOnButtonResult();
-    }
-    if (App.isClickOnButtonReturn(event)) {
-      this.clickOnButtonReturn();
-    }
-
-    if (App.isClickOnButtonNewGame(event)) {
-      this.clickOnButtonNewGame();
+      App.clickOnButtonResult();
     }
   }
 
@@ -72,10 +69,11 @@ export default class App {
     return event.target.parentNode.classList.contains('points');
   }
 
-  clickOnPoints(event) {
+  async clickOnPoints(event) {
+    spinnerOn();
     const group = App.getRandomArbitrary(0, 5);
-    const response = App.getRandomWords(group);
-
+    const response = await App.getRandomWords(group);
+    spinnerOff();
     this.items = document.querySelector('.items');
     this.items.innerHTML = '';
     this.items.append(this.appcontainer.getItems(response));
@@ -83,7 +81,7 @@ export default class App {
     const translation = document.querySelector('.translation');
     translation.innerHTML = '';
     const image = document.querySelector('.img');
-    image.setAttribute('src', './assets/img/blank.jpg');
+    image.src = './assets/img/speakit/blank.jpg';
     const points = document.querySelectorAll('.point');
     for (let i = 0; i < points.length; i += 1) {
       points[i].classList.remove('activePoint');
@@ -107,7 +105,6 @@ export default class App {
       }
       if (event.target.classList.contains('item')) {
         this.wordActive = event.target.querySelector('.word').textContent;
-        this.translationActive = event.target.querySelector('.translation').textContent;
         App.getActiveItem(event.target);
         return true;
       }
@@ -115,21 +112,22 @@ export default class App {
     return false;
   }
 
-  clickOnWords() {
+  async clickOnWords() {
+    spinnerOn();
     const images = document.querySelector('.img');
     const translation = document.querySelector('.translation');
     const audio = document.querySelector('.audio');
     const result = this.getInfoByWord(this.wordActive);
-    images.setAttribute('src', this.src + result[0]);
-    audio.setAttribute('src', this.src + result[1]);
+    images.src = this.src + result[0];
+    audio.src = this.src + result[1];
     const playPromise = audio.play();
     if (playPromise !== undefined) {
       playPromise.then(() => {})
         .catch(() => {});
     }
     translation.innerText = '';
-    translation.insertAdjacentHTML('beforeend', this.translationActive);
-    this.getInfoByWord(this.wordActive);
+    translation.insertAdjacentHTML('beforeend', await translateEngToRus(this.wordActive));
+    spinnerOff();
   }
 
   static isClickOnButtonSpeak(event) {
@@ -143,7 +141,7 @@ export default class App {
     document.querySelector('.translation').classList.add('none');
     document.querySelector('.input').classList.remove('none');
     const image = document.querySelector('.img');
-    image.setAttribute('src', './assets/img/blank.jpg');
+    image.src = './';
     const items = document.querySelectorAll('.item');
     for (let i = 0; i < items.length; i += 1) {
       items[i].classList.remove('activeItem');
@@ -170,7 +168,7 @@ export default class App {
       if (word === items[i].innerText) {
         items[i].parentElement.classList.add('activeItem');
         const result = this.getInfoByWord(word);
-        images.setAttribute('src', this.src + result[0]);
+        images.src = this.src + result[0];
         const starContainer = document.createElement('div');
         starContainer.classList.add('star');
         document.querySelector('.score').append(starContainer);
@@ -180,10 +178,10 @@ export default class App {
 
   getInfoByWord(word) {
     const result = [];
-    for (let i = 0; i < this.activeWords.length / 2; i += 1) {
-      if (this.activeWords[i].word === word) {
-        result.push(this.activeWords[i].image);
-        result.push(this.activeWords[i].audio);
+    for (let i = 0; i < this.arrayWords.length; i += 1) {
+      if (this.arrayWords[i].word === word) {
+        result.push(this.arrayWords[i].image);
+        result.push(this.arrayWords[i].audio);
       }
     }
     return result;
@@ -209,7 +207,7 @@ export default class App {
     document.querySelector('.score').innerHTML = '';
     document.querySelector('.translation').innerHTML = '';
     const image = document.querySelector('.img');
-    image.setAttribute('src', './assets/img/blank.jpg');
+    image.src = './assets/img/speakit/blank.jpg';
     const items = document.querySelectorAll('.item');
     for (let i = 0; i < items.length; i += 1) {
       items[i].classList.remove('activeItem');
@@ -225,26 +223,6 @@ export default class App {
     document.querySelector('.container').classList.add('hidden');
   }
 
-  static isClickOnButtonReturn(event) {
-    return event.target.classList.contains('return');
-  }
-
-  static clickOnButtonReturn() {
-    document.querySelector('.results').classList.add('hidden');
-    document.querySelector('.container').classList.remove('hidden');
-  }
-
-  static isClickOnButtonNewGame(event) {
-    return event.target.classList.contains('new-game');
-  }
-
-  clickOnButtonNewGame() {
-    document.querySelector('.results').classList.add('hidden');
-    document.querySelector('.container').classList.remove('hidden');
-    document.querySelector('.translation').classList.remove('none');
-    this.clickOnButtonRestart();
-  }
-
   static async getRandomWords(group) {
     const page = App.getRandomArbitrary(0, 29);
     const arrayWords = [];
@@ -254,7 +232,7 @@ export default class App {
         word: this.activeWords[i].word,
         isGuess: false,
         transcription: this.activeWords[i].transcription,
-        image: this.activeWords.image,
+        image: this.activeWords[i].image,
         audio: this.activeWords[i].audio,
         current: App.getDataCurrent(this.activeWords[i].image),
       });
@@ -270,5 +248,9 @@ export default class App {
     let buf = stringCurrent.substring(9, 13);
     buf = parseFloat(stringCurrent);
     return buf;
+  }
+
+  static initPreloader(main) {
+    main.prepend(getLoader());
   }
 }
