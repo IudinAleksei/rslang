@@ -15,7 +15,7 @@ export default function sliderSettingsPageHandling() {
   sliderNewWords.addEventListener('input', getSliderHandler(sliderCounterNewWords));
   sliderCards.addEventListener('input', getSliderHandler(sliderCounterCards));
 
-  const inputs = document.querySelectorAll('.settings-checkbox');
+  const inputs = document.querySelectorAll('.settings-checkbox:required');
   const playButton = document.querySelector('.settings__play-button');
 
   function checkSelectedCheckboxes() {

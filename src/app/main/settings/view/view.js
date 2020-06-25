@@ -54,19 +54,19 @@ export default function addSettingsHtml() {
             </div>
           </div>
           <div class="settings-container">
-            <input class="settings-checkbox" type="checkbox" id="example">
+            <input class="settings-checkbox" type="checkbox" id="example" required>
             <label for="example"></label>
             <div class="settings-container__text">
-              <p>Example</p>
+              <p>Example<span>*</span</p>
             </div>
           </div>
         </div>
         <div class="settings-wrapper__wrap">
           <div class="settings-container">
-            <input class="settings-checkbox" type="checkbox" id="translation">
+            <input class="settings-checkbox" type="checkbox" id="translation" required checked>
             <label for="translation"></label>
             <div class="settings-container__text">
-              <p>Translation</p>
+              <p>Translation<span>*</span</p>
             </div>
           </div>
           <div class="settings-container">
@@ -77,17 +77,17 @@ export default function addSettingsHtml() {
             </div>
           </div>
           <div class="settings-container">
-            <input class="settings-checkbox" type="checkbox" id="show-picture" checked>
+            <input class="settings-checkbox" type="checkbox" id="show-picture">
             <label for="show-picture"></label>
             <div class="settings-container__text">
               <p>Show Picture</p>
             </div>
           </div>
           <div class="settings-container">
-            <input class="settings-checkbox" type="checkbox" id="explanation">
+            <input class="settings-checkbox" type="checkbox" id="explanation" required>
             <label for="explanation"></label>
             <div class="settings-container__text">
-              <p>Explanation</p>
+              <p>Explanation<span>*</span></p>
             </div>
           </div>
           <div class="settings-container">
@@ -99,7 +99,7 @@ export default function addSettingsHtml() {
           </div>
         </div>
       </div>
-      <p class="settings-important-information">At least one option should be selected</p></div>
+      <p class="settings-important-information">Select one of the required options (<span>*</span>)</p></div>
       <div class="settings__buttons">
         <button class="settings__play-button">PLAY</button>
       </div>
