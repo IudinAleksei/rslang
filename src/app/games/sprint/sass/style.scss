@@ -17,7 +17,7 @@
     margin: 100px auto 0;
     border-radius: 8px;
     border: 1px solid #fff;
-    background-color: hsla(0,0%,100%,.2);
+    background-color: rgba(0, 0, 0, 0.2);
 }
 
 .word-section {
@@ -195,30 +195,34 @@
 
 .buttons-section {
     background-color: transparent;
-    padding-bottom: 70px;
+    min-height: 86px;
+    padding: 18px 28px;
+    display: flex;
+    justify-content: space-around;
 }
 
 .sprint-game__wrong {
-    position: relative;
-    width: 183px;
-    height: 50px;
-    border-radius: 4px;
-    background-color: #ed593b;
-    font-size: 20px;
-    font-weight: 400;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.2;
-    letter-spacing: normal;
-    text-align: center;
-    color: #fff;
-    margin-left: 9px;
-    margin-right: 9px;
+    // position: relative;
+    // width: 183px;
+    // height: 50px;
+    // border-radius: 4px;
+    // background-color: #ed593b;
+    // font-size: 20px;
+    // font-weight: 400;
+    // font-stretch: normal;
+    // font-style: normal;
+    // line-height: 1.2;
+    // letter-spacing: normal;
+    // text-align: center;
+    // color: #fff;
+    // margin-left: 9px;
+    // margin-right: 9px;
+    @include button($background-color: #ed593b, $color_text: $white_color);
 }
 
 .sprint-game__correct {
     position: relative;
-    @include button();
+    @include button($color_text: $white_color);
 }
 
 

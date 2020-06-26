@@ -25,8 +25,8 @@ export default function renderGame() {
     </div>
   </div>
     <div class="buttons-section">
-      <button class="sprint-game__wrong"></button>
-      <button class="sprint-game__correct"></button>
+      <button class="sprint-game__wrong">Wrong</button>
+      <button class="sprint-game__correct">Correct</button>
     </div>
   </div>`;
 }
