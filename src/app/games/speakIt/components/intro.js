@@ -1,4 +1,8 @@
 export default class Intro {
+  constructor(transitionIntroToGame) {
+    this.transitionIntroToGame = transitionIntroToGame;
+  }
+
   getIntro() {
     this.intro = document.createElement('div');
     this.intro.classList.add('intro');
@@ -27,7 +31,7 @@ export default class Intro {
 
   handlerClick(event) {
     if (Intro.isClickOnIntro(event)) {
-      this.clickOnIntro();
+      this.transitionIntroToGame();
     }
   }
 
@@ -35,8 +39,7 @@ export default class Intro {
     return event.target.classList.contains('intro-btn');
   }
 
-  clickOnIntro() {
+  hiddenIntro() {
     this.intro.classList.add('hidden');
-    document.querySelector('.container').classList.remove('hidden');
   }
 }

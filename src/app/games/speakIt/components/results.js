@@ -1,6 +1,7 @@
 export default class Results {
-  constructor(clickOnButtonRestart) {
+  constructor(clickOnButtonRestart, transitionResultsToGame) {
     this.clickOnButtonRestart = clickOnButtonRestart;
+    this.transitionResultsToGame = transitionResultsToGame;
   }
 
   render(array) {
@@ -26,7 +27,7 @@ export default class Results {
 
   handlerClick(event) {
     if (Results.isClickOnButtonReturn(event)) {
-      Results.clickOnButtonReturn();
+      this.transitionResultsToGame();
     }
 
     if (Results.isClickOnButtonNewGame(event)) {
@@ -132,5 +133,13 @@ export default class Results {
     document.querySelector('.container').classList.remove('hidden');
     document.querySelector('.translation').classList.remove('none');
     this.clickOnButtonRestart();
+  }
+
+  hiddenResults() {
+    this.results.classList.add('hidden');
+  }
+
+  showResults() {
+    this.results.classList.remove('hidden');
   }
 }
