@@ -1,7 +1,7 @@
 
 .main__about-us{
   @include position();
-  @include background(url('../assets/img/back-about.jpg'), $background-repeat: no-repeat);
+  @include background(url('/src/assets/img/about-us/background.jpg'), $background-repeat: no-repeat);
   @include flex();
   .logo-about-us {
     height: 80px;
