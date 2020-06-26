@@ -24,6 +24,9 @@ export default function renderGame() {
         <div class="translation">тест</div>
     </div>
   </div>
-    <div class="buttons-section"></div>
+    <div class="buttons-section">
+      <button class="sprint-game__wrong"></button>
+      <button class="sprint-game__correct"></button>
+    </div>
   </div>`;
 }

@@ -193,4 +193,33 @@
     font-family: $body_font;
 }
 
+.buttons-section {
+    background-color: transparent;
+    padding-bottom: 70px;
+}
+
+.sprint-game__wrong {
+    position: relative;
+    width: 183px;
+    height: 50px;
+    border-radius: 4px;
+    background-color: #ed593b;
+    font-size: 20px;
+    font-weight: 400;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.2;
+    letter-spacing: normal;
+    text-align: center;
+    color: #fff;
+    margin-left: 9px;
+    margin-right: 9px;
+}
+
+.sprint-game__correct {
+    position: relative;
+    @include button();
+}
+
+
 
