@@ -54,5 +54,5 @@ export default function showGamePage() {
   const container = document.createElement('div');
   container.className = 'container-game';
   document.querySelector('.main-container').append(container);
-  container.innerHTML = '<div class="container-puzzle"><div class="translate"><div class="translate-text"></div></div><div class="block-puzzle"></div><div id="text" class="text" draggable="true"></div><div class="buttons-puzzle"><button id="know">I dont know</button><button id="check">Check</button><button id="continue">Continue</button><button id="results">Results</button></div></div>';
+  container.innerHTML = '<div class="container-puzzle"><div class="translate"><div class="translate-text"></div></div><div class="block-puzzle"></div><div id="text" class="text" data-id="text"></div><div class="buttons-puzzle"><button id="know">I dont know</button><button id="check">Check</button><button id="continue">Continue</button><button id="results">Results</button></div></div>';
 }
