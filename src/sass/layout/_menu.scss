@@ -66,7 +66,7 @@
 }
 
 .menu__items__item_active {
-    color: $selected_menu_item;;
+    color: $button_hover_color;
 }
 
 .menu__items__games-subMenu__game {
@@ -74,7 +74,7 @@
     &::before {
     content: url(/src/assets/icons/header/dot.svg);
     position: absolute;
-    top: -4px;
+    top: 7px;
     left: -25px;
     }
 }
@@ -82,19 +82,17 @@
 
 .menu__items li {
     list-style: none;
-    padding: 10px 0;
+    padding: 11px 0;
     white-space: nowrap;
-}
-
-.menu__items a {
     color: $white_color;
     text-decoration: none;
     font-family: $body_font;
     font-size: 1.4rem;
     letter-spacing: 0.2rem;
     text-transform: uppercase;
+    cursor: pointer;
     &:hover {
-    color: $selected_menu_item;
+    color: $button_hover_color;
 }
 }
 
@@ -136,6 +134,7 @@
     text-decoration: none;
     font-family: $body_font;
     font-size: 1.6rem;
+    z-index: 3;
     &::before {
         position: absolute;
     content: url(/src/assets/icons/header/box-arrow-left.svg);
