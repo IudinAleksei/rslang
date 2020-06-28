@@ -9,15 +9,14 @@ import {
 } from './components/loader';
 import {
   getWords,
-  translateEngToRus,
 } from '../../common/index';
 
 export default class App {
   constructor() {
     this.intro = new Intro(this.transitionIntroToGame.bind(this));
-    this.game = new Game(spinnerOn, spinnerOff, translateEngToRus,
-      this.transitionGameToResults.bind(this));
-    this.results = new Results(this.game.clickOnButtonRestart.bind(this),
+    this.game = new Game(spinnerOn, spinnerOff,
+      this.transitionGameToResults.bind(this), App.getRandomWords, App.getRandomArbitrary);
+    this.results = new Results(this.game.clickOnButtonRestart.bind(this.game),
       this.transitionResultsToGame.bind(this));
     this.group = 0;
   }
@@ -35,18 +34,36 @@ export default class App {
     spinnerOff();
   }
 
+  transitionIntroToGame() {
+    this.intro.hiddenIntro();
+    this.game.showGame();
+  }
+
+  transitionGameToResults() {
+    this.game.hiddenGame();
+    this.arrayWords = this.game.getActiveArray();
+    this.results.updateResultsWord(this.arrayWords);
+    this.results.showResults();
+  }
+
+  transitionResultsToGame() {
+    this.results.hiddenResults();
+    this.game.showGame();
+  }
+
   static async getRandomWords(group) {
     const page = App.getRandomArbitrary(0, 29);
     const arrayWords = [];
-    this.activeWords = await getWords(group, page);
-    for (let i = 0; i < this.activeWords.length / 2; i += 1) {
+    const activeWords = await getWords(group, page);
+    for (let i = 0; i < activeWords.length / 2; i += 1) {
       arrayWords.push({
-        word: this.activeWords[i].word,
+        word: activeWords[i].word,
         isGuess: false,
-        transcription: this.activeWords[i].transcription,
-        image: this.activeWords[i].image,
-        audio: this.activeWords[i].audio,
-        current: App.getDataCurrent(this.activeWords[i].image),
+        transcription: activeWords[i].transcription,
+        translation: activeWords[i].wordTranslate,
+        image: activeWords[i].image,
+        audio: activeWords[i].audio,
+        current: App.getDataCurrent(activeWords[i].image),
       });
     }
     return arrayWords;
@@ -60,20 +77,5 @@ export default class App {
     let buf = stringCurrent.substring(9, 13);
     buf = parseFloat(stringCurrent);
     return buf;
-  }
-
-  transitionIntroToGame() {
-    this.intro.hiddenIntro();
-    this.game.showGame();
-  }
-
-  transitionGameToResults() {
-    this.game.hiddenGame();
-    this.Results.showResults();
-  }
-
-  transitionResultsToGame() {
-    this.intro.hiddenResults();
-    this.game.showGame();
   }
 }

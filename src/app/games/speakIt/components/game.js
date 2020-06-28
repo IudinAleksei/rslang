@@ -1,10 +1,12 @@
 export default class Game {
-  constructor(spinnerOn, spinnerOff, translateEngToRus, transitionGameToResults) {
+  constructor(spinnerOn, spinnerOff,
+    transitionGameToResults, getRandomWords, getRandomArbitrary) {
     this.spinnerOn = spinnerOn;
     this.spinnerOff = spinnerOff;
-    this.translateEngToRus = translateEngToRus;
     this.transitionGameToResults = transitionGameToResults;
-    this.complexity = 0;
+    this.getRandomWords = getRandomWords;
+    this.getRandomArbitrary = getRandomArbitrary;
+    this.activeArray = [];
     this.maxPoint = 6;
     this.activePoint = 0;
     // this.src = 'https://raw.githubusercontent.com/SkaymanT/rslang-data/master/data/';
@@ -12,15 +14,14 @@ export default class Game {
   }
 
   render(arrayWords) {
-    this.arrayWords = arrayWords;
+    this.activeArray = arrayWords;
     this.game = document.createElement('div');
     this.game.classList.add('game');
     this.game.classList.add('hidden');
 
     this.game.append(this.getHeaderResult());
-    this.game.append(Game.getImage());
-    const items = this.getItems(this.arrayWords);
-    this.game.append(items);
+    this.game.append(this.getImage());
+    this.game.append(this.getItems(this.activeArray));
 
     this.game.append(Game.getButtons());
 
@@ -28,10 +29,6 @@ export default class Game {
     audioContainer.classList.add('audio');
     audioContainer.src = '';
     this.game.append(audioContainer);
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    if (SpeechRecognition) {
-      this.recognition = new SpeechRecognition();
-    }
     this.game.addEventListener('click', (event) => this.handlerClick(event));
 
     return this.game;
@@ -65,12 +62,12 @@ export default class Game {
 
   async clickOnPoints(event) {
     this.spinnerOn();
-    const group = Game.getRandomArbitrary(0, 5);
-    const response = await Game.getRandomWords(group);
+    const group = this.getRandomArbitrary(0, 5);
+    this.activeArray = await this.getRandomWords(group);
     this.spinnerOff();
     this.items = document.querySelector('.items');
     this.items.innerHTML = '';
-    this.items.append(this.game.getItems(response));
+    this.items.append(this.getItems(this.activeArray));
 
     const translation = document.querySelector('.translation');
     translation.innerHTML = '';
@@ -106,27 +103,24 @@ export default class Game {
     return false;
   }
 
-  async clickOnWords() {
-    this.spinnerOn();
+  clickOnWords() {
     const images = document.querySelector('.img');
     const translation = document.querySelector('.translation');
     const audio = document.querySelector('.audio');
     const result = this.getInfoByWord(this.wordActive);
-    images.src = this.src + result[0];
-    audio.src = this.src + result[1];
+    images.src = this.src + result.image;
+    audio.src = this.src + result.audio;
     const playPromise = audio.play();
     if (playPromise !== undefined) {
       playPromise.then(() => {})
         .catch(() => {});
     }
-    translation.innerText = '';
-    translation.insertAdjacentHTML('beforeend', await this.translateEngToRus(this.wordActive));
-    this.spinnerOff();
+    translation.innerHTML = `${result.translation}`;
   }
 
   static isClickOnButtonSpeak(event) {
     if (event.target.classList.contains('user-speach')) {
-      return document.querySelector('.translation').classList.contains('none');
+      return event.target.classList.contains('user-speach');
     }
     return false;
   }
@@ -134,13 +128,12 @@ export default class Game {
   clickOnButtonSpeak() {
     document.querySelector('.translation').classList.add('none');
     document.querySelector('.input').classList.remove('none');
-    const image = document.querySelector('.img');
-    image.src = './';
-    const items = document.querySelectorAll('.item');
-    for (let i = 0; i < items.length; i += 1) {
-      items[i].classList.remove('activeItem');
+    document.querySelector('.user-speach').innerHTML = 'Await...';
+    document.querySelector('.input').innerHTML = '';
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (SpeechRecognition) {
+      this.recognition = new SpeechRecognition();
     }
-
     this.recognition.lang = 'en-US';
     this.recognition.start();
     this.recognition.addEventListener('result', (e) => {
@@ -148,37 +141,40 @@ export default class Game {
         .map((result) => result[0])
         .map((result) => result.transcript)
         .join('');
-      const word = transcript.toLowerCase();
+      let word = transcript.toLowerCase();
       document.querySelector('.input').value = word;
+      if (word[word.length - 1] === '.') {
+        word = word.substring(0, word.length - 1);
+      }
       this.checkedTrueWord(word);
     });
-    this.recognition.addEventListener('end', this.recognition.start);
   }
 
   checkedTrueWord(word) {
     const images = document.querySelector('.img');
-    const items = document.querySelectorAll('.word');
-    for (let i = 0; i < items.length; i += 1) {
-      if (word === items[i].innerText) {
-        items[i].parentElement.classList.add('activeItem');
+    for (let i = 0; i < this.activeArray.length; i += 1) {
+      if (word === this.activeArray[i].word) {
+        document.querySelectorAll('.word')[i].parentElement.classList.add('activeItem');
         const result = this.getInfoByWord(word);
-        images.src = this.src + result[0];
+        images.src = this.src + result.image;
         const starContainer = document.createElement('div');
         starContainer.classList.add('star');
         document.querySelector('.score').append(starContainer);
+        this.activeArray[i].isGuess = true;
       }
     }
+    this.recognition.stop();
+    this.recognition.removeEventListener('end', this.recognition.start);
+    document.querySelector('.user-speach').innerHTML = 'Speak please';
   }
 
   getInfoByWord(word) {
-    const result = [];
-    for (let i = 0; i < this.arrayWords.length; i += 1) {
-      if (this.arrayWords[i].word === word) {
-        result.push(this.arrayWords[i].image);
-        result.push(this.arrayWords[i].audio);
+    for (let i = 0; i < this.activeArray.length; i += 1) {
+      if (this.activeArray[i].word === word) {
+        return this.activeArray[i];
       }
     }
-    return result;
+    return false;
   }
 
   static getActiveItem(target) {
@@ -194,10 +190,8 @@ export default class Game {
   }
 
   clickOnButtonRestart() {
-    this.recognition.stop();
-    this.recognition.removeEventListener('end', this.recognition.start);
     document.querySelector('.translation').classList.remove('none');
-    document.querySelector('.input').classList.add('none');
+    this.inputContainer.classList.add('none');
     document.querySelector('.score').innerHTML = '';
     document.querySelector('.translation').innerHTML = '';
     const image = document.querySelector('.img');
@@ -249,7 +243,7 @@ export default class Game {
     return resultContainer;
   }
 
-  static getImage() {
+  getImage() {
     const imagesContainer = document.createElement('div');
     imagesContainer.classList.add('images');
     const imagesFont = document.createElement('img');
@@ -261,12 +255,12 @@ export default class Game {
     translationContainer.classList.add('translation');
     imagesContainer.append(translationContainer);
 
-    const inputContainer = document.createElement('input');
-    inputContainer.type = 'text';
-    inputContainer.classList.add('input');
-    inputContainer.classList.add('none');
-    inputContainer.readOnly = true;
-    imagesContainer.append(inputContainer);
+    this.inputContainer = document.createElement('input');
+    this.inputContainer.type = 'text';
+    this.inputContainer.classList.add('input');
+    this.inputContainer.classList.add('none');
+    this.inputContainer.readOnly = true;
+    imagesContainer.append(this.inputContainer);
 
     return imagesContainer;
   }
@@ -306,5 +300,9 @@ export default class Game {
 
   showGame() {
     this.game.classList.remove('hidden');
+  }
+
+  getActiveArray() {
+    return this.activeArray;
   }
 }

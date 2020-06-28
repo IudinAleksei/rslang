@@ -1,0 +1,16 @@
+.results {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  padding: 10px;
+  transition: .5s;
+  background-image: url(/src/assets/img/speakit/bg.png);
+  background-size: cover;
+}
