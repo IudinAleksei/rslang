@@ -1,3 +1,9 @@
+$img-width: 390px;
+$img-height: 260px;
+$font-size: 22px;
+$item-width: 200px;
+$item-height: 70px;
+
 .results {
   display: flex;
   align-items: center;
@@ -13,4 +19,103 @@
   transition: .5s;
   background-image: url(/src/assets/img/speakit/bg.png);
   background-size: cover;
+
+
+  .results-container {
+    width: 100%;
+    max-width: 780px;
+    min-height: 600px;
+    padding: 40px 40px;
+    text-align: left;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, .1), 0 2px 4px 0 rgba(14, 30, 37, .12);
+  }
+
+  .errors-num {
+    background-color: #da5b4c;
+    color: #fff;
+    padding: 0 14px;
+    border-radius: 21px;
+    margin-left: 5px;
+  }
+
+  .succes-num {
+    background-color: #01AF61;
+    color: #fff;
+    padding: 0 14px;
+    border-radius: 21px;
+    margin-left: 5px;
+  }
+
+  .results-container .item {
+    flex-direction: row;
+    min-height: 50px;
+    border: 0;
+    margin: 0;
+    padding: 0 0 0 50px;
+    box-shadow: none;
+  }
+
+  .results-container .item .audio-icon {
+    top: 8px;
+  }
+
+  .results-container .item .transcription {
+    font-size: $font-size;
+  }
+
+  .results-container .item .translation {
+    margin-bottom: 0;
+  }
+
+  .succes-item {
+    margin-bottom: 40px;
+  }
+
+  .btns-res {
+    margin-bottom: 10px;
+  }
+
+  .btn-res {
+    margin: 0;
+    font-size: 20px;
+    padding: 10px 15px;
+    min-width: 160px;
+    color: rgba(14, 30, 37, .7);
+    background: transparent;
+    border: 1px solid rgba(14, 30, 37, .7);
+  }
+
+  .btn-res:nth-child(1) {
+    margin-right: 40px;
+  }
+
+  .btn-res:nth-child(2) {
+    margin-right: 40px;
+  }
+
+  .btn-res:hover {
+    background: rgba(60, 70, 97, .1);
+  }
+
+  .btn-res:focus,
+  .btn-res:active {
+    background: rgba(60, 70, 97, .1);
+  }
+
+  .items .item .translation {
+    display: none;
+  }
+
+  .results .item .translation {
+    min-height: 30px;
+    margin-bottom: 0;
+  }
+
+  @media (max-width:1200px) {}
+
+  @media (max-width:730px) {}
+
+  @media (max-width:600px) {}
 }

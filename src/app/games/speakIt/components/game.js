@@ -193,6 +193,7 @@ export default class Game {
     document.querySelector('.translation').classList.remove('none');
     this.inputContainer.classList.add('none');
     document.querySelector('.score').innerHTML = '';
+    document.querySelector('.user-speach').innerHTML = 'Speak please';
     document.querySelector('.translation').innerHTML = '';
     const image = document.querySelector('.img');
     image.src = './assets/img/speakit/blank.jpg';
