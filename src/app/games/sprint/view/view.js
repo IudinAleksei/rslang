@@ -3,7 +3,9 @@ export default function renderGame() {
   mainContainer.innerHTML = `<div class="card-container">
     <div class="word-section">
       <div class="question-wrapper">
-        <div class="sound-button"></div>
+        <div class="sound-button">
+        <audio class="word-sound" src=""></audio>
+        </div>
         <div class="points">0</div>
         <div class="sound"></div>
         <div class="progress">
@@ -20,8 +22,8 @@ export default function renderGame() {
             <div class="branch"></div>
           </div>
         </div>
-        <div class="word">test</div>
-        <div class="translation">тест</div>
+        <div class="word"></div>
+        <div class="translation"></div>
     </div>
   </div>
     <div class="buttons-section">
