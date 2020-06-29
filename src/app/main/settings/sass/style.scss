@@ -68,7 +68,7 @@
     color: #f50a0a;
   }
 }
-  
+
 .settings__slider-container {
 display: flex;
 justify-content: center;
@@ -156,7 +156,7 @@ padding-right: 14px;
      border-left-color: transparent;
     height: 20px;
   }
-  
+
   .settings-checkbox:checked + label:before{
     content: "";
     position: absolute;
@@ -184,6 +184,7 @@ padding-right: 14px;
       @include button($background-color: $header_icons_color, $opacity: .5, $cursor: default, $color_text: $white_color);
   }
 
+
   @media screen and (max-width: 600px) {
     .settings-wrapper{
         display: block;
@@ -191,7 +192,7 @@ padding-right: 14px;
      .settings-title {
       @include headingText($font-size: 3.5rem);
       padding-top: 20px;
-     } 
+     }
 
   }
 
@@ -204,10 +205,11 @@ padding-right: 14px;
         .slider {
             width: 105px;
         }
-    } 
+    }
     .settings-title {
       @include headingText($font-size: 2.5rem);
       padding-top: 20px;
-    } 
+    }
 
   }
+
