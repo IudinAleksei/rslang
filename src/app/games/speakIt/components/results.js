@@ -54,10 +54,15 @@ export default class Results {
       if (arrayWords[i].isGuess) {
         const keyValue = `<div class="item" data-current="${arrayWords[i].current}"><span class="audio-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="currentColor" d="M15.788 13.007a3 3 0 110 5.985c.571 3.312 2.064 5.675 3.815 5.675 2.244 0 4.064-3.88 4.064-8.667 0-4.786-1.82-8.667-4.064-8.667-1.751 0-3.244 2.363-3.815 5.674zM19 26c-3.314 0-12-4.144-12-10S15.686 6 19 6s6 4.477 6 10-2.686 10-6 10z" fill-rule="evenodd"></path></svg></span><p class="word">${arrayWords[i].word}</p><p class="transcription">${arrayWords[i].transcription}</p><p class="translation">${arrayWords[i].translation}</p></div>`;
         this.succesItem.insertAdjacentHTML('beforeend', keyValue);
+        this.succesItem.append(Results.getSvgAudio());
+        console.log(Results.getSvgAudio());
         countSucces += 1;
       } else {
-        const keyValue = `<div class="item" data-current="${arrayWords[i].current}"><span class="audio-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="currentColor" d="M15.788 13.007a3 3 0 110 5.985c.571 3.312 2.064 5.675 3.815 5.675 2.244 0 4.064-3.88 4.064-8.667 0-4.786-1.82-8.667-4.064-8.667-1.751 0-3.244 2.363-3.815 5.674zM19 26c-3.314 0-12-4.144-12-10S15.686 6 19 6s6 4.477 6 10-2.686 10-6 10z" fill-rule="evenodd"></path></svg></span><p class="word">${arrayWords[i].word}</p><p class="transcription">${arrayWords[i].transcription}</p><p class="translation">${arrayWords[i].translation}</p></div>`;
-        this.errorsItem.insertAdjacentHTML('beforeend', keyValue);
+        // const keyValue = `<div class="item" data-current="${arrayWords[i].current}"><span class="audio-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="currentColor" d="M15.788 13.007a3 3 0 110 5.985c.571 3.312 2.064 5.675 3.815 5.675 2.244 0 4.064-3.88 4.064-8.667 0-4.786-1.82-8.667-4.064-8.667-1.751 0-3.244 2.363-3.815 5.674zM19 26c-3.314 0-12-4.144-12-10S15.686 6 19 6s6 4.477 6 10-2.686 10-6 10z" fill-rule="evenodd"></path></svg></span><p class="word">${arrayWords[i].word}</p><p class="transcription">${arrayWords[i].transcription}</p><p class="translation">${arrayWords[i].translation}</p></div>`;
+        // this.errorsItem.insertAdjacentHTML('beforeend', keyValue);
+        this.errorsItem.append(Results.getSvgAudio());
+        console.log(Results.getSvgAudio());
+        // console.log(keyValue);
         countErrors += 1;
       }
     }
@@ -68,15 +73,28 @@ export default class Results {
     return resultsWord;
   }
 
-  // static getSvgAudio() {
-  //   const audioIcon = document.createElement('span');
-  //   audioIcon.classList.add('audio-icon');
-  //   const svgIcon = document.createElement('svg');
-  //   svgIcon.xmlns = "http://www.w3.org/2000/svg";
-  //   svgIcon.viewBox = "0 0 32 32";
-  //   // <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="currentColor" d="M15.788 13.007a3 3 0 110 5.985c.571 3.312 2.064 5.675 3.815 5.675 2.244 0 4.064-3.88 4.064-8.667 0-4.786-1.82-8.667-4.064-8.667-1.751 0-3.244 2.363-3.815 5.674zM19 26c-3.314 0-12-4.144-12-10S15.686 6 19 6s6 4.477 6 10-2.686 10-6 10z" fill-rule="evenodd"></path></svg></span>
-  //   resultsWord.append(this.errorsItem);
-  // }
+  static getItemContainer() {
+    const itemContainer = document.createElement('div');
+    itemContainer.classList.add('item');
+
+    return itemContainer;
+  }
+
+  static getSvgAudio() {
+    const audioIcon = document.createElement('span');
+    audioIcon.classList.add('audio-icon');
+    const svgIcon = document.createElement('svg');
+    svgIcon.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+    svgIcon.setAttribute('viewBox', '0 0 32 32');
+    svgIcon.viewBox = '0 0 32 32';
+    const pathIcon = document.createElement('path');
+    pathIcon.setAttribute('fill', 'currentColor');
+    pathIcon.setAttribute('d', 'M15.788 13.007a3 3 0 110 5.985c.571 3.312 2.064 5.675 3.815 5.675 2.244 0 4.064-3.88 4.064-8.667 0-4.786-1.82-8.667-4.064-8.667-1.751 0-3.244 2.363-3.815 5.674zM19 26c-3.314 0-12-4.144-12-10S15.686 6 19 6s6 4.477 6 10-2.686 10-6 10z');
+    pathIcon.setAttribute('fill-rule', 'evenodd');
+    svgIcon.append(pathIcon);
+    audioIcon.append(svgIcon);
+    return audioIcon;
+  }
 
   updateResultsWord(arrayWords) {
     let countErrors = 0;
@@ -91,6 +109,10 @@ export default class Results {
       } else {
         const keyValue = `<div class="item" data-current="${arrayWords[i].current}"><span class="audio-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="currentColor" d="M15.788 13.007a3 3 0 110 5.985c.571 3.312 2.064 5.675 3.815 5.675 2.244 0 4.064-3.88 4.064-8.667 0-4.786-1.82-8.667-4.064-8.667-1.751 0-3.244 2.363-3.815 5.674zM19 26c-3.314 0-12-4.144-12-10S15.686 6 19 6s6 4.477 6 10-2.686 10-6 10z" fill-rule="evenodd"></path></svg></span><p class="word">${arrayWords[i].word}</p><p class="transcription">${arrayWords[i].transcription}</p><p class="translation">${arrayWords[i].translation}</p></div>`;
         this.errorsItem.insertAdjacentHTML('beforeend', keyValue);
+        const itemResults = document.createElement('div');
+        itemResults.classList.add('item');
+        itemResults.append(Results.getSvgAudio());
+        this.errorsItem.append(itemResults);
         countErrors += 1;
       }
     }
@@ -99,9 +121,10 @@ export default class Results {
   }
 
   getCountSucces(countSucces) {
-    this.succesContainer = document.createElement('div');
-    const nameSucces = 'Знаю';
-    const keyValue = `<p class="succes">${nameSucces}<span class="succes-num">${countSucces}</span></p>`;
+    this.succesContainer = document.createElement('p');
+    this.succesContainer.classList.add('succes');
+    const nameErrors = 'Ошибок';
+    const keyValue = `${nameErrors}<span class="succes-num">${countSucces}</span>`;
     this.succesContainer.insertAdjacentHTML('beforeend', keyValue);
 
     return this.succesContainer;
@@ -119,7 +142,9 @@ export default class Results {
 
   static getButtons() {
     const buttons = document.createElement('div');
-    const keyValue = '<div class="btns btns-res"><a href="#" class="btn btn-res return">Return</a><a href="#" class="btn btn-res new-game">New game</a></div>';
+    buttons.classList.add('btns');
+    buttons.classList.add('btns-res');
+    const keyValue = '<a href="#" class="btn btn-res return">Return</a><a href="#" class="btn btn-res new-game">New game</a>';
     buttons.insertAdjacentHTML('beforeend', keyValue);
     return buttons;
   }
