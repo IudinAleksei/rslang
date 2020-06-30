@@ -14,6 +14,7 @@ export default function renderGame() {
             <div class="circle empty"></div>
             <div class="circle empty"></div>
           </div>
+          <div><p class="extra-points"></p></div>
           <div class="birds">
             <div class="parrot parrot1 active-parrot"></div>
             <div class="parrot parrot2"></div>

@@ -1,8 +1,8 @@
 import './sass/style.scss';
 import renderGame from './view/view';
-import springGamePageHandling from './controls/controls';
+import sprintGamePageHandling from './gameLogic';
 
-export default function startGame() {
+export default function startSprintGame() {
   renderGame();
-  springGamePageHandling();
+  sprintGamePageHandling();
 }
