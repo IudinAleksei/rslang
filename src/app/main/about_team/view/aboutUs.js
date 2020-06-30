@@ -1,3 +1,5 @@
+import '../sass/about-us.scss';
+
 const generatePageAboutUs = () => {
   const OUR_TEAM = [{
     img: 'assets/img/about-us/cat.jpg',
@@ -53,6 +55,9 @@ const generatePageAboutUs = () => {
                 <a href="${githubLink}"><img src="assets/img/about-us/logo.svg" class="github"></a>
               </div>
             </div>`;
+  const DIV_BACKGROUND = document.createElement('div');
+  DIV_BACKGROUND.className = 'main__background-about-us';
+  document.querySelector('.main-container').appendChild(DIV_BACKGROUND);
   const LOGO = '<p class="logo-about-us">About us</p>';
   const DIV_ABOUT_US = document.createElement('div');
   DIV_ABOUT_US.className = 'main__about-us';
@@ -65,7 +70,7 @@ const generatePageAboutUs = () => {
   DIV_ABOUT_US.appendChild(DIV_WRAP_CARDS);
 
   for (let i = 0; i < OUR_TEAM.length; i += 1) {
-    DIV_WRAP_CARDS.insertAdjacentHTML('beforebegin', CARD(OUR_TEAM[i].img, OUR_TEAM[i].name, OUR_TEAM[i].text, OUR_TEAM[i].telegramLink, OUR_TEAM[i].githubLink));
+    DIV_WRAP_CARDS.insertAdjacentHTML('beforeend', CARD(OUR_TEAM[i].img, OUR_TEAM[i].name, OUR_TEAM[i].text, OUR_TEAM[i].telegramLink, OUR_TEAM[i].githubLink));
   }
 };
 export default generatePageAboutUs;
