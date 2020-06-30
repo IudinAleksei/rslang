@@ -1,7 +1,7 @@
 import menuHandling from './app/main/menu/menu';
-import startGame from './app/games/sprint/index';
+import menuClickHandler from './app/common/controls/controls';
 
 window.onload = () => {
   menuHandling();
-  startGame();
+  menuClickHandler();
 };
