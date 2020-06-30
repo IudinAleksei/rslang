@@ -1,19 +1,10 @@
-.audiochallenge-list {
-  align-self: stretch;
-}
-
-.word-list {
-  display: flex;
-  justify-content: space-evenly;
-  color: $color_text_button;
-  font-size: 2rem;
-  padding: 0;
-  width: 100%;
-}
+@import './startPage';
+@import './game';
 
 body {
-  background: $background_liner_gradient;
-  box-sizing: border-box;
+  background: no-repeat url('/assets/img/audiochallenge-background.jpg');
+  background-position: 50% 50%;
+  background-size: cover;
 }
 
 .main {
@@ -21,34 +12,11 @@ body {
 }
 
 .main-container {
-  @include flex;
-
   height: 100%;
 }
 
-.button {
-  @include button;
+#audiochallenge {
+  @include flex;
 
-  color: $white-color;
-}
-
-.speak-icon {
-  background-color: #e6e6e6;
-  width: 100px;
-  height: 100px;
-  position: relative;
-  border-radius: 50%;
-
-  &:hover {
-    cursor: pointer;
-    background-color: #e1e1e1;
-  }
-}
-
-.speak-icon::before {
-  content: url('/assets/icons/audiochallenge/speaker.svg');
-  width: 50px;
-  height: 50px;
-  position: absolute;
-  transform: translate(50%, 50%);
+  height: 100%;
 }

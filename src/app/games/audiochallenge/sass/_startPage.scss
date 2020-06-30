@@ -1,0 +1,133 @@
+.logo path:nth-child(2) {
+  animation: letter-animation 2s ease forwards;
+  stroke-dasharray: 274px;
+  stroke-dashoffset: 274px;
+}
+
+.logo path:nth-child(3) {
+  animation: letter-animation 2s ease forwards 0.2s;
+  stroke-dasharray: 302px;
+  stroke-dashoffset: 302px;
+}
+
+.logo path:nth-child(4) {
+  animation: letter-animation 2s ease forwards 0.4s;
+  stroke-dasharray: 325px;
+  stroke-dashoffset: 325px;
+}
+
+.logo path:nth-child(5) {
+  animation: letter-animation 2s ease forwards 0.6s;
+  stroke-dasharray: 223px;
+  stroke-dashoffset: 223px;
+}
+
+.logo path:nth-child(6) {
+  animation: letter-animation 2s ease forwards 0.8s;
+  stroke-dasharray: 317px;
+  stroke-dashoffset: 317px;
+}
+
+.logo path:nth-child(7) {
+  animation: letter-animation 2s ease forwards 1s;
+  stroke-dasharray: 278px;
+  stroke-dashoffset: 278px;
+}
+
+.logo path:nth-child(8) {
+  animation: letter-animation 2s ease forwards 1.2s;
+  stroke-dasharray: 335px;
+  stroke-dashoffset: 335px;
+}
+
+.logo path:nth-child(9) {
+  animation: letter-animation 2s ease forwards 1.4s;
+  stroke-dasharray: 274px;
+  stroke-dashoffset: 274px;
+}
+
+.logo path:nth-child(10) {
+  animation: letter-animation 2s ease forwards 1.6s;
+  stroke-dasharray: 200px;
+  stroke-dashoffset: 200px;
+}
+
+.logo path:nth-child(11) {
+  animation: letter-animation 2s ease forwards 1.8s;
+  stroke-dasharray: 201px;
+  stroke-dashoffset: 201px;
+}
+
+.logo path:nth-child(12) {
+  animation: letter-animation 2s ease forwards 2s;
+  stroke-dasharray: 352px;
+  stroke-dashoffset: 352px;
+}
+
+.logo path:nth-child(13) {
+  animation: letter-animation 2s ease forwards 2.2s;
+  stroke-dasharray: 352px;
+  stroke-dashoffset: 352px;
+}
+
+.logo path:nth-child(14) {
+  animation: letter-animation 2s ease forwards 2.4s;
+  stroke-dasharray: 357px;
+  stroke-dashoffset: 357px;
+}
+
+.logo path:nth-child(15) {
+  animation: letter-animation 2s ease forwards 2.6s;
+  stroke-dasharray: 352px;
+  stroke-dashoffset: 352px;
+}
+
+@keyframes letter-animation {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.audiochallenge-subtitle {
+  color: $white_color;
+  font-size: 2.5rem;
+}
+
+.audiochallenge-list {
+  align-self: stretch;
+  min-height: 70px;
+}
+
+.select-level__form {
+  margin-bottom: 25px;
+  color: $white_color;
+  font-size: 2rem;
+}
+
+.choose-level {
+  display: inline-block;
+  margin: 0;
+  margin-right: 10px;
+}
+
+.select-level {
+  color: #000;
+}
+
+.choose-user-word {
+  margin: 0;
+  text-align: center;
+}
+
+.select-user-word {
+  color: #000;
+  font-size: 1.7rem;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.audiochallenge__start-button {
+  @include button;
+
+  color: #fff;
+}
