@@ -1,7 +1,7 @@
 import menuHandling from './app/main/menu/menu';
-import createCardWord from './app/main/training/index';
+import menuClickHandler from './app/common/controls/controls';
 
 window.onload = () => {
   menuHandling();
-  createCardWord();
+  menuClickHandler();
 };

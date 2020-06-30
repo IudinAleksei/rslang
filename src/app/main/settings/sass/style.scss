@@ -185,7 +185,7 @@ padding-right: 14px;
   }
 
 
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: $tablet_sreen) {
     .settings-wrapper{
         display: block;
       }
@@ -196,7 +196,7 @@ padding-right: 14px;
 
   }
 
-  @media screen and (max-width: 450px) {
+  @media screen and (max-width: $phone_screen) {
     .slider-container{
       padding: 5px 8px 0 0;
         span {
@@ -210,6 +210,5 @@ padding-right: 14px;
       @include headingText($font-size: 2.5rem);
       padding-top: 20px;
     }
-
   }
 
