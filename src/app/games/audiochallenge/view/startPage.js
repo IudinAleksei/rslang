@@ -1,7 +1,9 @@
-/* eslint-disable no-console */
 import startAudiochallengeGame from './startGame';
 
-export default function createStartPage() {
+export default function renderAudiochallengeStartPage() {
+  const bodyClass = document.querySelector('body').classList;
+  document.querySelector('body').classList.remove(bodyClass[0], bodyClass[1]);
+  document.querySelector('body').classList.add('audiochallenge__body');
   document.querySelector('.main-container').innerHTML = '';
   const wrapper = document.createElement('div');
   wrapper.setAttribute('id', 'audiochallenge');
