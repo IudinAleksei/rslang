@@ -14,8 +14,8 @@ export default function createLayout() {
   list.classList.add('audiochallenge-list');
 
   const button = document.createElement('button');
-  button.classList.add('button');
+  button.classList.add('audiochallenge__button');
   button.textContent = 'I don\'t know';
 
-  document.querySelector('.main-container').append(assets, list, button);
+  document.getElementById('audiochallenge').append(assets, list, button);
 }

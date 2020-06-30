@@ -2,6 +2,7 @@
 import startAudiochallengeGame from './startGame';
 
 export default function createStartPage() {
+  document.querySelector('.main-container').innerHTML = '';
   const wrapper = document.createElement('div');
   wrapper.setAttribute('id', 'audiochallenge');
 

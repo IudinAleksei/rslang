@@ -4,6 +4,8 @@ import {
   getWordsInfo, getWordInfoById, getWords, getRandomInteger,
 } from '../../../common/index';
 
+let round = 0;
+
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i -= 1) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -38,16 +40,23 @@ export default async function getWordArr() {
   for (let i = 0; i < 5; i += 1) {
     const li = document.createElement('li');
     li.classList.add('word-list__item');
+    li.innerText = sliceArr[i];
+
     if (sliceArr[i] === wordTranslate) {
-      li.innerText = sliceArr[i];
+      li.setAttribute('data-word', word);
       li.setAttribute('data-audio', audio);
       li.setAttribute('data-image', image);
-    } else {
-      li.innerText = sliceArr[i];
     }
+
     ol.append(li);
   }
 
   document.querySelector('.audiochallenge-list').innerHTML = '';
   document.querySelector('.audiochallenge-list').append(ol);
+
+  if (round === 10) {
+    round = 0;
+  }
+
+  round += 1;
 }
