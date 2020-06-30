@@ -12,9 +12,9 @@ function handleDrag(item) {
   selectedItem.classList.add('drag-sort-active');
   let swapItem = document.elementFromPoint(x, y) === null
     ? selectedItem : document.elementFromPoint(x, y);
-  if (document.getElementById(`big${object.puzzleCounterBox}`) === swapItem.parentNode) {
+  if (document.getElementById('box') === swapItem.parentNode) {
     swapItem = swapItem !== selectedItem.nextSibling ? swapItem : swapItem.nextSibling;
-    return document.getElementById(`big${object.puzzleCounterBox}`).insertBefore(selectedItem, swapItem);
+    return document.getElementById('box').insertBefore(selectedItem, swapItem);
   }
   if (document.getElementById('text') === swapItem.parentNode) {
     swapItem = swapItem !== selectedItem.nextSibling ? swapItem : swapItem.nextSibling;
@@ -36,15 +36,13 @@ export function enableDragSort() {
   });
   const sortElement = document.getElementsByClassName('puzzle-word');
   Array.from(sortElement).forEach((item) => {
-    console.log(item);
     enableDragItem(item);
   });
 }
 export function drags() {
-  const fillBox = document.getElementById(`big${object.puzzleCounterBox}`);
+  const fillBox = document.getElementById('box');
   const fillText = document.getElementById('text');
   let selectedBox;
-  console.log(fillBox);
   document.body.addEventListener('dragstart', (event) => {
     selectedBox = event.target;
     event.dataTransfer.setData('text/html', event.target);
@@ -54,15 +52,17 @@ export function drags() {
     event.dataTransfer.dropEffect = 'move';
   });
   fillBox.addEventListener('drop', function (event) {
-    console.log(event.target);
-    if (event.target.id === `big${object.puzzleCounterBox}`) this.insertBefore(selectedBox, this.nextElementSibling);
+    if (event.target.id === 'box') this.insertBefore(selectedBox, this.nextElementSibling);
+    const len = document.getElementById('text').getElementsByTagName('*');
+    if (len.length === 0) {
+      document.getElementById('check').style.display = 'block';
+    }
   });
   fillText.addEventListener('dragover', (event) => {
     event.preventDefault();
     event.dataTransfer.dropEffect = 'move';
   });
   fillText.addEventListener('drop', function (event) {
-    console.log(event.target);
     if (event.target.id === 'text') this.appendChild(selectedBox);
   });
 }
