@@ -1,3 +1,5 @@
+import '../sass/cardWithWord.scss';
+
 // Исправить
 // const ELEMENT = [{
 //   0: (image) => `<div class="image">
@@ -19,7 +21,7 @@ const createCardWord = () => {
   DIV_CONTROLS_BAR.className = ('conrtols-bar');
 
   const BUTTONS_CONTROLS_BAR = `<button class="delete-word">
-                                  <img src="assets/chat-quote.svg">
+                                  <img src="../../../../assets/icons/card/bookmark-plus.svg">
                                 </button>
                                 <button class="explanation">
                                   <img src="assets/trash.svg">
@@ -32,14 +34,15 @@ const createCardWord = () => {
 
   const DIV_WRAP_CARD = document.createElement('div');
   DIV_WRAP_CARD.className = ('wrap-card');
-
+  DIV_WRAP.appendChild(DIV_WRAP_CARD);
   const DIV_CARD = document.createElement('div');
   DIV_CARD.className = ('card');
   DIV_WRAP_CARD.appendChild(DIV_CARD);
 
-  const INPUT = document.createElement('input');
+  const INPUT = document.createElement('INPUT');
+  INPUT.type = 'text';
   INPUT.className = ('input');
-  INPUT.focus();
+  INPUT.autofocus = true;
   DIV_CARD.appendChild(INPUT);
   const SENTENSE = document.createElement('div');
   SENTENSE.className = ('sentense');

@@ -1,3 +1,6 @@
+@import '../../../../sass/abstract/constants';
+@import '../../../../sass/abstract/mixins';
+
 .main__wrap-cards {
   background: linear-gradient(90deg, rgba(226,242,231,0.8939950980392157) 0%, rgba(251,216,216,0.6306897759103641) 89%);;
   border: none;
@@ -134,7 +137,7 @@ input:active, input:focus{
   width: 60px;
   height: 90px;
   background: white;
-  background-image: url(./assets/bookmark-plus.svg);
+  background-image: url(../../../../assets/icons/card/bookmark-plus.svg);
   background-repeat: no-repeat;
   background-position: center;
   border-radius: 8px;
