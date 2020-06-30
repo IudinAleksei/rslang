@@ -1,7 +1,7 @@
 import menuHandling from './app/main/menu/menu';
-import generatePageAboutUs from './app/main/about_team/index';
+import menuClickHandler from './app/common/controls/controls';
 
 window.onload = () => {
   menuHandling();
-  generatePageAboutUs();
+  menuClickHandler();
 };

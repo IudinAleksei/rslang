@@ -55,14 +55,16 @@ const generatePageAboutUs = () => {
                 <a href="${githubLink}"><img src="assets/img/about-us/logo.svg" class="github"></a>
               </div>
             </div>`;
+  const MAIN_CONTAINER = document.querySelector('.main-container');
+  Array.from(MAIN_CONTAINER.children).forEach((child) => child.remove());
   const DIV_BACKGROUND = document.createElement('div');
   DIV_BACKGROUND.className = 'main__background-about-us';
-  document.querySelector('.main-container').appendChild(DIV_BACKGROUND);
+  MAIN_CONTAINER.appendChild(DIV_BACKGROUND);
   const LOGO = '<p class="logo-about-us">About us</p>';
   const DIV_ABOUT_US = document.createElement('div');
   DIV_ABOUT_US.className = 'main__about-us';
 
-  document.querySelector('.main-container').appendChild(DIV_ABOUT_US);
+  MAIN_CONTAINER.appendChild(DIV_ABOUT_US);
   DIV_ABOUT_US.insertAdjacentHTML('afterbegin', LOGO);
 
   const DIV_WRAP_CARDS = document.createElement('div');
