@@ -1,10 +1,9 @@
-import showGamePage from './view/gamePage';
-import getWord from './logicsGame';
 import puzzleGameHandling from './controls/controls';
+import showStartPuzzleGame from './view/start';
+import './sass/style.scss';
 
-function game() {
-  showGamePage();
-  getWord();
+function game(token) {
+  showStartPuzzleGame(token);
   puzzleGameHandling();
 }
 

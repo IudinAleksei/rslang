@@ -9,7 +9,7 @@ function handleDrag(item) {
   const selectedItem = item.target;
   const x = event.clientX;
   const y = event.clientY;
-  selectedItem.classList.add('drag-sort-active');
+  selectedItem.classList.add('puzzle-game__drag-sort-active');
   let swapItem = document.elementFromPoint(x, y) === null
     ? selectedItem : document.elementFromPoint(x, y);
   if (document.getElementById('box') === swapItem.parentNode) {
@@ -23,7 +23,7 @@ function handleDrag(item) {
   return true;
 }
 function handleDrop(item) {
-  item.target.classList.remove('drag-sort-active');
+  item.target.classList.remove('puzzle-game__drag-sort-active');
 }
 function enableDragItem(item) {
   item.ondrag = handleDrag;
@@ -34,7 +34,7 @@ export function enableDragSort() {
   document.body.addEventListener('dragstart', (event) => {
     event.dataTransfer.setData('text/html', event.target);
   });
-  const sortElement = document.getElementsByClassName('puzzle-word');
+  const sortElement = document.getElementsByClassName('puzzle-game__puzzle-word');
   Array.from(sortElement).forEach((item) => {
     enableDragItem(item);
   });

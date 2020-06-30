@@ -1,11 +1,14 @@
 export const DEFAULT_SESSION_DATA = Object.freeze({
   score: 0,
-  puzzleCounterBox: 1,
-  puzzleCounterWord: 1,
 });
 
 export const DEFAULT_LOCAL_DATA = Object.freeze({
-  state: {},
+  puzzleAutoPlaySound: 'true',
+  puzzleShowImage: 'true',
+  puzzleShowTranslation: 'true',
+  puzzleRepeatPlay: 'true',
+  puzzleLevel: 0,
+  puzzlePage: 0,
 });
 
 export const API_KEYS = Object.freeze({
