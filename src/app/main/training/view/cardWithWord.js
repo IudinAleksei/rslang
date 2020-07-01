@@ -1,16 +1,14 @@
 import '../sass/cardWithWord.scss';
-
-// Исправить
-// const ELEMENT = [{
-//   0: (image) => `<div class="image">
-//                   <img src=${image}>
-//                  </div>`,
-//   0: (transcript) => `<p class="transcript">${transcript}</p>`,
-//   0: (explanationWword) => `<p class="explanation-word">${explanationWword}</p>`,
-//   0: (meaningWword) => `<p class="meaning-word">${meaningWword}</p>`,
-//   0: (translateSentense) => `<p class="translate-sentense">${translateSentense}</p>`,
-//   0: (translateWord) => `<p class="translate-word">${translateWord}</p>`,
-// }];
+const ELEMENT = [{
+  'show-picture': (image) => `<div class="image">
+                  <img src=${image}>
+                 </div>`,
+  transcription: (transcript) => `<p class="transcript">${transcript}</p>`,
+  explanation: (explanationWword) => `<p class="explanation-word">${explanationWword}</p>`,
+  example: (meaningWword) => `<p class="meaning-word">${meaningWword}</p>`,
+  'sentences-translation': (translateSentense) => `<p class="translate-sentense">${translateSentense}</p>`,
+  translation: (translateWord) => `<p class="translate-word">${translateWord}</p>`,
+}];
 
 const createCardWord = () => {
   const DIV_WRAP = document.createElement('div');
