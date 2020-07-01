@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 export default function showStartPuzzleGame() {
   document.querySelector('.main-container').outerHTML = document.querySelector('.main-container').outerHTML;
   document.querySelector('.main-container').classList.add('puzzle-game__main-container');
