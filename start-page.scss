@@ -1,0 +1,17 @@
+.main__wrap-start-page{
+  @include position();
+  @include flex();
+  @include background(url('../assets/img/start-page-background.jpg'), $background-repeat: no-repeat);
+  h1 {
+    @include headingText();
+  };
+  p {
+    @include bodyText();
+    text-align: center;
+    line-height: 1.7rem;
+    margin: 50px 0 50px 0;
+  };
+};
+.main__wrap-start-page.none {
+  display: none;
+}

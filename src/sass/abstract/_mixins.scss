@@ -4,9 +4,9 @@
   align-items: center;
   justify-content: center;
 }
-@mixin position () {
+@mixin position ($position: absolute) {
   border: none;
-  position: absolute;
+  position: $position;
   bottom: 0;
   left: 0;
   width: 100%;
