@@ -9,7 +9,6 @@ export default class Game {
     this.activeArray = [];
     this.maxPoint = 6;
     this.activePoint = 0;
-    // this.src = 'https://raw.githubusercontent.com/SkaymanT/rslang-data/master/data/';
     this.src = 'https://raw.githubusercontent.com/irinainina/rslang/rslang-data/data/';
   }
 
