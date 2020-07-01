@@ -21,8 +21,7 @@ export default class App {
     this.group = 0;
   }
 
-  async initApp() {
-    const main = document.querySelector('.main');
+  async initApp(root) {
     this.main = document.createElement('div');
     this.main.id = 'speakit';
     this.arrayWords = await App.getRandomWords(this.group);
@@ -30,7 +29,7 @@ export default class App {
     this.main.prepend(this.intro.getIntro());
     this.main.append(this.game.render(this.arrayWords));
     this.main.append(this.results.render(this.arrayWords));
-    main.prepend(this.main);
+    root.prepend(this.main);
     spinnerOff();
   }
 

@@ -1,9 +1,11 @@
+
 .intro {
+  position: absolute;
+  min-height: calc(100vh + 80px);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  position: absolute;
   top: 0;
   bottom: 0;
   left: 0;

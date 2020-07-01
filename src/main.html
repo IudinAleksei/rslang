@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,39 +8,40 @@
   <!-- don't add links to fonts, they must be in assets/fonts and imported via styles -->
   <!-- don't plug favicon, webpack will do this -->
 </head>
+
 <body>
   <header class="header">
     <div class="header-container">
       <div class="menu" id="menu">
-            <div class="menu__elements">
-            <div class="menu__icon">
+        <div class="menu__elements">
+          <div class="menu__icon">
             <div class="menu__icon__line menu__icon__first-line"></div>
             <div class="menu__icon__line menu__icon__second-line"></div>
             <div class="menu__icon__line menu__icon__third-line"></div>
             <div class="menu__icon__line menu__icon__forth-line"></div>
-        </div>
-        <ul class="menu__items">
+          </div>
+          <ul class="menu__items">
             <li class="menu__items__item menu__items__settings-item" data-handler="renderSettings">Settings</li>
             <li class="menu__items__item">Dictionary</li>
             <li class="menu__items__item">Statistics</li>
             <li lass="menu__items__item">Games:
-            <ul class="menu__items__games-subMenu">
-            <li class="menu__items__item menu__items__games-subMenu__game">RS Lang</li>
-            <li class="menu__items__item menu__items__games-subMenu__game">Audio Challenge </li>
-            <li class="menu__items__item menu__items__games-subMenu__game">Speak It </li>
-            <li class="menu__items__item menu__items__games-subMenu__game">English Puzzle</li>
-            <li class="menu__items__item menu__items__games-subMenu__game">Savanna</li>
-            <li class="menu__items__item menu__items__games-subMenu__game">Sprint</li>
-        </ul>
-        </li>
-        <li class="menu__items__item" data-handler="generatePageAboutUs">About Us</li>
-        </ul>
+              <ul class="menu__items__games-subMenu">
+                <li class="menu__items__item menu__items__games-subMenu__game">RS Lang</li>
+                <li class="menu__items__item menu__items__games-subMenu__game">Audio Challenge </li>
+                <li class="menu__items__item menu__items__games-subMenu__game" data-handler="generateSpeakit">Speak It </li>
+                <li class="menu__items__item menu__items__games-subMenu__game">English Puzzle</li>
+                <li class="menu__items__item menu__items__games-subMenu__game">Savanna</li>
+                <li class="menu__items__item menu__items__games-subMenu__game">Sprint</li>
+              </ul>
+            </li>
+            <li class="menu__items__item" data-handler="generatePageAboutUs">About Us</li>
+          </ul>
         </div>
         <div class="menu-bg" id="menu-bg"></div>
-        </div>
-        <div class="authorization">
+      </div>
+      <div class="authorization">
         <a href="#" id="authorization__log-out" class="authorization__log-out">Log out</a>
-        </div>
+      </div>
     </div>
   </header>
   <main class="main">
@@ -50,4 +52,5 @@
   </main>
   <!-- don't plug styles and scripts, webpack will do this -->
 </body>
+
 </html>

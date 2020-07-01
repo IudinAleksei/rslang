@@ -8,10 +8,12 @@ $maxtablet-sсreen: 900px;
 $tablet-sсreen: 600px;
 $phone-sсreen: 450px;
 
+
 .results {
   display: flex;
   align-items: center;
-  height: 100%;
+  min-height: calc(100% + 80px);
+  overflow: auto;
   justify-content: center;
   flex-direction: column;
   position: absolute;
@@ -27,6 +29,8 @@ $phone-sсreen: 450px;
 
 
   .results-container {
+    position: relative;
+    margin-top: 80px;
     width: 100%;
     max-width: 780px;
     height: 100%;
@@ -59,6 +63,7 @@ $phone-sсreen: 450px;
       }
 
       .translation {
+        padding-top: 10px;
         margin-bottom: 0;
         font-size: $font-size;
       }
@@ -129,11 +134,17 @@ $phone-sсreen: 450px;
 
       .item {
         min-height: 45px;
+
+        .translation {
+          padding-top: 0px;
+        }
       }
     }
   }
 
   @media (max-width:$tablet-sсreen) {
+    min-height: 700px;
+
     .results-container {
       padding: 25px 25px;
 
@@ -151,6 +162,7 @@ $phone-sсreen: 450px;
   }
 
   @media (max-width: 450px) {
+    min-height: 600px;
 
     .results-container {
       padding: 8px 8px;
