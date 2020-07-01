@@ -1,8 +1,7 @@
 import fetchUrl from './commonFetch';
 
 export async function getWords(group, page) {
-  // const urlWords = `https://afternoon-falls-25894.herokuapp.com/words?page=${page}&group=${group}`;
-  const urlWords = `http://pacific-castle-12388.herokuapp.com/words?page=${page}&group=${group}`;
+  const urlWords = `https://afternoon-falls-25894.herokuapp.com/words?page=${page}&group=${group}`;
   const content = fetchUrl(urlWords, {});
   return content;
 }

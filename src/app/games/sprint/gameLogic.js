@@ -5,7 +5,7 @@ import { getWords } from '../../common/network/backendWords/backendWords';
 import getMedia from '../../common/utils/githubMedia';
 import getRandomInteger from '../../common/utils/randomInteger';
 
-export default async function sprintGamePageHandling() {
+export default async function sprintGamePageHandling(level) {
   const body = document.querySelector('body');
   const word = document.querySelector('.word');
   const translation = document.querySelector('.translation');
@@ -17,9 +17,8 @@ export default async function sprintGamePageHandling() {
   const correctButton = document.querySelector('.sprint-game__correct');
   const incorrectButton = document.querySelector('.sprint-game__wrong');
   const extraPoints = document.querySelector('.extra-points');
-  const group = 1;
+  const group = level;
   let page = getRandomInteger(1, 22);
-  console.log(page);
 
   body.className = 'body__spring-game-page';
 
@@ -185,8 +184,10 @@ export default async function sprintGamePageHandling() {
     console.log('click on correct');
     if (gameStates.currentWord.isAnswerCorrect === true) {
       incrementCorrectAnswer();
+      playAudio('../../../assets/audio/sprintGame/correct.mp3');
     } else {
       resetCorrectAnswers();
+      playAudio('../../../assets/audio/sprintGame/failure.mp3');
     }
     nextWord();
   }
@@ -195,8 +196,10 @@ export default async function sprintGamePageHandling() {
     console.log('click on INcorrect');
     if (gameStates.currentWord.isAnswerCorrect === false) {
       incrementCorrectAnswer();
+      playAudio('../../../assets/audio/sprintGame/correct.mp3');
     } else {
       resetCorrectAnswers();
+      playAudio('../../../assets/audio/sprintGame/failure.mp3');
     }
     nextWord();
   }

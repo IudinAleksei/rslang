@@ -1,8 +1,8 @@
 import './sass/style.scss';
-import renderGame from './view/view';
-import sprintGamePageHandling from './gameLogic';
+import renderStartPage from './view/view';
+import addEventListenerForStartPage from './controls/controls';
 
 export default function startSprintGame() {
-  renderGame();
-  sprintGamePageHandling();
+  renderStartPage();
+  addEventListenerForStartPage();
 }
