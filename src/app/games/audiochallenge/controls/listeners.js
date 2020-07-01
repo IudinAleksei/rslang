@@ -2,6 +2,7 @@
 /* eslint-disable no-console */
 import createAudio from '../view/createAudio';
 import getWordArr from '../view/wordList';
+import { createImage } from '../view/createAssets';
 
 const stat = {};
 
@@ -12,16 +13,19 @@ function repeatAudio() {
 }
 
 async function nextWord() {
-  const button = document.querySelector('.audiochallenge__button');
+  const button = document.querySelector('.button');
   await getWordArr();
   await createAudio();
   wordListlistener();
+  createImage();
   button.classList.remove('button-next');
+  button.classList.add('audiochallenge__button');
+  button.textContent = 'I don\'t know';
 }
 
 function listener(event) {
   const audioTranslate = document.querySelector('.word-audio').dataset.translate;
-  const button = document.querySelector('.audiochallenge__button');
+  const button = document.querySelector('.button');
   const clickWord = event.target;
   const { word } = clickWord.dataset;
   if (clickWord.textContent === audioTranslate) {
@@ -32,8 +36,6 @@ function listener(event) {
         el.classList.add('wrong');
       }
     });
-
-    button.classList.add('button-next');
   } else {
     clickWord.style.textDecoration = 'line-through';
 
@@ -47,6 +49,9 @@ function listener(event) {
       }
     });
   }
+  button.classList.remove('audiochallenge__button');
+  button.textContent = '';
+
   button.classList.add('button-next');
 
   document.querySelector('.word-list').removeEventListener('click', listener);
@@ -57,15 +62,32 @@ function wordListlistener() {
 }
 
 function buttonListener() {
-  const button = document.querySelector('.audiochallenge__button');
+  const button = document.querySelector('.button');
   button.addEventListener('click', () => {
     if (button.classList.contains('button-next')) {
       document.querySelector('.word-list').innerHTML = '';
       nextWord();
     } else {
-      repeatAudio();
+      const audioTranslate = document.querySelector('.word-audio').dataset.translate;
+      document.querySelectorAll('.word-list__item').forEach((el) => {
+        if (el.textContent !== audioTranslate) {
+          el.classList.add('wrong');
+        }
+      });
+
+      button.textContent = '';
+      button.classList.remove('audiochallenge__button');
+      button.classList.add('button-next');
     }
   });
 }
 
-export { wordListlistener, repeatAudio, buttonListener };
+function audioIconListener() {
+  const icon = document.querySelector('.speak-icon');
+
+  icon.addEventListener('click', repeatAudio);
+}
+
+export {
+  wordListlistener, repeatAudio, buttonListener, audioIconListener,
+};

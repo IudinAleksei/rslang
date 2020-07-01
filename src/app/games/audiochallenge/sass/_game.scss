@@ -20,14 +20,22 @@
 .audiochallenge__button {
   @include button;
 
+  outline: none;
+  color: $white-color;
+}
+
+.button-next {
+  @include button;
+
+  position: relative;
+  outline: none;
   color: $white-color;
 }
 
 .button-next::before {
   content: '\2192';
   position: absolute;
-  right: 50%;
-  left: 50%;
+  transform: translate(-50%, -75%) scale(3);
 }
 
 .speak-icon {
@@ -49,4 +57,11 @@
   width: 50px;
   height: 50px;
   transform: translate(50%, 50%);
+}
+
+.audiochallenge-image {
+  display: none;
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
 }

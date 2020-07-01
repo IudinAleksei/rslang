@@ -1,3 +1,5 @@
+import { getMedia } from '../../../common/index';
+
 function createSpeakIcon() {
   const div = document.createElement('div');
   div.classList.add('speak-icon');
@@ -5,9 +7,15 @@ function createSpeakIcon() {
 }
 
 function createImage() {
+  document.querySelector('.image__wrapper').innerHTML = '';
+
   const image = document.createElement('img');
   image.classList.add('audiochallenge-image');
-  document.querySelector('.audiochallenge-assets').prepend(image);
+
+  const srcElem = document.querySelector('[data-image]');
+  image.src = getMedia(srcElem.dataset.image);
+
+  document.querySelector('.image__wrapper').append(image);
 }
 
 export { createSpeakIcon, createImage };
