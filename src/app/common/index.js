@@ -17,4 +17,4 @@ export { translateEngToRus, translateRusToEng } from './network/translationAPI';
 
 export { setLocalData, getLocalData, getAndInitLocalData } from './utils/localStorage';
 
-export { hideHeader } from './utils/hideDomElements';
+export { hideHeader, hideMain } from './utils/hideDomElements';

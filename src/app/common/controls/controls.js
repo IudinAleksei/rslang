@@ -1,6 +1,6 @@
 import menuHandlers from './menuHandlers';
 import renderSettings from '../../main/settings/index';
-import { hideHeader } from '../index';
+import { hideHeader, hideMain } from '../index';
 
 const CURRENT_STATE = {
   page: '',
@@ -15,8 +15,12 @@ function menuClickHandler(loginResponse) {
         return;
       }
       if (functionName !== undefined) {
-        menuHandlers[functionName](loginResponse);
-        CURRENT_STATE.page = functionName;
+        hideMain(true);
+        document.body.addEventListener('transitionend', () => {
+          menuHandlers[functionName](loginResponse);
+          CURRENT_STATE.page = functionName;
+          hideMain(false);
+        }, { once: true });
       } else {
         // eslint-disable-next-line no-alert
         alert('эта страница еще не создана');

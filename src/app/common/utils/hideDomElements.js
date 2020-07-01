@@ -10,10 +10,10 @@ export const hideHeader = (hide = true) => {
 };
 
 export const hideMain = (hide = true) => {
-  const header = document.querySelector(`.${ELEMENTS_CLASSES.headerContainer}`);
+  const main = document.querySelector(`.${ELEMENTS_CLASSES.main}`);
   if (hide) {
-    header.classList.add(ELEMENTS_CLASSES.hideHeaderContainer);
+    main.classList.add(ELEMENTS_CLASSES.hideMain);
     return;
   }
-  header.classList.remove(ELEMENTS_CLASSES.hideHeaderContainer);
+  main.classList.remove(ELEMENTS_CLASSES.hideMain);
 };

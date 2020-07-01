@@ -17,4 +17,6 @@ export const API_REQUEST = Object.freeze({
 export const ELEMENTS_CLASSES = Object.freeze({
   headerContainer: 'header-container',
   hideHeaderContainer: 'header-container_hidden',
+  main: 'main',
+  hideMain: 'main_hidden',
 });
