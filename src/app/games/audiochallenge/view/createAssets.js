@@ -3,7 +3,7 @@ import { getMedia } from '../../../common/index';
 function createSpeakIcon() {
   const div = document.createElement('div');
   div.classList.add('speak-icon');
-  document.querySelector('.audiochallenge-assets').append(div);
+  document.querySelector('.answer__wrapper').prepend(div);
 }
 
 function createImage() {
@@ -18,4 +18,10 @@ function createImage() {
   document.querySelector('.image__wrapper').append(image);
 }
 
-export { createSpeakIcon, createImage };
+function createTrueWord() {
+  const word = document.querySelector('.true-word');
+
+  word.textContent = document.querySelector('[data-word]').dataset.word;
+}
+
+export { createSpeakIcon, createImage, createTrueWord };

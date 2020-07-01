@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-console */
 import {

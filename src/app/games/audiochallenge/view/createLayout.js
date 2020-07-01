@@ -5,10 +5,18 @@ export default function createLayout() {
   const image = document.createElement('div');
   image.classList.add('image__wrapper');
 
+  const answer = document.createElement('div');
+  answer.classList.add('answer__wrapper');
+
+  const trueWord = document.createElement('div');
+  trueWord.classList.add('true-word');
+
+  answer.append(trueWord);
+
   const audio = document.createElement('div');
   audio.classList.add('audio__wrapper');
 
-  assets.append(audio, image);
+  assets.append(audio, image, answer);
 
   const list = document.createElement('div');
   list.classList.add('audiochallenge-list');

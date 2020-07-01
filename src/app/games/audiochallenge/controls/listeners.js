@@ -2,7 +2,7 @@
 /* eslint-disable no-console */
 import createAudio from '../view/createAudio';
 import getWordArr from '../view/wordList';
-import { createImage } from '../view/createAssets';
+import { createImage, createTrueWord } from '../view/createAssets';
 
 const stat = {};
 
@@ -14,10 +14,15 @@ function repeatAudio() {
 
 async function nextWord() {
   const button = document.querySelector('.button');
+  const trueWord = document.querySelector('.true-word');
+  const speakIcon = document.querySelector('.speak-icon');
   await getWordArr();
   await createAudio();
   wordListlistener();
   createImage();
+  createTrueWord();
+  trueWord.classList.remove('true-word_active');
+  speakIcon.classList.remove('speak-icon_active');
   button.classList.remove('button-next');
   button.classList.add('audiochallenge__button');
   button.textContent = 'I don\'t know';
@@ -26,6 +31,9 @@ async function nextWord() {
 function listener(event) {
   const audioTranslate = document.querySelector('.word-audio').dataset.translate;
   const button = document.querySelector('.button');
+  const trueWord = document.querySelector('.true-word');
+  const speakIcon = document.querySelector('.speak-icon');
+  const image = document.querySelector('.audiochallenge-image');
   const clickWord = event.target;
   const { word } = clickWord.dataset;
   if (clickWord.textContent === audioTranslate) {
@@ -49,6 +57,11 @@ function listener(event) {
       }
     });
   }
+
+  image.classList.add('audiochallenge-image_active');
+  trueWord.classList.add('true-word_active');
+  speakIcon.classList.add('speak-icon_active');
+
   button.classList.remove('audiochallenge__button');
   button.textContent = '';
 
@@ -69,11 +82,19 @@ function buttonListener() {
       nextWord();
     } else {
       const audioTranslate = document.querySelector('.word-audio').dataset.translate;
+      const trueWord = document.querySelector('.true-word');
+      const speakIcon = document.querySelector('.speak-icon');
+      const image = document.querySelector('.audiochallenge-image');
+
       document.querySelectorAll('.word-list__item').forEach((el) => {
         if (el.textContent !== audioTranslate) {
           el.classList.add('wrong');
         }
       });
+
+      image.classList.add('audiochallenge-image_active');
+      trueWord.classList.add('true-word_active');
+      speakIcon.classList.add('speak-icon_active');
 
       button.textContent = '';
       button.classList.remove('audiochallenge__button');
