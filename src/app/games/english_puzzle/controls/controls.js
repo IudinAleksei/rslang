@@ -1,11 +1,7 @@
-/* eslint-disable max-len */
-/* eslint-disable no-unused-vars */
-import { getAndInitSessionData, setSessionData, getSessionData } from '../../../common/utils/sessionStorage';
-import { getAndInitLocalData, getLocalData, setLocalData } from '../../../common/utils/localStorage';
+import { setSessionData } from '../../../common/utils/sessionStorage';
 import {
   getWord, playAudio, showPuzzle, paintings,
 } from '../logicsGame';
-
 import showStatistic from '../view/statistic';
 
 let wordKnow = [];
@@ -135,6 +131,7 @@ function controlGamePuzzle(event) {
   }
   if (event.target.className === 'puzzle-start-game__button') {
     document.querySelector('.main-container').innerHTML = '';
+    document.querySelector('.main-container').classList.remove('puzzle-game__main-container');
     getWord(level, page);
   }
   if (event.target.className === 'button-speech') {
@@ -253,6 +250,9 @@ function controlGamePuzzle(event) {
 }
 
 export default function puzzleGameHandling() {
+  document.querySelector('.menu__items__item').addEventListener('click', () => {
+    document.querySelector('body').classList.remove('puzzle-game__background');
+  });
   document.querySelector('.main-container').addEventListener('click', (event) => {
     controlHint(event);
     controlGamePuzzle(event);

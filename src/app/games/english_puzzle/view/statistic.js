@@ -38,6 +38,6 @@ export default function showStatistic(paintings, level, page, wordKnow, wordNotK
   blockKnow.append(know);
   const buttonContinue = document.createElement('button');
   buttonContinue.id = 'button-statistic';
-  buttonContinue.innerText = 'continue';
+  buttonContinue.innerText = 'Continue';
   containerStatistic.append(buttonContinue);
 }

@@ -1,10 +1,5 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-param-reassign */
-import { getAndInitSessionData } from '../../../common/utils/sessionStorage';
-
-const object = getAndInitSessionData();
-
 function handleDrag(item) {
   const selectedItem = item.target;
   const x = event.clientX;
@@ -57,10 +52,6 @@ export function drags() {
     if (len.length === 0) {
       document.getElementById('check').style.display = 'block';
     }
-  });
-  fillText.addEventListener('dragover', (event) => {
-    event.preventDefault();
-    event.dataTransfer.dropEffect = 'move';
   });
   fillText.addEventListener('drop', function (event) {
     if (event.target.id === 'text') this.appendChild(selectedBox);

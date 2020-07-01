@@ -1,16 +1,5 @@
-/* eslint-disable no-unused-vars */
-import { getUserSettings } from '../../../common/network/backendWords/settingsBackendWords';
-import { setSessionData, getAndInitSessionData, getSessionData } from '../../../common/utils/sessionStorage';
-import { getAndInitLocalData, getLocalData, setLocalData } from '../../../common/utils/localStorage';
-
-/* function getSittingsPuzzleGame(tokens) {
-  console.log(tokens.token, tokens.userId, getLocalData);
-  getUserSettings(tokens.token, tokens.userId).then((result) => {
-    console.log(result);
-  });
-} */
-
-export default function showStartPuzzleGame(token) {
+export default function showStartPuzzleGame() {
+  document.querySelector('.main-container').classList.add('puzzle-game__main-container');
   document.querySelector('.main-container').innerHTML = '';
   document.querySelector('body').classList.remove('authorization-form__body__background');
   document.querySelector('.main-container').classList.remove('main-container__form');

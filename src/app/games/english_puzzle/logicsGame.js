@@ -1,18 +1,11 @@
-/* eslint-disable prefer-const */
-/* eslint-disable no-unused-vars */
 import paintings1 from './view/level1';
 import paintings2 from './view/level2';
 import paintings3 from './view/level3';
 import paintings4 from './view/level4';
 import paintings5 from './view/level5';
 import paintings6 from './view/level6';
-import { setSessionData, getAndInitSessionData } from '../../common/utils/sessionStorage';
 import { enableDragSort, drags } from './view/dragAndDrop';
-import { getAndInitLocalData, getLocalData } from '../../common/utils/localStorage';
 import showGamePage from './view/gamePage';
-
-const objectSession = getAndInitSessionData();
-const objectLocal = getAndInitLocalData();
 
 let counterWord = 0;
 let arrayWord = [];
