@@ -1,13 +1,22 @@
 import menuHandlers from './menuHandlers';
 import renderSettings from '../../main/settings/index';
+import { hideHeader } from '../index';
+
+const CURRENT_STATE = {
+  page: '',
+};
 
 function menuClickHandler(loginResponse) {
   document.querySelector('.menu').addEventListener('click', (event) => {
     const el = event.target.closest('.menu__items__item');
     if (el) {
       const functionName = el.dataset.handler;
+      if (functionName === CURRENT_STATE.page) {
+        return;
+      }
       if (functionName !== undefined) {
         menuHandlers[functionName](loginResponse);
+        CURRENT_STATE.page = functionName;
       } else {
         // eslint-disable-next-line no-alert
         alert('эта страница еще не создана');
@@ -15,9 +24,10 @@ function menuClickHandler(loginResponse) {
     }
   });
 }
-const startMain = (loginRsponse) => {
+const startMain = (loginResponse) => {
+  hideHeader(false);
   renderSettings();
-  menuClickHandler(loginRsponse);
+  menuClickHandler(loginResponse);
 };
 
 export default startMain;

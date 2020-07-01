@@ -16,3 +16,5 @@ export { default as getRandomInteger } from './utils/randomInteger';
 export { translateEngToRus, translateRusToEng } from './network/translationAPI';
 
 export { setLocalData, getLocalData, getAndInitLocalData } from './utils/localStorage';
+
+export { hideHeader } from './utils/hideDomElements';
