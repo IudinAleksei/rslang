@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 export default function showGamePage(paintings, level) {
   const header = document.createElement('div');
   header.className = 'puzzle-game__header';

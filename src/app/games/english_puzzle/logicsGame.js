@@ -71,7 +71,6 @@ async function getWords(levels, pages) {
 
 export async function showPuzzle(level, page) {
   let widthWord = document.querySelector('.puzzle-game__container-puzzle').offsetWidth;
-  console.log(widthWord);
   document.getElementById('check').style.display = 'none';
   round = arrayWords.shift();
   const numberOfLetters = round.textExample.replace(/(<([^>]+)>)/ig, '').match(/[A-Za-z0-9]/g).length;
@@ -86,7 +85,6 @@ export async function showPuzzle(level, page) {
     counterWord += 1;
     widthPercent = (((document.querySelector('.puzzle-game__container-puzzle').offsetWidth / numberOfLetters) * e.match(/[A-Za-z0-9]/g).length) / document.querySelector('.puzzle-game__container-puzzle').offsetWidth) * 100;
     width = (document.querySelector('.puzzle-game__container-puzzle').offsetWidth / numberOfLetters) * e.match(/[A-Za-z0-9]/g).length;
-    console.log(width);
     const results = `<span class='puzzle-game__puzzle-word fon' draggable="true" style="width:${widthPercent}%; background-image:url(https://raw.githubusercontent.com/cup0ra/rslang_data_paintings/master/${paintings[level][page].imageSrc});background-position:${widthWord}px ${heightWord}px;background-size:${document.querySelector('.puzzle-game__container-puzzle').offsetWidth}px 400px" id="${e}${counterWord} " data-value="${i}"><div class="">${e}</div></span>`;
     widthWord -= width;
     return results;
@@ -101,7 +99,6 @@ export async function showPuzzle(level, page) {
   if (arrayWords.length > 0) {
     sessionStorage.setItem('arrayLength', true);
   }
-  console.log(arrayWords);
   heightWord -= 40;
   enableDragSort();
   drags();

@@ -1,8 +1,8 @@
+/* eslint-disable no-param-reassign */
 export default function showStartPuzzleGame() {
+  document.querySelector('.main-container').outerHTML = document.querySelector('.main-container').outerHTML;
   document.querySelector('.main-container').classList.add('puzzle-game__main-container');
   document.querySelector('.main-container').innerHTML = '';
-  document.querySelector('body').classList.remove('authorization-form__body__background');
-  document.querySelector('.main-container').classList.remove('main-container__form');
   document.querySelector('body').classList.add('puzzle-game__background');
   const wrapperStartPuzzle = document.createElement('div');
   wrapperStartPuzzle.className = 'puzzle-start-game__wrapper';

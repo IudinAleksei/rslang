@@ -252,12 +252,13 @@ function controlGamePuzzle(event) {
 export default function puzzleGameHandling() {
   document.querySelector('.menu__items__item').addEventListener('click', () => {
     document.querySelector('body').classList.remove('puzzle-game__background');
-  });
+    document.querySelector('.main-container').innerHTML = '';
+  }, false);
   document.querySelector('.main-container').addEventListener('click', (event) => {
     controlHint(event);
     controlGamePuzzle(event);
     movingPuzzle(event);
-  });
+  }, false);
   document.querySelector('.main-container').addEventListener('change', async (event) => {
     changeLevelPage(event);
   }, false);
