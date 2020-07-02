@@ -1,7 +1,14 @@
+@import '../../../../sass/abstract/constants';
+@import '../../../../sass/abstract/mixins';
 @import "./components/intro";
 @import "./components/preloader";
 @import "./components/results";
 @import "./components/game";
+
+.main__background-speakit {
+  @include position($position: fixed);
+  @include background(url('/src/assets/img/rs-lang.jpg'), $background-repeat: no-repeat);
+}
 
 * {
   box-sizing: border-box;
@@ -10,8 +17,43 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Open Sans', sans-serif;
-  // overflow: hidden;
+  font-family: $body_font;
   min-height: 100%;
 }
 
+#speakit {
+  @include game-speakit;
+  @include intro-speakit;
+  @include results-speakit;
+  
+  .btns {
+    display: flex;
+  }
+
+  .btn {
+    @include button;
+    color: $white_color;
+  }
+
+  .btn:hover {
+    background: $button_hover_color;
+    color: $body_color;
+  }
+
+  .btn:focus,
+  .btn:active {
+    outline: 0;
+  }
+
+  .activeBtn {
+    background: #009179;
+    color: $white_color;
+    transition: .15s;
+  }
+
+  .activeBtn:hover {
+    background: #009179;
+    color: $body_color;
+    transition: .15s;
+  }
+}

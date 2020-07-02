@@ -22,14 +22,19 @@ export default class App {
   }
 
   async initApp(root) {
+    const mainContainer = document.querySelector('.main-container');
+    const divBackground = document.createElement('div');
+    divBackground.className = 'main__background-speakit';
+    mainContainer.prepend(divBackground);
     this.main = document.createElement('div');
     this.main.id = 'speakit';
-    this.arrayWords = await App.getRandomWords(this.group);
+    root.append(this.main);
     this.main.prepend(getLoader());
+    spinnerOn();
+    this.arrayWords = await App.getRandomWords(this.group);
     this.main.prepend(this.intro.getIntro());
     this.main.append(this.game.render(this.arrayWords));
     this.main.append(this.results.render(this.arrayWords));
-    root.prepend(this.main);
     spinnerOff();
   }
 
@@ -73,8 +78,6 @@ export default class App {
   }
 
   static getDataCurrent(stringCurrent) {
-    let buf = stringCurrent.substring(9, 13);
-    buf = parseFloat(stringCurrent);
-    return buf;
+    return parseFloat(stringCurrent.substring(9, 13));
   }
 }

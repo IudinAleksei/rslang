@@ -269,23 +269,20 @@ export default class Game {
     const buttonsContainer = document.createElement('div');
     buttonsContainer.classList.add('btns');
 
-    const buttonRestart = document.createElement('a');
-    buttonRestart.href = '#';
+    const buttonRestart = document.createElement('button');
     buttonRestart.classList.add('btn');
     buttonRestart.classList.add('restart');
     buttonRestart.innerHTML = 'Restart';
     buttonsContainer.append(buttonRestart);
 
-    const buttonVoice = document.createElement('a');
-    buttonVoice.href = '#';
+    const buttonVoice = document.createElement('button');
     buttonVoice.classList.add('btn');
     buttonVoice.classList.add('voice');
     buttonVoice.classList.add('user-speach');
     buttonVoice.innerHTML = 'Speak please';
     buttonsContainer.append(buttonVoice);
 
-    const buttonResult = document.createElement('a');
-    buttonResult.href = '#';
+    const buttonResult = document.createElement('button');
     buttonResult.classList.add('btn');
     buttonResult.classList.add('result');
     buttonResult.innerHTML = 'Results';

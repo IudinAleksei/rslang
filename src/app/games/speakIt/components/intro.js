@@ -17,10 +17,9 @@ export default class Intro {
     paragraphContainer.innerHTML = 'Click on the words to hear them sound.<br> Click on the button and speak the words into the microphone.';
     this.intro.append(paragraphContainer);
 
-    const buttonContainer = document.createElement('a');
+    const buttonContainer = document.createElement('button');
     buttonContainer.classList.add('intro-btn');
     buttonContainer.classList.add('btn');
-    buttonContainer.href = '#';
     buttonContainer.innerHTML = 'Start';
     this.intro.append(buttonContainer);
 

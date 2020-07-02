@@ -144,8 +144,20 @@ export default class Results {
     const buttons = document.createElement('div');
     buttons.classList.add('btns');
     buttons.classList.add('btns-res');
-    const keyValue = '<a href="#" class="btn btn-res return">Return</a><a href="#" class="btn btn-res new-game">New game</a>';
-    buttons.insertAdjacentHTML('beforeend', keyValue);
+
+    const buttonReturn = document.createElement('button');
+    buttonReturn.classList.add('btn');
+    buttonReturn.classList.add('btn-res');
+    buttonReturn.classList.add('return');
+    buttonReturn.innerHTML = 'Return';
+    buttons.append(buttonReturn);
+
+    const buttonNewGame = document.createElement('button');
+    buttonNewGame.classList.add('btn');
+    buttonNewGame.classList.add('btn-res');
+    buttonNewGame.classList.add('new-game');
+    buttonNewGame.innerHTML = 'New game';
+    buttons.append(buttonNewGame);
     return buttons;
   }
 
