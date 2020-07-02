@@ -87,11 +87,15 @@ function changeLevelPage(event) {
     level = +event.target.value;
     page = 0;
     localStorage.setItem('puzzlePage', page);
+    wordKnow = [];
+    wordNotKnow = [];
     getWord(level, page);
     localStorage.setItem('puzzleLevel', level);
   }
   if (event.target.id === 'page') {
     page = +event.target.value;
+    wordKnow = [];
+    wordNotKnow = [];
     getWord(level, page);
     localStorage.setItem('puzzlePage', page);
   }
@@ -252,7 +256,6 @@ function controlGamePuzzle(event) {
 export default function puzzleGameHandling() {
   document.querySelector('.menu__items__item').addEventListener('click', () => {
     document.querySelector('body').classList.remove('puzzle-game__background');
-    document.querySelector('.main-container').innerHTML = '';
   }, false);
   document.querySelector('.main-container').addEventListener('click', (event) => {
     controlHint(event);

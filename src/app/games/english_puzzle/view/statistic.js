@@ -15,9 +15,9 @@ export default function showStatistic(paintings, level, page, wordKnow, wordNotK
   pictureName.innerText = `${paintings[level][page].author} - ${paintings[level][page].name}(${paintings[level][page].year})`;
   containerStatistic.append(pictureName);
   const blockKnow = document.createElement('div');
-  blockKnow.className = 'puzzle-game__block-not-know';
   containerStatistic.append(blockKnow);
   const notKnow = document.createElement('div');
+  notKnow.className = 'puzzle-game__block-not-know';
   notKnow.innerHTML = `I dont know  <span class="puzzle-game__block-not-know__item">${wordNotKnow.length}</span>:`;
   for (let i = 0; i < wordNotKnow.length; i += 1) {
     const word = document.createElement('div');
@@ -30,10 +30,10 @@ export default function showStatistic(paintings, level, page, wordKnow, wordNotK
   know.className = 'puzzle-game__block-know';
   know.innerHTML = `I know  <span class="puzzle-game__block-know__item">${wordKnow.length}</span>:`;
   for (let i = 0; i < wordKnow.length; i += 1) {
-    const w = document.createElement('p');
-    w.className = 'sentence';
-    w.innerHTML = `<button class="puzzle-game__word-statistic-button" data-value='${wordKnow[i].audioExample}'></button><p class="puzzle-game__word-statistic">${wordKnow[i].textExample}</p>`;
-    know.append(w);
+    const word = document.createElement('p');
+    word.className = 'puzzle-game__sentence';
+    word.innerHTML = `<button class="puzzle-game__word-statistic-button" data-value='${wordKnow[i].audioExample}'></button><p class="puzzle-game__word-statistic">${wordKnow[i].textExample}</p>`;
+    know.append(word);
   }
   blockKnow.append(know);
   const buttonContinue = document.createElement('button');

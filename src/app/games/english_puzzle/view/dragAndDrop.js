@@ -53,7 +53,13 @@ export function drags() {
       document.getElementById('check').style.display = 'block';
     }
   });
+  fillText.addEventListener('dragover', (event) => {
+    event.preventDefault();
+    event.dataTransfer.dropEffect = 'move';
+  });
   fillText.addEventListener('drop', function (event) {
-    if (event.target.id === 'text') this.appendChild(selectedBox);
+    if (event.target.id === 'text') {
+      this.appendChild(selectedBox);
+    }
   });
 }
