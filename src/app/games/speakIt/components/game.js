@@ -64,10 +64,7 @@ export default class Game {
     const group = this.getRandomArbitrary(0, 5);
     this.activeArray = await this.getRandomWords(group);
     this.spinnerOff();
-    this.items = document.querySelector('.items');
-    this.items.innerHTML = '';
-    this.items.append(this.getItems(this.activeArray));
-
+    this.updateItems(this.activeArray);
     const translation = document.querySelector('.translation');
     translation.innerHTML = '';
     const image = document.querySelector('.img');
@@ -206,16 +203,24 @@ export default class Game {
     return event.target.classList.contains('result');
   }
 
-  getItems(array) {
+  getItems(arrayWords) {
     this.items = document.createElement('div');
     this.items.classList.add('items');
-    (async () => {
-      const arrayWords = await array;
-      for (let i = 0; i < arrayWords.length; i += 1) {
-        const keyValue = `<div class="item" data-current="${arrayWords[i].current}"><span class="audio-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="currentColor" d="M15.788 13.007a3 3 0 110 5.985c.571 3.312 2.064 5.675 3.815 5.675 2.244 0 4.064-3.88 4.064-8.667 0-4.786-1.82-8.667-4.064-8.667-1.751 0-3.244 2.363-3.815 5.674zM19 26c-3.314 0-12-4.144-12-10S15.686 6 19 6s6 4.477 6 10-2.686 10-6 10z" fill-rule="evenodd"></path></svg></span><p class="word">${arrayWords[i].word}</p><p class="transcription">${arrayWords[i].transcription}</p><p class="translation">${arrayWords[i].translation}</p></div>`;
-        this.items.insertAdjacentHTML('beforeend', keyValue);
-      }
-    })();
+    for (let i = 0; i < arrayWords.length; i += 1) {
+      const keyValue = `<div class="item" data-current="${arrayWords[i].current}"><span class="audio-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="currentColor" d="M15.788 13.007a3 3 0 110 5.985c.571 3.312 2.064 5.675 3.815 5.675 2.244 0 4.064-3.88 4.064-8.667 0-4.786-1.82-8.667-4.064-8.667-1.751 0-3.244 2.363-3.815 5.674zM19 26c-3.314 0-12-4.144-12-10S15.686 6 19 6s6 4.477 6 10-2.686 10-6 10z" fill-rule="evenodd"></path></svg></span><p class="word">${arrayWords[i].word}</p><p class="transcription">${arrayWords[i].transcription}</p><p class="translation">${arrayWords[i].translation}</p></div>`;
+      this.items.insertAdjacentHTML('beforeend', keyValue);
+    }
+    return this.items;
+  }
+
+  updateItems(arrayWords) {
+    this.items = this.game.querySelectorAll('.item');
+    for (let i = 0; i < arrayWords.length; i += 1) {
+      this.items[i].dataset.current = arrayWords[i].current;
+      this.items[i].querySelector('.word').innerHTML = arrayWords[i].word;
+      this.items[i].querySelector('.transcription').innerHTML = arrayWords[i].transcription;
+      this.items[i].querySelector('.translation').innerHTML = arrayWords[i].translation;
+    }
     return this.items;
   }
 
