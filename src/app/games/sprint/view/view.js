@@ -13,6 +13,7 @@ export default function renderStartPage() {
 </div>
 <p>The game will start immediately after pressing start</p>
 <button class="sprint-game__start-button">Start</button>
+<div class="sprint-game__start-page__counter">3</div>
 </div>`;
 }
 
@@ -25,6 +26,7 @@ export function renderGame() {
         <audio class="word-sound" src=""></audio>
         </div>
         <div class="points">0</div>
+        <div class="counter">60</div>
         <div class="sound"></div>
         <div class="progress">
           <div class="circles">

@@ -11,6 +11,7 @@ export default async function sprintGamePageHandling(level) {
   const translation = document.querySelector('.translation');
   const points = document.querySelector('.points');
   const wordSound = document.querySelector('.word-sound');
+  const counter = document.querySelector('.counter');
   const soundButton = document.querySelector('.sound-button');
   const circles = document.querySelectorAll('.circle');
   const birds = document.querySelectorAll('.parrot');
@@ -209,6 +210,15 @@ export default async function sprintGamePageHandling(level) {
     correctButton.addEventListener('click', onCorrectButtonClick);
     incorrectButton.addEventListener('click', onIncorrectButtonClick);
   }
+  let seconds = 60;
+  setInterval(() => {
+    seconds--;
+    if (seconds > 0) {
+      counter.innerHTML = seconds;
+    } else if (seconds === 0) {
+      alert('finish');
+    }
+  }, 1000);
 
   nextWord();
   addEventListeners();

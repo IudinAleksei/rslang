@@ -25,6 +25,7 @@
 
     .sprint-game__start-button {
         @include button($color_text: $white_color);
+        position: relative;
     }
 }
 
@@ -149,6 +150,43 @@
     font-size: 3rem;
     font-weight: 600;
     color: #fff;
+}
+
+.counter {
+    font-family: $body_font;
+    width: 80px;
+    height: 40px;
+    display: inline-flex;
+    justify-content: center;
+    position: absolute;
+    top: -30px;
+    left: calc(100% - 40px);
+    font-size: 3rem;
+    font-weight: 600;
+    color: #f50a0a;
+    transform: translate(-50%, -50%);
+    border: 1px solid;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1), 0 11px 12px 0 rgba(14, 30, 37, 0.12);
+    border-radius: 8px;
+}
+
+.sprint-game__start-page__counter {
+    display: inline-block;
+    font-family: "Open Sans", sans-serif;
+    border: 2px solid $heading_color;
+    width: 90px;
+    height: 90px;
+    transition-duration: 0.4s;
+    font-size: 4rem;
+    text-align: center;
+    border-radius: 50%;
+    visibility: visible;
+    opacity: 1;
+    color: $heading_color;
+    position: relative;
+    line-height: 8rem;
+    top: 25px;
+    display: none;
 }
 
 .extra-points {
