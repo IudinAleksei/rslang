@@ -1,6 +1,6 @@
 import menuHandlers from './menuHandlers';
 import renderSettings from '../../main/settings/index';
-import { hideHeader, hideMain } from '../index';
+import { hideHeader, hideMain, clearBodyClasses } from '../index';
 
 const CURRENT_STATE = {
   page: '',
@@ -16,6 +16,7 @@ function menuClickHandler(loginResponse) {
       }
       if (functionName !== undefined) {
         hideMain(true);
+        clearBodyClasses();
         document.body.addEventListener('transitionend', () => {
           menuHandlers[functionName](loginResponse);
           CURRENT_STATE.page = functionName;
@@ -29,6 +30,11 @@ function menuClickHandler(loginResponse) {
   });
 }
 const startMain = (loginResponse) => {
+  hideMain(true);
+  document.body.addEventListener('transitionend', () => {
+    hideMain(false);
+  }, { once: true });
+  clearBodyClasses();
   hideHeader(false);
   renderSettings();
   menuClickHandler(loginResponse);
