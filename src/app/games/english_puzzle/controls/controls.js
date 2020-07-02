@@ -1,4 +1,3 @@
-import { setSessionData } from '../../../common/utils/sessionStorage';
 import {
   getWord, playAudio, showPuzzle, paintings,
 } from '../logicsGame';
@@ -6,8 +5,8 @@ import showStatistic from '../view/statistic';
 
 let wordKnow = [];
 let wordNotKnow = [];
-let page = localStorage.getItem('puzzlePage') === null ? 0 : localStorage.getItem('puzzlePage');
-let level = localStorage.getItem('puzzleLevel') === null ? 0 : localStorage.getItem('puzzleLevel');
+let page;
+let level;
 
 function writeStatistic() {
   const time = new Date();
@@ -217,7 +216,6 @@ function controlGamePuzzle(event) {
         document.getElementById('know').style.display = 'none';
         document.getElementById('results').style.display = 'block';
         document.getElementById('check').style.display = 'none';
-        setSessionData({ puzzleCounterBox: 0 });
         const elements = document.querySelector('.puzzle-game__container-puzzle').getElementsByClassName('puzzle-game__puzzle-word');
         for (let i = 0; i < elements.length; i += 1) {
           elements[i].style.borderColor = 'transparent';
@@ -254,6 +252,8 @@ function controlGamePuzzle(event) {
 }
 
 export default function puzzleGameHandling() {
+  page = localStorage.getItem('puzzlePage') === null ? 0 : localStorage.getItem('puzzlePage');
+  level = localStorage.getItem('puzzleLevel') === null ? 0 : localStorage.getItem('puzzleLevel');
   document.querySelector('.menu__items__item').addEventListener('click', () => {
     document.querySelector('body').classList.remove('puzzle-game__background');
   }, false);

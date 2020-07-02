@@ -1,4 +1,11 @@
+import { getAndInitLocalData } from '../../../common/utils/localStorage';
+
+function getUserSitting() {
+  getAndInitLocalData();
+}
+
 export default function showStartPuzzleGame() {
+  getUserSitting();
   document.querySelector('.main-container').outerHTML = document.querySelector('.main-container').outerHTML;
   document.querySelector('.main-container').classList.add('puzzle-game__main-container');
   document.querySelector('.main-container').innerHTML = '';
