@@ -6,10 +6,10 @@ import {
 } from '../controls/listeners';
 import { createSpeakIcon, createImage, createTrueWord } from './createAssets';
 
-export default async function startAudiochallengeGame() {
+export default async function startAudiochallengeGame(level) {
   createLayout();
   createSpeakIcon();
-  await getWordArr();
+  await getWordArr(level);
   await createAudio();
   createImage();
   createTrueWord();

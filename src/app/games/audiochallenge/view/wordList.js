@@ -10,16 +10,16 @@ function shuffle(array) {
   }
 }
 
-async function getWord() {
-  const wordsArr = await getWords(0, getRandomInteger(0, 29));
+async function getWord(level = 0) {
+  const wordsArr = await getWords(level, getRandomInteger(0, 29));
   const word = wordsArr[getRandomInteger(0, wordsArr.length - 1)];
   return word;
 }
 
-export default async function getWordArr() {
+export default async function getWordArr(level) {
   const {
     word, wordTranslate, audio, image,
-  } = await getWord();
+  } = await getWord(level);
   const wordInfo = await getWordsInfo(word);
   const { id } = wordInfo[0].meanings[0];
   const [wordObj] = await getWordInfoById(id);

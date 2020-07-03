@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import createAudio from '../view/createAudio';
 import getWordArr from '../view/wordList';
 import { createImage, createTrueWord } from '../view/createAssets';

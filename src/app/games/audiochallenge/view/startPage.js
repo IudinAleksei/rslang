@@ -1,4 +1,6 @@
+/* eslint-disable no-console */
 import startAudiochallengeGame from './startGame';
+// import getLevel from './getLevel';
 
 export default function renderAudiochallengeStartPage() {
   const bodyClass = document.querySelector('body').classList;
@@ -61,9 +63,8 @@ export default function renderAudiochallengeStartPage() {
   const selectLevel = document.createElement('select');
   selectLevel.classList.add('select-level');
 
-  for (let i = 1; i < 7; i += 1) {
+  for (let i = 0; i < 6; i += 1) {
     const option = document.createElement('option');
-    option.setAttribute('data-level', i - 1);
     option.textContent = i;
     selectLevel.append(option);
   }
@@ -88,8 +89,14 @@ export default function renderAudiochallengeStartPage() {
 
   document.querySelector('.main-container').append(wrapper);
 
+  let levelValue = 0;
+
+  selectLevel.onchange = function getLevelValue() {
+    levelValue = selectLevel.value;
+  };
+
   button.addEventListener('click', () => {
     wrapper.innerHTML = '';
-    startAudiochallengeGame();
+    startAudiochallengeGame(levelValue);
   });
 }
