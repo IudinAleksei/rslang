@@ -16,8 +16,8 @@ function menuClickHandler(loginResponse) {
       }
       if (functionName !== undefined) {
         hideMain(true);
-        clearBodyClasses();
         document.body.addEventListener('transitionend', () => {
+          clearBodyClasses();
           menuHandlers[functionName](loginResponse);
           CURRENT_STATE.page = functionName;
           hideMain(false);
@@ -32,11 +32,11 @@ function menuClickHandler(loginResponse) {
 const startMain = (loginResponse) => {
   hideMain(true);
   document.body.addEventListener('transitionend', () => {
+    clearBodyClasses();
     hideMain(false);
+    hideHeader(false);
+    renderSettings();
   }, { once: true });
-  clearBodyClasses();
-  hideHeader(false);
-  renderSettings();
   menuClickHandler(loginResponse);
 };
 

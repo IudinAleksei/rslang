@@ -51,8 +51,8 @@ const generatePageAboutUs = () => {
                 <p class="text">${text}</p>
               </div>
               <div class="contact">
-                <a href="${telegramLink}"><img src="assets/img/about-us/telegram.svg" class="telegtam"></a>
-                <a href="${githubLink}"><img src="assets/img/about-us/logo.svg" class="github"></a>
+                <a href="${telegramLink}" target="_blank"><img src="assets/img/about-us/telegram.svg" class="telegtam"></a>
+                <a href="${githubLink}" target="_blank"><img src="assets/img/about-us/logo.svg" class="github"></a>
               </div>
             </div>`;
   const MAIN_CONTAINER = document.querySelector('.main-container');
