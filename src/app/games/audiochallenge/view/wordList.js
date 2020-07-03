@@ -1,11 +1,7 @@
-/* eslint-disable no-alert */
 /* eslint-disable no-param-reassign */
-/* eslint-disable no-console */
 import {
   getWordsInfo, getWordInfoById, getWords, getRandomInteger,
 } from '../../../common/index';
-
-let round = 0;
 
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i -= 1) {
@@ -29,8 +25,10 @@ export default async function getWordArr() {
   const [wordObj] = await getWordInfoById(id);
 
   const arr = wordObj.alternativeTranslations;
+  const filterArr = arr.filter((el) => !(/\s+/).test(el.translation.text));
+
   const newArr = [];
-  arr.map((el) => newArr.push(el.translation.text));
+  filterArr.map((el) => newArr.push(el.translation.text));
   const sliceArr = newArr.slice(0, 4);
   sliceArr.push(wordTranslate);
   shuffle(sliceArr);
@@ -54,10 +52,4 @@ export default async function getWordArr() {
 
   document.querySelector('.audiochallenge-list').innerHTML = '';
   document.querySelector('.audiochallenge-list').append(ol);
-
-  if (round === 10) {
-    round = 0;
-  }
-
-  round += 1;
 }

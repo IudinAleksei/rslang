@@ -1,15 +1,31 @@
+.audiochallenge-assets {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 270px;
+}
+
+.image__wrapper {
+  display: flex;
+  justify-content: center;
+}
+
 .word-list {
   display: flex;
   justify-content: space-evenly;
   width: 100%;
   padding: 0;
-  color: $color_text_button;
+  color: #162114;
   font-size: 2rem;
 
   & li {
     list-style-position: inside;
     cursor: pointer;
   }
+}
+
+.right {
+  color: $color_text_button;
 }
 
 .wrong {
@@ -95,4 +111,10 @@
 .true-word_active,
 .audiochallenge-image_active {
   display: block;
+}
+
+.audiochallenge-list {
+  width: 90%;
+  min-height: 63px;
+  margin: 0 auto 20px;
 }

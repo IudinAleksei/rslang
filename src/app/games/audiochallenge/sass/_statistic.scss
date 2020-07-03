@@ -1,0 +1,104 @@
+.audiochallenge__statistic {
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 50%;
+  height: 50%;
+  padding: 30px;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  background-color: #fff;
+  color: #000;
+  font-size: 2rem;
+}
+
+.stat__wrapper {
+  h3 {
+    margin-bottom: 5px;
+  }
+
+  ul {
+    margin: 0;
+  }
+}
+
+.guessed-word__title {
+  color: #1ab429;
+}
+
+.guessed-list__item {
+  position: relative;
+  list-style-type: none;
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 4px;
+    left: -25px;
+    width: 16px;
+    height: 16px;
+    background: url('/assets/icons/audiochallenge/guessed.png') center (center / cover) no-repeat;
+  }
+}
+
+.mistake-word__title {
+  color: #f00;
+}
+
+.mistakes-list__item {
+  position: relative;
+  list-style-type: none;
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 4px;
+    left: -25px;
+    width: 16px;
+    height: 16px;
+    background: url('/assets/icons/audiochallenge/mistake.png') center (center / cover) no-repeat;
+  }
+}
+
+.dont-know-word__title {
+  color: #00f;
+}
+
+.dont-know-list__item {
+  position: relative;
+  list-style-type: none;
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 4px;
+    left: -25px;
+    width: 16px;
+    height: 16px;
+    background: url('/assets/icons/audiochallenge/dontKnow.png') center (center / cover) no-repeat;
+  }
+}
+
+.button__wrapper {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.button-again {
+  @include button;
+
+  color: $white-color;
+}
+
+.button-main-page {
+  @include button;
+
+  color: $white-color;
+}

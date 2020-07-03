@@ -5,6 +5,7 @@ export default function renderAudiochallengeStartPage() {
   document.querySelector('body').classList.remove(bodyClass[0], bodyClass[1]);
   document.querySelector('body').classList.add('audiochallenge__body');
   document.querySelector('.main-container').innerHTML = '';
+
   const wrapper = document.createElement('div');
   wrapper.setAttribute('id', 'audiochallenge');
 
