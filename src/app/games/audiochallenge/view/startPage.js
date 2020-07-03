@@ -1,6 +1,4 @@
-/* eslint-disable no-console */
 import startAudiochallengeGame from './startGame';
-// import getLevel from './getLevel';
 
 export default function renderAudiochallengeStartPage() {
   const bodyClass = document.querySelector('body').classList;

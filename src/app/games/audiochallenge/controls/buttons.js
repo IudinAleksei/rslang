@@ -4,6 +4,7 @@ import { createImage, createTrueWord } from '../view/createAssets';
 import createStatistic from '../view/statistic';
 import { stat, wordListener, wordListlistener } from './wordList';
 import statisticButton from './statisticButton';
+import { keyboardEvent } from './keyboard';
 
 let round = 1;
 
@@ -42,11 +43,15 @@ function clickButtons() {
       stat.right = 0;
       stat.mistakes = 0;
       stat.dontKnow = 0;
+
+      const body = document.querySelector('body');
+
+      body.removeEventListener('keydown', keyboardEvent);
     } else {
       round += 1;
       nextWord();
     }
-  } else {
+  } else if (button.classList.contains('audiochallenge__button')) {
     document.querySelector('.word-list').removeEventListener('click', wordListener);
     const audioTranslate = document.querySelector('.word-audio').dataset.translate;
     const trueWord = document.querySelector('.true-word');
