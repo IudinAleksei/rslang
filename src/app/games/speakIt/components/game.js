@@ -1,11 +1,10 @@
 export default class Game {
   constructor(spinnerOn, spinnerOff,
-    transitionGameToResults, getRandomWords, getRandomArbitrary) {
+    transitionGameToResults, getRandomWords) {
     this.spinnerOn = spinnerOn;
     this.spinnerOff = spinnerOff;
     this.transitionGameToResults = transitionGameToResults;
     this.getRandomWords = getRandomWords;
-    this.getRandomArbitrary = getRandomArbitrary;
     this.activeArray = [];
     this.maxPoint = 6;
     this.activePoint = 0;
@@ -60,24 +59,15 @@ export default class Game {
   }
 
   async clickOnPoints(event) {
-    this.spinnerOn();
-    const group = this.getRandomArbitrary(0, 5);
-    this.activeArray = await this.getRandomWords(group);
-    this.spinnerOff();
-    this.updateItems(this.activeArray);
-    const translation = document.querySelector('.translation');
-    translation.innerHTML = '';
-    const image = document.querySelector('.img');
-    image.src = './assets/img/speakit/blank.jpg';
-    const points = document.querySelectorAll('.point');
-    for (let i = 0; i < points.length; i += 1) {
-      points[i].classList.remove('activePoint');
-    }
+    this.game.querySelectorAll('.point').forEach((point) => {
+      point.classList.remove('activePoint');
+    });
     event.target.classList.add('activePoint');
+    await this.newGame();
   }
 
   isClickOnWords(event) {
-    if (!event.target.classList.contains('point')) {
+    if (this.game.querySelector('.input').classList.contains('none')) {
       if (event.target.parentNode.classList.contains('item')) {
         this.wordActive = event.target.parentNode.querySelector('.word').textContent;
         this.translationActive = event.target.parentNode.querySelector('.translation').textContent;
@@ -100,9 +90,9 @@ export default class Game {
   }
 
   clickOnWords() {
-    const images = document.querySelector('.img');
-    const translation = document.querySelector('.translation');
-    const audio = document.querySelector('.audio');
+    const images = this.game.querySelector('.img');
+    const translation = this.game.querySelector('.translation');
+    const audio = this.game.querySelector('.audio');
     const result = this.getInfoByWord(this.wordActive);
     images.src = this.src + result.image;
     audio.src = this.src + result.audio;
@@ -115,53 +105,57 @@ export default class Game {
   }
 
   static isClickOnButtonSpeak(event) {
-    if (event.target.classList.contains('user-speach')) {
-      return event.target.classList.contains('user-speach');
-    }
-    return false;
+    return event.target.classList.contains('user-speach');
   }
 
   clickOnButtonSpeak() {
-    document.querySelector('.translation').classList.add('none');
-    document.querySelector('.input').classList.remove('none');
-    document.querySelector('.user-speach').innerHTML = 'Await...';
-    document.querySelector('.input').innerHTML = '';
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    if (SpeechRecognition) {
-      this.recognition = new SpeechRecognition();
-    }
-    this.recognition.lang = 'en-US';
-    this.recognition.start();
-    this.recognition.addEventListener('result', (e) => {
-      const transcript = Array.from(e.results)
-        .map((result) => result[0])
-        .map((result) => result.transcript)
-        .join('');
-      let word = transcript.toLowerCase();
-      document.querySelector('.input').value = word;
-      if (word[word.length - 1] === '.') {
-        word = word.substring(0, word.length - 1);
+    if (!this.game.querySelector('.user-speach').classList.contains('activeBtn')) {
+      this.resetGameContainer();
+      this.game.querySelector('.translation').classList.add('none');
+      this.game.querySelector('.input').classList.remove('none');
+      this.game.querySelector('.user-speach').innerHTML = 'Stop speak';
+      this.game.querySelector('.user-speach').classList.add('activeBtn');
+      this.game.querySelector('.input').value = '';
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (SpeechRecognition) {
+        this.recognition = new SpeechRecognition();
       }
-      this.checkedTrueWord(word);
-    });
+      this.recognition.lang = 'en-US';
+      this.recognition.start();
+      this.recognition.addEventListener('result', (e) => {
+        const transcript = Array.from(e.results)
+          .map((result) => result[0])
+          .map((result) => result.transcript)
+          .join('');
+        let word = transcript.toLowerCase();
+        this.game.querySelector('.input').value = word;
+        if (word[word.length - 1] === '.') {
+          word = word.substring(0, word.length - 1);
+        }
+        this.checkedTrueWord(word);
+      });
+      this.recognition.addEventListener('end', this.recognition.start);
+    } else {
+      this.resetGameContainer();
+      this.game.querySelector('.user-speach').innerHTML = 'Speak please';
+      this.game.querySelector('.input').value = '';
+      this.stopRecognition();
+    }
   }
 
   checkedTrueWord(word) {
-    const images = document.querySelector('.img');
-    for (let i = 0; i < this.activeArray.length; i += 1) {
-      if (word === this.activeArray[i].word) {
-        document.querySelectorAll('.word')[i].parentElement.classList.add('activeItem');
+    const images = this.game.querySelector('.img');
+    this.activeArray.forEach((activeWord, index) => {
+      if (word === activeWord.word) {
+        this.game.querySelectorAll('.word')[index].parentElement.classList.add('activeItem');
         const result = this.getInfoByWord(word);
         images.src = this.src + result.image;
         const starContainer = document.createElement('div');
         starContainer.classList.add('star');
-        document.querySelector('.score').append(starContainer);
-        this.activeArray[i].isGuess = true;
+        this.game.querySelector('.score').append(starContainer);
+        this.activeArray[index].isGuess = true;
       }
-    }
-    this.recognition.stop();
-    this.recognition.removeEventListener('end', this.recognition.start);
-    document.querySelector('.user-speach').innerHTML = 'Speak please';
+    });
   }
 
   getInfoByWord(word) {
@@ -186,14 +180,27 @@ export default class Game {
   }
 
   clickOnButtonRestart() {
-    document.querySelector('.translation').classList.remove('none');
-    this.inputContainer.classList.add('none');
-    document.querySelector('.score').innerHTML = '';
-    document.querySelector('.user-speach').innerHTML = 'Speak please';
-    document.querySelector('.translation').innerHTML = '';
-    const image = document.querySelector('.img');
+    this.stopRecognition();
+    this.resetGameContainer();
+    this.resetActiveArray();
+  }
+
+  resetActiveArray() {
+    this.activeArray.forEach((activeWord, index) => {
+      this.activeArray[index].isGuess = false;
+    });
+  }
+
+  resetGameContainer() {
+    this.game.querySelector('.translation').classList.remove('none');
+    this.game.querySelector('.input').classList.add('none');
+    this.game.querySelector('.score').innerHTML = '';
+    this.game.querySelector('.user-speach').innerHTML = 'Speak please';
+    this.game.querySelector('.translation').innerHTML = '';
+    this.game.querySelector('.user-speach').classList.remove('activeBtn');
+    const image = this.game.querySelector('.img');
     image.src = './assets/img/speakit/blank.jpg';
-    const items = document.querySelectorAll('.item');
+    const items = this.game.querySelectorAll('.item');
     for (let i = 0; i < items.length; i += 1) {
       items[i].classList.remove('activeItem');
     }
@@ -201,6 +208,13 @@ export default class Game {
 
   static isClickOnButtonResult(event) {
     return event.target.classList.contains('result');
+  }
+
+  stopRecognition() {
+    if (this.recognition) {
+      this.recognition.stop();
+      this.recognition.removeEventListener('end', this.recognition.start);
+    }
   }
 
   getItems(arrayWords) {
@@ -216,6 +230,7 @@ export default class Game {
   updateItems(arrayWords) {
     this.items = this.game.querySelectorAll('.item');
     for (let i = 0; i < arrayWords.length; i += 1) {
+      this.items[i].classList.remove('activeItem');
       this.items[i].dataset.current = arrayWords[i].current;
       this.items[i].querySelector('.word').innerHTML = arrayWords[i].word;
       this.items[i].querySelector('.transcription').innerHTML = arrayWords[i].transcription;
@@ -294,6 +309,25 @@ export default class Game {
     buttonsContainer.append(buttonResult);
 
     return buttonsContainer;
+  }
+
+  searchNumberGroupByActivePoint() {
+    let resIndex = -1;
+    this.game.querySelectorAll('.point').forEach((point, index) => {
+      if (point.classList.contains('activePoint')) {
+        resIndex = index;
+      }
+    });
+    return resIndex;
+  }
+
+  async newGame() {
+    this.spinnerOn();
+    this.activeArray = await this.getRandomWords(this.searchNumberGroupByActivePoint());
+    this.spinnerOff();
+    this.updateItems(this.activeArray);
+    this.resetGameContainer();
+    this.stopRecognition();
   }
 
   hiddenGame() {

@@ -17,7 +17,7 @@ export default class App {
     this.game = new Game(spinnerOn, spinnerOff,
       this.transitionGameToResults.bind(this), App.getRandomWords, App.getRandomArbitrary);
     this.results = new Results(this.game.clickOnButtonRestart.bind(this.game),
-      this.transitionResultsToGame.bind(this));
+      this.game.newGame.bind(this.game), this.transitionResultsToGame.bind(this));
     this.group = 0;
   }
 

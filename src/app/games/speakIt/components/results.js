@@ -1,6 +1,7 @@
 export default class Results {
-  constructor(clickOnButtonRestart, transitionResultsToGame) {
+  constructor(clickOnButtonRestart, newGame, transitionResultsToGame) {
     this.clickOnButtonRestart = clickOnButtonRestart;
+    this.newGame = newGame;
     this.transitionResultsToGame = transitionResultsToGame;
     this.src = 'https://raw.githubusercontent.com/irinainina/rslang/rslang-data/data/';
   }
@@ -103,6 +104,7 @@ export default class Results {
   }
 
   updateResultsWord(arrayWords) {
+    this.activeArray = arrayWords;
     let countErrors = 0;
     let countSucces = 0;
     this.succesItem.innerHTML = '';
@@ -166,26 +168,26 @@ export default class Results {
       if (event.target.parentNode.classList.contains('item')) {
         this.wordActive = event.target.parentNode.querySelector('.word').textContent;
         this.translationActive = event.target.parentNode.querySelector('.translation').textContent;
-        Results.getActiveItem(event.target.parentNode);
+        this.getActiveItem(event.target.parentNode);
         return true;
       }
       if (event.target.parentNode.parentNode.parentNode.classList.contains('item')) {
         this.wordActive = event.target.parentNode.parentNode.parentNode.querySelector('.word').textContent;
         this.translationActive = event.target.parentNode.parentNode.parentNode.querySelector('.translation').textContent;
-        Results.getActiveItem(event.target.parentNode.parentNode.parentNode);
+        this.getActiveItem(event.target.parentNode.parentNode.parentNode);
         return true;
       }
       if (event.target.classList.contains('item')) {
         this.wordActive = event.target.querySelector('.word').textContent;
-        Results.getActiveItem(event.target);
+        this.getActiveItem(event.target);
         return true;
       }
     }
     return false;
   }
 
-  static getActiveItem(target) {
-    const items = document.querySelectorAll('.item');
+  getActiveItem(target) {
+    const items = this.results.querySelectorAll('.item');
     for (let i = 0; i < items.length; i += 1) {
       items[i].classList.remove('activeItem');
     }
@@ -221,7 +223,7 @@ export default class Results {
 
   clickOnButtonNewGame() {
     this.transitionResultsToGame();
-    this.clickOnButtonRestart();
+    this.newGame();
   }
 
   hiddenResults() {

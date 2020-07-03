@@ -25,7 +25,7 @@ body {
   @include game-speakit;
   @include intro-speakit;
   @include results-speakit;
-  
+
   .btns {
     display: flex;
   }
@@ -46,13 +46,13 @@ body {
   }
 
   .activeBtn {
-    background: #009179;
+    background: rgb(1, 119, 1);
     color: $white_color;
     transition: .15s;
   }
 
   .activeBtn:hover {
-    background: #009179;
+    background: #1ab429;
     color: $body_color;
     transition: .15s;
   }
