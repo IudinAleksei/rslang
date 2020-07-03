@@ -1,7 +1,9 @@
 import createLayout from './createLayout';
 import createAudio from './createAudio';
 import getWordArr from './wordList';
-import { wordListlistener, buttonListener, audioIconListener } from '../controls/listeners';
+import {
+  wordListlistener, buttonListener, audioIconListener, keyboardListener,
+} from '../controls/listeners';
 import { createSpeakIcon, createImage, createTrueWord } from './createAssets';
 
 export default async function startAudiochallengeGame() {
@@ -14,4 +16,5 @@ export default async function startAudiochallengeGame() {
   audioIconListener();
   wordListlistener();
   buttonListener();
+  keyboardListener();
 }

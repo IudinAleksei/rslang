@@ -40,6 +40,7 @@ export default async function getWordArr() {
     const li = document.createElement('li');
     li.classList.add('word-list__item');
     li.innerText = sliceArr[i];
+    li.setAttribute('data-key', i + 1);
 
     if (sliceArr[i] === wordTranslate) {
       li.setAttribute('data-word', word);

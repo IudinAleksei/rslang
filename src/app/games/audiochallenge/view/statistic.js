@@ -1,4 +1,3 @@
-/* eslint-disable no-restricted-syntax */
 export default function createStatistic(obj) {
   const { right, mistakes, dontKnow } = obj;
 
@@ -37,24 +36,28 @@ export default function createStatistic(obj) {
   const dontKnowList = document.createElement('ul');
   dontKnowList.classList.add('dont-know-list');
 
-  for (const key in obj) {
-    if (obj[key] === true) {
+  const objKey = Object.keys(obj);
+
+  objKey.map((el) => {
+    if (obj[el] === true) {
       const guessedListItem = document.createElement('li');
       guessedListItem.classList.add('guessed-list__item');
-      guessedListItem.textContent = key;
+      guessedListItem.textContent = el;
       guessedList.append(guessedListItem);
-    } else if (obj[key] === false) {
+    } else if (obj[el] === false) {
       const mistakesListItem = document.createElement('li');
       mistakesListItem.classList.add('mistakes-list__item');
-      mistakesListItem.textContent = key;
+      mistakesListItem.textContent = el;
       mistakesList.append(mistakesListItem);
-    } else if (obj[key] === 'dontKnow') {
+    } else if (obj[el] === 'dontKnow') {
       const dontKnowListItem = document.createElement('li');
       dontKnowListItem.classList.add('dont-know-list__item');
-      dontKnowListItem.textContent = key;
+      dontKnowListItem.textContent = el;
       dontKnowList.append(dontKnowListItem);
     }
-  }
+
+    return el;
+  });
 
   guessed.append(guessedTitle, guessedList);
   mistake.append(mistakesTitle, mistakesList);
@@ -68,11 +71,11 @@ export default function createStatistic(obj) {
   buttonWrapper.classList.add('button__wrapper');
 
   const againButton = document.createElement('button');
-  againButton.classList.add('button-again');
+  againButton.classList.add('button', 'button-again');
   againButton.textContent = 'Play again';
 
   const mainPageButton = document.createElement('button');
-  mainPageButton.classList.add('button-main-page');
+  mainPageButton.classList.add('button', 'button-main-page');
   mainPageButton.textContent = 'Main page';
 
   buttonWrapper.append(againButton, mainPageButton);

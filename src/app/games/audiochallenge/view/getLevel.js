@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-
 export default function getLevel() {
   let levelValue = 0;
 

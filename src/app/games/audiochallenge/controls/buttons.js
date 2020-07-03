@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import createAudio from '../view/createAudio';
 import getWordArr from '../view/wordList';
 import { createImage, createTrueWord } from '../view/createAssets';
@@ -28,14 +29,6 @@ export async function nextWord() {
 function clickButtons() {
   const button = document.querySelector('.button');
 
-  document.querySelector('.word-list').removeEventListener('click', wordListener);
-
-  const audioTranslate = document.querySelector('.word-audio').dataset.translate;
-  const trueWord = document.querySelector('.true-word');
-  const speakIcon = document.querySelector('.speak-icon');
-  const image = document.querySelector('.audiochallenge-image');
-  const word = trueWord.textContent;
-
   if (button.classList.contains('button-next')) {
     document.querySelector('.word-list').innerHTML = '';
 
@@ -55,6 +48,13 @@ function clickButtons() {
       nextWord();
     }
   } else {
+    document.querySelector('.word-list').removeEventListener('click', wordListener);
+    const audioTranslate = document.querySelector('.word-audio').dataset.translate;
+    const trueWord = document.querySelector('.true-word');
+    const speakIcon = document.querySelector('.speak-icon');
+    const image = document.querySelector('.audiochallenge-image');
+    const word = trueWord.textContent;
+
     document.querySelectorAll('.word-list__item').forEach((el) => {
       if (el.textContent !== audioTranslate) {
         el.classList.add('wrong');
@@ -76,7 +76,15 @@ function clickButtons() {
   }
 }
 
+function keybordEnterKey(event) {
+  if (event.key === 'Enter') {
+    clickButtons();
+  }
+}
+
 export function buttonListener() {
   const button = document.querySelector('.button');
+  const body = document.querySelector('body');
   button.addEventListener('click', clickButtons);
+  body.addEventListener('keydown', keybordEnterKey);
 }
