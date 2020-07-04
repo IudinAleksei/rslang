@@ -25,4 +25,5 @@ export const ELEMENTS_CLASSES = Object.freeze({
   main: 'main',
   hideMain: 'main_hidden',
   mainContainer: 'main-container',
+  dictionary: 'dictionary',
 });
