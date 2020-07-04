@@ -4,7 +4,7 @@
 
 .main__background-about-us {
   @include position($position: fixed);
-  @include background(url('../../../../assets/img/about-us/background.jpg'), $background-repeat: no-repeat);
+  @include background(url('../../../../assets/img/rs-lang.jpg'), $background-repeat: no-repeat);
 
 }
 .main__about-us {
