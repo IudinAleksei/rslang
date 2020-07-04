@@ -11,7 +11,6 @@ export default function renderStartPage() {
             <label class="sprint-game__range-value__level sprint-game__slider-value" for="level-slider" id="range-value-level">1</label>
           </div>
 </div>
-<p>The game will start immediately after pressing start</p>
 <button class="sprint-game__start-button">Start</button>
 <div class="sprint-game__start-page__counter">3</div>
 </div>`;
@@ -51,5 +50,6 @@ export function renderGame() {
       <button class="sprint-game__wrong">Wrong</button>
       <button class="sprint-game__correct">Correct</button>
     </div>
-  </div>`;
+  </div>
+  <div class="sprint-game__statistic-block hidden"></div>`;
 }

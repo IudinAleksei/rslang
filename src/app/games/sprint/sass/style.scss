@@ -26,6 +26,7 @@
     .sprint-game__start-button {
         @include button($color_text: $white_color);
         position: relative;
+        margin-top: 40px;
     }
 }
 
@@ -95,7 +96,6 @@
     }
 }
 
-
   .sprint-game__start-page.none {
     display: none;
   }
@@ -104,6 +104,10 @@
   width: 100vw;
   min-height: calc(100vh - 80px);
 };
+
+.card-container.hidden {
+    display: none;
+}
 
 .card-container {
     max-width: 484px;
@@ -357,8 +361,45 @@
     @include button($color_text: $white_color);
 }
 
+.sprint-game__statistic-block {
+    max-width: 484px;
+    margin: 100px auto 0;
+    border-radius: 8px;
+    border: 1px solid #fff;
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 20px;
+}
+
+.sprint-game__statistic-info__answers {
+    margin: auto;
+}
+
+.sprint-game__statistic-block.hidden {
+    display: none;
+}
+
+.sprint-game__statistic-info {
+    font-size: 3rem;
+    font-weight: 400;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 2;
+    letter-spacing: normal;
+    text-align: center;
+    color: #fff;
+    font-family: "Open Sans", sans-serif;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.play-again-btn {
+    position: relative;
+    @include button($color_text: $white_color);
+}
+
 @media screen and (max-width: $tablet_sreen) {
-    .card-container {
+    .card-container, .sprint-game__statistic-block {
         margin: 50px 20px;
     }
 }

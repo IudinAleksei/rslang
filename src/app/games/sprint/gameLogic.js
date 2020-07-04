@@ -4,6 +4,7 @@
 import { getWords } from '../../common/network/backendWords/backendWords';
 import getMedia from '../../common/utils/githubMedia';
 import getRandomInteger from '../../common/utils/randomInteger';
+import renderStartPage from './view/view';
 
 export default async function sprintGamePageHandling(level) {
   const body = document.querySelector('body');
@@ -19,6 +20,8 @@ export default async function sprintGamePageHandling(level) {
   const incorrectButton = document.querySelector('.sprint-game__wrong');
   const extraPoints = document.querySelector('.extra-points');
   const group = level;
+  const statisticBlock = document.querySelector('.sprint-game__statistic-block');
+  const cardContainer = document.querySelector('.card-container');
   let page = getRandomInteger(1, 22);
 
   body.className = 'body__spring-game-page';
@@ -29,6 +32,8 @@ export default async function sprintGamePageHandling(level) {
     correctAnswers: 0,
     words: [],
     currentWord: {},
+    correctAnswersStatistic: 0,
+    incorrectAnswersStatistic: 0,
   };
 
   function shuffle(array) {
@@ -145,15 +150,12 @@ export default async function sprintGamePageHandling(level) {
 
   async function loadNewWords() {
     const words = await getMixedArrayOfWords();
-    console.log(words);
     gameStates.words.push(...words);
   }
 
   function incrementCurrentWord() {
     const shiftedWord = gameStates.words.shift();
-    console.log(`shiftedWord >>>${shiftedWord}`);
     gameStates.currentWord = shiftedWord;
-    console.log(`gameStates.currentWord >>>${gameStates.currentWord}`);
   }
 
   async function setCardData() {
@@ -162,11 +164,9 @@ export default async function sprintGamePageHandling(level) {
   }
 
   async function nextWord() {
-    console.log('зашла в nextWord()');
     if (gameStates.words.length === 0) {
       await loadNewWords();
     } else if (gameStates.words.length === 3) {
-      console.log('осталось меньше 3-х слов');
       page += 1;
       await loadNewWords();
     }
@@ -175,34 +175,39 @@ export default async function sprintGamePageHandling(level) {
   }
 
   function onSoundClick() {
-    console.log('click on sound');
     const pathToMedia = getMedia(gameStates.currentWord.audio);
     wordSound.src = pathToMedia;
     playAudio(pathToMedia);
   }
 
   function onCorrectButtonClick() {
-    console.log('click on correct');
     if (gameStates.currentWord.isAnswerCorrect === true) {
       incrementCorrectAnswer();
       playAudio('../../../assets/audio/sprintGame/correct.mp3');
+      gameStates.correctAnswersStatistic++;
     } else {
       resetCorrectAnswers();
       playAudio('../../../assets/audio/sprintGame/failure.mp3');
+      gameStates.incorrectAnswersStatistic++;
     }
     nextWord();
   }
 
   function onIncorrectButtonClick() {
-    console.log('click on INcorrect');
     if (gameStates.currentWord.isAnswerCorrect === false) {
       incrementCorrectAnswer();
+      gameStates.correctAnswersStatistic++;
       playAudio('../../../assets/audio/sprintGame/correct.mp3');
     } else {
       resetCorrectAnswers();
       playAudio('../../../assets/audio/sprintGame/failure.mp3');
+      gameStates.incorrectAnswersStatistic++;
     }
     nextWord();
+  }
+
+  function onPlayAgain() {
+    renderStartPage();
   }
 
   function addEventListeners() {
@@ -210,13 +215,26 @@ export default async function sprintGamePageHandling(level) {
     correctButton.addEventListener('click', onCorrectButtonClick);
     incorrectButton.addEventListener('click', onIncorrectButtonClick);
   }
+
+  function addStatisticModal() {
+    statisticBlock.innerHTML = `<div class="sprint-game__statistic-info">
+    <p class="sprint-game__statistic-info__answers">You got ${gameStates.correctAnswersStatistic} correct answers out of 
+    ${gameStates.correctAnswersStatistic + gameStates.incorrectAnswersStatistic}!</p>
+    <p class="sprint-game__statistic-info__points">${points.innerText} points!</p>
+    <button class="play-again-btn">Play Again</button>
+    </div>`;
+    statisticBlock.classList.remove('hidden');
+  }
+
   let seconds = 60;
   setInterval(() => {
     seconds--;
     if (seconds > 0) {
       counter.innerHTML = seconds;
     } else if (seconds === 0) {
-      alert('finish');
+      cardContainer.classList.add('hidden');
+      addStatisticModal();
+      document.querySelector('.play-again-btn').addEventListener('click', onPlayAgain);
     }
   }, 1000);
 
