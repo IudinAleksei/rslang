@@ -24,4 +24,5 @@ export const ELEMENTS_CLASSES = Object.freeze({
   hideHeaderContainer: 'header-container_hidden',
   main: 'main',
   hideMain: 'main_hidden',
+  mainContainer: 'main-container',
 });

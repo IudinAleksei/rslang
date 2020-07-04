@@ -1,9 +1,11 @@
 import menuHandlers from './menuHandlers';
 import renderSettings from '../../main/settings/index';
-import { hideHeader, hideMain, clearBodyClasses } from '../index';
+import {
+  hideHeader, hideMain, clearBodyClasses, regenerateMainContainer,
+} from '../index';
 
 const CURRENT_STATE = {
-  page: '',
+  page: 'renderSettings',
 };
 
 function menuClickHandler(loginResponse) {
@@ -18,6 +20,7 @@ function menuClickHandler(loginResponse) {
         hideMain(true);
         document.body.addEventListener('transitionend', () => {
           clearBodyClasses();
+          regenerateMainContainer();
           menuHandlers[functionName](loginResponse);
           CURRENT_STATE.page = functionName;
           hideMain(false);
@@ -33,6 +36,7 @@ const startMain = (loginResponse) => {
   hideMain(true);
   document.body.addEventListener('transitionend', () => {
     clearBodyClasses();
+    regenerateMainContainer();
     hideMain(false);
     hideHeader(false);
     renderSettings();

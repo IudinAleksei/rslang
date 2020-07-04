@@ -19,4 +19,4 @@ export { setLocalData, getLocalData, getAndInitLocalData } from './utils/localSt
 
 export { hideHeader, hideMain } from './utils/hideDomElements';
 
-export { clearBodyClasses } from './utils/domClasses';
+export { clearBodyClasses, regenerateMainContainer } from './utils/domClasses';
