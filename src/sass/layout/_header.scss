@@ -1,13 +1,22 @@
-.header-container{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 40px;
-    height: 80px;
+.header {
+  height: 80px;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  padding: 0 40px;
+  transition: transform 0.3s ease;
+
+  &_hidden {
+    transform: translateY(-100%);
+  }
 }
 
 @media (max-width: 639px) {
-    .header-container{
-        padding: 0 20px;
-    }
+  .header-container {
+    padding: 0 20px;
+  }
 }
