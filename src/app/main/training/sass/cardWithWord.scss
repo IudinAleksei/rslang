@@ -3,12 +3,7 @@
 
 .main__background-cards {
   background: linear-gradient(90deg, rgba(226,242,231,0.8939950980392157) 0%, rgba(251,216,216,0.6306897759103641) 89%);;
-  border: none;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  @include position($position: fixed);
 }
 .main__wrap-cards {
   display: flex;
@@ -32,7 +27,7 @@
   margin-bottom: 25px;
   position: relative;
   width: 58rem;
-  height: 40rem;
+  height: 48rem;
 }
 .image{
   display: flex;
@@ -111,6 +106,7 @@
 .conrtols-bar{
   display: flex;
   margin-bottom: 25px;
+  z-index: 1;
 }
 .progress {
   background: #a4d5a9;
@@ -118,6 +114,7 @@
   height: 15px;
   width: 400px;
   padding: 3px;
+  z-index: 1;
 }
 .progress:after {
   content: '';
@@ -157,4 +154,5 @@ input:active, input:focus{
 }
 .wrap-buttons__check-word {
   display: flex;
+  z-index: 1;
 }
