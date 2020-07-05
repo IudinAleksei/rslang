@@ -1,0 +1,13 @@
+.main {
+  transition: opacity 0.5s ease-out;
+  opacity: 1;
+
+  &_hidden {
+    opacity: 0;
+  }
+}
+
+.main-container {
+  width: 100% !important;
+  min-height: calc(100vh - 80px) !important;
+}

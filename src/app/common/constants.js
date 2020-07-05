@@ -3,7 +3,12 @@ export const DEFAULT_SESSION_DATA = Object.freeze({
 });
 
 export const DEFAULT_LOCAL_DATA = Object.freeze({
-  state: {},
+  puzzleAutoPlaySound: 'true',
+  puzzleShowImage: 'true',
+  puzzleShowTranslation: 'true',
+  puzzleRepeatPlay: 'true',
+  puzzleLevel: 0,
+  puzzlePage: 0,
 });
 
 export const API_KEYS = Object.freeze({
@@ -12,4 +17,12 @@ export const API_KEYS = Object.freeze({
 
 export const API_REQUEST = Object.freeze({
   yandexTranslation: 'https://translate.yandex.net/api/v1.5/tr.json/translate?',
+});
+
+export const ELEMENTS_CLASSES = Object.freeze({
+  headerContainer: 'header-container',
+  hideHeaderContainer: 'header-container_hidden',
+  main: 'main',
+  hideMain: 'main_hidden',
+  mainContainer: 'main-container',
 });
