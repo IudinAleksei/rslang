@@ -52,3 +52,16 @@ export async function deleteUser(token, userId) {
   });
   return content;
 }
+
+export async function refreshToken(userId, refToken) {
+  const urlWords = `https://afternoon-falls-25894.herokuapp.com/users/${userId}/tokens`;
+  const content = fetchUrl(urlWords, {
+    method: 'GET',
+    withCredentials: true,
+    headers: {
+      Accept: 'application/json',
+      Authorization: `Bearer ${refToken}`,
+    },
+  });
+  return content;
+}
