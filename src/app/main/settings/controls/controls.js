@@ -31,4 +31,57 @@ export default function sliderSettingsPageHandling() {
   inputs.forEach((input) => {
     input.addEventListener('change', checkSelectedCheckboxes);
   });
+
+  document.querySelector('.main-container').addEventListener('change', () => {
+    if (document.getElementById('show-answer').checked) {
+      localStorage.setItem('showAnswer', true);
+    } else {
+      localStorage.setItem('showAnswer', false);
+    }
+    if (document.getElementById('delete-word').checked) {
+      localStorage.setItem('deleteWord', true);
+    } else {
+      localStorage.setItem('deleteWord', false);
+    }
+    if (document.getElementById('hard-word').checked) {
+      localStorage.setItem('hardWord', true);
+    } else {
+      localStorage.setItem('hardWord', false);
+    }
+    if (document.getElementById('transcription').checked) {
+      localStorage.setItem('transcription', true);
+    } else {
+      localStorage.setItem('transcription', false);
+    }
+    if (document.getElementById('example').checked) {
+      localStorage.setItem('example', true);
+    } else {
+      localStorage.setItem('example', false);
+    }
+    if (document.getElementById('translation').checked) {
+      localStorage.setItem('translation', true);
+    } else {
+      localStorage.setItem('translation', false);
+    }
+    if (document.getElementById('sentences-translation').checked) {
+      localStorage.setItem('sentencesTranslation', true);
+    } else {
+      localStorage.setItem('sentencesTranslation', false);
+    }
+    if (document.getElementById('show-picture').checked) {
+      localStorage.setItem('showPicture', true);
+    } else {
+      localStorage.setItem('showPicture', false);
+    }
+    if (document.getElementById('explanation').checked) {
+      localStorage.setItem('explanation', true);
+    } else {
+      localStorage.setItem('explanation', false);
+    }
+    if (document.getElementById('play-audio').checked) {
+      localStorage.setItem('playAudio', true);
+    } else {
+      localStorage.setItem('playAudio', false);
+    }
+  });
 }

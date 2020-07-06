@@ -1,0 +1,158 @@
+@import '../../../../sass/abstract/constants';
+@import '../../../../sass/abstract/mixins';
+
+.main__background-cards {
+  background: linear-gradient(90deg, rgba(226,242,231,0.8939950980392157) 0%, rgba(251,216,216,0.6306897759103641) 89%);;
+  @include position($position: fixed);
+}
+.main__wrap-cards {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.wrap-card {
+  display: flex;
+  justify-content: center;
+}
+.card {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: white;
+  border: 1px solid #1ab429;
+  border-radius: 8px;
+  box-shadow: 0 0 0 1px rgba(255,255,255,.1), 0 11px 12px 0 rgba(14,30,37,.12);
+  padding: 50px 50px;
+  margin-bottom: 25px;
+  position: relative;
+  width: 58rem;
+  height: 48rem;
+}
+.image{
+  display: flex;
+  justify-content: center;
+}
+.image img{
+  box-shadow: 0 0 0 1px rgba(255,255,255,.1), 0 11px 12px 0 rgba(14,30,37,.12);
+  width: 300px;
+  height: 150px;
+}
+.card__word {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 25px;
+}
+.explanation-word, .transcript, .translate-word, .meaning-word, .translate-sentense {
+  font-family: $body_font;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: black;
+  margin-bottom: 25px;
+  text-align: center;
+}
+.translate-word {
+  border: 1px solid #1ab429;
+  border-radius: 8px;
+  padding: 10px;
+}
+.meaning-word, .translate-sentense {
+  margin: 7px;
+}
+.meaning-word span{
+ background-color: #a4d5a9;
+}
+.show-answer, .enter{
+  display: inline-block;
+  font-family: $body_font;
+  border: 1px solid #1ab429;
+  background-color: #1ab429;
+  width: 180px;
+  height: 40px;
+  color: white;
+  box-shadow: 0 0 0 1px rgba(255,255,255,.1), 0 11px 12px 0 rgba(14,30,37,.12);
+  transition-duration: 0.4s;
+  cursor: pointer;
+  font-size: 2rem;
+  text-transform: uppercase;
+  text-align: center;
+  border-radius: 8px;
+  visibility: visible;
+  margin-bottom: 25px;
+  margin-right: 25px;
+}
+.show-answer:hover, .enter:hover {
+  background-color: green;
+}
+.delete-word, .explanation, .play-audio {
+  border: 1px solid #1ab429;
+  background: transparent;
+  width: 50px;
+  height: 50px;
+  box-shadow: 0 0 0 1px rgba(255,255,255,.1), 0 11px 12px 0 rgba(14,30,37,.12);
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 8px;
+  visibility: visible;
+  margin-left: 25px;
+  background-repeat: no-repeat;
+}
+.delete-word:hover, .explanation:hover, .play-audio:hover{
+  background: #1ab429;
+  color: aliceblue;
+}
+.conrtols-bar{
+  display: flex;
+  margin-bottom: 25px;
+  z-index: 1;
+}
+.progress {
+  background: #a4d5a9;
+  border-radius: 13px;
+  height: 15px;
+  width: 400px;
+  padding: 3px;
+  z-index: 1;
+}
+.progress:after {
+  content: '';
+  display: block;
+  background: #1ab429;
+  width: 50%;
+  height: 100%;
+  border-radius: 9px;
+}
+.input {
+  border-radius: 4px;
+  margin-top: 25px;
+  border: 1px solid #b0b6b1;
+  height: 30px;
+  font-size: 2rem;
+  font-family: 'Open Sans', sans-serif;
+  box-shadow: 0 0 0 1px rgba(255,255,255,.1), 0 11px 12px 0 rgba(14,30,37,.12);
+  text-align: center;
+}
+input:active, input:focus{
+  outline: none;
+}
+.div {
+  border: 1px solid #1ab429;
+  width: 60px;
+  height: 90px;
+  background: white;
+  background-image: url(../../../../assets/icons/card/bookmark-plus.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 8px;
+  margin: 0;
+  position: absolute;
+  top: -6%;
+  right: -2%;
+  cursor: pointer;
+}
+.wrap-buttons__check-word {
+  display: flex;
+  z-index: 1;
+}

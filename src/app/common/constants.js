@@ -9,6 +9,16 @@ export const DEFAULT_LOCAL_DATA = Object.freeze({
   puzzleRepeatPlay: 'true',
   puzzleLevel: 0,
   puzzlePage: 0,
+  showAnswer: 'true',
+  deleteWord: 'true',
+  hardWord: 'true',
+  transcription: 'true',
+  example: 'true',
+  translation: 'true',
+  sentencesTranslation: 'true',
+  showPicture: 'true',
+  explanation: 'true',
+  playAudio: 'true',
 });
 
 export const API_KEYS = Object.freeze({
