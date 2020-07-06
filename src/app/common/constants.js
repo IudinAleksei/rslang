@@ -26,4 +26,5 @@ export const ELEMENTS_CLASSES = Object.freeze({
   hideMain: 'main_hidden',
   mainContainer: 'main-container',
   dictionary: 'dictionary',
+  dictionaryBtn: 'dictionary__tab-button',
 });
