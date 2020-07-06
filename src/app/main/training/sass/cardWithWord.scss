@@ -65,21 +65,8 @@
  background-color: #a4d5a9;
 }
 .show-answer, .enter{
-  display: inline-block;
-  font-family: $body_font;
-  border: 1px solid #1ab429;
-  background-color: #1ab429;
-  width: 180px;
-  height: 40px;
+  @include button();
   color: white;
-  box-shadow: 0 0 0 1px rgba(255,255,255,.1), 0 11px 12px 0 rgba(14,30,37,.12);
-  transition-duration: 0.4s;
-  cursor: pointer;
-  font-size: 2rem;
-  text-transform: uppercase;
-  text-align: center;
-  border-radius: 8px;
-  visibility: visible;
   margin-bottom: 25px;
   margin-right: 25px;
 }
