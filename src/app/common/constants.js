@@ -25,4 +25,7 @@ export const ELEMENTS_CLASSES = Object.freeze({
   main: 'main',
   hideMain: 'main_hidden',
   mainContainer: 'main-container',
+  trainingFinalPage: 'training-final-container',
+  hideTrainingFinalPage: 'training-final-container_hidden',
+  trainingFinalMessage: 'training-final-page',
 });
