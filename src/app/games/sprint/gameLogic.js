@@ -1,29 +1,25 @@
-/* eslint-disable prefer-destructuring */
-/* eslint-disable no-param-reassign */
-/* eslint-disable no-plusplus */
 import { getWords } from '../../common/network/backendWords/backendWords';
 import getMedia from '../../common/utils/githubMedia';
 import getRandomInteger from '../../common/utils/randomInteger';
-import renderStartPage, { renderGame } from './view/view';
+import renderStartPage, {
+  renderGame, renderStatisticModal, setCardData, removeCircleClasses,
+} from './view/view';
+import { mixTranslations, playAudio } from './utils/utils';
 
 export async function sprintGamePageHandling(level) {
   const body = document.querySelector('body');
-  const word = document.querySelector('.word');
-  const translation = document.querySelector('.translation');
   const points = document.querySelector('.points');
   const wordSound = document.querySelector('.word-sound');
   const counter = document.querySelector('.counter');
   const soundButton = document.querySelector('.sound-button');
-  const circles = document.querySelectorAll('.circle');
   const birds = document.querySelectorAll('.parrot');
+  const circles = document.querySelectorAll('.circle');
   const correctButton = document.querySelector('.sprint-game__correct');
   const incorrectButton = document.querySelector('.sprint-game__wrong');
   const extraPoints = document.querySelector('.extra-points');
   const group = level;
-  const statisticBlock = document.querySelector('.sprint-game__statistic-block');
   const cardContainer = document.querySelector('.card-container');
   let page = getRandomInteger(1, 22);
-
   body.className = 'body__spring-game-page';
 
   const pointsConfig = [10, 20, 40, 80];
@@ -36,44 +32,6 @@ export async function sprintGamePageHandling(level) {
     incorrectAnswersStatistic: 0,
   };
 
-  function shuffle(array) {
-    let currentIndex = array.length;
-    let temporaryValue;
-    let randomIndex;
-    while (currentIndex !== 0) {
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex -= 1;
-      temporaryValue = array[currentIndex];
-      array[currentIndex] = array[randomIndex];
-      array[randomIndex] = temporaryValue;
-    }
-    return array;
-  }
-
-  async function getMixedArrayOfWords() {
-    const data = await getWords(group, page);
-    for (let i = 0; i < data.length; i++) {
-      data[i].isAnswerCorrect = true;
-    }
-    const numberOfIncorrectWords = getRandomInteger(2, 3);
-    for (let i = 0; i <= numberOfIncorrectWords + 2;) {
-      const first = data[i].wordTranslate;
-      const next = data[i + 1].wordTranslate;
-      const buffer = first;
-      data[i].wordTranslate = next;
-      data[i + 1].wordTranslate = buffer;
-      data[i].isAnswerCorrect = false;
-      data[i + 1].isAnswerCorrect = false;
-      i += 2;
-    }
-    return shuffle(data);
-  }
-
-  function playAudio(src) {
-    const audioElement = new Audio(src);
-    audioElement.play();
-  }
-
   function addPoints(circleNumber, gameLevel) {
     Array.from(circles)[circleNumber].classList.add('green-circle');
     gameStates.currentLevel = pointsConfig[gameLevel];
@@ -81,21 +39,16 @@ export async function sprintGamePageHandling(level) {
     points.innerText = pointsValue;
   }
 
-  function removeCircleClasses(className) {
-    circles.forEach((el) => {
-      el.classList.remove(className);
-    });
-  }
-
   function levelUp(gameLevel, counterOfBirds) {
     gameStates.currentLevel = pointsConfig[gameLevel];
     const pointsValue = Number(points.innerText) + gameStates.currentLevel;
     points.innerText = pointsValue;
     Array.from(birds)[counterOfBirds].classList.add('active-parrot');
+    playAudio('../../../assets/audio/sprintGame/levelUp.mp3');
   }
 
   function maxLevel() {
-    gameStates.currentLevel = pointsConfig[3];
+    [, , , gameStates.currentLevel] = pointsConfig;
     const pointsValue = Number(points.innerText) + gameStates.currentLevel;
     points.innerText = pointsValue;
   }
@@ -149,18 +102,14 @@ export async function sprintGamePageHandling(level) {
   }
 
   async function loadNewWords() {
-    const words = await getMixedArrayOfWords();
-    gameStates.words.push(...words);
+    const words = await getWords(group, page);
+    const mixedWords = mixTranslations(words);
+    gameStates.words.push(...mixedWords);
   }
 
   function incrementCurrentWord() {
     const shiftedWord = gameStates.words.shift();
     gameStates.currentWord = shiftedWord;
-  }
-
-  async function setCardData() {
-    word.innerText = gameStates.currentWord.word;
-    translation.innerText = gameStates.currentWord.wordTranslate;
   }
 
   async function nextWord() {
@@ -171,7 +120,7 @@ export async function sprintGamePageHandling(level) {
       await loadNewWords();
     }
     incrementCurrentWord();
-    setCardData();
+    setCardData(gameStates.currentWord.word, gameStates.currentWord.wordTranslate);
   }
 
   function onSoundClick() {
@@ -184,11 +133,11 @@ export async function sprintGamePageHandling(level) {
     if (gameStates.currentWord.isAnswerCorrect === true) {
       incrementCorrectAnswer();
       playAudio('../../../assets/audio/sprintGame/correct.mp3');
-      gameStates.correctAnswersStatistic++;
+      gameStates.correctAnswersStatistic += 1;
     } else {
       resetCorrectAnswers();
       playAudio('../../../assets/audio/sprintGame/failure.mp3');
-      gameStates.incorrectAnswersStatistic++;
+      gameStates.incorrectAnswersStatistic += 1;
     }
     nextWord();
   }
@@ -196,21 +145,14 @@ export async function sprintGamePageHandling(level) {
   function onIncorrectButtonClick() {
     if (gameStates.currentWord.isAnswerCorrect === false) {
       incrementCorrectAnswer();
-      gameStates.correctAnswersStatistic++;
+      gameStates.correctAnswersStatistic += 1;
       playAudio('../../../assets/audio/sprintGame/correct.mp3');
     } else {
       resetCorrectAnswers();
       playAudio('../../../assets/audio/sprintGame/failure.mp3');
-      gameStates.incorrectAnswersStatistic++;
+      gameStates.incorrectAnswersStatistic += 1;
     }
     nextWord();
-  }
-
-  function onPlayAgain() {
-    // startSprintGame();
-    renderStartPage();
-    // eslint-disable-next-line no-use-before-define
-    addEventListenerForStartPage();
   }
 
   function addEventListeners() {
@@ -219,24 +161,22 @@ export async function sprintGamePageHandling(level) {
     incorrectButton.addEventListener('click', onIncorrectButtonClick);
   }
 
-  function addStatisticModal() {
-    statisticBlock.innerHTML = `<div class="sprint-game__statistic-info">
-    <p class="sprint-game__statistic-info__answers">You got ${gameStates.correctAnswersStatistic} correct answers out of 
-    ${gameStates.correctAnswersStatistic + gameStates.incorrectAnswersStatistic}!</p>
-    <p class="sprint-game__statistic-info__points">${points.innerText} points!</p>
-    <button class="play-again-btn">Play Again</button>
-    </div>`;
-    statisticBlock.classList.remove('hidden');
+  function onPlayAgain() {
+    renderStartPage();
+    // eslint-disable-next-line no-use-before-define
+    addEventListenerForStartPage();
   }
 
   let seconds = 60;
   setInterval(() => {
-    seconds--;
+    seconds -= 1;
     if (seconds > 0) {
       counter.innerHTML = seconds;
     } else if (seconds === 0) {
       cardContainer.classList.add('hidden');
-      addStatisticModal();
+      const correct = gameStates.correctAnswersStatistic;
+      const inCorrect = gameStates.incorrectAnswersStatistic;
+      renderStatisticModal(correct, inCorrect, points.innerText);
       document.querySelector('.play-again-btn').addEventListener('click', onPlayAgain);
     }
   }, 1000);

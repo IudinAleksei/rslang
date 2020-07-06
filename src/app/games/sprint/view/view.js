@@ -7,8 +7,8 @@ export default function renderStartPage() {
             <p class="level">Level of difficulty:</p>
           </div>
           <div class="sprint-game__slider__input">
-            <input class="sprint-game__range-slider__level sprint-game__range-slider" type="range" id="level-slider" name="" value="1" min="1" max="6">
-            <label class="sprint-game__range-value__level sprint-game__slider-value" for="level-slider" id="range-value-level">1</label>
+            <input class="sprint-game__range-slider__level sprint-game__range-slider" type="range" id="level-slider" name="" value="0" min="0" max="5">
+            <label class="sprint-game__range-value__level sprint-game__slider-value" for="level-slider" id="range-value-level">0</label>
           </div>
 </div>
 <button class="sprint-game__start-button">Start</button>
@@ -52,4 +52,29 @@ export function renderGame() {
     </div>
   </div>
   <div class="sprint-game__statistic-block hidden"></div>`;
+}
+
+export function renderStatisticModal(correctAnswersStat, inCorrectAnswersStat, points) {
+  const statisticBlock = document.querySelector('.sprint-game__statistic-block');
+  statisticBlock.innerHTML = `<div class="sprint-game__statistic-info">
+    <p class="sprint-game__statistic-info__answers">You got ${correctAnswersStat} correct answers out of 
+    ${correctAnswersStat + inCorrectAnswersStat}!</p>
+    <p class="sprint-game__statistic-info__points">${points} points!</p>
+    <button class="play-again-btn">Play Again</button>
+    </div>`;
+  statisticBlock.classList.remove('hidden');
+}
+
+export async function setCardData(englishWord, russianWord) {
+  const word = document.querySelector('.word');
+  const translation = document.querySelector('.translation');
+  word.innerText = englishWord;
+  translation.innerText = russianWord;
+}
+
+export function removeCircleClasses(className) {
+  const circles = document.querySelectorAll('.circle');
+  circles.forEach((el) => {
+    el.classList.remove(className);
+  });
 }
