@@ -4,7 +4,7 @@
 /* eslint-disable no-unused-vars */
 import fetchUrl from '../../common/network/backendWords/commonFetch';
 import {
-  loginUser, getAllUserWords, createUserWord, updateUserWord,
+  loginUser, getAllUserWords, createUserWord, updateUserWord, upsertUserSettings, getUserSettings,
 } from '../../common/network/backendWords/backendWords';
 import getMedia from '../../common/utils/githubMedia';
 import showCard from './view/card';
@@ -38,7 +38,7 @@ export function nextWord() {
   playAudio(word.audio)
     .then(() => {
       document.querySelector('.input-background').style.opacity = 0;
-      setTimeout(() => { showCardWord(); }, 1000);
+      setTimeout(() => { showCardWord(arrayNewWords); }, 1000);
     });
 }
 
@@ -61,12 +61,13 @@ const filterUserWord = { $and: [{ 'userWord.difficulty': 'easy', 'userWord.optio
 getAllUserWords(tokens, usersId).then((q) => {
   console.log(q);
 });
-
-export async function showCardWord() {
-  console.log(arrayNewWords);
+upsertUserSettings(tokens, usersId, { optional: getAndInitLocalData() });
+getUserSettings(tokens, usersId).then((q) => console.log(q));
+export async function showCardWord(array) {
+  console.log(array);
   document.querySelector('.write-word').value = '';
-  word = arrayNewWords[0].paginatedResults.shift();
-  console.log(arrayNewWords);
+  word = array[0].paginatedResults.shift();
+  console.log(array);
   console.log(word);
   const reg1 = '(.*?)<b>';
   const reg2 = '</b>(.*?)+';
@@ -106,10 +107,10 @@ async function mainGame(sliderCounterNewWords, sliderCounterCards) {
     sliderCounterCards.textContent - sliderCounterNewWords.textContent, filterUserWord);
   arrayNewWords = await getAllAggregatedWords(tokens, usersId,
     sliderCounterNewWords.textContent, newWord);
-  arrayCommon = arrayNewWords[0].paginatedResults.concat(arrayUserWords[0].paginatedResults);
+  arrayCommon = arrayNewWords[0].paginatedResults.concat(arrayUserWords[0].paginatedResults).sort;
   showCard();
-  showCardWord();
-  console.log(arrayNewWords[0].paginatedResults, arrayUserWords[0].paginatedResults, arrayCommon);
+  showCardWord(arrayNewWords);
+  console.log(arrayNewWords, arrayUserWords, arrayCommon);
 }
 
 export function compareWord() {
