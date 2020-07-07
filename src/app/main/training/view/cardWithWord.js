@@ -1,7 +1,7 @@
 import '../sass/cardWithWord.scss';
 import CREATE_DOM_ELEMENTS from './domElements';
 
-export const CREATE_IMAGE_TOOLTIL = (image) => {
+const CREATE_IMAGE_TOOLTIL = (image) => {
   if (image) {
     const DIV_IMAGE = `<div class="image">
     //                   <img src=${image}>
@@ -22,21 +22,26 @@ export const CREATE_EXPLANATION_TOOLTIL = (text) => {
     document.querySelector('.sentense').insertAdjacentHTML('afterbegin', EXPLANATION_WORD);
   }
 };
-export const CREATE_TRANSLATE_SENTENSE_TOOLTIL = (translate) => {
+const CREATE_TRANSLATE_SENTENSE_TOOLTIL = (translate) => {
   if (translate) {
     const TRANSLATE_SENTENSE = `<p class="translate-sentense">${translate}</p>`;
     document.querySelector('.sentense').insertAdjacentHTML('afterbegin', TRANSLATE_SENTENSE);
   }
 };
-export const CREATE_TRANSLATE_WORD_TOOLTIL = (word) => {
+const CREATE_TRANSLATE_WORD_TOOLTIL = (word) => {
   if (word) {
     const TRANSLATE_WORD = `<p class="translate-word">${word}</p>`;
     document.querySelector('.sentense').insertAdjacentHTML('afterbegin', TRANSLATE_WORD);
   }
 };
 
-const createCardWord = () => {
+const createCardWord = (transcript, explanation, translate, image, word) => {
   CREATE_DOM_ELEMENTS();
+  CREATE_IMAGE_TOOLTIL(image);
+  CREATE_TRANSCRIPT_TOOLTIL(transcript);
+  CREATE_EXPLANATION_TOOLTIL(explanation);
+  CREATE_TRANSLATE_SENTENSE_TOOLTIL(translate);
+  CREATE_TRANSLATE_WORD_TOOLTIL(word);
 };
 
 export default createCardWord;
