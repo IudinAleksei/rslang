@@ -1,7 +1,6 @@
 import CREATE_CONTROLS_BAR_BUTTONS from './conrtolsBarButtons';
 import CREATE_CHECK_WORDS_BUTONS from './checkWordsButtons';
-import CREATE_INPUT from './createInput';
-import SET_INPUT_LENGTH from './createInput';
+import { CREATE_INPUT, SET_INPUT_LENGTH } from './createInput';
 
 const CREATE_DOM_ELEMENTS = () => {
   const BACKGROUND_CARDS = document.createElement('div');
