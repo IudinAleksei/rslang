@@ -8,8 +8,8 @@ export default class Statistics {
   render(arrayWords, arrayRow) {
     this.statistics = document.createElement('div');
     this.statistics.classList.add('table_statistics');
-    this.statistics.append(this.getControls());
-    this.statistics.append(this.getTable(arrayWords, arrayRow));
+    this.statistics.append(this.getTabsContainer(arrayWords, arrayRow));
+    // this.statistics.append(this.getTable(arrayWords, arrayRow));
 
     this.statistics.addEventListener('click', (event) => Statistics.handlerClick(event));
 
@@ -20,6 +20,25 @@ export default class Statistics {
     if (Statistics.isClickOnTheadTable(event)) {
       Statistics.getSortTable(event);
     }
+
+    if (Statistics.isClickOnTabs(event)) {
+      Statistics.clickOnTabs(event);
+    }
+  }
+
+  static isClickOnTabs(event) {
+    return event.target.parentNode.classList.contains('tabs') || event.target.parentNode.parentNode.classList.contains('tabs');
+  }
+
+  static clickOnTabs(event) {
+    const tabPanels = document.querySelectorAll('.tabs-panel');
+    document.querySelector('.tabs li.active').classList.remove('active');
+    document.querySelector('.tabs-panel.active').classList.remove('active');
+    const parentListItem = event.target.parentElement;
+    event.target.parentElement.classList.add('active');
+    const index = [...parentListItem.parentElement.children].indexOf(parentListItem);
+    const panel = [...tabPanels].filter((el) => el.getAttribute('data-index') === index);
+    panel[0].classList.add('active');
   }
 
   static isClickOnTheadTable(event) {
@@ -50,36 +69,42 @@ export default class Statistics {
     }
   }
 
-  getControls() {
-    const controlsContainer = document.createElement('div');
-    controlsContainer.classList.add('controls');
+  getTabsContainer(arrayWords, arrayRow) {
+    const tabsContainer = document.createElement('div');
+    tabsContainer.classList.add('tabs-container');
 
-    // const buttonRestart = document.createElement('button');
-    // buttonRestart.classList.add('controls__repeat-button');
-    // buttonRestart.innerHTML = 'Restart';
-    // controlsContainer.append(buttonRestart);
-
-    // const buttonVoice = document.createElement('button');
-    // buttonVoice.classList.add('controls__reset-button');
-    // buttonVoice.classList.add('user-speach');
-    // buttonVoice.innerHTML = 'Speak please';
-    // controlsContainer.append(buttonVoice);
-
-    const categories = document.createElement('fieldset');
-    categories.classList.add('fieldset');
-    categories.id = 'categories';
-    categories.innerHTML = '<legend>Categories</legend>';
-    this.arrayCategory.forEach((element) => {
-      if (element === 'main') {
-        categories.append(Statistics.getCategory(element, true));
-        console.log('ggg');
-      } else {
-        categories.append(Statistics.getCategory(element, false));
+    this.tabs = document.createElement('ul');
+    this.tabs.classList.add('tabs');
+    tabsContainer.append(this.tabs);
+    this.arrayCategory.forEach((element, index) => {
+      const item = document.createElement('li');
+      if (index === 0) {
+        item.classList.add('active');
       }
+      const page = document.createElement('span');
+      page.innerHTML = element;
+      item.append(page);
+      this.tabs.append(item);
     });
-    controlsContainer.append(categories);
+    tabsContainer.append(this.getTabsContent(arrayWords, arrayRow));
+    return tabsContainer;
+  }
 
-    return controlsContainer;
+  getTabsContent(arrayWords, arrayRow) {
+    const tabsContent = document.createElement('div');
+    tabsContent.classList.add('tabs-content');
+    this.arrayCategory.forEach((element, index) => {
+      const tabsPanel = document.createElement('div');
+      tabsPanel.classList.add('tabs-panel');
+      if (index === 0) {
+        tabsPanel.classList.add('active');
+        tabsPanel.append(this.getTable(arrayWords, arrayRow));
+      }
+      tabsPanel.dataset.index = index;
+      tabsContent.append(tabsPanel);
+    });
+    this.getTable(arrayWords, arrayRow);
+    return tabsContent;
   }
 
   static getCategory(nameCategory, checkedCategory) {

@@ -11,7 +11,7 @@ import {
 
 export default class App {
   constructor() {
-    this.arrayCategory = ['main', 'spekit', 'english puzzle', 'audio challenge', 'savanna', 'sprint'];
+    this.arrayCategory = ['main', 'chart'];
     this.arrayRow = ['word', 'translation', 'isGuess', 'correct answer', 'error answer', '% errors', 'Last date'];
     this.statistics = new Statistics(this.arrayCategory);
     this.group = 0;
