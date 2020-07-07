@@ -1,4 +1,6 @@
 /* eslint-disable no-param-reassign */
+import game from '../../primary/index';
+
 export default function sliderSettingsPageHandling() {
   const sliderNewWords = document.querySelector('.range-slider__words');
   const sliderCounterNewWords = document.querySelector('.range-value__words');
@@ -31,7 +33,7 @@ export default function sliderSettingsPageHandling() {
   inputs.forEach((input) => {
     input.addEventListener('change', checkSelectedCheckboxes);
   });
-
+  playButton.addEventListener('click', () => game(sliderCounterNewWords, sliderCounterCards));
   document.querySelector('.main-container').addEventListener('change', () => {
     if (document.getElementById('show-answer').checked) {
       localStorage.setItem('showAnswer', true);

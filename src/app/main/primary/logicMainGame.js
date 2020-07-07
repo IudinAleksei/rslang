@@ -42,36 +42,31 @@ export function nextWord() {
     });
 }
 
-function trainWordDate() {
-  const date = new Date();
-  const result = `${date.getDate()}.${date.getMonth()}.${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`;
-  return result;
-}
-
-console.log(trainWordDate());
 let word;
 let results;
-let arrayResult;
+let arrayNewWords;
+let arrayUserWords;
+let arrayCommon;
 const email = 'boronenkov_s@mail.ru';
 const password = 'Boss1985+';
 const tokens = localStorage.getItem('token');
 const usersId = localStorage.getItem('userId');
-const filter = {
+const newWord = {
   $or: [
-    { 'userWord.difficulty': 'easy' },
     { userWord: null },
   ],
 };
+const filterUserWord = { $and: [{ 'userWord.difficulty': 'easy', 'userWord.optional.repeat': true }] };
 
 getAllUserWords(tokens, usersId).then((q) => {
   console.log(q);
 });
 
 export async function showCardWord() {
-  console.log(arrayResult);
+  console.log(arrayNewWords);
   document.querySelector('.write-word').value = '';
-  word = arrayResult[0].paginatedResults.shift();
-  console.log(arrayResult);
+  word = arrayNewWords[0].paginatedResults.shift();
+  console.log(arrayNewWords);
   console.log(word);
   const reg1 = '(.*?)<b>';
   const reg2 = '</b>(.*?)+';
@@ -99,30 +94,35 @@ export async function showCardWord() {
   console.log(document.querySelector('.input-background').offsetWidth);
 }
 
-async function mainGame() {
+async function mainGame(sliderCounterNewWords, sliderCounterCards) {
+  console.log(sliderCounterCards.textContent - sliderCounterNewWords.textContent);
   await getAndInitLocalData();
   await loginUser({ email: `${email}`, password: `${password}` }).then((q) => {
     console.log(q);
     localStorage.setItem('token', q.token);
     localStorage.setItem('userId', q.userId);
   });
-  arrayResult = await getAllAggregatedWords(tokens, usersId, 20, filter);
+  arrayUserWords = await getAllAggregatedWords(tokens, usersId,
+    sliderCounterCards.textContent - sliderCounterNewWords.textContent, filterUserWord);
+  arrayNewWords = await getAllAggregatedWords(tokens, usersId,
+    sliderCounterNewWords.textContent, newWord);
+  arrayCommon = arrayNewWords[0].paginatedResults.concat(arrayUserWords[0].paginatedResults);
   showCard();
   showCardWord();
+  console.log(arrayNewWords[0].paginatedResults, arrayUserWords[0].paginatedResults, arrayCommon);
 }
 
 export function compareWord() {
   results = document.querySelector('.write-word').value;
-  console.log(results);
   if (results.toLowerCase() === word.word.toLowerCase()) {
     if (word.userWord) {
       updateUserWord(tokens, usersId, word._id, {
         difficulty: 'easy',
         optional: {
-          repeat: true,
-          date: trainWordDate(),
+          repeat: ((word.userWord.optional.counter < 6)),
+          date: Date.now(),
           delete: true,
-          counter: 0,
+          counter: word.userWord.optional.counter += 1,
         },
       });
     } else {
@@ -130,7 +130,7 @@ export function compareWord() {
         difficulty: 'easy',
         optional: {
           repeat: true,
-          date: trainWordDate(),
+          date: Date.now(),
           delete: true,
           counter: 0,
         },
@@ -156,10 +156,27 @@ export function compareWord() {
         document.querySelector(`[index='${i}']`).style.color = 'green';
       }
     }
-    createUserWord(tokens, usersId, word._id, {
-      difficulty: 'strong',
-      optional: { repeat: true },
-    });
+    if (word.userWord) {
+      updateUserWord(tokens, usersId, word._id, {
+        difficulty: 'easy',
+        optional: {
+          repeat: ((word.userWord.optional.counter < 6)),
+          date: Date.now(),
+          delete: true,
+          counter: word.userWord.optional.counter += 1,
+        },
+      });
+    } else {
+      createUserWord(tokens, usersId, word._id, {
+        difficulty: 'easy',
+        optional: {
+          repeat: true,
+          date: Date.now(),
+          delete: true,
+          counter: 0,
+        },
+      });
+    }
     playAudio(word.audio);
   }
 }
