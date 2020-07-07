@@ -1,3 +1,4 @@
+import '../sass/main.scss';
 import startGame from './startGame';
 
 export default function renderSavannahStartPage() {
@@ -7,8 +8,9 @@ export default function renderSavannahStartPage() {
   const wrapper = document.createElement('div');
   wrapper.setAttribute('id', 'savannah');
 
-  const title = document.createElement('div');
+  const title = document.createElement('h1');
   title.classList.add('savannah__title');
+  title.textContent = 'Savannah';
 
   const subtitle = document.createElement('p');
   subtitle.classList.add('savannah-subtitle');

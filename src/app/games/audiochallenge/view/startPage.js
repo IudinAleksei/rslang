@@ -1,3 +1,4 @@
+import '../sass/main.scss';
 import startAudiochallengeGame from './startGame';
 
 export default function renderAudiochallengeStartPage() {

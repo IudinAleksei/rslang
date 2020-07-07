@@ -7,19 +7,38 @@ export default class Game {
   constructor(randomArray) {
     this.randomArray = randomArray;
     this.wordsArr = [];
-    this.level = 1;
+    this.level = 0;
     this.life = 5;
     this.statObj = {};
   }
 
   renderLayout() {
+    this.trueWordContainer = document.createElement('div');
+    this.trueWordContainer.classList.add('savannah__true-word__container');
+
     this.trueWord = document.createElement('div');
-    this.trueWord.classList.add('true-word');
+    this.trueWord.classList.add('savannah__true-word');
 
     this.list = document.createElement('div');
     this.list.classList.add('savannah-list');
 
-    document.getElementById('savannah').append(this.trueWord, this.list);
+    this.trueWordContainer.append(this.trueWord);
+
+    this.heartWrapper = document.createElement('div');
+    this.heartWrapper.classList.add('heart__wrapper');
+
+    this.heartList = document.createElement('ul');
+    this.heartList.classList.add('heart__list');
+
+    for (let i = 0; i < 5; i += 1) {
+      this.heartItem = document.createElement('li');
+      this.heartItem.classList.add('heart__list-item', `${i}`);
+      this.heartList.append(this.heartItem);
+    }
+
+    this.heartWrapper.append(this.heartList);
+
+    document.getElementById('savannah').append(this.trueWordContainer, this.heartWrapper, this.list);
 
     this.list.addEventListener('click', (event) => this.clickHandler(event));
 
@@ -75,6 +94,11 @@ export default class Game {
 
   async createWordList() {
     this.wordArr = await this.getAlternativeWords();
+    this.trueWord.innerHTML = '';
+
+    this.ol = document.createElement('ol');
+    this.ol.classList.add('word-list');
+    this.ol.innerHTML = '';
 
     for (let i = 0; i < this.wordArr.length; i += 1) {
       const li = document.createElement('li');
@@ -84,8 +108,46 @@ export default class Game {
       if (li.textContent === Object.values(this.wordsArr[0])[0]) {
         li.setAttribute('data-word', Object.values(this.wordsArr[0])[0]);
       }
-      this.list.append(li);
+      this.ol.append(li);
     }
+
+    this.list.append(this.ol);
+    this.trueWord.append(Object.keys(this.wordsArr[0]));
+  }
+
+  animationWord() {
+    this.start = Date.now();
+
+    function draw(timePassed) {
+      document.querySelector('.savannah__true-word').style.transform = `translate(-50%, ${timePassed / 100}vh)`;
+      document.querySelector('.savannah__true-word').classList.add('savannah__true-word_fall');
+    }
+
+    this.timer = setInterval(() => {
+      const timePassed = Date.now() - this.start;
+
+      if (timePassed >= 5000) {
+        clearInterval(this.timer);
+
+        this.level += 1;
+        this.life -= 1;
+        this.statObj[Object.values(this.wordsArr[0])[0]] = false;
+        this.wordsArr.splice(0, 1);
+        this.list.innerHTML = '';
+        document.querySelector('.savannah__true-word').classList.remove('savannah__true-word_fall');
+        document.querySelector('.heart__list-item').remove();
+
+        if (this.level === this.wordsArr.length || this.life === 0) {
+          renderStatistic(this.statObj);
+        } else {
+          this.play();
+        }
+
+        return;
+      }
+
+      draw(timePassed);
+    }, 10);
   }
 
   clickHandler(event) {
@@ -96,28 +158,34 @@ export default class Game {
       this.level += 1;
       this.life -= 1;
       this.statObj[Object.values(this.wordsArr[0])[0]] = false;
+      document.querySelector('.heart__list-item').remove();
     }
 
+    clearInterval(this.timer);
     this.wordsArr.splice(0, 1);
     this.list.innerHTML = '';
     this.play();
   }
 
   async play() {
-    if (this.level === 20 || this.life === 0) {
-      renderStatistic(this.statObj);
-    }
-
     if (!this.wordsArr.length) {
       this.getWordsObj();
     }
 
-    this.createWordList();
+    await this.createWordList();
+
+    if (this.level === this.wordsArr.length || this.life === 0) {
+      clearInterval(this.timer);
+      renderStatistic(this.statObj);
+    }
+
+    this.animationWord();
 
     console.log(Object.values(this.wordsArr[0])[0]);
     console.log(Object.keys(this.wordsArr[0])[0]);
     console.log(this.level);
     console.log(this.life);
     console.log(this.statObj);
+    console.log(this.wordsArr);
   }
 }

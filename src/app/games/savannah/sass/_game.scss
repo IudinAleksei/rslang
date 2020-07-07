@@ -1,0 +1,69 @@
+.savannah-list {
+  z-index: 1;
+  align-self: stretch;
+}
+
+.word-list {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  padding: 0;
+  color: #162114;
+  font-size: 2rem;
+
+  & li {
+    list-style-position: inside;
+    cursor: pointer;
+  }
+}
+
+.savannah__true-word__container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.savannah__true-word {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%);
+  transition: letter-spacing 0.5s linear;
+  font-size: 2rem;
+  letter-spacing: 50px;
+}
+
+.savannah__true-word_fall {
+  letter-spacing: normal;
+}
+
+.heart__wrapper {
+  position: absolute;
+  top: 8vh;
+  right: 5vw;
+  width: 150px;
+}
+
+.heart__list {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  padding: 0;
+  list-style-type: none;
+}
+
+.heart__list-item {
+  width: 15px;
+  height: 10px;
+  margin-left: 10px;
+}
+
+.heart__list-item::before {
+  content: url('/assets/icons/savannah/heart.svg');
+  position: absolute;
+  width: 15px;
+  height: 10px;
+}
