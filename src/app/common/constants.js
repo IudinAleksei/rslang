@@ -28,4 +28,11 @@ export const ELEMENTS_CLASSES = Object.freeze({
   trainingFinalPage: 'training-final-container',
   hideTrainingFinalPage: 'training-final-container_hidden',
   trainingFinalMessage: 'training-final-page',
+  trainingFinalTitle: 'training-final-page__title',
+  trainingFinalText: 'training-final-page__text',
+});
+
+export const MESSAGES = Object.freeze({
+  trainingFinalTitle: 'RSLang',
+  trainingFinalText: 'Final text',
 });

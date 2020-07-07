@@ -1,3 +1,6 @@
+@import "../../../../sass/abstract/constants";
+@import "../../../../sass/abstract/mixins";
+
 .training-final-container {
   display: flex;
   position: absolute;
@@ -10,7 +13,7 @@
   justify-content: center;
   transition: opacity 0.3s ease;
   opacity: 1;
-  background-color: rgba(100, 100, 100, 0.6);
+  background-color: rgba(100, 100, 100, 0.5);
 
   &_hidden {
     opacity: 0;
@@ -18,12 +21,37 @@
 }
 
 .training-final-page {
+  @include flex();
+
+  justify-content: flex-start;
   width: 50%;
   height: 50%;
   border-radius: 10px;
-  background-color: lightgrey;
+  background: $background_liner_gradient;
+  box-shadow: $button_shadow;
 }
 
-body {
-  background-color: red;
+.training-final-page__title {
+  @include headingText(4rem);
+
+  margin: 0;
+  padding: 10px;
+  word-break: break-all;
+}
+
+.training-final-page__text {
+  @include bodyText();
+
+  margin: 0;
+  padding: 10px;
+  overflow-y: auto;
+  font-size: 2rem;
+  word-break: break-all;
+}
+
+@media (max-width: $phone_screen) {
+  .training-final-page {
+    width: calc(100% - 20px);
+    height: 50%;
+  }
 }
