@@ -1,6 +1,6 @@
 const CREATE_CONTROLS_BAR_BUTTONS = (wrap) => {
   const ELEMENTS_BUTTON = [{
-    сlass: 'explanation',
+    class: 'explanation',
     src: './assets/icons/card/chat-quote.svg',
   },
   {

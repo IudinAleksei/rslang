@@ -68,6 +68,8 @@
   @include button();
   color: white;
   margin-bottom: 25px;
+}
+.show-answer {
   margin-right: 25px;
 }
 .show-answer:hover, .enter:hover {
@@ -96,6 +98,7 @@
   z-index: 1;
 }
 .progress {
+  position: relative;
   background: #a4d5a9;
   border-radius: 13px;
   height: 15px;
@@ -108,8 +111,11 @@
   display: block;
   background: #1ab429;
   width: 50%;
-  height: 100%;
+  height: 12px;
   border-radius: 9px;
+  position: absolute;
+  top: 4%;
+  left: 0%;
 }
 .input {
   border-radius: 4px;
@@ -142,4 +148,108 @@ input:active, input:focus{
 .wrap-buttons__check-word {
   display: flex;
   z-index: 1;
+}
+
+@media screen and (max-width: $tablet_sreen) {
+  .card {
+    width: 53rem;
+    height: 53rem;
+  }
+  .delete-word, .explanation, .play-audio {
+    width: 60px;
+    height: 60px;
+    margin-left: 0;
+  }
+  .delete-word {
+    margin: 0 15px 0 15px;
+  }
+}
+@media screen and (max-width: 530px) {
+  .card {
+    width: 48rem;
+    height: 53rem;
+  }
+  .delete-word, .explanation, .play-audio {
+    width: 60px;
+    height: 60px;
+    margin-left: 0;
+  }
+  .delete-word {
+    margin: 0 15px 0 15px;
+  }
+}
+@media screen and (max-width: 470px) {
+  .card {
+    width: 43rem;
+    height: 53rem;
+  }
+  .delete-word, .explanation, .play-audio {
+    width: 60px;
+    height: 60px;
+    margin-left: 0;
+  }
+  .delete-word {
+    margin: 0 15px 0 15px;
+  }
+}
+@media screen and (max-width: $phone_screen) {
+  .card {
+    width: 38rem;
+    height: 53rem;
+  }
+  .delete-word, .explanation, .play-audio {
+    width: 60px;
+    height: 60px;
+    margin-left: 0;
+  }
+  .delete-word {
+    margin: 0 15px 0 15px;
+  }
+  .progress {
+    width: 30rem;
+  }
+}
+@media screen and (max-width: 380px) {
+  .card {
+    width: 33rem;
+    height: 53rem;
+  }
+  .wrap-buttons__check-word {
+    flex-direction: column;
+  }
+  .show-answer, .enter {
+    margin-right: 0;
+    width: 33rem;
+    height: 5rem;
+  }
+  .progress {
+    width: 24rem;
+  }
+}
+@media screen and (max-width: 320px) {
+  .wrap-buttons__check-word {
+    flex-direction: column;
+  }
+  .delete-word, .explanation, .play-audio {
+    width: 60px;
+    height: 60px;
+    margin-left: 0;
+  }
+  .delete-word {
+    margin: 0 15px 0 15px;
+  }
+  .card {
+    width: 30rem;
+    height: 40rem;
+  }
+  .show-answer {
+    margin-right: 0;
+  }
+  .show-answer, .enter {
+    width: 30rem;
+    height: 5rem;
+  }
+  .progress {
+    width: 24rem;
+  }
 }
