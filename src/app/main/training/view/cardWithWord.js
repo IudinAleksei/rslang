@@ -36,13 +36,12 @@ const CREATE_TRANSLATE_WORD_TOOLTIL = (word) => {
 };
 
 const createCardWord = (transcript, explanation, translate, image, word) => {
+  CREATE_DOM_ELEMENTS();
   CREATE_IMAGE_TOOLTIL(image);
   CREATE_TRANSCRIPT_TOOLTIL(transcript);
   CREATE_EXPLANATION_TOOLTIL(explanation);
   CREATE_TRANSLATE_SENTENSE_TOOLTIL(translate);
   CREATE_TRANSLATE_WORD_TOOLTIL(word);
-
-  CREATE_DOM_ELEMENTS();
 };
 
 export default createCardWord;

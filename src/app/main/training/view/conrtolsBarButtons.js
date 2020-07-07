@@ -1,10 +1,10 @@
 const CREATE_CONTROLS_BAR_BUTTONS = (wrap) => {
   const ELEMENTS_BUTTON = [{
-    class: 'delete-word',
+    сlass: 'explanation',
     src: './assets/icons/card/chat-quote.svg',
   },
   {
-    class: 'explanation',
+    class: 'delete-word',
     src: './assets/icons/card/trash.svg',
   },
   {
