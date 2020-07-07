@@ -40,6 +40,12 @@
   letter-spacing: normal;
 }
 
+.savannah__true-word_right {
+  width: 3px;
+  height: 5px;
+  color: $white_color;
+}
+
 .heart__wrapper {
   position: absolute;
   top: 8vh;
@@ -66,4 +72,20 @@
   position: absolute;
   width: 15px;
   height: 10px;
+}
+
+.crystal__wrapper {
+  position: absolute;
+  bottom: 5vh;
+  animation: move 1.5s linear infinite;
+}
+
+.crystal__image {
+  width: 25px;
+}
+
+@keyframes move {
+  50% {
+    transform: translateY(20px);
+  }
 }

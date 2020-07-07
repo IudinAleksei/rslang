@@ -38,7 +38,16 @@ export default class Game {
 
     this.heartWrapper.append(this.heartList);
 
-    document.getElementById('savannah').append(this.trueWordContainer, this.heartWrapper, this.list);
+    this.crystal = document.createElement('div');
+    this.crystal.classList.add('crystal__wrapper');
+
+    this.crystalImage = document.createElement('img');
+    this.crystalImage.classList.add('crystal__image');
+    this.crystalImage.src = '/assets/icons/savannah/crystal.png';
+
+    this.crystal.append(this.crystalImage);
+
+    document.getElementById('savannah').append(this.trueWordContainer, this.heartWrapper, this.list, this.crystal);
 
     this.list.addEventListener('click', (event) => this.clickHandler(event));
 
@@ -134,12 +143,12 @@ export default class Game {
         this.statObj[Object.values(this.wordsArr[0])[0]] = false;
         this.wordsArr.splice(0, 1);
         this.list.innerHTML = '';
-        document.querySelector('.savannah__true-word').classList.remove('savannah__true-word_fall');
         document.querySelector('.heart__list-item').remove();
 
         if (this.level === this.wordsArr.length || this.life === 0) {
           renderStatistic(this.statObj);
         } else {
+          document.querySelector('.savannah__true-word').classList.remove('savannah__true-word_fall');
           this.play();
         }
 
@@ -151,7 +160,11 @@ export default class Game {
   }
 
   clickHandler(event) {
+    let crystalScale = 1;
     if (event.target.dataset.word === Object.values(this.wordsArr[0])[0]) {
+      crystalScale += 0.1;
+      this.crystalImage.style.transform = '';
+      this.crystalImage.style.transform = `scale(${crystalScale})`;
       this.level += 1;
       this.statObj[Object.values(this.wordsArr[0])[0]] = true;
     } else {
@@ -177,15 +190,14 @@ export default class Game {
     if (this.level === this.wordsArr.length || this.life === 0) {
       clearInterval(this.timer);
       renderStatistic(this.statObj);
+    } else {
+      this.animationWord();
     }
-
-    this.animationWord();
 
     console.log(Object.values(this.wordsArr[0])[0]);
     console.log(Object.keys(this.wordsArr[0])[0]);
     console.log(this.level);
     console.log(this.life);
-    console.log(this.statObj);
     console.log(this.wordsArr);
   }
 }
