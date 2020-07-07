@@ -1,8 +1,7 @@
-/* eslint-disable class-methods-use-this */
 /* eslint-disable no-param-reassign */
-/* eslint-disable max-len */
 /* eslint-disable no-console */
 import { getWordsInfo, getWordInfoById } from '../../../common/index';
+import renderStatistic from './statistic';
 
 export default class Game {
   constructor(randomArray) {
@@ -10,6 +9,7 @@ export default class Game {
     this.wordsArr = [];
     this.level = 1;
     this.life = 5;
+    this.statObj = {};
   }
 
   renderLayout() {
@@ -31,6 +31,8 @@ export default class Game {
       const j = Math.floor(Math.random() * (i + 1));
       [array[i], array[j]] = [array[j], array[i]];
     }
+
+    this.test = 1;
 
     return array;
   }
@@ -88,19 +90,34 @@ export default class Game {
 
   clickHandler(event) {
     if (event.target.dataset.word === Object.values(this.wordsArr[0])[0]) {
-      this.wordsArr.splice(0, 1);
-      this.list.innerHTML = '';
-      this.print();
+      this.level += 1;
+      this.statObj[Object.values(this.wordsArr[0])[0]] = true;
+    } else {
+      this.level += 1;
+      this.life -= 1;
+      this.statObj[Object.values(this.wordsArr[0])[0]] = false;
     }
+
+    this.wordsArr.splice(0, 1);
+    this.list.innerHTML = '';
+    this.play();
   }
 
   async play() {
+    if (this.level === 20 || this.life === 0) {
+      renderStatistic(this.statObj);
+    }
+
     if (!this.wordsArr.length) {
       this.getWordsObj();
     }
 
+    this.createWordList();
+
     console.log(Object.values(this.wordsArr[0])[0]);
     console.log(Object.keys(this.wordsArr[0])[0]);
-    this.createWordList();
+    console.log(this.level);
+    console.log(this.life);
+    console.log(this.statObj);
   }
 }
