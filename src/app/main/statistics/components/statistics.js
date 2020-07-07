@@ -9,7 +9,6 @@ export default class Statistics {
     this.statistics = document.createElement('div');
     this.statistics.classList.add('table_statistics');
     this.statistics.append(this.getTabsContainer(arrayWords, arrayRow));
-    // this.statistics.append(this.getTable(arrayWords, arrayRow));
 
     this.statistics.addEventListener('click', (event) => Statistics.handlerClick(event));
 
@@ -31,14 +30,12 @@ export default class Statistics {
   }
 
   static clickOnTabs(event) {
-    const tabPanels = document.querySelectorAll('.tabs-panel');
     document.querySelector('.tabs li.active').classList.remove('active');
     document.querySelector('.tabs-panel.active').classList.remove('active');
     const parentListItem = event.target.parentElement;
     event.target.parentElement.classList.add('active');
     const index = [...parentListItem.parentElement.children].indexOf(parentListItem);
-    const panel = [...tabPanels].filter((el) => el.getAttribute('data-index') === index);
-    panel[0].classList.add('active');
+    document.querySelectorAll('.tabs-panel')[index].classList.add('active');
   }
 
   static isClickOnTheadTable(event) {
@@ -46,9 +43,8 @@ export default class Statistics {
   }
 
   static getSortTable(event) {
-    console.log('sort', event);
-    // eslint-disable-next-line no-param-reassign
-    const order = (event.target.dataset.order = -(event.target.dataset.order || -1));
+    const order = event.target;
+    // const order = event.target.dataset.order = -(event.target.dataset.order || -1);
     const index = [...event.target.parentNode.cells].indexOf(event.target);
     const collator = new Intl.Collator(['en', 'ru'], {
       numeric: true,
@@ -73,9 +69,14 @@ export default class Statistics {
     const tabsContainer = document.createElement('div');
     tabsContainer.classList.add('tabs-container');
 
+    tabsContainer.append(this.getTabsName());
+    tabsContainer.append(this.getTabsContent(arrayWords, arrayRow));
+    return tabsContainer;
+  }
+
+  getTabsName() {
     this.tabs = document.createElement('ul');
     this.tabs.classList.add('tabs');
-    tabsContainer.append(this.tabs);
     this.arrayCategory.forEach((element, index) => {
       const item = document.createElement('li');
       if (index === 0) {
@@ -86,8 +87,7 @@ export default class Statistics {
       item.append(page);
       this.tabs.append(item);
     });
-    tabsContainer.append(this.getTabsContent(arrayWords, arrayRow));
-    return tabsContainer;
+    return this.tabs;
   }
 
   getTabsContent(arrayWords, arrayRow) {
@@ -105,26 +105,6 @@ export default class Statistics {
     });
     this.getTable(arrayWords, arrayRow);
     return tabsContent;
-  }
-
-  static getCategory(nameCategory, checkedCategory) {
-    const category = document.createElement('span');
-    category.classList.add('fieldset__filter-wrapper');
-    const inputCategory = document.createElement('input');
-    inputCategory.type = 'radio';
-    inputCategory.value = nameCategory;
-    inputCategory.name = 'category';
-    inputCategory.id = nameCategory;
-    inputCategory.checked = checkedCategory;
-    inputCategory.innerHTML = nameCategory;
-    category.append(inputCategory);
-
-    const labelCategory = document.createElement('label');
-    labelCategory.classList.add('fieldset__text');
-    labelCategory.for = nameCategory;
-    labelCategory.innerHTML = nameCategory;
-    category.append(labelCategory);
-    return category;
   }
 
   getTable(arrayWords, arrayRow) {
