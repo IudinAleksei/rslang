@@ -1,9 +1,13 @@
-const CREATE_INPUT = (wrap, word) => {
+const CREATE_INPUT = (wrap) => {
   const INPUT = document.createElement('INPUT');
   INPUT.type = 'text';
   INPUT.className = ('input');
   INPUT.autofocus = true;
-  INPUT.size = word.length;
   wrap.appendChild(INPUT);
 };
+
 export default CREATE_INPUT;
+
+export const SET_INPUT_LENGTH = (word) => {
+  document.querySelector('.input').size = word.length;
+};

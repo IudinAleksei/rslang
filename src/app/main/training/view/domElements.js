@@ -1,6 +1,7 @@
 import CREATE_CONTROLS_BAR_BUTTONS from './conrtolsBarButtons';
 import CREATE_CHECK_WORDS_BUTONS from './checkWordsButtons';
 import CREATE_INPUT from './createInput';
+import SET_INPUT_LENGTH from './createInput';
 
 const CREATE_DOM_ELEMENTS = () => {
   const BACKGROUND_CARDS = document.createElement('div');
@@ -19,7 +20,8 @@ const CREATE_DOM_ELEMENTS = () => {
   const DIV_CARD = document.createElement('div');
   DIV_CARD.className = ('card');
   DIV_WRAP_CARD.appendChild(DIV_CARD);
-  CREATE_INPUT(DIV_CARD, 'work');
+  CREATE_INPUT(DIV_CARD);
+  SET_INPUT_LENGTH('work');
 
   const SENTENSE = document.createElement('div');
   SENTENSE.className = ('sentense');
