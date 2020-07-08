@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-console */
 import { getWordsInfo, getWordInfoById } from '../../../common/index';
@@ -12,6 +13,8 @@ export default class Game {
     this.statObj = {};
     this.crystalScale = 1;
     this.bg = 0;
+    this.statObj.right = 0;
+    this.statObj.mistakes = 0;
   }
 
   renderLayout() {
@@ -140,6 +143,23 @@ export default class Game {
     document.querySelector('.savannah__true-word').classList.remove('savannah__true-word_fall');
     document.querySelector('.savannah__true-word').classList.add('savannah__true-word_fall');
 
+    setTimeout(() => {
+      document.querySelector('.savannah__true-word').classList.add('savannah__true-word_false');
+      this.level += 1;
+      this.life -= 1;
+      this.statObj.mistakes += 1;
+      this.statObj[Object.values(this.wordsArr[0])[0]] = false;
+      document.querySelector('.heart__list-item').remove();
+
+      this.wordsArr.splice(0, 1);
+
+      setTimeout(() => {
+        this.list.innerHTML = '';
+        this.trueWordContainer.remove();
+        this.play();
+      }, 300);
+    }, 5000);
+
     return this;
   }
 
@@ -153,21 +173,32 @@ export default class Game {
       this.crystalImage.style.transform = '';
       this.crystalImage.style.transform = `scale(${this.crystalScale})`;
       this.level += 1;
+      this.statObj.right += 1;
       this.statObj[Object.values(this.wordsArr[0])[0]] = true;
+
+      this.wordsArr.splice(0, 1);
+
+      setTimeout(() => {
+        this.list.innerHTML = '';
+        this.trueWordContainer.remove();
+        this.play();
+      }, 500);
     } else {
       document.querySelector('.savannah__true-word').classList.add('savannah__true-word_false');
       this.level += 1;
       this.life -= 1;
+      this.statObj.mistakes += 1;
       this.statObj[Object.values(this.wordsArr[0])[0]] = false;
       document.querySelector('.heart__list-item').remove();
-    }
-    this.wordsArr.splice(0, 1);
 
-    setTimeout(() => {
-      this.list.innerHTML = '';
-      this.trueWordContainer.remove();
-      this.play();
-    }, 500);
+      this.wordsArr.splice(0, 1);
+
+      setTimeout(() => {
+        this.list.innerHTML = '';
+        this.trueWordContainer.remove();
+        this.play();
+      }, 300);
+    }
   }
 
   async play() {
@@ -179,7 +210,7 @@ export default class Game {
 
     await this.createWordList();
 
-    if (this.level === this.wordsArr.length || this.life === 0) {
+    if (this.level === 20 || this.life === 0) {
       renderStatistic(this.statObj);
     } else {
       this.animationWord();

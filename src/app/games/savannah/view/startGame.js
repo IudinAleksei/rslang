@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 /* eslint-disable no-console */
 import { getWords, getRandomInteger } from '../../../common/index';
 import Game from './game';

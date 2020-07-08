@@ -1,3 +1,8 @@
+/* eslint-disable no-console */
+/* eslint-disable import/no-cycle */
+import renderSavannahStartPage from './startPage';
+import renderSettings from '../../../main/settings/index';
+
 export default function renderStatistic(obj) {
   const { right, mistakes } = obj;
 
@@ -66,4 +71,12 @@ export default function renderStatistic(obj) {
 
   stat.append(statWrapper, buttonWrapper);
   document.querySelector(('#savannah')).append(stat);
+
+  againButton.addEventListener('click', () => renderSavannahStartPage());
+  mainPageButton.addEventListener('click', () => renderSettings());
+  document.addEventListener('keydown', (event) => {
+    if (event.keyCode === 13) {
+      renderSavannahStartPage();
+    }
+  });
 }
