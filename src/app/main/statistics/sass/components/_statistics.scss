@@ -101,5 +101,11 @@
     th.sorted[data-order="1"]::after {
       content: " ↓"
     }
+
+    #main-chart {
+      border: 1px solid black;
+      display: block;
+      margin: 0 auto;
+    }
   }
 }

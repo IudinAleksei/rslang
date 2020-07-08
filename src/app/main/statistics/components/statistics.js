@@ -5,10 +5,10 @@ export default class Statistics {
     this.arrayCategory = arrayCategory;
   }
 
-  render(arrayWords, arrayRow) {
+  render(arrayWords, arrayRow, statisticsChart) {
     this.statistics = document.createElement('div');
     this.statistics.classList.add('table_statistics');
-    this.statistics.append(this.getTabsContainer(arrayWords, arrayRow));
+    this.statistics.append(this.getTabsContainer(arrayWords, arrayRow, statisticsChart));
 
     this.statistics.addEventListener('click', (event) => Statistics.handlerClick(event));
 
@@ -65,12 +65,12 @@ export default class Statistics {
     }
   }
 
-  getTabsContainer(arrayWords, arrayRow) {
+  getTabsContainer(arrayWords, arrayRow, statisticsChart) {
     const tabsContainer = document.createElement('div');
     tabsContainer.classList.add('tabs-container');
 
     tabsContainer.append(this.getTabsName());
-    tabsContainer.append(this.getTabsContent(arrayWords, arrayRow));
+    tabsContainer.append(this.getTabsContent(arrayWords, arrayRow, statisticsChart));
     return tabsContainer;
   }
 
@@ -90,7 +90,7 @@ export default class Statistics {
     return this.tabs;
   }
 
-  getTabsContent(arrayWords, arrayRow) {
+  getTabsContent(arrayWords, arrayRow, statisticsChart) {
     const tabsContent = document.createElement('div');
     tabsContent.classList.add('tabs-content');
     this.arrayCategory.forEach((element, index) => {
@@ -99,6 +99,9 @@ export default class Statistics {
       if (index === 0) {
         tabsPanel.classList.add('active');
         tabsPanel.append(this.getTable(arrayWords, arrayRow));
+      }
+      if (index === 1) {
+        tabsPanel.append(Statistics.getChart(statisticsChart));
       }
       tabsPanel.dataset.index = index;
       tabsContent.append(tabsPanel);
@@ -145,5 +148,70 @@ export default class Statistics {
       row.append(headCell);
     });
     return row;
+  }
+
+  static getChart(statisticsChart) {
+    const chart = document.createElement('canvas');
+    chart.width = 600;
+    chart.height = 500;
+    chart.id = 'main-chart';
+    const ctx = chart.getContext('2d');
+    ctx.fillStyle = 'black';
+    ctx.lineWidth = 2.0;
+    ctx.beginPath();
+    ctx.moveTo(30, 10);
+    ctx.lineTo(30, chart.height - 40);
+    ctx.lineTo(chart.width - 10, chart.height - 40);
+    ctx.stroke();
+    const countWords = statisticsChart.reduce((sum, cur) => sum + cur.wordsLearned, 0);
+    ctx.fillText('words', 1, 10);
+    const row = 6;
+    for (let i = 0; i < row; i += 1) {
+      ctx.fillText(`${(row - 1 - i) * (countWords / 5)}`, 4, i * 80 + 60);
+      ctx.beginPath();
+      ctx.moveTo(25, i * 80 + 60);
+      ctx.lineTo(30, i * 80 + 60);
+      ctx.stroke();
+    }
+
+    ctx.fillText('days', chart.width - 25, chart.height - 45);
+    for (let i = 0; i < statisticsChart.length; i += 1) {
+      ctx.fillText(statisticsChart[i].date, 50 + i * ((chart.width - 50) / statisticsChart.length),
+        chart.height - 25);
+      ctx.beginPath();
+      ctx.moveTo(50 + i * ((chart.width - 25) / statisticsChart.length), chart.height - 45);
+      ctx.lineTo(50 + i * ((chart.width - 25) / statisticsChart.length), chart.height - 40);
+      ctx.stroke();
+    }
+
+    ctx.beginPath();
+    ctx.strokeStyle = '#1ab429';
+    ctx.fillStyle = '#1ab429';
+    ctx.moveTo(30, chart.height - 40);
+    let count = 0;
+    for (let i = 0; i < statisticsChart.length; i += 1) {
+      const dp = statisticsChart[i].wordsLearned;
+      count += dp;
+      ctx.lineTo(50 + i * ((chart.width - 25) / statisticsChart.length),
+        (chart.height - 40) - (chart.height - 100) * (count / countWords));
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(50 + i * ((chart.width - 25) / statisticsChart.length),
+        (chart.height - 40) - (chart.height - 100) * (count / countWords),
+        2, 0, 2 * Math.PI, true);
+      ctx.fill();
+    }
+    chart.addEventListener('mousemove', (event) => Statistics.getInfoPointChart(event));
+    return chart;
+  }
+
+  static getInfoPointChart(event) {
+    const chart = document.querySelector('#main-chart');
+    const ctx = chart.getContext('2d');
+    const x = event.clientX;
+    const y = event.clientY;
+    ctx.rect(20, 20, 150, 100);
+    console.log(ctx.isPointInPath(x, y));
+    // ctx.fillText('info', x, y);
   }
 }
