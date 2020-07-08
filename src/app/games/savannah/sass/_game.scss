@@ -8,7 +8,7 @@
   justify-content: space-evenly;
   width: 100%;
   padding: 0;
-  color: #162114;
+  color: $white_color;
   font-size: 2rem;
 
   & li {
@@ -31,19 +31,36 @@
   top: 0;
   left: 50%;
   transform: translate(-50%);
-  transition: letter-spacing 0.5s linear;
+  color: $white_color;
   font-size: 2rem;
   letter-spacing: 50px;
 }
 
 .savannah__true-word_fall {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 50vh);
+  transition: transform 5s linear, letter-spacing 0.5s linear;
+  color: $white_color;
+  font-size: 2rem;
   letter-spacing: normal;
 }
 
 .savannah__true-word_right {
-  width: 3px;
-  height: 5px;
-  color: $white_color;
+  width: 5px;
+  height: 30px;
+  transform: translate(-50%, 90vh);
+  transition: transform 0.5s linear;
+  border-radius: 40%;
+  background: $white_color;
+}
+
+.savannah__true-word_false {
+  transform: translate(-50%, 5vh);
+  transition: all 0.3s linear;
+  letter-spacing: 100px;
 }
 
 .heart__wrapper {

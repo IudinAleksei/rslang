@@ -10,19 +10,13 @@ export default class Game {
     this.level = 0;
     this.life = 5;
     this.statObj = {};
+    this.crystalScale = 1;
+    this.bg = 0;
   }
 
   renderLayout() {
-    this.trueWordContainer = document.createElement('div');
-    this.trueWordContainer.classList.add('savannah__true-word__container');
-
-    this.trueWord = document.createElement('div');
-    this.trueWord.classList.add('savannah__true-word');
-
     this.list = document.createElement('div');
     this.list.classList.add('savannah-list');
-
-    this.trueWordContainer.append(this.trueWord);
 
     this.heartWrapper = document.createElement('div');
     this.heartWrapper.classList.add('heart__wrapper');
@@ -47,7 +41,7 @@ export default class Game {
 
     this.crystal.append(this.crystalImage);
 
-    document.getElementById('savannah').append(this.trueWordContainer, this.heartWrapper, this.list, this.crystal);
+    document.getElementById('savannah').append(this.heartWrapper, this.list, this.crystal);
 
     this.list.addEventListener('click', (event) => this.clickHandler(event));
 
@@ -101,9 +95,22 @@ export default class Game {
     return this.wordList;
   }
 
+  createRightWord() {
+    this.trueWordContainer = document.createElement('div');
+    this.trueWordContainer.classList.add('savannah__true-word__container');
+
+    this.trueWord = document.createElement('div');
+    this.trueWord.classList.add('savannah__true-word');
+
+    this.trueWordContainer.append(this.trueWord);
+
+    this.trueWord.append(Object.keys(this.wordsArr[0]));
+
+    document.getElementById('savannah').append(this.trueWordContainer);
+  }
+
   async createWordList() {
     this.wordArr = await this.getAlternativeWords();
-    this.trueWord.innerHTML = '';
 
     this.ol = document.createElement('ol');
     this.ol.classList.add('word-list');
@@ -121,63 +128,46 @@ export default class Game {
     }
 
     this.list.append(this.ol);
-    this.trueWord.append(Object.keys(this.wordsArr[0]));
   }
 
   animationWord() {
-    this.start = Date.now();
-
-    function draw(timePassed) {
-      document.querySelector('.savannah__true-word').style.transform = `translate(-50%, ${timePassed / 100}vh)`;
-      document.querySelector('.savannah__true-word').classList.add('savannah__true-word_fall');
+    if (document.querySelector('.savannah__true-word').classList.contains('savannah__true-word_right')) {
+      document.querySelector('.savannah__true-word').classList.remove('savannah__true-word_right');
+    } else if (document.querySelector('.savannah__true-word').classList.contains('savannah__true-word_false')) {
+      document.querySelector('.savannah__true-word').classList.remove('savannah__true-word_false');
     }
 
-    this.timer = setInterval(() => {
-      const timePassed = Date.now() - this.start;
+    document.querySelector('.savannah__true-word').classList.remove('savannah__true-word_fall');
+    document.querySelector('.savannah__true-word').classList.add('savannah__true-word_fall');
 
-      if (timePassed >= 5000) {
-        clearInterval(this.timer);
-
-        this.level += 1;
-        this.life -= 1;
-        this.statObj[Object.values(this.wordsArr[0])[0]] = false;
-        this.wordsArr.splice(0, 1);
-        this.list.innerHTML = '';
-        document.querySelector('.heart__list-item').remove();
-
-        if (this.level === this.wordsArr.length || this.life === 0) {
-          renderStatistic(this.statObj);
-        } else {
-          document.querySelector('.savannah__true-word').classList.remove('savannah__true-word_fall');
-          this.play();
-        }
-
-        return;
-      }
-
-      draw(timePassed);
-    }, 10);
+    return this;
   }
 
   clickHandler(event) {
-    let crystalScale = 1;
     if (event.target.dataset.word === Object.values(this.wordsArr[0])[0]) {
-      crystalScale += 0.1;
+      this.bg += 5;
+      document.querySelector('.savannah__true-word').textContent = '';
+      document.querySelector('.savannah__true-word').classList.add('savannah__true-word_right');
+      document.querySelector('.savannah__body').style.backgroundPosition = `bottom ${this.bg}% right 50%`;
+      this.crystalScale += 0.1;
       this.crystalImage.style.transform = '';
-      this.crystalImage.style.transform = `scale(${crystalScale})`;
+      this.crystalImage.style.transform = `scale(${this.crystalScale})`;
       this.level += 1;
       this.statObj[Object.values(this.wordsArr[0])[0]] = true;
     } else {
+      document.querySelector('.savannah__true-word').classList.add('savannah__true-word_false');
       this.level += 1;
       this.life -= 1;
       this.statObj[Object.values(this.wordsArr[0])[0]] = false;
       document.querySelector('.heart__list-item').remove();
     }
-
-    clearInterval(this.timer);
     this.wordsArr.splice(0, 1);
-    this.list.innerHTML = '';
-    this.play();
+
+    setTimeout(() => {
+      this.list.innerHTML = '';
+      this.trueWordContainer.remove();
+      this.play();
+    }, 500);
   }
 
   async play() {
@@ -185,10 +175,11 @@ export default class Game {
       this.getWordsObj();
     }
 
+    this.createRightWord();
+
     await this.createWordList();
 
     if (this.level === this.wordsArr.length || this.life === 0) {
-      clearInterval(this.timer);
       renderStatistic(this.statObj);
     } else {
       this.animationWord();

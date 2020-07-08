@@ -5,8 +5,9 @@
 @import './statistic';
 
 .savannah__body {
+  transition: all 1s linear;
   background: url('/assets/icons/savannah/savannah_bg.svg');
-  background-position: bottom;
+  background-position: bottom right 50%;
 }
 
 #savannah {
