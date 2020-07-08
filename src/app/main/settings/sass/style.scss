@@ -2,27 +2,28 @@
 @import "../../../../sass/abstract/mixins";
 
 .body__settings-page {
-  @include background(url('/src/assets/img/rs-lang.jpg') center fixed, $background-size: cover, $background-repeat: repeat);
+  @include background(url('../../../../assets/img/rs-lang.jpg') center fixed, $background-size: cover, $background-repeat: repeat);
 }
+
 .main-container {
   width: 100vw;
   min-height: calc(100vh - 80px);
-};
+}
 
 .wrap__settings__slider-container {
-    padding-bottom: 20px;
+  padding-bottom: 20px;
 }
 
 .settings-wrapper {
-    font-size: 1.4rem;
-    display: flex;
-    justify-content: center;
-    margin: 0 33px 0 33px;
+  display: flex;
+  justify-content: center;
+  margin: 0 33px 0 33px;
+  font-size: 1.4rem;
 }
 
 .settings-wrapper__wrap {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .settings-container {
@@ -30,15 +31,16 @@
 }
 
 .settings-checkbox {
-    display: none;
+  display: none;
 }
 
 .settings-container__text {
-    width: 14rem;
-    margin: 0 0 20px 50px;
-    span {
-      color: #f50a0a;
-    }
+  width: 14rem;
+  margin: 0 0 20px 50px;
+
+  span {
+    color: #f50a0a;
+  }
 }
 
 .settings-select {
@@ -47,168 +49,181 @@
 
 .settings-title {
   margin-top: 0;
+
   @include headingText();
 }
 
 .settings-important-information {
-  font-family: $body_font;
-  text-align: center;
   position: relative;
-  font-size: 1.2rem;
   width: 250px;
   margin: auto;
+  font-family: $body_font;
+  font-size: 1.2rem;
+  text-align: center;
+
   &::before {
-    content: url(/src/assets/icons/settings/exclamation.svg);
-    width: 26px;
+    content: url('../../../../assets/icons/settings/exclamation.svg');
     position: absolute;
-    left: -4px;
     top: -4px;
+    left: -4px;
+    width: 26px;
   }
+
   span {
     color: #f50a0a;
   }
 }
 
 .settings__slider-container {
-display: flex;
-justify-content: center;
-align-items: center;
-margin: 10px 10px;
-font-size: 1.2rem;
-padding-right: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 10px;
+  padding-right: 14px;
+  font-size: 1.2rem;
 }
-  .settings__slider-container__text{
+
+.settings__slider-container__text {
   width: 15rem;
+
   p {
     font-family: $body_font;
   }
 }
+
 .settings__slider-container__input {
   display: flex;
   align-items: center;
   margin-left: 20px;
 }
+
 .slider {
   width: 170px;
   height: 2px;
-  -webkit-appearance: none;
-  outline: none;
   border-radius: 2px;
-  background: #111111;
+  outline: none;
+  background: #111;
   cursor: pointer;
+  -webkit-appearance: none;
+
   &::-webkit-slider-thumb {
-    -webkit-appearance: none;
     width: 20px;
     height: 20px;
     border-radius: 50%;
     background: $button_color;
+    -webkit-appearance: none;
   }
 }
 
 .slider-value {
+  position: relative;
   right: -14px;
+  box-sizing: border-box;
   width: 50px;
   height: 25px;
-  box-sizing: border-box;
-  background: $button_color;
-  text-align: center;
-  position: relative;
-  border-radius: 8px;
   margin: 0;
+  border-radius: 8px;
+  background: $button_color;
   color: white;
   line-height: 2.3rem;
+  text-align: center;
+
   &::before {
     content: '';
     position: absolute;
     top: 50%;
-    transform: translateY(-50%) rotate(45deg);
     left: -5px;
     width: 12px;
     height: 12px;
+    transform: translateY(-50%) rotate(45deg);
     background: $button_color;
     font-size: 1.3rem;
     line-height: 2.2rem;
   }
 }
 
-  .settings-checkbox + label{
-    position: absolute;
-    left: 0;
-    top: 5px;
-    bottom: 10px;
-    right: 10px;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    width: 20px;
-    border: 3px solid #444;
-    height: 20px;
-    margin: 0;
+.settings-checkbox + label {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  bottom: 10px;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  transition: all 0.3s ease;
+  border: 3px solid #444;
+  cursor: pointer;
+}
+
+.settings-checkbox:checked + label {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  transform: rotate(-50deg) translate(5px, -9px);
+  transition: all 0.3s ease;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: #2ecc71;
+  border-left-color: transparent;
+}
+
+.settings-checkbox:checked + label::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -3px;
+  width: 100%;
+  height: 15px;
+  border-left: 3px solid $button_hover_color;
+}
+
+.settings__buttons {
+  padding: 30px 0;
+  text-align: center;
+}
+
+.settings__play-button {
+  @include button($color_text: $white_color);
+
+  &:hover {
+    border: 1px solid $button_hover_color;
+    background-color: $button_hover_color;
+  }
+}
+
+.settings__play-button:disabled {
+  @include button($background-color: $header_icons_color, $opacity: 0.5, $cursor: default, $color_text: $white_color);
+}
+
+@media screen and (max-width: $tablet_sreen) {
+  .settings-wrapper {
+    display: block;
   }
 
-  .settings-checkbox:checked + label{
-    display: inline-block;
-    transform: rotate(-50deg) translate(5px,-9px);
-    transition: all 0.3s ease;
-    width: 20px;
-    border-top-color: transparent;
-     border-right-color: transparent;
-     border-bottom-color: #2ecc71;
-     border-left-color: transparent;
-    height: 20px;
+  .settings-title {
+    @include headingText($font-size: 3.5rem);
+
+    padding-top: 20px;
   }
+}
 
-  .settings-checkbox:checked + label:before{
-    content: "";
-    position: absolute;
-    right: 0;
-    bottom: -3px;
-    width: 100%;
-    height: 15px;
-    border-left: 3px solid $button_hover_color;
-  };
+@media screen and (max-width: $phone_screen) {
+  .slider-container {
+    padding: 5px 8px 0 0;
 
-  .settings__buttons{
-    text-align: center;
-    padding: 30px 0;
-  }
-
-    .settings__play-button {
-      @include button($color_text: $white_color);
-      &:hover {
-        background-color: $button_hover_color;
-        border: 1px solid $button_hover_color;
-      }
+    span {
+      width: 73px;
     }
 
-    .settings__play-button:disabled {
-      @include button($background-color: $header_icons_color, $opacity: .5, $cursor: default, $color_text: $white_color);
-  }
-
-
-  @media screen and (max-width: $tablet_sreen) {
-    .settings-wrapper{
-        display: block;
-      }
-     .settings-title {
-      @include headingText($font-size: 3.5rem);
-      padding-top: 20px;
-     }
-
-  }
-
-  @media screen and (max-width: $phone_screen) {
-    .slider-container{
-      padding: 5px 8px 0 0;
-        span {
-            width: 73px;
-        }
-        .slider {
-            width: 105px;
-        }
-    }
-    .settings-title {
-      @include headingText($font-size: 2.5rem);
-      padding-top: 20px;
+    .slider {
+      width: 105px;
     }
   }
 
+  .settings-title {
+    @include headingText($font-size: 2.5rem);
+
+    padding-top: 20px;
+  }
+}
