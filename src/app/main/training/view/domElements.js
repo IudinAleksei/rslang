@@ -1,7 +1,6 @@
 import CREATE_CONTROLS_BAR_BUTTONS from './conrtolsBarButtons';
 import CREATE_CHECK_WORDS_BUTONS from './checkWordsButtons';
-import CREATE_INPUT from './createInput';
-import SET_INPUT_LENGTH from './createInput';
+import CREATE_INPUT, { SET_INPUT_LENGTH } from './createInput';
 
 const CREATE_DOM_ELEMENTS = () => {
   const BACKGROUND_CARDS = document.createElement('div');
@@ -16,6 +15,10 @@ const CREATE_DOM_ELEMENTS = () => {
   const DIV_WRAP_CARD = document.createElement('div');
   DIV_WRAP_CARD.className = ('wrap-card');
   DIV_WRAP.appendChild(DIV_WRAP_CARD);
+
+  const BUTTON_HARD_WORD = document.createElement('button');
+  BUTTON_HARD_WORD.className = ('wrap-card__button-hard-word');
+  DIV_WRAP_CARD.appendChild(BUTTON_HARD_WORD);
 
   const DIV_CARD = document.createElement('div');
   DIV_CARD.className = ('card');

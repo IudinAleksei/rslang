@@ -14,6 +14,7 @@
 .wrap-card {
   display: flex;
   justify-content: center;
+  position: relative;
 }
 .card {
   display: flex;
@@ -130,20 +131,21 @@
 input:active, input:focus{
   outline: none;
 }
-.div {
+.wrap-card__button-hard-word {
   border: 1px solid #1ab429;
-  width: 60px;
-  height: 90px;
+  width: 70px;
+  height: 70px;
   background: white;
-  background-image: url(../../../../assets/icons/card/bookmark-plus.svg);
+  background-image: url(../../../../../src/assets/icons/card/school-black-18dp.svg);
   background-repeat: no-repeat;
   background-position: center;
   border-radius: 8px;
   margin: 0;
   position: absolute;
-  top: -6%;
-  right: -2%;
+  top: -5%;
+  right: -5%;
   cursor: pointer;
+  z-index: 1;
 }
 .wrap-buttons__check-word {
   display: flex;
