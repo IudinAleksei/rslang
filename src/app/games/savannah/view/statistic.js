@@ -15,14 +15,14 @@ export default function renderStatistic(obj) {
   guessed.classList.add('guessed-words');
 
   const guessedTitle = document.createElement('h3');
-  guessedTitle.classList.add('guessed-word__title');
+  guessedTitle.classList.add('savannah__guessed-word__title');
   guessedTitle.textContent = `Guessed ${right}:`;
 
   const mistake = document.createElement('div');
   mistake.classList.add('mistake-words');
 
   const mistakesTitle = document.createElement('h3');
-  mistakesTitle.classList.add('mistake-word__title');
+  mistakesTitle.classList.add('savannah__mistake-word__title');
   mistakesTitle.textContent = `Mistakes ${mistakes}:`;
 
   const guessedList = document.createElement('ul');
@@ -36,12 +36,12 @@ export default function renderStatistic(obj) {
   objKey.map((el) => {
     if (obj[el] === true) {
       const guessedListItem = document.createElement('li');
-      guessedListItem.classList.add('guessed-list__item');
+      guessedListItem.classList.add('savannah__guessed-list__item');
       guessedListItem.textContent = el;
       guessedList.append(guessedListItem);
     } else if (obj[el] === false) {
       const mistakesListItem = document.createElement('li');
-      mistakesListItem.classList.add('mistakes-list__item');
+      mistakesListItem.classList.add('savannah__mistakes-list__item');
       mistakesListItem.textContent = el;
       mistakesList.append(mistakesListItem);
     }

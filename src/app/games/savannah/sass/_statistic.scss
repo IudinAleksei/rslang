@@ -8,10 +8,57 @@
   width: 40%;
   min-width: 250px;
   min-height: 50%;
+  max-height: 70vh;
   padding: 30px;
   transform: translate(-50%, -50%);
   border-radius: 10px;
-  background-color: #fff;
+  background: rgba($color: #6cffde, $alpha: 0.2);
   color: #000;
   font-size: 2rem;
+}
+
+.stat__wrapper_scroll {
+  overflow-y: scroll;
+}
+
+.savannah__mistakes-list__item {
+  position: relative;
+  list-style-type: none;
+  color: #fabe2c;
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 5px;
+    left: -30px;
+    width: 20px;
+    height: 20px;
+    background: url('../../../../assets/icons/savannah/statistic-mistake.svg') center (center / cover) no-repeat;
+  }
+}
+
+.savannah__guessed-list__item {
+  position: relative;
+  list-style-type: none;
+  color: #5ec962;
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 5px;
+    left: -30px;
+    width: 20px;
+    height: 20px;
+    background: url('../../../../assets/icons/savannah/statistic-guessed.svg') center (center / cover) no-repeat;
+  }
+}
+
+.savannah__guessed-word__title {
+  color: #4caf50;
+}
+
+.savannah__mistake-word__title {
+  color: #ff9100;
 }

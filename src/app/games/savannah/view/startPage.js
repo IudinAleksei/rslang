@@ -15,7 +15,7 @@ export default function renderSavannahStartPage() {
 
   const subtitle = document.createElement('p');
   subtitle.classList.add('savannah-subtitle');
-  subtitle.textContent = 'Welcome to savannah game';
+  subtitle.textContent = 'Тренировка Саванна развивает словарный запас.';
 
   const form = document.createElement('form');
   form.classList.add('select-level__form');
