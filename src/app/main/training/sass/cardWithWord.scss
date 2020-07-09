@@ -14,6 +14,8 @@
 .wrap-card {
   display: flex;
   justify-content: center;
+  position: relative;
+
 }
 .card {
   display: flex;
@@ -27,15 +29,13 @@
   margin-bottom: 25px;
   position: relative;
   width: 58rem;
-  height: 48rem;
 }
 .image{
   display: flex;
   justify-content: center;
 }
 .image img{
-  box-shadow: 0 0 0 1px rgba(255,255,255,.1), 0 11px 12px 0 rgba(14,30,37,.12);
-  width: 300px;
+  width: 250px;
   height: 150px;
 }
 .card__word {
@@ -45,12 +45,12 @@
   align-items: center;
   margin-bottom: 25px;
 }
-.explanation-word, .transcript, .translate-word, .meaning-word, .translate-sentense {
+.explanation-word, .transcript, .translate-word, .meaning-word, .translate-sentense, .container-context {
   font-family: $body_font;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: black;
-  margin-bottom: 25px;
+  margin: 10px 0;
   text-align: center;
 }
 .translate-word {
@@ -106,26 +106,48 @@
   padding: 3px;
   z-index: 1;
 }
-.progress:after {
-  content: '';
-  display: block;
-  background: #1ab429;
-  width: 50%;
-  height: 12px;
-  border-radius: 9px;
-  position: absolute;
-  top: 4%;
-  left: 0%;
-}
+
 .input {
   border-radius: 4px;
-  margin-top: 25px;
   border: 1px solid #b0b6b1;
-  height: 30px;
   font-size: 2rem;
   font-family: 'Open Sans', sans-serif;
-  box-shadow: 0 0 0 1px rgba(255,255,255,.1), 0 11px 12px 0 rgba(14,30,37,.12);
-  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  outline: none;
+  border: none;
+  background: none;
+  padding: 0 5px;
+}
+.container-context, .meaning-word{
+  font-family: $body_font;
+  font-size: 2rem;
+  color:#338c99;
+  border-bottom: 1px solid #1ab429;
+  padding-bottom: 10px;
+  margin-bottom: 0px;
+}
+.meaning-word{
+  i{
+    opacity: 0;
+    background: #e0ebef;
+    transition: 0.5s;
+    font-style: inherit;
+  }
+}
+.input-container{
+  position: relative;
+  background: white;
+  font-family: $body_font;
+  font-size: 2rem;
+  background: #e0ebef
+}
+.input-background{
+ opacity: 0;
+  user-select: none;
+  padding: 0 5px;
+  transition: 0.5s;
 }
 input:active, input:focus{
   outline: none;
@@ -145,6 +167,22 @@ input:active, input:focus{
   right: -2%;
   cursor: pointer;
 }
+.wrap-card__button-hard-word {
+  border: 1px solid #1ab429;
+  width: 70px;
+  height: 70px;
+  background: white;
+  background-image: url(../../../../assets/icons/card/school-black-18dp.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 8px;
+  margin: 0;
+  position: absolute;
+  top: -5%;
+  right: -5%;
+  cursor: pointer;
+  z-index: 1;
+}
 .wrap-buttons__check-word {
   display: flex;
   z-index: 1;
@@ -153,7 +191,7 @@ input:active, input:focus{
 @media screen and (max-width: $tablet_sreen) {
   .card {
     width: 53rem;
-    height: 53rem;
+
   }
   .delete-word, .explanation, .play-audio {
     width: 60px;
@@ -167,7 +205,7 @@ input:active, input:focus{
 @media screen and (max-width: 530px) {
   .card {
     width: 48rem;
-    height: 53rem;
+
   }
   .delete-word, .explanation, .play-audio {
     width: 60px;
@@ -181,7 +219,7 @@ input:active, input:focus{
 @media screen and (max-width: 470px) {
   .card {
     width: 43rem;
-    height: 53rem;
+
   }
   .delete-word, .explanation, .play-audio {
     width: 60px;
@@ -195,7 +233,7 @@ input:active, input:focus{
 @media screen and (max-width: $phone_screen) {
   .card {
     width: 38rem;
-    height: 53rem;
+
   }
   .delete-word, .explanation, .play-audio {
     width: 60px;
@@ -212,7 +250,7 @@ input:active, input:focus{
 @media screen and (max-width: 380px) {
   .card {
     width: 33rem;
-    height: 53rem;
+
   }
   .wrap-buttons__check-word {
     flex-direction: column;
@@ -240,7 +278,7 @@ input:active, input:focus{
   }
   .card {
     width: 30rem;
-    height: 40rem;
+
   }
   .show-answer {
     margin-right: 0;
