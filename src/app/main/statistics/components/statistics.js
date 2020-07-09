@@ -1,9 +1,11 @@
-/* eslint-disable no-shadow */
-/* eslint-disable no-multi-assign */
+import Chart from './chart';
+import TableStatistics from './table-statistics';
+
 export default class Statistics {
   constructor(arrayCategory) {
     this.arrayCategory = arrayCategory;
-    this.isHover = false;
+    this.chart = new Chart();
+    this.tableStatistics = new TableStatistics();
   }
 
   render(arrayWords, arrayRow, statisticsChart) {
@@ -17,10 +19,6 @@ export default class Statistics {
   }
 
   static handlerClick(event) {
-    if (Statistics.isClickOnTheadTable(event)) {
-      Statistics.getSortTable(event);
-    }
-
     if (Statistics.isClickOnTabs(event)) {
       Statistics.clickOnTabs(event);
     }
@@ -41,29 +39,6 @@ export default class Statistics {
 
   static isClickOnTheadTable(event) {
     return event.target.tagName === 'TH';
-  }
-
-  static getSortTable(event) {
-    const order = event.target;
-    // const order = event.target.dataset.order = -(event.target.dataset.order || -1);
-    const index = [...event.target.parentNode.cells].indexOf(event.target);
-    const collator = new Intl.Collator(['en', 'ru'], {
-      numeric: true,
-    });
-    const comparator = (index, order) => (a, b) => order * collator.compare(
-      b.children[index].innerHTML,
-      a.children[index].innerHTML,
-    );
-
-    // eslint-disable-next-line no-restricted-syntax
-    for (const tBody of event.target.closest('table').tBodies) {
-      tBody.append(...[...tBody.rows].sort(comparator(index, order)));
-    }
-
-    // eslint-disable-next-line no-restricted-syntax
-    for (const cell of event.target.parentNode.cells) {
-      cell.classList.toggle('sorted', cell === event.target);
-    }
   }
 
   getTabsContainer(arrayWords, arrayRow, statisticsChart) {
@@ -99,136 +74,14 @@ export default class Statistics {
       tabsPanel.classList.add('tabs-panel');
       if (index === 0) {
         tabsPanel.classList.add('active');
-        tabsPanel.append(this.getTable(arrayWords, arrayRow));
+        tabsPanel.append(this.tableStatistics.render(arrayWords, arrayRow));
       }
       if (index === 1) {
-        tabsPanel.append(Statistics.getChart(statisticsChart));
+        tabsPanel.append(this.chart.render(statisticsChart));
       }
       tabsPanel.dataset.index = index;
       tabsContent.append(tabsPanel);
     });
-    this.getTable(arrayWords, arrayRow);
     return tabsContent;
-  }
-
-  getTable(arrayWords, arrayRow) {
-    this.table = document.createElement('table');
-    this.table.classList.add('table_sort');
-    this.table.append(Statistics.getTHead(arrayRow));
-    this.table.append(Statistics.getTbody(arrayWords, arrayRow));
-
-    return this.table;
-  }
-
-  static getTHead(arrayRow) {
-    const head = document.createElement('thead');
-    const row = document.createElement('tr');
-    arrayRow.forEach((element) => {
-      const headCell = document.createElement('th');
-      headCell.innerHTML = element;
-      row.append(headCell);
-    });
-    head.append(row);
-
-    return head;
-  }
-
-  static getTbody(arrayWords, arrayRow) {
-    const tBody = document.createElement('tbody');
-    arrayWords.forEach((word) => {
-      tBody.append(Statistics.getRowWord(word, arrayRow));
-    });
-    return tBody;
-  }
-
-  static getRowWord(word, arrayRow) {
-    const row = document.createElement('tr');
-    arrayRow.forEach((element) => {
-      const headCell = document.createElement('td');
-      headCell.innerHTML = word[element];
-      row.append(headCell);
-    });
-    return row;
-  }
-
-  static getChart(statisticsChart) {
-    const chart = document.createElement('canvas');
-    chart.width = 600;
-    chart.height = 500;
-    chart.id = 'main-chart';
-    const ctx = chart.getContext('2d');
-    ctx.font = '12px sans-serif';
-    ctx.fillStyle = 'black';
-    ctx.lineWidth = 2.0;
-    ctx.beginPath();
-    ctx.moveTo(30, 10);
-    ctx.lineTo(30, chart.height - 40);
-    ctx.lineTo(chart.width - 10, chart.height - 40);
-    ctx.stroke();
-    const countWords = statisticsChart.reduce((sum, cur) => sum + cur.wordsLearned, 0);
-    const updateChart = statisticsChart.map((element, index) => ({
-      wordsLearned: element.wordsLearned,
-      date: element.date,
-      x: (chart.height - 40) - (chart.height - 100) * (1 / countWords),
-      y: 50 + index * ((chart.width - 25) / statisticsChart.length),
-    }));
-    console.log(updateChart);
-    ctx.fillText('words', 1, 10);
-    const row = 6;
-    for (let i = 0; i < row; i += 1) {
-      ctx.fillText(`${(row - 1 - i) * (countWords / 5)}`, 4, i * (chart.height / 5) + 60);
-      ctx.beginPath();
-      ctx.moveTo(25, i * (chart.height / 5) + 60);
-      ctx.lineTo(30, i * (chart.height / 5) + 60);
-      ctx.stroke();
-    }
-
-    ctx.fillText('days', chart.width - 25, chart.height - 45);
-    for (let i = 0; i < statisticsChart.length; i += 1) {
-      ctx.fillText(statisticsChart[i].date, 50 + i * ((chart.width - 50) / statisticsChart.length),
-        chart.height - 25);
-      ctx.beginPath();
-      ctx.moveTo(50 + i * ((chart.width - 25) / statisticsChart.length), chart.height - 45);
-      ctx.lineTo(50 + i * ((chart.width - 25) / statisticsChart.length), chart.height - 40);
-      ctx.stroke();
-    }
-
-    ctx.beginPath();
-    ctx.strokeStyle = '#1ab429';
-    ctx.fillStyle = '#1ab429';
-    ctx.moveTo(30, chart.height - 40);
-    let count = 0;
-    for (let i = 0; i < statisticsChart.length; i += 1) {
-      const dp = statisticsChart[i].wordsLearned;
-      count += dp;
-      ctx.lineTo(50 + i * ((chart.width - 25) / statisticsChart.length),
-        (chart.height - 40) - (chart.height - 100) * (count / countWords));
-      ctx.stroke();
-      ctx.beginPath();
-      ctx.arc(50 + i * ((chart.width - 25) / statisticsChart.length),
-        (chart.height - 40) - (chart.height - 100) * (count / countWords),
-        2, 0, 2 * Math.PI, true);
-      ctx.fill();
-    }
-    chart.addEventListener('mousemove', (event) => Statistics.getInfoPointChart(event));
-    return chart;
-  }
-
-  static getInfoPointChart(event) {
-    const chart = document.querySelector('#main-chart');
-    const ctx = chart.getContext('2d');
-    const x = event.offsetX;
-    const y = event.offsetY;
-    ctx.rect(200, 200, 150, 100);
-    if (ctx.isPointInPath(x, y)) {
-      if (!this.isHover) {
-        ctx.font = 'bold 15px sans-serif';
-        ctx.fillText(`${event.offsetY} \r ${event.offsetX}`, 50, 60);
-        this.isHover = true;
-      }
-    } else {
-      this.isHover = false;
-      ctx.clearRect(50, 40, 100, 50);
-    }
   }
 }

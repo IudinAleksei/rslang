@@ -30,19 +30,19 @@ export default class App {
     spinnerOn();
     const data = [{
       wordsLearned: 10,
-      date: '07.06.2020',
+      date: Date.parse('2020-06-07'),
     }, {
       wordsLearned: 20,
-      date: '08.06.2020',
+      date: Date.parse('2020-06-08'),
     }, {
       wordsLearned: 100,
-      date: '09.06.2020',
+      date: Date.parse('2020-06-09'),
     }, {
       wordsLearned: 40,
-      date: '10.06.2020',
+      date: Date.parse('2020-06-09'),
     }, {
       wordsLearned: 50,
-      date: '11.06.2020',
+      date: Date.parse('2020-06-11'),
     }];
     this.arrayWords = await App.getRandomWords(this.group);
     this.main.prepend(this.statistics.render(this.arrayWords, this.arrayRow, data));
