@@ -132,11 +132,11 @@ export async function sprintGamePageHandling(level) {
   function onCorrectButtonClick() {
     if (gameStates.currentWord.isAnswerCorrect === true) {
       incrementCorrectAnswer();
-      playAudio('../../../assets/audio/sprintGame/correct.mp3');
+      playAudio('./assets/audio/sprintGame/correct.mp3');
       gameStates.correctAnswersStatistic += 1;
     } else {
       resetCorrectAnswers();
-      playAudio('../../../assets/audio/sprintGame/failure.mp3');
+      playAudio('./assets/audio/sprintGame/failure.mp3');
       gameStates.incorrectAnswersStatistic += 1;
     }
     nextWord();
@@ -146,10 +146,10 @@ export async function sprintGamePageHandling(level) {
     if (gameStates.currentWord.isAnswerCorrect === false) {
       incrementCorrectAnswer();
       gameStates.correctAnswersStatistic += 1;
-      playAudio('../../../assets/audio/sprintGame/correct.mp3');
+      playAudio('./assets/audio/sprintGame/correct.mp3');
     } else {
       resetCorrectAnswers();
-      playAudio('../../../assets/audio/sprintGame/failure.mp3');
+      playAudio('./assets/audio/sprintGame/failure.mp3');
       gameStates.incorrectAnswersStatistic += 1;
     }
     nextWord();
