@@ -15,6 +15,7 @@ export default class Game {
     this.bg = 0;
     this.statObj.right = 0;
     this.statObj.mistakes = 0;
+    this.click = false;
   }
 
   renderLayout() {
@@ -143,7 +144,7 @@ export default class Game {
     document.querySelector('.savannah__true-word').classList.remove('savannah__true-word_fall');
     document.querySelector('.savannah__true-word').classList.add('savannah__true-word_fall');
 
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       document.querySelector('.savannah__true-word').classList.add('savannah__true-word_false');
       this.level += 1;
       this.life -= 1;
@@ -160,12 +161,21 @@ export default class Game {
       }, 300);
     }, 5000);
 
+    document.addEventListener('click', (event) => {
+      if (event) {
+        clearTimeout(timeout);
+      }
+    }, { once: true });
+
     return this;
   }
 
   clickHandler(event) {
+    this.click = true;
+
     if (event.target.dataset.word === Object.values(this.wordsArr[0])[0]) {
       this.bg += 5;
+      event.target.classList.add('savannah__right-word');
       document.querySelector('.savannah__true-word').textContent = '';
       document.querySelector('.savannah__true-word').classList.add('savannah__true-word_right');
       document.querySelector('.savannah__body').style.backgroundPosition = `bottom ${this.bg}% right 50%`;
@@ -185,6 +195,7 @@ export default class Game {
       }, 500);
     } else {
       document.querySelector('.savannah__true-word').classList.add('savannah__true-word_false');
+      event.target.classList.add('savannah__wrong-word');
       this.level += 1;
       this.life -= 1;
       this.statObj.mistakes += 1;

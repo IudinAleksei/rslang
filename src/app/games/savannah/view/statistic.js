@@ -78,5 +78,5 @@ export default function renderStatistic(obj) {
     if (event.keyCode === 13) {
       renderSavannahStartPage();
     }
-  });
+  }, { once: true });
 }

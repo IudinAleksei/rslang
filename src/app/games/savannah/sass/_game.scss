@@ -19,11 +19,11 @@
   }
 }
 
-.savannah__list-item_right {
+.savannah__right-word {
   background: rgba($color: #6cffde, $alpha: 0.1);
 }
 
-.savannah__list-item_wrong {
+.savannah__wrong-word {
   background: rgba($color: #b80000, $alpha: 0.3);
 }
 
@@ -41,14 +41,16 @@
   top: 0;
   left: 50%;
   transform: translate(-50%);
+  opacity: 0;
   color: $white_color;
   font-size: 4.8rem;
-  letter-spacing: 50px;
+  letter-spacing: 5vw;
 }
 
 .savannah__true-word_fall {
   transform: translate(-50%, 50vh);
-  transition: transform 5s linear, letter-spacing 0.5s linear;
+  transition: transform 5s linear, letter-spacing 0.5s linear, opacity 0.3s ease-in;
+  opacity: 1;
   letter-spacing: normal;
 }
 
@@ -64,7 +66,8 @@
 .savannah__true-word_false {
   transform: translate(-50%, 20vh);
   transition: all 0.3s linear;
-  letter-spacing: 100px;
+  opacity: 0;
+  letter-spacing: 5vw;
 }
 
 .heart__wrapper {

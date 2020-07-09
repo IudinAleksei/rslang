@@ -63,4 +63,11 @@ export default function renderSavannahStartPage() {
     wrapper.innerHTML = '';
     startGame(levelValue);
   });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.keyCode === 13) {
+      document.querySelector('#savannah').innerHTML = '';
+      startGame(levelValue);
+    }
+  }, { once: true });
 }
