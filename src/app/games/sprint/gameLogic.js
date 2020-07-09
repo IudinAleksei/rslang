@@ -17,6 +17,10 @@ export async function sprintGamePageHandling(level) {
   const correctButton = document.querySelector('.sprint-game__correct');
   const incorrectButton = document.querySelector('.sprint-game__wrong');
   const extraPoints = document.querySelector('.extra-points');
+  const sound = document.querySelector('.sound');
+  const audioCorrect = new Audio('../../../assets/audio/sprintGame/correct.mp3');
+  const audioInCorrect = new Audio('../../../assets/audio/sprintGame/failure.mp3');
+  const levelUpSound = new Audio('../../../assets/audio/sprintGame/levelUp.mp3');
   const group = level;
   const cardContainer = document.querySelector('.card-container');
   let page = getRandomInteger(1, 22);
@@ -44,7 +48,7 @@ export async function sprintGamePageHandling(level) {
     const pointsValue = Number(points.innerText) + gameStates.currentLevel;
     points.innerText = pointsValue;
     Array.from(birds)[counterOfBirds].classList.add('active-parrot');
-    playAudio('../../../assets/audio/sprintGame/levelUp.mp3');
+    levelUpSound.play();
   }
 
   function maxLevel() {
@@ -132,11 +136,11 @@ export async function sprintGamePageHandling(level) {
   function onCorrectButtonClick() {
     if (gameStates.currentWord.isAnswerCorrect === true) {
       incrementCorrectAnswer();
-      playAudio('../../../assets/audio/sprintGame/correct.mp3');
+      audioCorrect.play();
       gameStates.correctAnswersStatistic += 1;
     } else {
       resetCorrectAnswers();
-      playAudio('../../../assets/audio/sprintGame/failure.mp3');
+      audioInCorrect.play();
       gameStates.incorrectAnswersStatistic += 1;
     }
     nextWord();
@@ -146,19 +150,41 @@ export async function sprintGamePageHandling(level) {
     if (gameStates.currentWord.isAnswerCorrect === false) {
       incrementCorrectAnswer();
       gameStates.correctAnswersStatistic += 1;
-      playAudio('../../../assets/audio/sprintGame/correct.mp3');
+      audioCorrect.play();
     } else {
       resetCorrectAnswers();
-      playAudio('../../../assets/audio/sprintGame/failure.mp3');
+      audioInCorrect.play();
       gameStates.incorrectAnswersStatistic += 1;
     }
     nextWord();
   }
 
+  function onSoundButtonClick() {
+    sound.classList.toggle('sound-on');
+    sound.classList.toggle('sound-off');
+    if (sound.classList.contains('sound-off')) {
+      audioCorrect.muted = true;
+      audioInCorrect.muted = true;
+      levelUpSound.muted = true;
+    } else {
+      audioCorrect.muted = false;
+      audioInCorrect.muted = false;
+      levelUpSound.muted = false;
+    }
+  }
+
   function addEventListeners() {
     soundButton.addEventListener('click', onSoundClick);
     correctButton.addEventListener('click', onCorrectButtonClick);
+    document.body.addEventListener('keydown', (event) => {
+      if (event.keyCode === 37) {
+        onIncorrectButtonClick();
+      } else if (event.keyCode === 39) {
+        onCorrectButtonClick();
+      }
+    });
     incorrectButton.addEventListener('click', onIncorrectButtonClick);
+    sound.addEventListener('click', onSoundButtonClick);
   }
 
   function onPlayAgain() {
@@ -178,6 +204,11 @@ export async function sprintGamePageHandling(level) {
       const inCorrect = gameStates.incorrectAnswersStatistic;
       renderStatisticModal(correct, inCorrect, points.innerText);
       document.querySelector('.play-again-btn').addEventListener('click', onPlayAgain);
+      document.body.addEventListener('keydown', (event) => {
+        if (event.keyCode === 13) {
+          onPlayAgain();
+        }
+      }, { once: true });
     }
   }, 1000);
 
@@ -192,7 +223,7 @@ export default function addEventListenerForStartPage() {
   const gameLevel = document.querySelector('#range-value-level');
   const startCounter = document.querySelector('.sprint-game__start-page__counter');
 
-  function onclickStartPlay() {
+  function startPlayAction() {
     const level = gameLevel.innerHTML;
     let seconds = 3;
     startPlay.style.display = 'none';
@@ -217,5 +248,10 @@ export default function addEventListenerForStartPage() {
   }
 
   sliderLevelSprintGame.addEventListener('input', getSliderHandler(sliderCounterLevelSprint));
-  startPlay.addEventListener('click', onclickStartPlay);
+  startPlay.addEventListener('click', startPlayAction, { once: true });
+  document.body.addEventListener('keydown', (event) => {
+    if (event.keyCode === 13) {
+      startPlayAction();
+    }
+  }, { once: true });
 }

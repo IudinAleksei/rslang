@@ -202,7 +202,6 @@
 .sound {
     width: 30px;
     height: 30px;
-    background-image: url(/src/assets/icons/springGame/music_on.svg);
     background-position: 0;
     background-repeat: no-repeat;
     background-size: contain;
@@ -210,6 +209,10 @@
     position: absolute;
     top: -43px;
     left: 26px;
+}
+
+.sound-on {
+    background-image: url(/src/assets/icons/springGame/music_on.svg);
 }
 
 .sound-off {
@@ -359,6 +362,26 @@
 .sprint-game__correct {
     position: relative;
     @include button($color_text: $white_color);
+}
+
+.arrows {
+    min-height: 40px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.arrowLeft {
+    background-image: url(/src/assets/icons/springGame/arrowLeft.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 50px;
+}
+
+.arrowRight {
+    background-image: url(/src/assets/icons/springGame/arrowRight.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 50px;
 }
 
 .sprint-game__statistic-block {
