@@ -3,13 +3,16 @@
 import renderSavannahStartPage from './startPage';
 import renderSettings from '../../../main/settings/index';
 
-export default function renderStatistic(obj) {
+export default function renderStatistic(obj, loginResponse) {
   const { right, mistakes } = obj;
 
   document.querySelector(('#savannah')).innerHTML = '';
 
   const stat = document.createElement('div');
   stat.classList.add('savannah__statistic');
+
+  const statWrapper = document.createElement('div');
+  statWrapper.classList.add('stat__wrapper');
 
   const guessed = document.createElement('div');
   guessed.classList.add('guessed-words');
@@ -33,6 +36,10 @@ export default function renderStatistic(obj) {
 
   const objKey = Object.keys(obj);
 
+  if (objKey.length > 11) {
+    statWrapper.classList.add('stat__wrapper_scroll');
+  }
+
   objKey.map((el) => {
     if (obj[el] === true) {
       const guessedListItem = document.createElement('li');
@@ -52,8 +59,6 @@ export default function renderStatistic(obj) {
   guessed.append(guessedTitle, guessedList);
   mistake.append(mistakesTitle, mistakesList);
 
-  const statWrapper = document.createElement('div');
-  statWrapper.classList.add('stat__wrapper');
   statWrapper.append(guessed, mistake);
 
   const buttonWrapper = document.createElement('div');
@@ -72,11 +77,11 @@ export default function renderStatistic(obj) {
   stat.append(statWrapper, buttonWrapper);
   document.querySelector(('#savannah')).append(stat);
 
-  againButton.addEventListener('click', () => renderSavannahStartPage());
-  mainPageButton.addEventListener('click', () => renderSettings());
+  againButton.addEventListener('click', () => renderSavannahStartPage(loginResponse), { once: true });
+  mainPageButton.addEventListener('click', () => renderSettings(), { once: true });
   document.addEventListener('keydown', (event) => {
     if (event.keyCode === 13) {
-      renderSavannahStartPage();
+      renderSavannahStartPage(loginResponse);
     }
   }, { once: true });
 }

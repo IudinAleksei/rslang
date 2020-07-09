@@ -1,11 +1,8 @@
 /* eslint-disable import/no-cycle */
-/* eslint-disable no-console */
-import { getWords, getRandomInteger } from '../../../common/index';
 import Game from './game';
 
-export default async function startGame(level = 0) {
-  const arr = await getWords(level, getRandomInteger(0, 29));
-  const game = new Game(arr);
+export default async function startGame(wordsArr, loginResponse) {
+  const game = new Game(wordsArr, loginResponse);
   game.renderLayout();
   game.play();
 }

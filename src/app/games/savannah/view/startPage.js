@@ -1,9 +1,11 @@
 /* eslint-disable import/no-cycle */
 import '../sass/main.scss';
+import getWordsArray from './getWordsArray';
 import startGame from './startGame';
 
-export default function renderSavannahStartPage() {
+export default async function renderSavannahStartPage(loginResponse) {
   document.querySelector('body').classList.add('savannah__body');
+  document.querySelector('.savannah__body').style.backgroundPosition = 'bottom right 50%';
   document.querySelector('.main-container').innerHTML = '';
 
   const wrapper = document.createElement('div');
@@ -27,7 +29,7 @@ export default function renderSavannahStartPage() {
   const selectLevel = document.createElement('select');
   selectLevel.classList.add('select-level');
 
-  for (let i = 0; i < 6; i += 1) {
+  for (let i = 1; i <= 6; i += 1) {
     const option = document.createElement('option');
     option.textContent = i;
     selectLevel.append(option);
@@ -38,7 +40,7 @@ export default function renderSavannahStartPage() {
   chooseUserWord.classList.add('choose-user-word');
 
   const selectUserWord = document.createElement('span');
-  selectUserWord.classList.add('select-user-word');
+  selectUserWord.classList.add('savannah__select-user-word');
   selectUserWord.textContent = 'learning words';
 
   chooseUserWord.append(selectUserWord);
@@ -53,21 +55,39 @@ export default function renderSavannahStartPage() {
 
   document.querySelector('.main-container').append(wrapper);
 
-  let levelValue = 0;
+  let levelValue = 1;
 
-  selectLevel.onchange = function getLevelValue() {
+  let wordsArr = [];
+
+  selectLevel.onchange = async function getLevelValue() {
     levelValue = selectLevel.value;
+    wordsArr = await getWordsArray(loginResponse, levelValue);
+    button.removeAttribute('disabled');
   };
+
+  selectUserWord.addEventListener('click', async () => {
+    wordsArr = await getWordsArray(loginResponse, false);
+
+    if (wordsArr.length < 5) {
+      alert('Sorry, you have less than 5 words in your vocabulary.\nPlease, choose level!');
+    } else {
+      selectUserWord.classList.add('savannah__select-user-word_select');
+    }
+  });
+
+  wordsArr = await getWordsArray(loginResponse, levelValue);
 
   button.addEventListener('click', () => {
     wrapper.innerHTML = '';
-    startGame(levelValue);
-  });
+
+    startGame(wordsArr, loginResponse);
+  }, { once: true });
 
   document.addEventListener('keydown', (event) => {
     if (event.keyCode === 13) {
       document.querySelector('#savannah').innerHTML = '';
-      startGame(levelValue);
+
+      startGame(wordsArr, loginResponse);
     }
   }, { once: true });
 }

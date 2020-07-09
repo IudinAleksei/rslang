@@ -5,10 +5,11 @@ import { getWordsInfo, getWordInfoById } from '../../../common/index';
 import renderStatistic from './statistic';
 
 export default class Game {
-  constructor(randomArray) {
-    this.randomArray = randomArray;
-    this.wordsArr = [];
-    this.level = 0;
+  constructor(wordsArr, loginResponse) {
+    this.loginResponse = loginResponse;
+    this.wordsArr = wordsArr;
+    this.maxLevel = Object.keys(this.wordsArr).length;
+    this.level = 1;
     this.life = 5;
     this.statObj = {};
     this.crystalScale = 1;
@@ -41,13 +42,11 @@ export default class Game {
 
     this.crystalImage = document.createElement('img');
     this.crystalImage.classList.add('crystal__image');
-    this.crystalImage.src = '/assets/icons/savannah/crystal.png';
+    this.crystalImage.src = './assets/icons/savannah/crystal.png';
 
     this.crystal.append(this.crystalImage);
 
     document.getElementById('savannah').append(this.heartWrapper, this.list, this.crystal);
-
-    this.list.addEventListener('click', (event) => this.clickHandler(event));
 
     return this.list;
   }
@@ -61,13 +60,6 @@ export default class Game {
     this.test = 1;
 
     return array;
-  }
-
-  getWordsObj() {
-    this.randomArray.map((el) => {
-      this.wordsArr.push({ [el.word]: el.wordTranslate });
-      return el;
-    });
   }
 
   async getAlternativeWords() {
@@ -132,6 +124,8 @@ export default class Game {
     }
 
     this.list.append(this.ol);
+
+    this.list.addEventListener('click', (event) => this.clickHandler(event), { once: true });
   }
 
   animationWord() {
@@ -171,7 +165,7 @@ export default class Game {
   }
 
   clickHandler(event) {
-    this.click = true;
+    this.level += 1;
 
     if (event.target.dataset.word === Object.values(this.wordsArr[0])[0]) {
       this.bg += 5;
@@ -182,7 +176,6 @@ export default class Game {
       this.crystalScale += 0.1;
       this.crystalImage.style.transform = '';
       this.crystalImage.style.transform = `scale(${this.crystalScale})`;
-      this.level += 1;
       this.statObj.right += 1;
       this.statObj[Object.values(this.wordsArr[0])[0]] = true;
 
@@ -196,7 +189,6 @@ export default class Game {
     } else {
       document.querySelector('.savannah__true-word').classList.add('savannah__true-word_false');
       event.target.classList.add('savannah__wrong-word');
-      this.level += 1;
       this.life -= 1;
       this.statObj.mistakes += 1;
       this.statObj[Object.values(this.wordsArr[0])[0]] = false;
@@ -213,24 +205,20 @@ export default class Game {
   }
 
   async play() {
-    if (!this.wordsArr.length) {
-      this.getWordsObj();
-    }
-
-    this.createRightWord();
-
-    await this.createWordList();
-
-    if (this.level === 20 || this.life === 0) {
-      renderStatistic(this.statObj);
+    if (this.level === this.maxLevel || this.life === 0) {
+      renderStatistic(this.statObj, this.loginResponse);
     } else {
+      this.createRightWord();
+
+      await this.createWordList();
+
       this.animationWord();
     }
 
-    console.log(Object.values(this.wordsArr[0])[0]);
-    console.log(Object.keys(this.wordsArr[0])[0]);
-    console.log(this.level);
-    console.log(this.life);
-    console.log(this.wordsArr);
+    // console.log(Object.values(this.wordsArr[0])[0]);
+    // console.log(Object.keys(this.wordsArr[0])[0]);
+    // console.log(this.level);
+    // console.log(this.life);
+    // console.log(this.wordsArr);
   }
 }

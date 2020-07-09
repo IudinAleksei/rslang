@@ -7,8 +7,10 @@
 }
 
 .savannah-subtitle {
+  padding: 5px;
   color: $white_color;
   font-size: 2rem;
+  text-align: center;
 }
 
 .select-level__form {
@@ -32,11 +34,15 @@
   text-align: center;
 }
 
-.select-user-word {
-  color: #000;
+.savannah__select-user-word {
   font-size: 1.7rem;
   text-decoration: underline;
   cursor: pointer;
+}
+
+.savannah__select-user-word_select {
+  color: #6cffde;
+  text-decoration: none;
 }
 
 .savannah__start-button {
