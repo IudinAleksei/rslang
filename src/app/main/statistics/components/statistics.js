@@ -3,6 +3,7 @@
 export default class Statistics {
   constructor(arrayCategory) {
     this.arrayCategory = arrayCategory;
+    this.isHover = false;
   }
 
   render(arrayWords, arrayRow, statisticsChart) {
@@ -156,6 +157,7 @@ export default class Statistics {
     chart.height = 500;
     chart.id = 'main-chart';
     const ctx = chart.getContext('2d');
+    ctx.font = '12px sans-serif';
     ctx.fillStyle = 'black';
     ctx.lineWidth = 2.0;
     ctx.beginPath();
@@ -164,13 +166,20 @@ export default class Statistics {
     ctx.lineTo(chart.width - 10, chart.height - 40);
     ctx.stroke();
     const countWords = statisticsChart.reduce((sum, cur) => sum + cur.wordsLearned, 0);
+    const updateChart = statisticsChart.map((element, index) => ({
+      wordsLearned: element.wordsLearned,
+      date: element.date,
+      x: (chart.height - 40) - (chart.height - 100) * (1 / countWords),
+      y: 50 + index * ((chart.width - 25) / statisticsChart.length),
+    }));
+    console.log(updateChart);
     ctx.fillText('words', 1, 10);
     const row = 6;
     for (let i = 0; i < row; i += 1) {
-      ctx.fillText(`${(row - 1 - i) * (countWords / 5)}`, 4, i * 80 + 60);
+      ctx.fillText(`${(row - 1 - i) * (countWords / 5)}`, 4, i * (chart.height / 5) + 60);
       ctx.beginPath();
-      ctx.moveTo(25, i * 80 + 60);
-      ctx.lineTo(30, i * 80 + 60);
+      ctx.moveTo(25, i * (chart.height / 5) + 60);
+      ctx.lineTo(30, i * (chart.height / 5) + 60);
       ctx.stroke();
     }
 
@@ -208,10 +217,18 @@ export default class Statistics {
   static getInfoPointChart(event) {
     const chart = document.querySelector('#main-chart');
     const ctx = chart.getContext('2d');
-    const x = event.clientX;
-    const y = event.clientY;
-    ctx.rect(20, 20, 150, 100);
-    console.log(ctx.isPointInPath(x, y));
-    // ctx.fillText('info', x, y);
+    const x = event.offsetX;
+    const y = event.offsetY;
+    ctx.rect(200, 200, 150, 100);
+    if (ctx.isPointInPath(x, y)) {
+      if (!this.isHover) {
+        ctx.font = 'bold 15px sans-serif';
+        ctx.fillText(`${event.offsetY} \r ${event.offsetX}`, 50, 60);
+        this.isHover = true;
+      }
+    } else {
+      this.isHover = false;
+      ctx.clearRect(50, 40, 100, 50);
+    }
   }
 }
