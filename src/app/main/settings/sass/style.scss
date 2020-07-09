@@ -184,6 +184,7 @@ padding-right: 14px;
       @include button($background-color: $header_icons_color, $opacity: .5, $cursor: default, $color_text: $white_color);
   }
 
+
   @media screen and (max-width: $tablet_sreen) {
     .settings-wrapper{
         display: block;
@@ -209,5 +210,5 @@ padding-right: 14px;
       @include headingText($font-size: 2.5rem);
       padding-top: 20px;
     }
-
   }
+
