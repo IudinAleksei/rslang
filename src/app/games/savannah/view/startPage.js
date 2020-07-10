@@ -1,5 +1,7 @@
+/* eslint-disable no-console */
 /* eslint-disable import/no-cycle */
 import '../sass/main.scss';
+import { setLocalData, getAndInitLocalData } from '../../../common/index';
 import getWordsArray from './getWordsArray';
 import startGame from './startGame';
 
@@ -55,7 +57,7 @@ export default async function renderSavannahStartPage(loginResponse) {
 
   document.querySelector('.main-container').append(wrapper);
 
-  let levelValue = 1;
+  let levelValue = getAndInitLocalData().savannahLevel;
 
   let wordsArr = [];
 
@@ -70,6 +72,7 @@ export default async function renderSavannahStartPage(loginResponse) {
 
     if (wordsArr.length < 5) {
       alert('Sorry, you have less than 5 words in your vocabulary.\nPlease, choose level!');
+      wordsArr = await getWordsArray(loginResponse, levelValue);
     } else {
       selectUserWord.classList.add('savannah__select-user-word_select');
     }
@@ -80,12 +83,16 @@ export default async function renderSavannahStartPage(loginResponse) {
   button.addEventListener('click', () => {
     wrapper.innerHTML = '';
 
+    setLocalData({ savannahLevel: levelValue });
+
     startGame(wordsArr, loginResponse);
   }, { once: true });
 
   document.addEventListener('keydown', (event) => {
     if (event.keyCode === 13) {
       document.querySelector('#savannah').innerHTML = '';
+
+      setLocalData({ savannahLevel: levelValue });
 
       startGame(wordsArr, loginResponse);
     }
