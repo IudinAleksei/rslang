@@ -1,6 +1,5 @@
 /* eslint-disable import/no-cycle */
 import renderSavannahStartPage from './startPage';
-import renderSettings from '../../../main/settings/index';
 
 export default function renderStatistic(obj, loginResponse) {
   const { right, mistakes } = obj;
@@ -67,17 +66,16 @@ export default function renderStatistic(obj, loginResponse) {
   againButton.classList.add('savannah__stat__button', 'button-again');
   againButton.textContent = 'Play again';
 
-  const mainPageButton = document.createElement('button');
-  mainPageButton.classList.add('savannah__stat__button', 'button-main-page');
-  mainPageButton.textContent = 'Main page';
+  // const mainPageButton = document.createElement('button');
+  // mainPageButton.classList.add('savannah__stat__button', 'button-main-page');
+  // mainPageButton.textContent = 'Main page';
 
-  buttonWrapper.append(againButton, mainPageButton);
+  buttonWrapper.append(againButton);
 
   stat.append(statWrapper, buttonWrapper);
   document.querySelector(('#savannah')).append(stat);
 
   againButton.addEventListener('click', () => renderSavannahStartPage(loginResponse), { once: true });
-  mainPageButton.addEventListener('click', () => renderSettings(), { once: true });
   document.addEventListener('keydown', (event) => {
     if (event.keyCode === 13) {
       renderSavannahStartPage(loginResponse);
