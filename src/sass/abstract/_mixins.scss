@@ -4,53 +4,55 @@
   align-items: center;
   justify-content: center;
 }
+
 @mixin position ($position: absolute) {
-  border: none;
   position: $position;
   bottom: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  border: none;
 }
 
 @mixin background($background-image, $background-repeat, $background-size: cover) {
   background: $background_liner_gradient, $background-image;
   background-repeat: $background-repeat;
   background-size: $background-size;
-};
+}
 
 @mixin button($background-color: $button_color, $width: 180px, $heigth: 50px, $opacity: 1, $cursor: pointer, $color_text: $color_text_button) {
   display: inline-block;
-  font-family: $body_font;
-  border: 1px solid $button_color;
-  background-color: $background-color;
+  visibility: visible;
   width: $width;
   height: $heigth;
-  box-shadow: $button_shadow;
   transition-duration: 0.4s;
-  cursor: $cursor;
-  font-size: 20px;
-  text-transform: uppercase;
-  text-align: center;
+  border: 1px solid $button_color;
   border-radius: 8px;
-  visibility: visible;
   opacity: $opacity;
+  background-color: $background-color;
+  box-shadow: $button_shadow;
   color: $color_text;
+  font-family: $body_font;
+  font-size: 20px;
+  text-align: center;
+  text-transform: uppercase;
+  cursor: $cursor;
 }
+
 @mixin headingText ($font-size: 50px) {
+  margin-bottom: 50px;
+  color: $heading_color;
   font-family: $heading_font;
   font-size: $font-size;
-  text-transform: uppercase;
-  letter-spacing: 7px;
   font-weight: 700;
-  color: $heading_color;
+  letter-spacing: 7px;
   text-align: center;
-  margin-bottom: 50px;
+  text-transform: uppercase;
 }
 
 @mixin bodyText () {
+  color: $body_color;
   font-family: $body_font;
   font-size: 1rem;
   font-weight: 400;
-  color: $body_color;
 }
