@@ -61,14 +61,14 @@ export default function renderStatistic(obj, loginResponse) {
   statWrapper.append(guessed, mistake);
 
   const buttonWrapper = document.createElement('div');
-  buttonWrapper.classList.add('button__wrapper');
+  buttonWrapper.classList.add('savannah__stat__button__wrapper');
 
   const againButton = document.createElement('button');
-  againButton.classList.add('button', 'button-again');
+  againButton.classList.add('savannah__stat__button', 'button-again');
   againButton.textContent = 'Play again';
 
   const mainPageButton = document.createElement('button');
-  mainPageButton.classList.add('button', 'button-main-page');
+  mainPageButton.classList.add('savannah__stat__button', 'button-main-page');
   mainPageButton.textContent = 'Main page';
 
   buttonWrapper.append(againButton, mainPageButton);
