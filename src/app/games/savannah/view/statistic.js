@@ -34,7 +34,7 @@ export default function renderStatistic(obj, loginResponse) {
 
   const objKey = Object.keys(obj);
 
-  if (objKey.length > 13) {
+  if (objKey.length > 17) {
     statWrapper.classList.add('stat__wrapper_scroll');
   }
 
@@ -65,10 +65,6 @@ export default function renderStatistic(obj, loginResponse) {
   const againButton = document.createElement('button');
   againButton.classList.add('savannah__stat__button', 'button-again');
   againButton.textContent = 'Play again';
-
-  // const mainPageButton = document.createElement('button');
-  // mainPageButton.classList.add('savannah__stat__button', 'button-main-page');
-  // mainPageButton.textContent = 'Main page';
 
   buttonWrapper.append(againButton);
 
