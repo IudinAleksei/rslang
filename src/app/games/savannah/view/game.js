@@ -16,7 +16,6 @@ export default class Game {
     this.bg = 0;
     this.statObj.right = 0;
     this.statObj.mistakes = 0;
-    this.click = false;
   }
 
   renderLayout() {
@@ -42,11 +41,13 @@ export default class Game {
 
     this.crystalImage = document.createElement('img');
     this.crystalImage.classList.add('crystal__image');
-    this.crystalImage.src = './assets/icons/savannah/crystal.png';
+    this.crystalImage.src = '/assets/icons/savannah/crystal.png';
 
     this.crystal.append(this.crystalImage);
 
     document.getElementById('savannah').append(this.heartWrapper, this.list, this.crystal);
+
+    this.list.addEventListener('click', (event) => this.clickHandler(event));
 
     return this.list;
   }
@@ -119,13 +120,18 @@ export default class Game {
       li.textContent = this.wordArr[i];
       if (li.textContent === Object.values(this.wordsArr[0])[0]) {
         li.setAttribute('data-word', Object.values(this.wordsArr[0])[0]);
+      } else {
+        li.setAttribute('data-falseword', 'true');
       }
       this.ol.append(li);
     }
 
     this.list.append(this.ol);
+  }
 
-    this.list.addEventListener('click', (event) => this.clickHandler(event), { once: true });
+  playAudio(src) {
+    this.audioElement = new Audio(src);
+    this.audioElement.play();
   }
 
   animationWord() {
@@ -148,6 +154,8 @@ export default class Game {
 
       this.wordsArr.splice(0, 1);
 
+      this.playAudio('../../../assets/audio/savannah/savannah-wrong-word.mp3');
+
       setTimeout(() => {
         this.list.innerHTML = '';
         this.trueWordContainer.remove();
@@ -156,7 +164,7 @@ export default class Game {
     }, 5000);
 
     document.addEventListener('click', (event) => {
-      if (event) {
+      if (event.target.classList.contains('savannah__list-item')) {
         clearTimeout(timeout);
       }
     }, { once: true });
@@ -165,9 +173,8 @@ export default class Game {
   }
 
   clickHandler(event) {
-    this.level += 1;
-
     if (event.target.dataset.word === Object.values(this.wordsArr[0])[0]) {
+      this.playAudio('../../../assets/audio/savannah/savannah-right-word.mp3');
       this.bg += 5;
       event.target.classList.add('savannah__right-word');
       document.querySelector('.savannah__true-word').textContent = '';
@@ -176,6 +183,7 @@ export default class Game {
       this.crystalScale += 0.1;
       this.crystalImage.style.transform = '';
       this.crystalImage.style.transform = `scale(${this.crystalScale})`;
+      this.level += 1;
       this.statObj.right += 1;
       this.statObj[Object.values(this.wordsArr[0])[0]] = true;
 
@@ -186,9 +194,11 @@ export default class Game {
         this.trueWordContainer.remove();
         this.play();
       }, 500);
-    } else {
+    } else if (event.target.dataset.falseword === 'true') {
+      this.playAudio('../../../assets/audio/savannah/savannah-wrong-word.mp3');
       document.querySelector('.savannah__true-word').classList.add('savannah__true-word_false');
       event.target.classList.add('savannah__wrong-word');
+      this.level += 1;
       this.life -= 1;
       this.statObj.mistakes += 1;
       this.statObj[Object.values(this.wordsArr[0])[0]] = false;
@@ -205,7 +215,8 @@ export default class Game {
   }
 
   async play() {
-    if (this.level === this.maxLevel || this.life === 0) {
+    if (this.level === this.maxLevel || this.life <= 0) {
+      this.playAudio('../../../assets/audio/savannah/savannah-statistic.mp3');
       renderStatistic(this.statObj, this.loginResponse);
     } else {
       this.createRightWord();
@@ -215,10 +226,10 @@ export default class Game {
       this.animationWord();
     }
 
-    // console.log(Object.values(this.wordsArr[0])[0]);
-    // console.log(Object.keys(this.wordsArr[0])[0]);
-    // console.log(this.level);
-    // console.log(this.life);
-    // console.log(this.wordsArr);
+    console.log(Object.values(this.wordsArr[0])[0]);
+    console.log(Object.keys(this.wordsArr[0])[0]);
+    console.log(this.level);
+    console.log(this.life);
+    console.log(this.wordsArr);
   }
 }

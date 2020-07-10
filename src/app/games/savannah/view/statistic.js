@@ -36,7 +36,7 @@ export default function renderStatistic(obj, loginResponse) {
 
   const objKey = Object.keys(obj);
 
-  if (objKey.length > 11) {
+  if (objKey.length > 13) {
     statWrapper.classList.add('stat__wrapper_scroll');
   }
 
