@@ -201,6 +201,8 @@ export default class Game {
       this.playAudio('./assets/audio/savannah/savannah-wrong-word.mp3');
       document.querySelector('.savannah__true-word').classList.add('savannah__true-word_false');
       event.target.classList.add('savannah__wrong-word');
+
+      setTimeout(() => document.querySelector('[data-word]').classList.add('savannah__right-word'), 100);
       this.level += 1;
       this.life -= 1;
       this.statObj.mistakes += 1;
@@ -230,51 +232,51 @@ export default class Game {
     }
 
     // document.addEventListener('keydown', (event) => {
-    //   const element = document.querySelector(`[data-key="${event.key}"]`);
-    //   const elementDataKey = element.dataset.key;
-    //   const elementDataWord = element.dataset.falseword;
+    //   if (event.key === '1' || event.key === '2' || event.key === '3' || event.key === '4') {
+    //     const element = document.querySelector(`[data-key="${event.key}"]`);
+    //     const elementDataWord = element.dataset.falseword;
 
-    //   console.log(event.key === elementDataKey);
-    //   console.log(elementDataWord !== 'true');
+    //     console.log(elementDataWord === 'true');
 
-    //   if (event.key === elementDataKey && elementDataWord !== 'true') {
-    //     this.playAudi`1o('../../../assets/audio/savannah/savannah-right-word.mp3');
-    //     this.bg += 5;
-    //     element.classList.add('savannah__right-word');
-    //     document.querySelector('.savannah__true-word').textContent = '';
-    //     document.querySelector('.savannah__true-word').classList.add('savannah__true-word_right');
-    //     document.querySelector('.savannah__body').style.backgroundPosition = `bottom ${this.bg}% right 50%`;
-    //     this.crystalScale += 0.1;
-    //     this.crystalImage.style.transform = '';
-    //     this.crystalImage.style.transform = `scale(${this.crystalScale})`;
-    //     this.level += 1;
-    //     this.statObj.right += 1;
-    //     this.statObj[Object.values(this.wordsArr[0])[0]] = true;
+    //     if (elementDataWord !== 'true') {
+    //       this.playAudio('../../../assets/audio/savannah/savannah-right-word.mp3');
+    //       this.bg += 5;
+    //       element.classList.add('savannah__right-word');
+    //       document.querySelector('.savannah__true-word').textContent = '';
+    //       document.querySelector('.savannah__true-word').classList.add('savannah__true-word_right');
+    //       document.querySelector('.savannah__body').style.backgroundPosition = `bottom ${this.bg}% right 50%`;
+    //       this.crystalScale += 0.1;
+    //       this.crystalImage.style.transform = '';
+    //       this.crystalImage.style.transform = `scale(${this.crystalScale})`;
+    //       this.level += 1;
+    //       this.statObj.right += 1;
+    //       this.statObj[Object.values(this.wordsArr[0])[0]] = true;
 
-    //     this.wordsArr.splice(0, 1);
+    //       this.wordsArr.splice(0, 1);
 
-    //     setTimeout(() => {
-    //       this.list.innerHTML = '';
-    //       this.trueWordContainer.remove();
-    //       this.play();
-    //     }, 500);
-    //   } else if (event.key === elementDataKey && elementDataWord === 'true') {
-    //     this.playAudio('../../../assets/audio/savannah/savannah-wrong-word.mp3');
-    //     document.querySelector('.savannah__true-word').classList.add('savannah__true-word_false');
-    //     event.target.classList.add('savannah__wrong-word');
-    //     this.level += 1;
-    //     this.life -= 1;
-    //     this.statObj.mistakes += 1;
-    //     this.statObj[Object.values(this.wordsArr[0])[0]] = false;
-    //     document.querySelector('.heart__list-item').remove();
+    //       setTimeout(() => {
+    //         this.list.innerHTML = '';
+    //         this.trueWordContainer.remove();
+    //         this.play();
+    //       }, 500);
+    //     } else if (elementDataWord === 'true') {
+    //       this.playAudio('../../../assets/audio/savannah/savannah-wrong-word.mp3');
+    //       document.querySelector('.savannah__true-word').classList.add('savannah__true-word_false');
+    //       event.target.classList.add('savannah__wrong-word');
+    //       this.level += 1;
+    //       this.life -= 1;
+    //       this.statObj.mistakes += 1;
+    //       this.statObj[Object.values(this.wordsArr[0])[0]] = false;
+    //       document.querySelector('.heart__list-item').remove();
 
-    //     this.wordsArr.splice(0, 1);
+    //       this.wordsArr.splice(0, 1);
 
-    //     setTimeout(() => {
-    //       this.list.innerHTML = '';
-    //       this.trueWordContainer.remove();
-    //       this.play();
-    //     }, 300);
+    //       setTimeout(() => {
+    //         this.list.innerHTML = '';
+    //         this.trueWordContainer.remove();
+    //         this.play();
+    //       }, 300);
+    //     }
     //   }
     // }, { once: true });
   }
