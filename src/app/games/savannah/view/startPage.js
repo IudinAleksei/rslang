@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /* eslint-disable import/no-cycle */
 import '../sass/main.scss';
 import { setLocalData, getAndInitLocalData } from '../../../common/index';

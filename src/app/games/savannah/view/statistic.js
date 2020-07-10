@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /* eslint-disable import/no-cycle */
 import renderSavannahStartPage from './startPage';
 import renderSettings from '../../../main/settings/index';

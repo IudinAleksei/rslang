@@ -1,6 +1,5 @@
 /* eslint-disable import/no-cycle */
 /* eslint-disable no-param-reassign */
-/* eslint-disable no-console */
 import { getWordsInfo, getWordInfoById } from '../../../common/index';
 import renderStatistic from './statistic';
 
@@ -225,11 +224,5 @@ export default class Game {
 
       this.animationWord();
     }
-
-    console.log(Object.values(this.wordsArr[0])[0]);
-    console.log(Object.keys(this.wordsArr[0])[0]);
-    console.log(this.level);
-    console.log(this.life);
-    console.log(this.wordsArr);
   }
 }
