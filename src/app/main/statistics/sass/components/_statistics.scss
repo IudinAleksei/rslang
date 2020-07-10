@@ -1,3 +1,8 @@
+$maxtablet-sсreen: 900px;
+$tablet-sсreen: 600px;
+$phone-sсreen: 450px;
+$column: 7;
+
 @mixin statistics {
 
   .table_statistics {
@@ -60,38 +65,40 @@
 
 
     .table_sort {
+      position: relative;
       width: 100%;
-      border-collapse: collapse
-    }
+      margin: auto;
+      border-collapse: collapse;
 
-    .table_sort tr {
-      display: flex
-    }
+      tr {
+        display: flex
+      }
 
-    .table_sort td,
-    .table_sort th {
-      width: 16.66667%;
-      padding: 10px 10px 10px 5px;
-      font-size: 14px;
-      text-align: center;
-      word-wrap: break-word;
-      border: 1px solid #ccc
-    }
+      td,
+      th {
+        width: calc(100%/#{$column});
+        padding: 10px 10px 10px 5px;
+        font-size: 14px;
+        text-align: center;
+        word-wrap: break-word;
+        border: 1px solid #ccc;
+      }
 
-    .table_sort td:first-letter,
-    .table_sort th:first-letter {
-      text-transform: uppercase;
-    }
+      td:first-letter,
+      th:first-letter {
+        text-transform: uppercase;
+      }
 
-    .table_sort th {
-      color: #fff;
-      cursor: pointer;
-      user-select: none;
-      background-color: $button_color;
-    }
+      th {
+        color: #fff;
+        cursor: pointer;
+        user-select: none;
+        background-color: $button_color;
+      }
 
-    .table_sort tbody tr:nth-child(2n) {
-      background: #e3e3e3
+      tbody tr:nth-child(2n) {
+        background: #e3e3e3
+      }
     }
 
     th.sorted[data-order="-1"]::after {
@@ -108,6 +115,66 @@
       margin: 0 auto;
       width: 600px;
       height: 500px;
+    }
+
+
+    @media (max-width: $maxtablet-sсreen) {
+
+      .table_sort {
+
+        td,
+        th {
+          width: calc((100%)/ #{$column});
+          padding: 2px 2px 2px 1px;
+          font-size: 11px;
+        }
+      }
+
+      #main-chart {
+        width: 400px;
+        height: 350px;
+      }
+    }
+
+    @media (max-width:$tablet-sсreen) {
+
+      .table_sort {
+
+        td,
+        th {
+          width: calc((100%)/#{$column});
+          padding: 2px 2px 2px 1px;
+          font-size: 9px;
+        }
+      }
+
+      #main-chart {
+        width: 300px;
+        height: 250px;
+      }
+    }
+
+    @media (max-width: $phone-sсreen) {
+
+      .table_sort {
+
+        td,
+        th {
+          width: calc((100%)/#{$column});
+          padding: 2px 2px 2px 1px;
+          font-size: 7.5px;
+        }
+      }
+
+      .tabs-content {
+        padding: 10px;
+      }
+
+
+      #main-chart {
+        width: 210px;
+        height: 200px;
+      }
     }
   }
 }

@@ -63,4 +63,7 @@ body {
     color: $body_color;
     transition: .15s;
   }
+  @media (max-width: $phone-sсreen) {
+    margin: 0 10px;
+  }
 }

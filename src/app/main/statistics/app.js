@@ -6,7 +6,7 @@ import {
   spinnerOff,
 } from './components/loader';
 import {
-  getWords,
+  getWords, getUserStatistic,
 } from '../../common/index';
 
 export default class App {
@@ -32,16 +32,16 @@ export default class App {
       wordsLearned: 10,
       date: Date.parse('2020-06-07'),
     }, {
-      wordsLearned: 20,
+      wordsLearned: 2,
       date: Date.parse('2020-06-08'),
     }, {
-      wordsLearned: 100,
+      wordsLearned: 13,
       date: Date.parse('2020-06-09'),
     }, {
-      wordsLearned: 40,
+      wordsLearned: 7,
       date: Date.parse('2020-06-09'),
     }, {
-      wordsLearned: 50,
+      wordsLearned: 5,
       date: Date.parse('2020-06-11'),
     }];
     this.arrayWords = await App.getRandomWords(this.group);
