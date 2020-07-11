@@ -173,17 +173,24 @@ export async function sprintGamePageHandling(level) {
     }
   }
 
+  function pressOnLeftArrow(event) {
+    if (event.keyCode === 37) {
+      onIncorrectButtonClick();
+    }
+  }
+
+  function pressOnRightArrow(event) {
+    if (event.keyCode === 39) {
+      onCorrectButtonClick();
+    }
+  }
+
   function addEventListeners() {
     soundButton.addEventListener('click', onSoundClick);
     correctButton.addEventListener('click', onCorrectButtonClick);
-    document.body.addEventListener('keydown', (event) => {
-      if (event.keyCode === 37) {
-        onIncorrectButtonClick();
-      } else if (event.keyCode === 39) {
-        onCorrectButtonClick();
-      }
-    });
     incorrectButton.addEventListener('click', onIncorrectButtonClick);
+    document.body.addEventListener('keydown', pressOnLeftArrow);
+    document.body.addEventListener('keydown', pressOnRightArrow);
     sound.addEventListener('click', onSoundButtonClick);
   }
 
@@ -203,6 +210,10 @@ export async function sprintGamePageHandling(level) {
       const correct = gameStates.correctAnswersStatistic;
       const inCorrect = gameStates.incorrectAnswersStatistic;
       renderStatisticModal(correct, inCorrect, points.innerText);
+      document.body.removeEventListener('keydown', pressOnLeftArrow);
+      document.body.removeEventListener('keydown', pressOnRightArrow);
+      correctButton.removeEventListener('click', onCorrectButtonClick);
+      incorrectButton.removeEventListener('click', onIncorrectButtonClick);
       document.querySelector('.play-again-btn').addEventListener('click', onPlayAgain);
       document.body.addEventListener('keydown', (event) => {
         if (event.keyCode === 13) {
