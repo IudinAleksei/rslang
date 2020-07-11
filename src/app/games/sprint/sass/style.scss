@@ -212,6 +212,10 @@
     left: 26px;
 }
 
+.sound-on {
+    background-image: url('../../../../assets/icons/springGame/music_on.svg');
+}
+
 .sound-off {
     background-image: url('../../../../assets/icons/springGame/music_off.svg');
 }
@@ -359,6 +363,26 @@
 .sprint-game__correct {
     position: relative;
     @include button($color_text: $white_color);
+}
+
+.arrows {
+    min-height: 40px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.arrowLeft {
+    background-image: url('../../../../assets/icons/springGame/arrowLeft.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 50px;
+}
+
+.arrowRight {
+    background-image: url('../../../../assets/icons/springGame/arrowRight.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 50px;
 }
 
 .sprint-game__statistic-block {
