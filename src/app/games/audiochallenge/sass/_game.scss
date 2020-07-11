@@ -11,6 +11,7 @@
 
 .word-list {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-evenly;
   width: 100%;
   padding: 0;
@@ -119,4 +120,25 @@
 .audiochallenge-image_active {
   display: block;
 }
-
+@media screen and (max-width: $tablet_sreen) {
+  .word-list {
+    li {
+      margin: 16px 25px;
+      padding: 20px 20px;
+    }
+  }
+  .audiochallenge__button {
+    width: 200px;
+  }
+}
+@media screen and (max-width: $phone_screen) {
+  .word-list {
+    li {
+      margin: 16px 25px;
+      padding: 20px 20px;
+    }
+  }
+  .audiochallenge__button {
+    width: 200px;
+  }
+}
