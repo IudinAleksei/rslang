@@ -8,14 +8,15 @@ const isDev = process.env.NODE_ENV === 'development';
 const isProd = !isDev;
 
 module.exports = {
+  context: path.resolve(__dirname, 'src'),
   entry: {
     landing: [
-      './src/sass/index.scss',
-      './src/index.js',
+      './sass/index.scss',
+      './index.js',
     ],
     main: [
-      './src/sass/main.scss',
-      './src/main.js',
+      './sass/main.scss',
+      './main.js',
     ],
   },
   output: {
@@ -35,21 +36,21 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HTMLWebpackPlugin({
-      template: './src/index.html',
+      template: 'index.html',
       filename: 'index.html',
       minify: isProd,
-      favicon: './src/favicon.ico',
+      favicon: 'favicon.ico',
       chunks: ['landing'],
     }),
     new HTMLWebpackPlugin({
-      template: './src/main.html',
+      template: 'main.html',
       filename: 'main.html',
       minify: isProd,
-      favicon: './src/favicon.ico',
+      favicon: 'favicon.ico',
       chunks: ['main'],
     }),
     new CopyWebpackPlugin([
-      { from: './src/assets', to: 'assets' },
+      { from: 'assets', to: 'assets' },
     ]),
     new MiniCssExtractPlugin({
       filename: isDev ? '[name].css' : '[name].[hash].css',
@@ -64,14 +65,13 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              name: '[name].[ext]',
-              outputPath: 'fonts/',
+              name: '[path][name].[ext]',
             },
           },
         ],
       },
       {
-        test: /\.(webp|png|svg|jpe?g|gif)(\?v=\d+\.\d+\.\d+)?$/i,
+        test: /\.(webp|mp3|png|svg|jpe?g|gif)(\?v=\d+\.\d+\.\d+)?$/i,
         use: [
           {
             loader: 'file-loader',
