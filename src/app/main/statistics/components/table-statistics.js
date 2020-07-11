@@ -81,8 +81,8 @@ export default class TableStatistics {
       } else if (element === 'correct answer') {
         headCell.innerHTML = word.optional.rightWord;
       } else if (element === '% errors') {
-        headCell.innerHTML = Math.floor((word.optional.rightWord
-          / (word.optional.rightWord + word.optional.wrongWord)) * 100);
+        headCell.innerHTML = `${Math.floor((word.optional.wrongWord
+          / (word.optional.rightWord + word.optional.wrongWord)) * 100)} %`;
       } else {
         headCell.innerHTML = word.optional[element];
       }
