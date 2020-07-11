@@ -26,7 +26,7 @@ export function renderGame() {
         </div>
         <div class="points">0</div>
         <div class="counter">60</div>
-        <div class="sound"></div>
+        <div class="sound sound-on"></div>
         <div class="progress">
           <div class="circles">
             <div class="circle empty"></div>
@@ -49,6 +49,10 @@ export function renderGame() {
     <div class="buttons-section">
       <button class="sprint-game__wrong">Wrong</button>
       <button class="sprint-game__correct">Correct</button>
+    </div>
+    <div class="arrows">
+      <div class="arrowLeft"></div>
+      <div class="arrowRight"></div>
     </div>
   </div>
   <div class="sprint-game__statistic-block hidden"></div>`;
