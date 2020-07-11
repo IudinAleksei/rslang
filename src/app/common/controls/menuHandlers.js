@@ -12,9 +12,6 @@ export default {
   gamePuzzle,
   generateSpeakit,
   renderAudiochallengeStartPage,
-<<<<<<< HEAD
-  renderDictionary,
-=======
   startSprintGame,
->>>>>>> develop
+  renderDictionary,
 };
