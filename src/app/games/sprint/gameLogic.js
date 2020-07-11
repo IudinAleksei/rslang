@@ -18,9 +18,9 @@ export async function sprintGamePageHandling(level) {
   const incorrectButton = document.querySelector('.sprint-game__wrong');
   const extraPoints = document.querySelector('.extra-points');
   const sound = document.querySelector('.sound');
-  const audioCorrect = new Audio('../../../assets/audio/sprintGame/correct.mp3');
-  const audioInCorrect = new Audio('../../../assets/audio/sprintGame/failure.mp3');
-  const levelUpSound = new Audio('../../../assets/audio/sprintGame/levelUp.mp3');
+  const audioCorrect = new Audio('./assets/audio/sprintGame/correct.mp3');
+  const audioInCorrect = new Audio('./assets/audio/sprintGame/failure.mp3');
+  const levelUpSound = new Audio('./assets/audio/sprintGame/levelUp.mp3');
   const group = level;
   const cardContainer = document.querySelector('.card-container');
   let page = getRandomInteger(1, 22);
