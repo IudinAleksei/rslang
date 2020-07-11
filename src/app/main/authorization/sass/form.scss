@@ -2,7 +2,7 @@
 @import "../../../../sass/abstract/mixins";
 
 .authorization-form__body__background{
-  @include background(url('/src/assets/img/start-page-background..jpg'), $background-repeat: no-repeat);
+  @include background(url('../../../../assets/img/start-page-background..jpg'), $background-repeat: no-repeat);
 };
 
 .main-container__form{

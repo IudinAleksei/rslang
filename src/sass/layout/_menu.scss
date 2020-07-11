@@ -1,3 +1,8 @@
+.menu {
+  position: relative;
+  z-index: 2;
+}
+
 .menu__icon {
   position: relative;
   width: 37px;
@@ -56,7 +61,7 @@
 
   .menu__items__settings-item {
     &::after {
-      content: url(/src/assets/icons/header/gear-fill.svg);
+      content: url("../assets/icons/header/gear-fill.svg");
       position: relative;
       top: 4px;
       left: 5px;
@@ -75,7 +80,7 @@
     position: relative;
 
     &::before {
-      content: url(/src/assets/icons/header/dot.svg);
+      content: url("../assets/icons/header/dot.svg");
       position: absolute;
       top: 7px;
       left: -25px;
@@ -141,7 +146,7 @@
     text-decoration: none;
 
     &::before {
-      content: url(/src/assets/icons/header/box-arrow-left.svg);
+      content: url("../assets/icons/header/box-arrow-left.svg");
       position: absolute;
       top: 3px;
       right: 60px;

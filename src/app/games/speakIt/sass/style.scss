@@ -7,7 +7,7 @@
 
 .main__background-speakit {
   @include position($position: fixed);
-  @include background(url('/src/assets/img/rs-lang.jpg'), $background-repeat: no-repeat);
+  @include background(url('../../../../assets/img/rs-lang.jpg'), $background-repeat: no-repeat);
 }
 
 * {
