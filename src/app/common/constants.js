@@ -30,9 +30,20 @@ export const ELEMENTS_CLASSES = Object.freeze({
   trainingFinalMessage: 'training-final-page',
   trainingFinalTitle: 'training-final-page__title',
   trainingFinalText: 'training-final-page__text',
+  trainingShortStatsTitle: 'training-final-page__short-stats__title',
+  trainingShortStatsBtn: 'training-final-page__short-stats-button',
+  trainingShortStatsString: 'training-final-page__short-stats__string',
+  trainingShortStatsDescription: 'training-final-page__short-stats__string__description',
+  trainingShortStatsValue: 'training-final-page__short-stats__string__value',
 });
 
 export const MESSAGES = Object.freeze({
-  trainingFinalTitle: 'RSLang',
-  trainingFinalText: 'Final text',
+  trainingFinalTitle: 'RSLang Training Mode',
+  trainingFinalText: 'You have reached your daily card limit. \n You can increase the daily limit, but this may reduce the effectiveness of memorizing words.',
+  trainingShortStatsBtn: 'Show short-term stats',
+  trainingStatsTitle: 'Short-term statistics of this training session',
+  trainingAllCards: 'Total cards',
+  trainingRightCards: 'Correct answer',
+  trainingNewCards: 'New words',
+  trainingCardSeries: 'The longest series of correct answers',
 });
