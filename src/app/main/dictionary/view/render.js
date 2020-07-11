@@ -14,6 +14,8 @@ const createTabButton = (name) => {
 export const renderDictionary = () => {
   const mainContainer = document.querySelector(`.${ELEMENTS_CLASSES.mainContainer}`);
 
+  document.body.classList.add(ELEMENTS_CLASSES.dictionaryBody);
+
   const dict = document.createElement('div');
   dict.classList.add(ELEMENTS_CLASSES.dictionary);
 

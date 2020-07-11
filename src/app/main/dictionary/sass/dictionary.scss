@@ -1,3 +1,10 @@
+@import "../../../../sass/abstract/constants";
+@import "../../../../sass/abstract/mixins";
+
+.dictionary-body {
+  @include background(url('../../../../assets/img/rs-lang.jpg') center fixed, $background-size: cover, $background-repeat: repeat);
+}
+
 .dictionary {
   background-color: grey;
 }

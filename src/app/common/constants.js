@@ -25,10 +25,8 @@ export const ELEMENTS_CLASSES = Object.freeze({
   main: 'main',
   hideMain: 'main_hidden',
   mainContainer: 'main-container',
-<<<<<<< HEAD
   dictionary: 'dictionary',
   dictionaryBtn: 'dictionary__tab-button',
-=======
   trainingFinalPage: 'training-final-container',
   hideTrainingFinalPage: 'training-final-container_hidden',
   trainingFinalMessage: 'training-final-page',
@@ -39,6 +37,7 @@ export const ELEMENTS_CLASSES = Object.freeze({
   trainingShortStatsString: 'training-final-page__short-stats__string',
   trainingShortStatsDescription: 'training-final-page__short-stats__string__description',
   trainingShortStatsValue: 'training-final-page__short-stats__string__value',
+  dictionaryBody: 'dictionary-body',
 });
 
 export const MESSAGES = Object.freeze({
@@ -50,5 +49,4 @@ export const MESSAGES = Object.freeze({
   trainingRightCards: 'Correct answer',
   trainingNewCards: 'New words',
   trainingCardSeries: 'The longest series of correct answers',
->>>>>>> develop
 });
