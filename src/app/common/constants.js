@@ -19,6 +19,8 @@ export const DEFAULT_LOCAL_DATA = Object.freeze({
   showPicture: 'true',
   explanation: 'true',
   playAudio: 'true',
+  newWord: 10,
+  cards: 20,
 });
 
 export const API_KEYS = Object.freeze({
