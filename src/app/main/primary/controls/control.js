@@ -9,6 +9,8 @@ function mainGameHandling() {
     if (event.target.className === 'show-answer') {
       document.querySelector('.input-background').style.opacity = 1;
       document.querySelector('.meaning-word i').style.opacity = 1;
+      document.querySelector('.explanation-word').style.opacity = 1;
+      document.querySelector('.translate-sentense').style.opacity = 1;
       nextWord();
     }
   });

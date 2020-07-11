@@ -105,6 +105,14 @@ export default function addSettingsHtml() {
       </div>
    </div>
   </div>`;
+  if (localStorage.getItem('cards')) {
+    document.querySelector('.range-slider__cards').value = localStorage.getItem('cards');
+    document.querySelector('.range-value__cards').innerHTML = localStorage.getItem('cards');
+  }
+  if (localStorage.getItem('newWord')) {
+    document.querySelector('.range-slider__words').value = localStorage.getItem('newWord');
+    document.querySelector('.range-value__words').innerHTML = localStorage.getItem('newWord');
+  }
   if (localStorage.getItem('showAnswer') === 'true') {
     document.getElementById('show-answer').checked = 1;
   }

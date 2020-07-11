@@ -53,6 +53,10 @@
   margin: 10px 0;
   text-align: center;
 }
+.translate-sentense, .explanation-word{
+  opacity: 0;
+  transition: 0.5s;
+}
 .translate-word {
   border: 1px solid #1ab429;
   border-radius: 8px;

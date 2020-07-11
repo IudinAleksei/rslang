@@ -13,6 +13,12 @@ export default function sliderSettingsPageHandling() {
     const slider = element;
     return function assignInnerHtml(event) {
       slider.innerHTML = event.target.value;
+      if (sliderCounterCards) {
+        localStorage.setItem('cards', sliderCards.value);
+      }
+      if (sliderNewWords) {
+        localStorage.setItem('newWord', sliderNewWords.value);
+      }
     };
   }
 
@@ -33,7 +39,7 @@ export default function sliderSettingsPageHandling() {
   inputs.forEach((input) => {
     input.addEventListener('change', checkSelectedCheckboxes);
   });
-  playButton.addEventListener('click', () => game(sliderCounterNewWords, sliderCounterCards));
+  playButton.addEventListener('click', () => game());
   document.querySelector('.main-container').addEventListener('change', () => {
     if (document.getElementById('show-answer').checked) {
       localStorage.setItem('showAnswer', true);
