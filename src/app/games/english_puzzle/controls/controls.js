@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import {
   getWord, playAudio, showPuzzle, paintings,
 } from '../logicsGame';

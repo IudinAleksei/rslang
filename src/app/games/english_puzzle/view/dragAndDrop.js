@@ -1,4 +1,3 @@
-/* eslint-disable func-names */
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-param-reassign */
 function handleDrag(item) {

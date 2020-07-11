@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import paintings1 from './view/level1';
 import paintings2 from './view/level2';
 import paintings3 from './view/level3';

@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 export default async function fetchUrl(url, options) {
   try {
     const response = await fetch(url, options);
