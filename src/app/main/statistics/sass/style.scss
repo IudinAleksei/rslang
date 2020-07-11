@@ -20,8 +20,8 @@ body {
 }
 
 .title {
-  padding: 0;
-  margin: 20px 0;
+  margin: 0;
+  padding: 20px 0;
   color: $heading_color;
   text-align: center;
   font-size: 40px;
@@ -63,6 +63,7 @@ body {
     color: $body_color;
     transition: .15s;
   }
+
   @media (max-width: $phone-sсreen) {
     margin: 0 10px;
   }

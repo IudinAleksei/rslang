@@ -25,7 +25,7 @@ export default class App {
     mainContainer.prepend(divBackground);
     this.main = document.createElement('div');
     this.main.id = 'statistics';
-    mainContainer.prepend(App.getHeaderPage('statistics'));
+    this.main.prepend(App.getHeaderPage('statistics'));
     root.append(this.main);
     this.main.prepend(getLoader());
     spinnerOn();
@@ -35,11 +35,11 @@ export default class App {
     if (statisticsChart.hasOwnProperty('optional')) {
       // eslint-disable-next-line no-prototype-builtins
       if (statisticsChart.optional.hasOwnProperty('days')) {
-        this.main.prepend(this.statistics.render(this.arrayWords, this.arrayRow,
+        this.main.append(this.statistics.render(this.arrayWords, this.arrayRow,
           statisticsChart.optional.days));
       }
     } else {
-      this.main.prepend(this.statistics.render(this.arrayWords, this.arrayRow,
+      this.main.append(this.statistics.render(this.arrayWords, this.arrayRow,
         null));
     }
     spinnerOff();
