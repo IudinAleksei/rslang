@@ -4,7 +4,15 @@ export default class Chart {
   }
 
   render(statisticsChart) {
-    const countWords = statisticsChart.reduce((sum, cur) => sum + cur.wordsLearned, 0);
+    if (statisticsChart === null) {
+      const infoText = document.createElement('span');
+      infoText.classList.add('infoText');
+      infoText.innerHTML = 'No data';
+      return infoText;
+    }
+    const countWords = statisticsChart.learnedWords.reduce(
+      (sum, cur) => sum + cur, 0,
+    );
     this.chart = document.createElement('canvas');
     if (document.documentElement.clientWidth > 900) {
       this.chart.width = 600;
@@ -77,14 +85,14 @@ export default class Chart {
       context.stroke();
     }
     context.fillText('days', this.chart.width - 35, this.chart.height - 45);
-    for (let i = 0; i < statisticsChart.length; i += 1) {
-      context.fillText(`${i + 1}`, 50 + i * ((this.chart.width - this.chart.width / 20) / statisticsChart.length),
+    for (let i = 0; i < statisticsChart.date.length; i += 1) {
+      context.fillText(`${i + 1}`, 50 + i * ((this.chart.width - this.chart.width / 20) / statisticsChart.date.length),
         this.chart.height - this.chart.height / 20);
       context.beginPath();
-      context.moveTo(50 + i * ((this.chart.width - this.chart.width / 20) / statisticsChart.length),
-        this.chart.height - 45);
-      context.lineTo(50 + i * ((this.chart.width - this.chart.width / 20) / statisticsChart.length),
-        this.chart.height - 40);
+      context.moveTo(50 + i * ((this.chart.width - this.chart.width / 20)
+       / statisticsChart.date.length), this.chart.height - 45);
+      context.lineTo(50 + i * ((this.chart.width - this.chart.width / 20)
+      / statisticsChart.date.length), this.chart.height - 40);
       context.stroke();
     }
   }
@@ -96,21 +104,21 @@ export default class Chart {
     context.moveTo(30, this.chart.height - 40);
     let count = 0;
     this.updateChart = [];
-    for (let i = 0; i < statisticsChart.length; i += 1) {
-      const dp = statisticsChart[i].wordsLearned;
+    for (let i = 0; i < statisticsChart.learnedWords.length; i += 1) {
+      const dp = statisticsChart.learnedWords[i];
       count += dp;
-      context.lineTo(50 + i * ((this.chart.width - 25) / statisticsChart.length),
+      context.lineTo(50 + i * ((this.chart.width - 25) / statisticsChart.learnedWords.length),
         (this.chart.height - 40) - (this.chart.height - 100) * (count / countWords));
       context.stroke();
       context.beginPath();
-      context.arc(50 + i * ((this.chart.width - 25) / statisticsChart.length),
+      context.arc(50 + i * ((this.chart.width - 25) / statisticsChart.learnedWords.length),
         (this.chart.height - 40) - (this.chart.height - 100) * (count / countWords),
         2, 0, 2 * Math.PI, true);
       this.updateChart.push({
-        wordsLearned: statisticsChart[i].wordsLearned,
-        date: new Date(statisticsChart[i].date).toLocaleDateString(),
+        wordsLearned: statisticsChart.learnedWords[i],
+        date: new Date(statisticsChart.date[i]).toLocaleDateString(),
         y: (this.chart.height - 40) - (this.chart.height - 100) * (count / countWords),
-        x: 50 + i * ((this.chart.width - 25) / statisticsChart.length),
+        x: 50 + i * ((this.chart.width - 25) / statisticsChart.learnedWords.length),
       });
       context.fill();
     }

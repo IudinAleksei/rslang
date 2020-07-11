@@ -6,18 +6,19 @@ import {
   spinnerOff,
 } from './components/loader';
 import {
-  getWords, getUserStatistic,
+  getAllUserWords,
+  getUserStatistic,
 } from '../../common/index';
 
 export default class App {
   constructor() {
     this.arrayCategory = ['main', 'chart'];
-    this.arrayRow = ['word', 'translation', 'isGuess', 'correct answer', 'error answer', '% errors', 'Last date'];
+    this.arrayRow = ['word', 'translation', 'correct answer', '% errors', 'date'];
     this.statistics = new Statistics(this.arrayCategory);
     this.group = 0;
   }
 
-  async initApp(root) {
+  async initApp(root, token, userId) {
     const mainContainer = document.querySelector('.main-container');
     const divBackground = document.createElement('div');
     divBackground.className = 'main__background-statistics';
@@ -28,24 +29,19 @@ export default class App {
     root.append(this.main);
     this.main.prepend(getLoader());
     spinnerOn();
-    const data = [{
-      wordsLearned: 10,
-      date: Date.parse('2020-06-07'),
-    }, {
-      wordsLearned: 2,
-      date: Date.parse('2020-06-08'),
-    }, {
-      wordsLearned: 13,
-      date: Date.parse('2020-06-09'),
-    }, {
-      wordsLearned: 7,
-      date: Date.parse('2020-06-09'),
-    }, {
-      wordsLearned: 5,
-      date: Date.parse('2020-06-11'),
-    }];
-    this.arrayWords = await App.getRandomWords(this.group);
-    this.main.prepend(this.statistics.render(this.arrayWords, this.arrayRow, data));
+    const statisticsChart = await getUserStatistic(token, userId);
+    this.arrayWords = await getAllUserWords(token, userId);
+    // eslint-disable-next-line no-prototype-builtins
+    if (statisticsChart.hasOwnProperty('optional')) {
+      // eslint-disable-next-line no-prototype-builtins
+      if (statisticsChart.optional.hasOwnProperty('days')) {
+        this.main.prepend(this.statistics.render(this.arrayWords, this.arrayRow,
+          statisticsChart.optional.days));
+      }
+    } else {
+      this.main.prepend(this.statistics.render(this.arrayWords, this.arrayRow,
+        null));
+    }
     spinnerOff();
   }
 
@@ -64,24 +60,6 @@ export default class App {
   transitionResultsToGame() {
     this.results.hiddenResults();
     this.game.showGame();
-  }
-
-  static async getRandomWords(group) {
-    const page = App.getRandomArbitrary(0, 29);
-    const arrayWords = [];
-    const activeWords = await getWords(group, page);
-    for (let i = 0; i < activeWords.length / 2; i += 1) {
-      arrayWords.push({
-        word: activeWords[i].word,
-        isGuess: false,
-        transcription: activeWords[i].transcription,
-        translation: activeWords[i].wordTranslate,
-        image: activeWords[i].image,
-        audio: activeWords[i].audio,
-        current: App.getDataCurrent(activeWords[i].image),
-      });
-    }
-    return arrayWords;
   }
 
   static getRandomArbitrary(min, max) {

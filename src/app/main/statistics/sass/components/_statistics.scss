@@ -1,7 +1,7 @@
 $maxtablet-sсreen: 900px;
 $tablet-sсreen: 600px;
 $phone-sсreen: 450px;
-$column: 7;
+$column: 5;
 
 @mixin statistics {
 
@@ -49,10 +49,16 @@ $column: 7;
 
     .tabs-content {
       position: relative;
-      z-index: 2;
       padding: 15px;
       border-radius: 0 4px 4px 4px;
       background: white;
+
+    }
+
+    .infoText{
+      display: block;
+      margin: 20px auto;
+      text-align: center;
     }
 
     .tabs-panel {

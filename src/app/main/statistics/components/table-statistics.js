@@ -22,8 +22,9 @@ export default class TableStatistics {
   }
 
   static getSortTable(event) {
-    const order = event.target;
-    // const order = event.target.dataset.order = -(event.target.dataset.order || -1);
+    // const order = event.target;
+    // eslint-disable-next-line no-param-reassign
+    const order = event.target.dataset.order = -(event.target.dataset.order || -1);
     const index = [...event.target.parentNode.cells].indexOf(event.target);
     const collator = new Intl.Collator(['en', 'ru'], {
       numeric: true,
@@ -59,6 +60,12 @@ export default class TableStatistics {
 
   static getTbody(arrayWords, arrayRow) {
     const tBody = document.createElement('tbody');
+    if (arrayWords.length === 0) {
+      const infoText = document.createElement('span');
+      infoText.classList.add('infoText');
+      infoText.innerHTML = 'No data';
+      tBody.append(infoText);
+    }
     arrayWords.forEach((word) => {
       tBody.append(TableStatistics.getRowWord(word, arrayRow));
     });
@@ -69,7 +76,16 @@ export default class TableStatistics {
     const row = document.createElement('tr');
     arrayRow.forEach((element) => {
       const headCell = document.createElement('td');
-      headCell.innerHTML = word[element];
+      if (element === 'date') {
+        headCell.innerHTML = new Date(word.optional[element]).toLocaleDateString();
+      } else if (element === 'correct answer') {
+        headCell.innerHTML = word.optional.rightWord;
+      } else if (element === '% errors') {
+        headCell.innerHTML = Math.floor((word.optional.rightWord
+          / (word.optional.rightWord + word.optional.wrongWord)) * 100);
+      } else {
+        headCell.innerHTML = word.optional[element];
+      }
       row.append(headCell);
     });
     return row;
