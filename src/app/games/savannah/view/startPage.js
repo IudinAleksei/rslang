@@ -18,7 +18,7 @@ export default async function renderSavannahStartPage(loginResponse) {
 
   const subtitle = document.createElement('p');
   subtitle.classList.add('savannah-subtitle');
-  subtitle.textContent = 'Тренировка Саванна развивает словарный запас.';
+  subtitle.textContent = 'Savannah game increase your vocabulary';
 
   const form = document.createElement('form');
   form.classList.add('select-level__form');
@@ -88,12 +88,14 @@ export default async function renderSavannahStartPage(loginResponse) {
   }, { once: true });
 
   document.addEventListener('keydown', (event) => {
-    if (event.keyCode === 13) {
-      document.querySelector('#savannah').innerHTML = '';
+    if (event.code === 'Enter') {
+      if (document.querySelector('.savannah__start-button')) {
+        document.querySelector('#savannah').innerHTML = '';
 
-      setLocalData({ savannahLevel: levelValue });
+        setLocalData({ savannahLevel: levelValue });
 
-      startGame(wordsArr, loginResponse);
+        startGame(wordsArr, loginResponse);
+      }
     }
   }, { once: true });
 }

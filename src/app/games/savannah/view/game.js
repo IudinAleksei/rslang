@@ -16,6 +16,7 @@ export default class Game {
     this.bg = 0;
     this.statObj.right = 0;
     this.statObj.mistakes = 0;
+    this.workAnimation = true;
   }
 
   renderLayout() {
@@ -48,8 +49,6 @@ export default class Game {
     document.getElementById('savannah').append(this.heartWrapper, this.list, this.crystal);
 
     this.list.addEventListener('click', (event) => this.clickHandler(event));
-
-    document.addEventListener('keydown', (event) => this.keyboardHandler(event));
   }
 
   shuffle(array) {
@@ -162,6 +161,7 @@ export default class Game {
         this.list.innerHTML = '';
         this.trueWordContainer.remove();
         this.play();
+        this.workAnimation = false;
       }, 300);
     }, 5000);
   }
@@ -263,6 +263,8 @@ export default class Game {
   }
 
   keyboardHandler(event) {
+    this.workAnimation = true;
+
     if (event.code === 'Digit1' || event.code === 'Digit2' || event.code === 'Digit3' || event.code === 'Digit4' || event.code === 'Numpad1' || event.code === 'Numpad2' || event.code === 'Numpad3' || event.code === 'Numpad4') {
       clearTimeout(this.timeout);
 
@@ -291,6 +293,10 @@ export default class Game {
       await this.createWordList();
 
       this.animationWord();
+    }
+
+    if (this.workAnimation) {
+      document.addEventListener('keydown', (event) => this.keyboardHandler(event), { once: true });
     }
   }
 }
