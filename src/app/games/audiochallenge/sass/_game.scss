@@ -50,7 +50,6 @@
 
 .button-next {
   @include button;
-
   position: relative;
   outline: none;
   color: $white-color;
@@ -121,8 +120,3 @@
   display: block;
 }
 
-.audiochallenge-list {
-  width: 90%;
-  min-height: 63px;
-  margin: 0 auto 20px;
-}

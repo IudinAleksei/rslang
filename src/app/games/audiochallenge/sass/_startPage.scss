@@ -155,3 +155,78 @@
   justify-content: center;
   min-height: calc(100vh - 80px);
 }
+@media screen and (max-width: 800px) {
+  .logo {
+    width: 600px;
+  }
+  .audiochallenge-subtitle {
+    margin-top: 10px;
+  }
+  .select-level__form {
+    margin-top: 0px;
+  }
+}
+@media screen and (max-width: $tablet_sreen) {
+  .logo {
+    width: 450px;
+  }
+  .audiochallenge-subtitle {
+    font-size: 2rem;
+    margin-top: 0px;
+  }
+  .choose-level {
+    font-size: 1.8rem;
+  }
+  .select-level__form {
+    margin-top: 5px;
+  }
+  .select-level {
+    margin: 0 3px 0 3px;
+  }
+  .choose-user-word {
+    font-size: 1.8rem;
+  }
+  .select-user-word {
+    font-size: 1.8rem;
+  }
+}
+@media screen and (max-width: $phone_screen) {
+  .logo {
+    width: 320px;
+  }
+  .select-level__form {
+    display: block;
+  }
+  .choose-level{
+    margin-bottom: 15px;
+  }
+  .select-level {
+    margin: 0 0 0 5px;
+  }
+  .choose-user-word {
+    margin-bottom: 30px;
+  }
+  .audiochallenge__start-button {
+    width: 290px;
+    height: 50px;
+  }
+}
+@media screen and (max-width: 320px) {
+  .logo {
+    width: 310px;
+  }
+  .audiochallenge-subtitle {
+    font-size: 1.8rem;
+  }
+  .select-level__form {
+    margin-top: 10px;
+  }
+  .select-level {
+    width: 60px;
+    height: 40px;
+  }
+  .audiochallenge__start-button {
+    width: 300px;
+    height: 50px;
+  }
+}
