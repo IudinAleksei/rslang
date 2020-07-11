@@ -2,13 +2,92 @@
 @import './game';
 @import './statistic';
 
+.main-container__container-audiochallenge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 80px);
+}
 .audiochallenge__body {
-  background-image: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%);
+  background-image: linear-gradient(to right bottom, #48985a, #6eb260, #97cb65, #c4e46a, #f5fb71);
+  animation: change 10s ease-in-out infinite;
 }
 
+@keyframes change {
+  0% {
+    background-position: 0 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
 #audiochallenge {
   @include flex;
-
   justify-content: normal;
-  padding-top: 10vh;
+}
+
+.audiochallenge-subtitle {
+  @include bodyText();
+  font-size: 2.5rem;
+  margin: 25px 0 0 0;
+}
+
+
+.audiochallenge-list {
+  align-self: stretch;
+  min-height: 70px;
+}
+
+.select-level__form {
+  @include bodyText();
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
+
+.choose-level {
+  @include bodyText();
+  font-size: 2rem;
+  display: inline-block;
+  margin: 0;
+  margin-right: 10px;
+}
+
+.select-level {
+  color: #000;
+  width: 50px;
+  height: 30px;
+  border-radius: 4px;
+  border: none;
+  padding: 3px 0 0 5px;
+  margin: 0 10px 0 10px;
+}
+
+.choose-user-word {
+  margin: 0;
+  text-align: center;
+}
+
+.select-user-word {
+  color: black;
+  font-size: 2rem;
+  cursor: pointer;
+  border-bottom: 2px solid $white-color;
+  &:hover{
+    color: $white-color;
+    border-bottom: none;
+  }
+}
+.audiochallenge__start-button {
+  @include button;
+  color: $white-color;
+  margin-top: 25px;
+  &:hover{
+    background-color: $button_hover_color;
+  }
 }

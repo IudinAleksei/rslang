@@ -88,46 +88,4 @@
   }
 }
 
-.audiochallenge-subtitle {
-  color: $white_color;
-  font-size: 2.5rem;
-}
 
-.audiochallenge-list {
-  align-self: stretch;
-  min-height: 70px;
-}
-
-.select-level__form {
-  margin-bottom: 25px;
-  color: $white_color;
-  font-size: 2rem;
-}
-
-.choose-level {
-  display: inline-block;
-  margin: 0;
-  margin-right: 10px;
-}
-
-.select-level {
-  color: #000;
-}
-
-.choose-user-word {
-  margin: 0;
-  text-align: center;
-}
-
-.select-user-word {
-  color: #000;
-  font-size: 1.7rem;
-  text-decoration: underline;
-  cursor: pointer;
-}
-
-.audiochallenge__start-button {
-  @include button;
-
-  color: $white-color;
-}

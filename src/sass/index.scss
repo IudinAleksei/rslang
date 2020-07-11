@@ -30,7 +30,7 @@ body {
 }
 .main-container__background-landing-page {
  @include position($position: fixed);
- @include background(url(../assets/img/start-page-background..jpg), no-repeat);
+ @include background(url(../assets/img/start-page-background.jpg), no-repeat);
 }
 .navigation-menu__button-menu {
   @include button();
@@ -57,7 +57,7 @@ body {
     font-size: 40px;
   }
 }
-.wrap-landing-page__gaims {
+.wrap-landing-page__games {
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -68,7 +68,7 @@ body {
     margin: 0;
   }
 }
-.gaims-wrap {
+.games-wrap {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -81,8 +81,8 @@ body {
        margin-bottom: 0;
     }
     img {
-      width: 450px;
-      height: 250px;
+      width: 310px;
+      height: 200px;
       box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1), 0 11px 12px 0 rgba(14, 30, 37, 0.12);
       border-radius: 4px;
     }
@@ -168,7 +168,7 @@ body {
       font-size: 25px;
     }
     video {
-      width: 320px;
+      width: 310px;
     }
   }
   .gaims-wrap {
