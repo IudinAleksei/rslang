@@ -1,0 +1,26 @@
+.savannah__timer {
+  color: $white_color;
+  font-size: 5rem;
+}
+
+.savannah__preload__describe__wrapper {
+  position: absolute;
+  bottom: 5vh;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.savannah__preload__keyboard-ico {
+  position: absolute;
+  top: -50px;
+  left: 50%;
+  width: 40px;
+  height: 35px;
+  transform: translateX(-50%);
+  background: url('../../../../assets/icons/savannah/preload-keyboard.svg') center center/cover no-repeat;
+}
+
+.savannah__preload__describe {
+  color: $white_color;
+  font-size: 1.5rem;
+}

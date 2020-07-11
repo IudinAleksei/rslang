@@ -2,7 +2,7 @@
 import '../sass/main.scss';
 import { setLocalData, getAndInitLocalData } from '../../../common/index';
 import getWordsArray from './getWordsArray';
-import startGame from './startGame';
+import preload from './preload';
 
 export default async function renderSavannahStartPage(loginResponse) {
   document.querySelector('body').classList.add('savannah__body');
@@ -79,12 +79,12 @@ export default async function renderSavannahStartPage(loginResponse) {
 
   wordsArr = await getWordsArray(loginResponse, levelValue);
 
-  button.addEventListener('click', () => {
+  button.addEventListener('click', async () => {
     wrapper.innerHTML = '';
 
     setLocalData({ savannahLevel: levelValue });
 
-    startGame(wordsArr, loginResponse);
+    preload(wordsArr, loginResponse);
   }, { once: true });
 
   document.addEventListener('keydown', (event) => {
@@ -94,7 +94,7 @@ export default async function renderSavannahStartPage(loginResponse) {
 
         setLocalData({ savannahLevel: levelValue });
 
-        startGame(wordsArr, loginResponse);
+        preload(wordsArr, loginResponse);
       }
     }
   }, { once: true });
