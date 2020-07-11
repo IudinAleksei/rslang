@@ -25,4 +25,25 @@ export const ELEMENTS_CLASSES = Object.freeze({
   main: 'main',
   hideMain: 'main_hidden',
   mainContainer: 'main-container',
+  trainingFinalPage: 'training-final-container',
+  hideTrainingFinalPage: 'training-final-container_hidden',
+  trainingFinalMessage: 'training-final-page',
+  trainingFinalTitle: 'training-final-page__title',
+  trainingFinalText: 'training-final-page__text',
+  trainingShortStatsTitle: 'training-final-page__short-stats__title',
+  trainingShortStatsBtn: 'training-final-page__short-stats-button',
+  trainingShortStatsString: 'training-final-page__short-stats__string',
+  trainingShortStatsDescription: 'training-final-page__short-stats__string__description',
+  trainingShortStatsValue: 'training-final-page__short-stats__string__value',
+});
+
+export const MESSAGES = Object.freeze({
+  trainingFinalTitle: 'RSLang Training Mode',
+  trainingFinalText: 'You have reached your daily card limit. \n You can increase the daily limit, but this may reduce the effectiveness of memorizing words.',
+  trainingShortStatsBtn: 'Show short-term stats',
+  trainingStatsTitle: 'Short-term statistics of this training session',
+  trainingAllCards: 'Total cards',
+  trainingRightCards: 'Correct answer',
+  trainingNewCards: 'New words',
+  trainingCardSeries: 'The longest series of correct answers',
 });
