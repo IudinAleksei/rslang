@@ -1,4 +1,7 @@
-import { loginUser, createUser } from '../../../common/index';
+import {
+  loginUser, createUser, upsertUserSettings, getAndInitLocalData,
+  getUserSettings,
+} from '../../../common/index';
 
 function showError() {
   const errors = document.createElement('div');
@@ -23,7 +26,11 @@ async function getSign(email, password) {
       return null;
     }
     loginResponse = await loginUser({ email: `${email}`, password: `${password}` });
+    upsertUserSettings(loginResponse.token, loginResponse.userId,
+      { optional: getAndInitLocalData() });
   }
+  const settingsUser = await getUserSettings(loginResponse.token, loginResponse.userId);
+  localStorage.setItem(settingsUser);
   return loginResponse;
 }
 export default function formHandling(nextPageFunction) {

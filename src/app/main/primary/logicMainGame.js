@@ -33,6 +33,10 @@ let arrayCommon;
 let progressCardLength;
 let objectUserWord;
 let counterCard = 0;
+let isCorrectAnswer = true;
+let counterCorrectAnswer = 0;
+let counterSeriesCorrectAnswer = 0;
+const arrayCorrectAnswer = [];
 const email = 'team52@mail.ru';
 const password = 'Test2020+';
 const tokens = localStorage.getItem('token');
@@ -71,7 +75,14 @@ export function nextWord() {
           createUserWord(tokens, usersId, word._id, objectUserWord).then((q) => console.log(q));
         }
         if (arrayCommon.length === 0) {
-          alert();
+          const statsValues = {
+            trainingAllCards: +(localStorage.getItem('cards')),
+            trainingRightCards: counterCorrectAnswer,
+            trainingNewCards: +(localStorage.getItem('newWord')),
+            trainingCardSeries: Math.max.apply(null, arrayCorrectAnswer),
+          };
+          alert(statsValues);
+          console.log(statsValues);
         } else {
           showCardWord(arrayCommon);
         }
@@ -93,15 +104,10 @@ export function updateWord(event) {
   }
 }
 
-getAllUserWords(tokens, usersId).then((q) => {
-  console.log(q);
-});
-upsertUserSettings(tokens, usersId, { optional: getAndInitLocalData() });
-getUserSettings(tokens, usersId).then((q) => console.log(q));
-
 export async function showCardWord(array) {
-  counterCard += 1;
   document.querySelector('.main-container').innerHTML = '';
+  isCorrectAnswer = true;
+  counterCard += 1;
   console.log(array);
   word = array.shift();
   console.log(word);
@@ -123,7 +129,6 @@ export async function showCardWord(array) {
     word.textMeaningTranslate, getMedia(word.image), word.wordTranslate, word.textMeaning);
   showInformationWord();
   document.querySelector('.progress').max = quantityCards;
-  console.log(document.querySelector('.progress').max);
   document.querySelector('.progress').value = counterCard;
   document.querySelector('.word-start').innerHTML = `${w[1]}`;
   document.querySelector('.word-end').innerHTML = `${e[0]}`;
@@ -136,7 +141,6 @@ export async function showCardWord(array) {
     document.querySelector('.input-background').append(litter);
   });
   document.querySelector('.input').style.width = `${document.querySelector('.input-background').offsetWidth}px`;
-  console.log(document.querySelector('.input-background').offsetWidth);
 }
 
 async function mainGame() {
@@ -144,10 +148,6 @@ async function mainGame() {
   document.querySelector('.main-container').innerHTML = '';
   quantityNewWords = localStorage.getItem('newWord');
   quantityCards = localStorage.getItem('cards');
-  console.log(progressCardLength);
-  await getAndInitLocalData();
-  upsertUserSettings(tokens, usersId, { optional: getAndInitLocalData() });
-  getUserSettings(tokens, usersId).then((q) => console.log(q));
   await loginUser({ email: `${email}`, password: `${password}` }).then((q) => {
     console.log(q);
     localStorage.setItem('token', q.token);
@@ -173,7 +173,14 @@ export function compareWord() {
     document.querySelector('.explanation-word').style.opacity = 1;
     document.querySelector('.translate-sentense').style.opacity = 1;
     nextWord();
+    if (isCorrectAnswer === true) {
+      counterCorrectAnswer += 1;
+      counterSeriesCorrectAnswer += 1;
+    }
   } else {
+    arrayCorrectAnswer.push(counterSeriesCorrectAnswer);
+    isCorrectAnswer = false;
+    counterSeriesCorrectAnswer = 0;
     document.querySelector('.input').value = '';
     document.querySelector('.input-background').style.opacity = 1;
     setTimeout(() => {
@@ -196,6 +203,7 @@ export function compareWord() {
     });
     playAudio(word.audio);
   }
+  console.log(counterSeriesCorrectAnswer, counterCorrectAnswer, arrayCorrectAnswer);
 }
 
 export default mainGame;
