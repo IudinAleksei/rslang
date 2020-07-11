@@ -1,9 +1,8 @@
-/* eslint-disable max-len */
-/* eslint-disable no-console */
 /* eslint-disable import/no-cycle */
 /* eslint-disable no-param-reassign */
 import { getWordsInfo, getWordInfoById } from '../../../common/index';
 import renderStatistic from './statistic';
+import renderSavannahStartPage from './startPage';
 
 export default class Game {
   constructor(wordsArr, loginResponse) {
@@ -221,8 +220,49 @@ export default class Game {
     }
   }
 
+  keyboardRightWord(element) {
+    this.playAudio('./assets/audio/savannah/savannah-right-word.mp3');
+    this.bg += 5;
+    element.classList.add('savannah__right-word');
+    document.querySelector('.savannah__true-word').textContent = '';
+    document.querySelector('.savannah__true-word').classList.add('savannah__true-word_right');
+    document.querySelector('.savannah__body').style.backgroundPosition = `bottom ${this.bg}% right 50%`;
+    this.crystalScale += 0.1;
+    this.crystalImage.style.transform = '';
+    this.crystalImage.style.transform = `scale(${this.crystalScale})`;
+    this.level += 1;
+    this.statObj.right += 1;
+    this.statObj[Object.values(this.wordsArr[0])[0]] = true;
+
+    this.wordsArr.splice(0, 1);
+
+    setTimeout(() => {
+      this.list.innerHTML = '';
+      this.trueWordContainer.remove();
+      this.play();
+    }, 500);
+  }
+
+  keyboardWrongWord(element) {
+    this.playAudio('./assets/audio/savannah/savannah-wrong-word.mp3');
+    document.querySelector('.savannah__true-word').classList.add('savannah__true-word_false');
+    element.classList.add('savannah__wrong-word');
+    this.level += 1;
+    this.life -= 1;
+    this.statObj.mistakes += 1;
+    this.statObj[Object.values(this.wordsArr[0])[0]] = false;
+    document.querySelector('.heart__list-item').remove();
+
+    this.wordsArr.splice(0, 1);
+
+    setTimeout(() => {
+      this.list.innerHTML = '';
+      this.trueWordContainer.remove();
+      this.play();
+    }, 300);
+  }
+
   keyboardHandler(event) {
-    // console.log(123456789);
     if (event.code === 'Digit1' || event.code === 'Digit2' || event.code === 'Digit3' || event.code === 'Digit4' || event.code === 'Numpad1' || event.code === 'Numpad2' || event.code === 'Numpad3' || event.code === 'Numpad4') {
       clearTimeout(this.timeout);
 
@@ -230,50 +270,19 @@ export default class Game {
       const elementDataWord = element.dataset.falseword;
 
       if (elementDataWord !== 'true') {
-        this.playAudio('./assets/audio/savannah/savannah-right-word.mp3');
-        this.bg += 5;
-        element.classList.add('savannah__right-word');
-        document.querySelector('.savannah__true-word').textContent = '';
-        document.querySelector('.savannah__true-word').classList.add('savannah__true-word_right');
-        document.querySelector('.savannah__body').style.backgroundPosition = `bottom ${this.bg}% right 50%`;
-        this.crystalScale += 0.1;
-        this.crystalImage.style.transform = '';
-        this.crystalImage.style.transform = `scale(${this.crystalScale})`;
-        this.level += 1;
-        this.statObj.right += 1;
-        this.statObj[Object.values(this.wordsArr[0])[0]] = true;
-
-        this.wordsArr.splice(0, 1);
-
-        setTimeout(() => {
-          this.list.innerHTML = '';
-          this.trueWordContainer.remove();
-          this.play();
-        }, 500);
+        this.keyboardRightWord(element);
       } else if (elementDataWord === 'true') {
-        this.playAudio('./assets/audio/savannah/savannah-wrong-word.mp3');
-        document.querySelector('.savannah__true-word').classList.add('savannah__true-word_false');
-        element.classList.add('savannah__wrong-word');
-        this.level += 1;
-        this.life -= 1;
-        this.statObj.mistakes += 1;
-        this.statObj[Object.values(this.wordsArr[0])[0]] = false;
-        document.querySelector('.heart__list-item').remove();
-
-        this.wordsArr.splice(0, 1);
-
-        setTimeout(() => {
-          this.list.innerHTML = '';
-          this.trueWordContainer.remove();
-          this.play();
-        }, 300);
+        this.keyboardWrongWord(element);
+      }
+    } else if (event.code === 'Enter') {
+      if (document.querySelector('.savannah__stat__button')) {
+        renderSavannahStartPage(this.loginResponse);
       }
     }
   }
 
   async play() {
     if (this.level === this.maxLevel || this.life <= 0) {
-      // document.removeEventListener('keydown', (event) => this.keyboardHandler(event));
       this.playAudio('./assets/audio/savannah/savannah-statistic.mp3');
       renderStatistic(this.statObj, this.loginResponse);
     } else {

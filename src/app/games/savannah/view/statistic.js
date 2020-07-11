@@ -72,9 +72,4 @@ export default function renderStatistic(obj, loginResponse) {
   document.querySelector(('#savannah')).append(stat);
 
   againButton.addEventListener('click', () => renderSavannahStartPage(loginResponse), { once: true });
-  document.addEventListener('keydown', (event) => {
-    if (event.keyCode === 13) {
-      renderSavannahStartPage(loginResponse);
-    }
-  }, { once: true });
 }
