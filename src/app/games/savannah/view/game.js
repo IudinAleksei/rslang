@@ -1,5 +1,4 @@
 /* eslint-disable import/no-cycle */
-/* eslint-disable no-param-reassign */
 import { getWordsInfo, getWordInfoById } from '../../../common/index';
 import renderStatistic from './statistic';
 import renderSavannahStartPage from './startPage';
@@ -52,14 +51,21 @@ export default class Game {
   }
 
   shuffle(array) {
-    for (let i = array.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
+    const shuffledArray = array;
+    let currentIndex = shuffledArray.length;
+    let temporaryValue;
+    let randomIndex;
+    while (currentIndex !== 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+      temporaryValue = array[currentIndex];
+      shuffledArray[currentIndex] = array[randomIndex];
+      shuffledArray[randomIndex] = temporaryValue;
     }
 
     this.test = 1;
 
-    return array;
+    return shuffledArray;
   }
 
   async getAlternativeWords() {
@@ -157,6 +163,9 @@ export default class Game {
 
       this.playAudio('./assets/audio/savannah/savannah-wrong-word.mp3');
 
+      const rightWord = document.querySelector('[data-word]');
+      rightWord.classList.add('savannah__right-word');
+
       setTimeout(() => {
         this.list.innerHTML = '';
         this.trueWordContainer.remove();
@@ -212,6 +221,7 @@ export default class Game {
 
   clickHandler(event) {
     clearTimeout(this.timeout);
+    this.workAnimation = false;
 
     if (event.target.dataset.word === Object.values(this.wordsArr[0])[0]) {
       this.rightWordChoose(event);
@@ -244,9 +254,14 @@ export default class Game {
   }
 
   keyboardWrongWord(element) {
+    const rightWord = document.querySelector('[data-word]');
+
     this.playAudio('./assets/audio/savannah/savannah-wrong-word.mp3');
     document.querySelector('.savannah__true-word').classList.add('savannah__true-word_false');
     element.classList.add('savannah__wrong-word');
+
+    setTimeout(() => rightWord.classList.add('savannah__right-word'), 100);
+
     this.level += 1;
     this.life -= 1;
     this.statObj.mistakes += 1;

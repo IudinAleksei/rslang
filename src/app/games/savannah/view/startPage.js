@@ -63,7 +63,10 @@ export default async function renderSavannahStartPage(loginResponse) {
   selectLevel.onchange = async function getLevelValue() {
     levelValue = selectLevel.value;
     wordsArr = await getWordsArray(loginResponse, levelValue);
-    button.removeAttribute('disabled');
+
+    if (selectUserWord.classList.contains('savannah__select-user-word_select')) {
+      selectUserWord.classList.remove('savannah__select-user-word_select');
+    }
   };
 
   selectUserWord.addEventListener('click', async () => {
