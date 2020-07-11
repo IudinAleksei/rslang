@@ -3,6 +3,7 @@ import menuHandling from './app/main/menu/menu';
 // import { showForm, formHandling } from './app/main/authorization/index';
 import renderAudiochallengeStartPage from './app/games/audiochallenge/index';
 
+
 window.onload = () => {
   menuHandling();
   renderAudiochallengeStartPage();
