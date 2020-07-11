@@ -6,10 +6,6 @@ export default function renderAudiochallengeStartPage() {
   document.querySelector('body').classList.add('audiochallenge__body');
   document.querySelector('.main-container').innerHTML = '';
 
-  const CONTAINER_AUDIOCHALLENGE = document.createElement('div');
-  CONTAINER_AUDIOCHALLENGE.className = 'main-container__container-audiochallenge';
-  document.querySelector('.main-container').appendChild(CONTAINER_AUDIOCHALLENGE);
-
   const wrapper = document.createElement('div');
   wrapper.setAttribute('id', 'audiochallenge');
 
@@ -89,7 +85,7 @@ export default function renderAudiochallengeStartPage() {
 
   wrapper.append(title, subtitle, form, button);
 
-  CONTAINER_AUDIOCHALLENGE.appendChild(wrapper);
+  document.querySelector('.main-container').append(wrapper);
 
   let levelValue = 0;
 
