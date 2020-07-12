@@ -46,11 +46,11 @@ export async function getWordArr() {
   shuffle(sliceArr);
 
   const ol = document.createElement('ol');
-  ol.classList.add('word-list');
+  ol.classList.add('audiochallenge__word-list');
 
   for (let i = 0; i < 5; i += 1) {
     const li = document.createElement('li');
-    li.classList.add('word-list__item');
+    li.classList.add('audiochallenge__word-list__item');
     li.innerText = sliceArr[i];
     li.setAttribute('data-key', i + 1);
 
