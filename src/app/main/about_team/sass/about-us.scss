@@ -91,3 +91,17 @@
     }
   }
 }
+@media screen and (max-width: 320px) {
+  .about-us__wrap {
+    width: 292px;
+    height: 337px;
+    margin-bottom: 70px;
+  }
+  .about-us__wrap{
+    .wrap-name {
+      .text {
+        height: 90px;
+      }
+    }
+  }
+}
