@@ -1,15 +1,16 @@
 import createLayout from './createLayout';
 import createAudio from './createAudio';
-import getWordArr from './wordList';
+import { getWord, getWordArr } from './wordList';
 import {
   wordListlistener, buttonListener, audioIconListener, keyboardListener,
 } from '../controls/listeners';
 import { createSpeakIcon, createImage, createTrueWord } from './createAssets';
 
-export default async function startAudiochallengeGame(level) {
+export default async function startAudiochallengeGame(arr) {
   createLayout();
   createSpeakIcon();
-  await getWordArr(level);
+  await getWord(arr);
+  await getWordArr();
   await createAudio();
   createImage();
   createTrueWord();

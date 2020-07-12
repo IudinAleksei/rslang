@@ -1,6 +1,8 @@
-import startAudiochallengeGame from './startGame';
+import { setLocalData, getAndInitLocalData } from '../../../common/index';
+import getWordsArray from './getWordsArray';
+import preload from './preload';
 
-export default function renderAudiochallengeStartPage() {
+export default async function renderAudiochallengeStartPage(loginResponse) {
   const bodyClass = document.querySelector('body').classList;
   document.querySelector('body').classList.remove(bodyClass[0], bodyClass[1]);
   document.querySelector('body').classList.add('audiochallenge__body');
@@ -52,16 +54,16 @@ export default function renderAudiochallengeStartPage() {
   subtitle.textContent = 'Welcome to audiochallenge game';
 
   const form = document.createElement('form');
-  form.classList.add('select-level__form');
+  form.classList.add('audiochallenge__select-level__form');
 
   const choose = document.createElement('p');
-  choose.classList.add('choose-level');
+  choose.classList.add('audiochallenge__choose-level');
   choose.textContent = 'You can choose level';
 
   const selectLevel = document.createElement('select');
-  selectLevel.classList.add('select-level');
+  selectLevel.classList.add('audiochallenge__select-level');
 
-  for (let i = 0; i < 6; i += 1) {
+  for (let i = 1; i <= 6; i += 1) {
     const option = document.createElement('option');
     option.textContent = i;
     selectLevel.append(option);
@@ -69,10 +71,10 @@ export default function renderAudiochallengeStartPage() {
 
   const chooseUserWord = document.createElement('p');
   chooseUserWord.textContent = 'or your ';
-  chooseUserWord.classList.add('choose-user-word');
+  chooseUserWord.classList.add('audiochallenge__choose-user-word');
 
   const selectUserWord = document.createElement('span');
-  selectUserWord.classList.add('select-user-word');
+  selectUserWord.classList.add('audiochallenge__select-user-word');
   selectUserWord.textContent = 'learning words';
 
   chooseUserWord.append(selectUserWord);
@@ -87,14 +89,49 @@ export default function renderAudiochallengeStartPage() {
 
   document.querySelector('.main-container').append(wrapper);
 
-  let levelValue = 0;
+  let levelValue = getAndInitLocalData().audiochallengeLevel;
 
-  selectLevel.onchange = function getLevelValue() {
+  let wordsArr = [];
+
+  selectLevel.onchange = async function getLevelValue() {
     levelValue = selectLevel.value;
+    wordsArr = await getWordsArray(loginResponse, levelValue);
+
+    if (selectUserWord.classList.contains('audiochallenge__select-user-word_select')) {
+      selectUserWord.classList.remove('audiochallenge__select-user-word_select');
+    }
   };
 
-  button.addEventListener('click', () => {
-    wrapper.innerHTML = '';
-    startAudiochallengeGame(levelValue);
+  selectUserWord.addEventListener('click', async () => {
+    wordsArr = await getWordsArray(loginResponse, false);
+
+    if (wordsArr.length < 5) {
+      alert('Sorry, you have less than 5 words in your vocabulary.\nPlease, choose level!');
+      wordsArr = await getWordsArray(loginResponse, levelValue);
+    } else {
+      selectUserWord.classList.add('audiochallenge__select-user-word_select');
+    }
   });
+
+  wordsArr = await getWordsArray(loginResponse, levelValue);
+
+  button.addEventListener('click', async () => {
+    wrapper.innerHTML = '';
+
+    setLocalData({ audiochallengeLevel: levelValue });
+
+    preload(wordsArr, loginResponse);
+  }, { once: true });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.code === 'Enter') {
+      if (document.querySelector('.audiochallenge__start-button')) {
+        document.querySelector('#audiochallenge').innerHTML = '';
+
+        setLocalData({ audiochallengeLevel: levelValue });
+
+        preload(wordsArr, loginResponse);
+      }
+    }
+  }, { once: true });
 }

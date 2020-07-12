@@ -1,5 +1,5 @@
 import createAudio from '../view/createAudio';
-import getWordArr from '../view/wordList';
+import { getWordArr } from '../view/wordList';
 import { createImage, createTrueWord } from '../view/createAssets';
 import createStatistic from '../view/statistic';
 import { stat, wordListener, wordListlistener } from './wordList';
