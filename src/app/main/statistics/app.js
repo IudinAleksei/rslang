@@ -30,17 +30,23 @@ export default class App {
     this.main.prepend(getLoader());
     spinnerOn();
     const statisticsChart = await getUserStatistic(token, userId);
-    this.arrayWords = await getAllUserWords(token, userId);
-    // eslint-disable-next-line no-prototype-builtins
-    if (statisticsChart.hasOwnProperty('optional')) {
-      // eslint-disable-next-line no-prototype-builtins
-      if (statisticsChart.optional.hasOwnProperty('days')) {
-        this.main.append(this.statistics.render(this.arrayWords, this.arrayRow,
-          statisticsChart.optional.days));
-      }
-    } else {
+    if (statisticsChart === null) {
+      this.arrayWords = await getAllUserWords(token, userId);
       this.main.append(this.statistics.render(this.arrayWords, this.arrayRow,
         null));
+    } else {
+      this.arrayWords = await getAllUserWords(token, userId);
+      // eslint-disable-next-line no-prototype-builtins
+      if (statisticsChart.hasOwnProperty('optional')) {
+        // eslint-disable-next-line no-prototype-builtins
+        if (statisticsChart.optional.hasOwnProperty('days')) {
+          this.main.append(this.statistics.render(this.arrayWords, this.arrayRow,
+            statisticsChart.optional.days));
+        }
+      } else {
+        this.main.append(this.statistics.render(this.arrayWords, this.arrayRow,
+          null));
+      }
     }
     spinnerOff();
   }
