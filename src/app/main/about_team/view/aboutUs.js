@@ -4,44 +4,44 @@ const generatePageAboutUs = () => {
   const OUR_TEAM = [{
     img: 'assets/img/about-us/cat.jpg',
     name: 'Aleksei Iudin',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur dictum libero eu quam cursus dapibus eget non augue. Morbi pulvinar purus non sodales eleifend.',
-    telegramLink: 'https://telegram.org/',
-    githubLink: 'https://github.com/',
+    text: 'Created the project structure. Configured webpack and other project tools. Developed common modules for the sessionStorage, localStorage, and Yandex.Translate API. Created a dictionary page. Code review of all PRs',
+    telegramLink: 'https://t.me/AleksDraco',
+    githubLink: 'https://github.com/IudinAleksei',
   },
   {
     img: 'assets/img/about-us/cat.jpg',
     name: 'Hanna Tsitsenkova',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur dictum libero eu quam cursus dapibus eget non augue. Morbi pulvinar purus non sodales eleifend.',
-    telegramLink: 'https://telegram.org/',
-    githubLink: 'https://github.com/',
+    text: 'Developed: design card for Tranning game, design and content for about us page, design lending page, mixins and constant for app',
+    telegramLink: 'https://t.me/titenkova_anna',
+    githubLink: 'https://github.com/Hanna25',
   },
   {
     img: 'assets/img/about-us/cat.jpg',
     name: 'Ihar Zimnitski',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur dictum libero eu quam cursus dapibus eget non augue. Morbi pulvinar purus non sodales eleifend.',
-    telegramLink: 'https://telegram.org/',
-    githubLink: 'https://github.com/',
+    text: 'Developed: Savanna game, Audiochallenge game, function for working with skyeng api',
+    telegramLink: 'https://t.me/igor_zi',
+    githubLink: 'https://github.com/igorzima',
   },
   {
     img: 'assets/img/about-us/cat.jpg',
     name: 'Searhei Baranenkau',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur dictum libero eu quam cursus dapibus eget non augue. Morbi pulvinar purus non sodales eleifend.',
-    telegramLink: 'https://telegram.org/',
-    githubLink: 'https://github.com/',
+    text: 'Developed: Training game, English puzzle game, authorization form',
+    telegramLink: 'https://t.me/cupora',
+    githubLink: 'https://github.com/cup0ra',
   },
   {
     img: 'assets/img/about-us/cat.jpg',
     name: 'Semen Shpakau',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur dictum libero eu quam cursus dapibus eget non augue. Morbi pulvinar purus non sodales eleifend.',
-    telegramLink: 'https://telegram.org/',
-    githubLink: 'https://github.com/',
+    text: 'Developed: SpeakIt game, backend function, statistics page',
+    telegramLink: 'https://t.me/Jack34Black',
+    githubLink: 'https://github.com/SkaymanT',
   },
   {
     img: 'assets/img/about-us/cat.jpg',
     name: 'Kate Prokofieva',
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur dictum libero eu quam cursus dapibus eget non augue. Morbi pulvinar purus non sodales eleifend.',
-    telegramLink: 'https://telegram.org/',
-    githubLink: 'https://github.com/',
+    text: 'Developed: Sprint game, burger menu, settings for Training game game, content for landing page',
+    telegramLink: 'https://t.me/KatherineProkofieva',
+    githubLink: 'https://github.com/KatherineP',
   },
   ];
   const CARD = (img, name, text, telegramLink, githubLink) => `<div class="about-us__wrap">
@@ -51,8 +51,8 @@ const generatePageAboutUs = () => {
                 <p class="text">${text}</p>
               </div>
               <div class="contact">
-                <a href="${telegramLink}"><img src="assets/img/about-us/telegram.svg" class="telegtam"></a>
-                <a href="${githubLink}"><img src="assets/img/about-us/logo.svg" class="github"></a>
+                <a href="${telegramLink}" target="_blank"><img src="assets/img/about-us/telegram.svg" class="telegtam"></a>
+                <a href="${githubLink}" target="_blank"><img src="assets/img/about-us/logo.svg" class="github"></a>
               </div>
             </div>`;
   const MAIN_CONTAINER = document.querySelector('.main-container');
