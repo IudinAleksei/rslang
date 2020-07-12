@@ -1,6 +1,7 @@
 import { setLocalData, getAndInitLocalData } from '../../../common/index';
 import getWordsArray from './getWordsArray';
 import preload from './preload';
+import '../sass/main.scss';
 
 export default async function renderAudiochallengeStartPage(loginResponse) {
   const bodyClass = document.querySelector('body').classList;

@@ -10,6 +10,7 @@ export const DEFAULT_LOCAL_DATA = Object.freeze({
   puzzleLevel: 0,
   puzzlePage: 0,
   audiochallengeLevel: 1,
+  savannahLevel: 1,
 });
 
 export const API_KEYS = Object.freeze({

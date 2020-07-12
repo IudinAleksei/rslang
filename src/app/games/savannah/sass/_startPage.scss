@@ -1,0 +1,52 @@
+.savannah__title {
+  @include headingText;
+
+  margin: 0;
+  color: #6cffde;
+  font-size: 5rem;
+}
+
+.savannah-subtitle {
+  padding: 5px;
+  color: $white_color;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.select-level__form {
+  margin-bottom: 25px;
+  color: $white_color;
+  font-size: 2rem;
+}
+
+.choose-level {
+  display: inline-block;
+  margin: 0;
+  margin-right: 10px;
+}
+
+.select-level {
+  color: #000;
+}
+
+.choose-user-word {
+  margin: 0;
+  text-align: center;
+}
+
+.savannah__select-user-word {
+  font-size: 1.7rem;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.savannah__select-user-word_select {
+  color: #6cffde;
+  text-decoration: none;
+}
+
+.savannah__start-button {
+  @include button(#00c49d);
+
+  color: $white-color;
+}
