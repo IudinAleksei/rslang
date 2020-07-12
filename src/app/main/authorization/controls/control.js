@@ -1,6 +1,10 @@
 import {
-  loginUser, createUser, upsertUserSettings, getAndInitLocalData,
-  getUserSettings, setLocalData,
+  loginUser,
+  createUser,
+  upsertUserSettings,
+  getAndInitLocalData,
+  getUserSettings,
+  setLocalData,
 } from '../../../common/index';
 
 function showError() {
@@ -16,40 +20,58 @@ function showError() {
 async function getSign(email, password) {
   let loginResponse = null;
   if (document.getElementById('signin').checked) {
-    loginResponse = await loginUser({ email: `${email}`, password: `${password}` });
+    loginResponse = await loginUser({
+      email: `${email}`,
+      password: `${password}`,
+    });
     if (loginResponse) {
       sessionStorage.setItem('authorized', JSON.stringify(loginResponse));
       const settingsUser = await getUserSettings(loginResponse.token, loginResponse.userId);
-      console.log(settingsUser);
       setLocalData(settingsUser.optional);
     }
     return loginResponse;
   }
   if (document.getElementById('signup').checked) {
-    const result = await createUser({ email: `${email}`, password: `${password}` });
+    const result = await createUser({
+      email: `${email}`,
+      password: `${password}`,
+    });
     console.log(result);
     if (result === null) {
       showError();
       return null;
     }
-    loginResponse = await loginUser({ email: `${email}`, password: `${password}` });
+    loginResponse = await loginUser({
+      email: `${email}`,
+      password: `${password}`,
+    });
     if (loginResponse) {
       sessionStorage.setItem('authorized', JSON.stringify(loginResponse));
       localStorage.clear();
-      upsertUserSettings(loginResponse.token, loginResponse.userId,
-        { optional: getAndInitLocalData() }).then((q) => console.log(q));
+      upsertUserSettings(loginResponse.token, loginResponse.userId, {
+        optional: getAndInitLocalData(),
+      }).then((q) => console.log(q));
     }
   }
   return loginResponse;
 }
 export default function formHandling(nextPageFunction) {
-  document.getElementById('authorization').addEventListener('submit', async (event) => {
-    event.preventDefault();
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    const loginResponse = await getSign(email, password);
+  let loginResponse = sessionStorage.authorized;
+  console.log(sessionStorage.authorized);
+  if (sessionStorage.authorized) {
+    loginResponse = sessionStorage.authorized;
     if (loginResponse) {
       nextPageFunction(loginResponse);
     }
-  });
+  } else {
+    document.getElementById('authorization').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      loginResponse = await getSign(email, password);
+      if (loginResponse) {
+        nextPageFunction(loginResponse);
+      }
+    });
+  }
 }
