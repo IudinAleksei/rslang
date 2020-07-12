@@ -23,38 +23,26 @@
   align-items: center;
 }
 .puzzle-start-game__wrapper{
-  width: 320px;
+  width: 520px;
   margin: auto ;
   @include flex() ;
-  color:#fff;
+
 }
 .puzzle-start-game__heading{
-  margin-bottom: 20px;
-  font-size: 3rem;
-  justify-content: center;
+  @include headingText ($font-size: 5rem)
 }
 .puzzle-start-game__description{
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
+
 }
 .puzzle-start-game__button{
-  background: $button_color;
-  border: none;
-  outline: none;
-  border-radius: 2px;
-  color: #fff;
-  cursor: pointer;
-  font-size: 14px;
-  height: 30px;
-  width: 80px;
-  margin-top: 20px;
-  overflow: hidden;
-  transition: all .3s cubic-bezier(.6,0,.4,1);
+  @include  button();
+  color:white;
 
   &:hover{
     background: green;
     cursor: pointer;
-    box-shadow: 0 5px 10px rgba(0,0,0,0.25), 0 3px 3px rgba(0,0,0,0.22);
   }
 }
 
@@ -433,7 +421,12 @@
     justify-content: center;
     align-items: center;
   }
+  .puzzle-start-game__wrapper{
+    width: 320px;
+    margin: auto ;
+    @include flex() ;
 
+  }
   .puzzle-game__puzzle-word{
     font-size: 1rem;
   }

@@ -1,7 +1,7 @@
 const CREATE_CHECK_WORDS_BUTONS = (wrap) => {
   const ELEMENT_BUTTONS = [{
     class: 'show-answer',
-    text: 'show ansver',
+    text: 'show answer',
   },
   {
     class: 'enter',
