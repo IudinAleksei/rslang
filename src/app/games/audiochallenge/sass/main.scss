@@ -3,14 +3,24 @@
 @import './startPage';
 @import './game';
 @import './statistic';
+@import './preload';
 
 .audiochallenge__body {
-  animation: background-image 3s infinite alternate;
-  background-image: linear-gradient(to right bottom, #48985a, #6eb260, #97cb65, #c4e46a, #f5fb71);
+  width: 100%;
+  height: 100%;
+  transition: all 1s linear;
+  background: linear-gradient(-45deg, #f5fb71, #6ff7a0, #00e4e4, #00c5ff, #719bfb, #a8a2ef, #c7ace3, #d8badb, #deccd8, #e4edb9);
+  background-size: 1100% 1100%;
 }
 
 #audiochallenge {
   @include flex;
 
   justify-content: normal;
+  width: 100%;
+  transform: translateY(-90px);
+
+  @media screen and (max-width: 499px) {
+    transform: translateY(-30px);
+  }
 }

@@ -8,6 +8,7 @@ import { keyboardEvent } from './keyboard';
 import renderAudiochallengeStartPage from '../view/startPage';
 
 let round = 1;
+let bodyPosition = 0;
 
 export async function nextWord() {
   const button = document.querySelector('.button');
@@ -29,6 +30,7 @@ export async function nextWord() {
 
 function clickButtons(loginResponse) {
   const button = document.querySelector('.button');
+  const bodyBcg = document.querySelector('.audiochallenge__body');
 
   if (button.classList.contains('audiochallenge__button-next')) {
     document.querySelector('.audiochallenge__word-list').innerHTML = '';
@@ -52,6 +54,14 @@ function clickButtons(loginResponse) {
       round += 1;
       nextWord();
     }
+
+    if (bodyPosition === 90) {
+      bodyPosition = 0;
+    } else {
+      bodyPosition += 10;
+    }
+
+    bodyBcg.style.backgroundPosition = `${bodyPosition}% ${bodyPosition}%`;
   } else if (button.classList.contains('audiochallenge__button')) {
     document.querySelector('.audiochallenge__word-list').removeEventListener('click', wordListener);
     const audioTranslate = document.querySelector('.audiochallenge__word-audio').dataset.translate;
