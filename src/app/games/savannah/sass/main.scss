@@ -1,0 +1,20 @@
+@import '../../../../sass/abstract/constants';
+@import '../../../../sass/abstract/mixins';
+@import './startPage';
+@import './game';
+@import './statistic';
+@import './preload';
+
+.savannah__body {
+  transition: all 1s linear;
+  background: url('../../../../assets/icons/savannah/savannah_bg.svg');
+  background-position: bottom right 50%;
+}
+
+#savannah {
+  @include flex;
+
+  justify-content: normal;
+  height: calc(100vh - 80px);
+  padding-top: 30vh;
+}

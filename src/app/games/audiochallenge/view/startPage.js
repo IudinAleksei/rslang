@@ -1,3 +1,4 @@
+import '../sass/main.scss';
 import startAudiochallengeGame from './startGame';
 
 export default function renderAudiochallengeStartPage() {
@@ -8,6 +9,10 @@ export default function renderAudiochallengeStartPage() {
 
   const wrapper = document.createElement('div');
   wrapper.setAttribute('id', 'audiochallenge');
+
+  const containerAudiochallenge = document.createElement('div');
+  containerAudiochallenge.className = 'main-container__container-audiochallenge';
+  document.querySelector('.main-container').appendChild(containerAudiochallenge);
 
   const title = document.createElement('div');
   title.classList.add('audiochallenge__title');
@@ -85,7 +90,7 @@ export default function renderAudiochallengeStartPage() {
 
   wrapper.append(title, subtitle, form, button);
 
-  document.querySelector('.main-container').append(wrapper);
+  containerAudiochallenge.appendChild(wrapper);
 
   let levelValue = 0;
 

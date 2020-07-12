@@ -74,11 +74,7 @@ export default function createStatistic(obj) {
   againButton.classList.add('button', 'button-again');
   againButton.textContent = 'Play again';
 
-  const mainPageButton = document.createElement('button');
-  mainPageButton.classList.add('button', 'button-main-page');
-  mainPageButton.textContent = 'Main page';
-
-  buttonWrapper.append(againButton, mainPageButton);
+  buttonWrapper.append(againButton);
 
   stat.append(statWrapper, buttonWrapper);
   document.querySelector(('#audiochallenge')).append(stat);
