@@ -4,6 +4,9 @@ import gamePuzzle from '../../games/english_puzzle/index';
 import generatePageAboutUs from '../../main/about_team/index';
 import renderAudiochallengeStartPage from '../../games/audiochallenge/view/startPage';
 import generateSpeakit from '../../games/speakIt/index';
+import generateStatistics from '../../main/statistics/index';
+import gameTraining from '../../main/primary/index';
+import renderSavannahStartPage from '../../games/savannah/view/startPage';
 
 export default {
   renderSettings,
@@ -12,4 +15,7 @@ export default {
   generateSpeakit,
   renderAudiochallengeStartPage,
   startSprintGame,
+  generateStatistics,
+  gameTraining,
+  renderSavannahStartPage,
 };

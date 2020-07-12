@@ -30,7 +30,7 @@ export default function showStatistic(paintings, level, page, wordKnow, wordNotK
   know.className = 'puzzle-game__block-know';
   know.innerHTML = `I know  <span class="puzzle-game__block-know__item">${wordKnow.length}</span>:`;
   for (let i = 0; i < wordKnow.length; i += 1) {
-    const word = document.createElement('p');
+    const word = document.createElement('div');
     word.className = 'puzzle-game__sentence';
     word.innerHTML = `<button class="puzzle-game__word-statistic-button" data-value='${wordKnow[i].audioExample}'></button><p class="puzzle-game__word-statistic">${wordKnow[i].textExample}</p>`;
     know.append(word);
