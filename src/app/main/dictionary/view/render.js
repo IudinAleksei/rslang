@@ -5,6 +5,9 @@ const createTabButton = (name) => {
   const btn = document.createElement('button');
 
   btn.classList.add(ELEMENTS_CLASSES.dictionaryBtn);
+  if (name === 'Studied words') {
+    btn.classList.add(ELEMENTS_CLASSES.selectDictionaryBtn);
+  }
 
   btn.innerText = name;
 
@@ -13,15 +16,22 @@ const createTabButton = (name) => {
 
 export const renderDictionary = () => {
   const mainContainer = document.querySelector(`.${ELEMENTS_CLASSES.mainContainer}`);
+  const TAB_BUTTONS_NAME = ['Studied words', 'Difficult words', 'Deleited words'];
 
   document.body.classList.add(ELEMENTS_CLASSES.dictionaryBody);
 
   const dict = document.createElement('div');
   dict.classList.add(ELEMENTS_CLASSES.dictionary);
+  const buttonContainer = document.createElement('div');
+  buttonContainer.classList.add(ELEMENTS_CLASSES.dictionaryBtnContainer);
 
-  const studiedBtn = createTabButton('Studied words');
+  TAB_BUTTONS_NAME.forEach((name) => {
+    const studiedBtn = createTabButton(name);
 
-  dict.append(studiedBtn);
+    buttonContainer.append(studiedBtn);
+  });
+
+  dict.append(buttonContainer);
 
   mainContainer.append(dict);
 };

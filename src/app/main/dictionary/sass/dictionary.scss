@@ -6,12 +6,44 @@
 }
 
 .dictionary {
-  background-color: grey;
+  height: calc(100vh - 80px);
+}
+
+.dictionary__button-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 600px;
+  height: 42px;
+  margin: 0 auto;
+  overflow: hidden;
 }
 
 .dictionary__tab-button {
-  width: 150px;
-  height: 50px;
-  border-radius: 10px;
-  background-color: red;
+  @include button();
+
+  width: 190px;
+  margin-left: 5px;
+  padding-bottom: 8px;
+  color: $white_color;
+
+  &_selected {
+    background-color: transparent;
+    text-shadow: 0 0 4px  $border_color;
+  }
+}
+
+@media (max-width: $tablet_sreen) {
+  .dictionary__button-container {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: unset;
+  }
+
+  .dictionary__tab-button {
+    margin-top: 5px;
+    margin-left: 5px;
+    padding: 0;
+  }
 }

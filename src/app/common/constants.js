@@ -25,8 +25,6 @@ export const ELEMENTS_CLASSES = Object.freeze({
   main: 'main',
   hideMain: 'main_hidden',
   mainContainer: 'main-container',
-  dictionary: 'dictionary',
-  dictionaryBtn: 'dictionary__tab-button',
   trainingFinalPage: 'training-final-container',
   hideTrainingFinalPage: 'training-final-container_hidden',
   trainingFinalMessage: 'training-final-page',
@@ -37,7 +35,12 @@ export const ELEMENTS_CLASSES = Object.freeze({
   trainingShortStatsString: 'training-final-page__short-stats__string',
   trainingShortStatsDescription: 'training-final-page__short-stats__string__description',
   trainingShortStatsValue: 'training-final-page__short-stats__string__value',
+  dictionary: 'dictionary',
   dictionaryBody: 'dictionary-body',
+  dictionaryBtnContainer: 'dictionary__button-container',
+  dictionaryBtn: 'dictionary__tab-button',
+  selectDictionaryBtn: 'dictionary__tab-button_selected',
+
 });
 
 export const MESSAGES = Object.freeze({
