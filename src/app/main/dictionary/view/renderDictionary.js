@@ -1,5 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import { ELEMENTS_CLASSES } from '../../../common/constants';
+import { readAllUserWords } from '../model/dictionaryLogic';
 
 const createTabButton = (name) => {
   const btn = document.createElement('button');
@@ -14,9 +15,10 @@ const createTabButton = (name) => {
   return btn;
 };
 
-export const renderDictionary = () => {
+export const renderDictionary = (loginResponse) => {
+  readAllUserWords(loginResponse);
   const mainContainer = document.querySelector(`.${ELEMENTS_CLASSES.mainContainer}`);
-  const TAB_BUTTONS_NAME = ['Studied words', 'Difficult words', 'Deleited words'];
+  const TAB_BUTTONS_NAME = ['Studied words', 'Difficult words', 'Deleted words'];
 
   document.body.classList.add(ELEMENTS_CLASSES.dictionaryBody);
 
