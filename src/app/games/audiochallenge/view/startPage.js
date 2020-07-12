@@ -11,6 +11,10 @@ export default async function renderAudiochallengeStartPage(loginResponse) {
   const wrapper = document.createElement('div');
   wrapper.setAttribute('id', 'audiochallenge');
 
+  const containerAudiochallenge = document.createElement('div');
+  containerAudiochallenge.className = 'main-container__container-audiochallenge';
+  document.querySelector('.main-container').appendChild(containerAudiochallenge);
+
   const title = document.createElement('div');
   title.classList.add('audiochallenge__title');
   title.innerHTML = `
@@ -87,7 +91,7 @@ export default async function renderAudiochallengeStartPage(loginResponse) {
 
   wrapper.append(title, subtitle, form, button);
 
-  document.querySelector('.main-container').append(wrapper);
+  containerAudiochallenge.appendChild(wrapper);
 
   let levelValue = getAndInitLocalData().audiochallengeLevel;
 
