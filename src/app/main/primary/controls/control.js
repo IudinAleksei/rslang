@@ -13,20 +13,23 @@ function mainGameHandling() {
       document.querySelector('.translate-sentense').style.opacity = 1;
       nextWord();
     }
-  });
+  }, false);
   document.querySelector('.main-container').addEventListener('focus', () => {
     document.querySelector('.input-background').style.opacity = 0;
-  });
+  }, false);
   document.querySelector('.main-container').addEventListener('input', () => {
     document.querySelector('.input-background').style.opacity = 0;
-  });
-  document.addEventListener('keydown', (event) => {
+  }, false);
+  document.querySelector('.main-container').addEventListener('keydown', (event) => {
     document.querySelector('.input').focus();
     if (event.key === 'Enter') {
       event.preventDefault();
       compareWord();
     }
-  });
+  }, false);
+  document.addEventListener('keydown', () => {
+    document.querySelector('.input').focus();
+  }, false);
 }
 
 export default mainGameHandling;

@@ -1,9 +1,9 @@
 import mainGame from './logicMainGame';
 import mainGameHandling from './controls/control';
 
-function game(sliderCounterNewWords, sliderCounterCards) {
-  mainGame(sliderCounterNewWords, sliderCounterCards);
+function gameTraining() {
+  mainGame();
   mainGameHandling();
 }
 
-export default game;
+export default gameTraining;

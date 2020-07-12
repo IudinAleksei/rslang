@@ -9,8 +9,8 @@ export default function addSettingsHtml() {
             <p>New words to learn:</p>
           </div>
           <div class="settings__slider-container__input">
-            <input class="range-slider__words slider" type="range" id="words-slider" name="" value="10" min="2" max="25">
-            <label class="range-value__words slider-value" for="words-slider" id="range-value-new-words">10</label>
+            <input class="range-slider__words slider" type="range" id="words-slider" name="" value="0" min="0" max="25">
+            <label class="range-value__words slider-value" for="words-slider" id="range-value-new-words"></label>
           </div>
         </div>
         <div class="settings__slider-container">
@@ -18,8 +18,8 @@ export default function addSettingsHtml() {
             <p>Max number of Cards:</p>
           </div>
           <div class="settings__slider-container__input">
-            <input class="range-slider__cards slider" type="range" id="cards-slider" name="" value="20" min="4" max="50">
-            <label class="range-value__cards slider-value" for="cards-slider" id="range-value-cards">20</label>
+            <input class="range-slider__cards slider" type="range" id="cards-slider" name="" value="0" min="10" max="50">
+            <label class="range-value__cards slider-value" for="cards-slider" id="range-value-cards"></label>
           </div>
         </div>
       </div>
