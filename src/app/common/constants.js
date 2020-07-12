@@ -10,6 +10,18 @@ export const DEFAULT_LOCAL_DATA = Object.freeze({
   puzzleLevel: 0,
   puzzlePage: 0,
   audiochallengeLevel: 1,
+  showAnswer: 'true',
+  deleteWord: 'true',
+  hardWord: 'true',
+  transcription: 'true',
+  example: 'true',
+  translation: 'true',
+  sentencesTranslation: 'true',
+  showPicture: 'true',
+  explanation: 'true',
+  playAudio: 'true',
+  newWord: 10,
+  cards: 20,
   savannahLevel: 1,
 });
 

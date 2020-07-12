@@ -9,8 +9,8 @@ export default function addSettingsHtml() {
             <p>New words to learn:</p>
           </div>
           <div class="settings__slider-container__input">
-            <input class="range-slider__words slider" type="range" id="words-slider" name="" value="10" min="2" max="30">
-            <label class="range-value__words slider-value" for="words-slider" id="range-value-new-words">10</label>
+            <input class="range-slider__words slider" type="range" id="words-slider" name="" value="0" min="0" max="25">
+            <label class="range-value__words slider-value" for="words-slider" id="range-value-new-words"></label>
           </div>
         </div>
         <div class="settings__slider-container">
@@ -18,8 +18,8 @@ export default function addSettingsHtml() {
             <p>Max number of Cards:</p>
           </div>
           <div class="settings__slider-container__input">
-            <input class="range-slider__cards slider" type="range" id="cards-slider" name="" value="20" min="4" max="40">
-            <label class="range-value__cards slider-value" for="cards-slider" id="range-value-cards">20</label>
+            <input class="range-slider__cards slider" type="range" id="cards-slider" name="" value="0" min="10" max="50">
+            <label class="range-value__cards slider-value" for="cards-slider" id="range-value-cards"></label>
           </div>
         </div>
       </div>
@@ -105,4 +105,72 @@ export default function addSettingsHtml() {
       </div>
    </div>
   </div>`;
+  if (localStorage.getItem('cards')) {
+    document.querySelector('.range-slider__cards').value = localStorage.getItem('cards');
+    document.querySelector('.range-value__cards').innerHTML = localStorage.getItem('cards');
+  }
+  if (localStorage.getItem('newWord')) {
+    document.querySelector('.range-slider__words').value = localStorage.getItem('newWord');
+    document.querySelector('.range-value__words').innerHTML = localStorage.getItem('newWord');
+  }
+  if (localStorage.getItem('showAnswer') === 'true') {
+    document.getElementById('show-answer').checked = 1;
+  }
+  if (localStorage.getItem('showAnswer') === 'false') {
+    document.getElementById('show-answer').checked = 0;
+  }
+  if (localStorage.getItem('deleteWord') === 'true') {
+    document.getElementById('delete-word').checked = 1;
+  }
+  if (localStorage.getItem('deleteWord') === 'false') {
+    document.getElementById('delete-word').checked = 0;
+  }
+  if (localStorage.getItem('hardWord') === 'true') {
+    document.getElementById('hard-word').checked = 1;
+  }
+  if (localStorage.getItem('hardWord') === 'false') {
+    document.getElementById('hard-word').checked = 0;
+  }
+  if (localStorage.getItem('transcription') === 'true') {
+    document.getElementById('transcription').checked = 1;
+  }
+  if (localStorage.getItem('transcription') === 'false') {
+    document.getElementById('transcription').checked = 0;
+  }
+  if (localStorage.getItem('example') === 'true') {
+    document.getElementById('example').checked = 1;
+  }
+  if (localStorage.getItem('example') === 'false') {
+    document.getElementById('example').checked = 0;
+  }
+  if (localStorage.getItem('translation') === 'true') {
+    document.getElementById('translation').checked = 1;
+  }
+  if (localStorage.getItem('translation') === 'false') {
+    document.getElementById('translation').checked = 0;
+  }
+  if (localStorage.getItem('sentencesTranslation') === 'true') {
+    document.getElementById('sentences-translation').checked = 1;
+  }
+  if (localStorage.getItem('sentencesTranslation') === 'false') {
+    document.getElementById('sentences-translation').checked = 0;
+  }
+  if (localStorage.getItem('showPicture') === 'true') {
+    document.getElementById('show-picture').checked = 1;
+  }
+  if (localStorage.getItem('showPicture') === 'false') {
+    document.getElementById('show-picture').checked = 0;
+  }
+  if (localStorage.getItem('explanation') === 'true') {
+    document.getElementById('explanation').checked = 1;
+  }
+  if (localStorage.getItem('explanation') === 'false') {
+    document.getElementById('explanation').checked = 0;
+  }
+  if (localStorage.getItem('playAudio') === 'true') {
+    document.getElementById('play-audio').checked = 1;
+  }
+  if (localStorage.getItem('playAudio') === 'false') {
+    document.getElementById('play-audio').checked = 0;
+  }
 }
