@@ -17,7 +17,7 @@ export default class Game {
     this.statObj.mistakes = 0;
     this.workAnimation = true;
     this.audioPlay = true;
-    this.rightCount = 0;
+    this.rightCount = 1;
   }
 
   renderLayout() {
@@ -190,7 +190,7 @@ export default class Game {
         this.trueWordContainer.remove();
         this.play();
         this.workAnimation = false;
-        this.rightCount = 0;
+        this.rightCount = 1;
       }, 300);
     }, 5000);
   }
@@ -206,7 +206,8 @@ export default class Game {
     document.querySelector('.savannah__true-word').classList.add('savannah__true-word_right');
     document.querySelector('.savannah__body').style.backgroundPosition = `bottom ${this.bg}% right 50%`;
 
-    if (this.rightCount % 3 === 0 && this.rightCount !== 0) {
+    if (this.rightCount % 3 === 0) {
+      this.playAudio('./assets/audio/savannah/savannah-crystal-scale.mp3');
       this.crystalScale += 0.1;
       this.crystalImage.style.transform = '';
       this.crystalImage.style.transform = `scale(${this.crystalScale})`;
@@ -237,7 +238,7 @@ export default class Game {
     setTimeout(() => document.querySelector('[data-word]').classList.add('savannah__right-word'), 100);
     this.level += 1;
     this.life -= 1;
-    this.rightCount = 0;
+    this.rightCount = 1;
     this.statObj.mistakes += 1;
     this.statObj[Object.values(this.wordsArr[0])[0]] = false;
     document.querySelector('.heart__list-item').remove();
@@ -273,7 +274,8 @@ export default class Game {
     document.querySelector('.savannah__true-word').classList.add('savannah__true-word_right');
     document.querySelector('.savannah__body').style.backgroundPosition = `bottom ${this.bg}% right 50%`;
 
-    if (this.rightCount % 3 === 0 && this.rightCount !== 0) {
+    if (this.rightCount % 3 === 0) {
+      this.playAudio('./assets/audio/savannah/savannah-crystal-scale.mp3');
       this.crystalScale += 0.1;
       this.crystalImage.style.transform = '';
       this.crystalImage.style.transform = `scale(${this.crystalScale})`;
@@ -307,7 +309,7 @@ export default class Game {
 
     this.level += 1;
     this.life -= 1;
-    this.rightCount = 0;
+    this.rightCount = 1;
     this.statObj.mistakes += 1;
     this.statObj[Object.values(this.wordsArr[0])[0]] = false;
     document.querySelector('.heart__list-item').remove();
