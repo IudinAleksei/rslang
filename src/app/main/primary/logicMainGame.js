@@ -1,14 +1,14 @@
 /* eslint-disable no-underscore-dangle */
 import fetchUrl from '../../common/network/backendWords/commonFetch';
 import {
-  createUserWord,
-  updateUserWord, upsertUserSettings,
+  createUserWord, updateUserWord, upsertUserSettings,
 } from '../../common/network/backendWords/backendWords';
 import getMedia from '../../common/utils/githubMedia';
 import { getAndInitLocalData } from '../../common/index';
 import createCardWord from '../training/view/cardWithWord';
 import showInformationWord from './view/showInformationWord';
 import renderFinalPage from '../training/view/renderFinal';
+import updateStatistics from './view/updateStatistics';
 
 export async function getAllAggregatedWords(token, userId, wordsPerPage, filter) {
   const urlWords = `https://afternoon-falls-25894.herokuapp.com/users/${userId}/aggregatedWords?wordsPerPage=${wordsPerPage}&filter=${encodeURIComponent(JSON.stringify(filter))}`;
@@ -89,8 +89,8 @@ export async function showCardWord(array) {
 
   showInformationWord();
 
-  document.querySelector('.progress').max = quantityCards;
-  document.querySelector('.progress').value = counterCard;
+  document.querySelector('.main-progress').max = quantityCards;
+  document.querySelector('.main-progress').value = counterCard;
   document.querySelector('.word-start').innerHTML = `${startSentence[1]}`;
   document.querySelector('.word-end').innerHTML = `${endSentence[0]}`;
   document.querySelector('.input').maxLength = `${word.word.length}`;
@@ -169,7 +169,6 @@ async function mainGame() {
   tokens = authorized.token;
   usersId = authorized.userId;
   counterCard = 0;
-
   upsertUserSettings(tokens, usersId,
     { optional: getAndInitLocalData() });
 
@@ -208,6 +207,9 @@ export function compareWord() {
     objectUserWord.optional.rightWord += 1;
     objectUserWord.optional.counter += 1;
     objectUserWord.optional.repeat = (objectUserWord.optional.counter < 4);
+    if (objectUserWord.optional.repeat === false) {
+      updateStatistics(tokens, usersId, 1);
+    }
 
     document.querySelector('.meaning-word i').style.opacity = 1;
     document.querySelector('.explanation-word').style.opacity = 1;

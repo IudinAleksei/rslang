@@ -103,7 +103,7 @@
   margin-bottom: 25px;
   z-index: 1;
 }
-.progress {
+.main-progress {
   position: relative;
   background: #a4d5a9;
   border-radius: 13px;
@@ -249,7 +249,7 @@ input:active, input:focus{
   .delete-word {
     margin: 0 15px 0 15px;
   }
-  .progress {
+  .main-progress {
     width: 30rem;
   }
 }
@@ -266,7 +266,7 @@ input:active, input:focus{
     width: 33rem;
     height: 5rem;
   }
-  .progress {
+  .main-progress {
     width: 24rem;
   }
 }
@@ -293,7 +293,7 @@ input:active, input:focus{
     width: 30rem;
     height: 5rem;
   }
-  .progress {
+  .main-progress {
     width: 24rem;
   }
 }

@@ -32,7 +32,7 @@ const CREATE_DOM_ELEMENTS = () => {
   CREATE_CHECK_WORDS_BUTONS(DIV_WRAP);
 
   const DIV_PROGRESS = document.createElement('progress');
-  DIV_PROGRESS.className = ('progress');
+  DIV_PROGRESS.className = ('main-progress');
   DIV_WRAP.appendChild(DIV_PROGRESS);
 };
 export default CREATE_DOM_ELEMENTS;
