@@ -1,31 +1,30 @@
-export default function createStatistic(obj) {
-  const { right, mistakes, dontKnow } = obj;
+/* eslint-disable import/no-cycle */
+import renderSavannahStartPage from './startPage';
 
-  document.querySelector(('#audiochallenge')).innerHTML = '';
+export default function renderStatistic(obj, loginResponse) {
+  const { right, mistakes } = obj;
+
+  document.querySelector(('#savannah')).innerHTML = '';
 
   const stat = document.createElement('div');
-  stat.classList.add('audiochallenge__statistic');
+  stat.classList.add('savannah__statistic');
+
+  const statWrapper = document.createElement('div');
+  statWrapper.classList.add('stat__wrapper');
 
   const guessed = document.createElement('div');
   guessed.classList.add('guessed-words');
 
   const guessedTitle = document.createElement('h3');
-  guessedTitle.classList.add('guessed-word__title');
+  guessedTitle.classList.add('savannah__guessed-word__title');
   guessedTitle.textContent = `Guessed ${right}:`;
 
   const mistake = document.createElement('div');
   mistake.classList.add('mistake-words');
 
   const mistakesTitle = document.createElement('h3');
-  mistakesTitle.classList.add('mistake-word__title');
+  mistakesTitle.classList.add('savannah__mistake-word__title');
   mistakesTitle.textContent = `Mistakes ${mistakes}:`;
-
-  const dunno = document.createElement('div');
-  dunno.classList.add('dont-know-words');
-
-  const dontKnowTitle = document.createElement('h3');
-  dontKnowTitle.classList.add('dont-know-word__title');
-  dontKnowTitle.textContent = `Don't know ${dontKnow}:`;
 
   const guessedList = document.createElement('ul');
   guessedList.classList.add('guessed-list');
@@ -33,27 +32,23 @@ export default function createStatistic(obj) {
   const mistakesList = document.createElement('ul');
   mistakesList.classList.add('mistake-list');
 
-  const dontKnowList = document.createElement('ul');
-  dontKnowList.classList.add('dont-know-list');
-
   const objKey = Object.keys(obj);
+
+  if (objKey.length > 17) {
+    statWrapper.classList.add('stat__wrapper_scroll');
+  }
 
   objKey.map((el) => {
     if (obj[el] === true) {
       const guessedListItem = document.createElement('li');
-      guessedListItem.classList.add('guessed-list__item');
+      guessedListItem.classList.add('savannah__guessed-list__item');
       guessedListItem.textContent = el;
       guessedList.append(guessedListItem);
     } else if (obj[el] === false) {
       const mistakesListItem = document.createElement('li');
-      mistakesListItem.classList.add('mistakes-list__item');
+      mistakesListItem.classList.add('savannah__mistakes-list__item');
       mistakesListItem.textContent = el;
       mistakesList.append(mistakesListItem);
-    } else if (obj[el] === 'dontKnow') {
-      const dontKnowListItem = document.createElement('li');
-      dontKnowListItem.classList.add('dont-know-list__item');
-      dontKnowListItem.textContent = el;
-      dontKnowList.append(dontKnowListItem);
     }
 
     return el;
@@ -61,21 +56,20 @@ export default function createStatistic(obj) {
 
   guessed.append(guessedTitle, guessedList);
   mistake.append(mistakesTitle, mistakesList);
-  dunno.append(dontKnowTitle, dontKnowList);
 
-  const statWrapper = document.createElement('div');
-  statWrapper.classList.add('stat__wrapper');
-  statWrapper.append(guessed, mistake, dunno);
+  statWrapper.append(guessed, mistake);
 
   const buttonWrapper = document.createElement('div');
-  buttonWrapper.classList.add('button__wrapper');
+  buttonWrapper.classList.add('savannah__stat__button__wrapper');
 
   const againButton = document.createElement('button');
-  againButton.classList.add('button', 'button-again');
+  againButton.classList.add('savannah__stat__button', 'button-again');
   againButton.textContent = 'Play again';
 
   buttonWrapper.append(againButton);
 
   stat.append(statWrapper, buttonWrapper);
-  document.querySelector(('#audiochallenge')).append(stat);
+  document.querySelector(('#savannah')).append(stat);
+
+  againButton.addEventListener('click', () => renderSavannahStartPage(loginResponse), { once: true });
 }

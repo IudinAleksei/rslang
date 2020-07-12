@@ -5,6 +5,7 @@ import generatePageAboutUs from '../../main/about_team/index';
 import renderAudiochallengeStartPage from '../../games/audiochallenge/view/startPage';
 import generateSpeakit from '../../games/speakIt/index';
 import { renderDictionary } from '../../main/dictionary/index';
+import renderSavannahStartPage from '../../games/savannah/view/startPage';
 
 export default {
   renderSettings,
@@ -14,4 +15,5 @@ export default {
   renderAudiochallengeStartPage,
   startSprintGame,
   renderDictionary,
+  renderSavannahStartPage,
 };

@@ -1,0 +1,132 @@
+.savannah__statistic {
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 40%;
+  min-height: 50%;
+  max-height: 70vh;
+  padding: 30px;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  background: rgba($color: #6cffde, $alpha: 0.2);
+  color: #000;
+  font-size: 2rem;
+
+  @media (max-width: 1220px) {
+    width: 50%;
+  }
+
+  @media (max-width: 930px) {
+    width: 60%;
+  }
+
+  @media (max-width: 768px) {
+    width: 90%;
+  }
+}
+
+.stat__wrapper_scroll {
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    width: 15px;
+    border-radius: 50px;
+    opacity: 0.1;
+    background-color: #143861;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 9em;
+    background-color: #51ac54;
+    box-shadow: inset 1px 1px 10px #f3faf7;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: #418d43;
+  }
+
+  &::-webkit-scrollbar-button:vertical:start:decrement {
+    border-radius: 50px 50px 0 0;
+    background:
+      linear-gradient(120deg, #02141a 40%, rgba(80, 172, 83, 0) 41%),
+      linear-gradient(240deg, #02141a 40%, rgba(80, 172, 83, 0) 41%),
+      linear-gradient(0deg, #02141a 30%, rgba(80, 172, 83, 0) 31%);
+    background-color: #50ac53;
+  }
+
+  &::-webkit-scrollbar-button:vertical:end:increment {
+    border-radius: 0 0 50px 50px;
+    background:
+      linear-gradient(300deg, #02141a 40%, rgba(80, 172, 83, 0) 41%),
+      linear-gradient(60deg, #02141a 40%, rgba(80, 172, 83, 0) 41%),
+      linear-gradient(180deg, #02141a 30%, rgba(80, 172, 83, 0) 31%);
+    background-color: #50ac53;
+  }
+}
+
+.savannah__mistakes-list__item {
+  position: relative;
+  list-style-type: none;
+  color: #fabe2c;
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 5px;
+    left: -30px;
+    width: 20px;
+    height: 20px;
+    background: url('../../../../assets/icons/savannah/statistic-mistake.svg') center (center / cover) no-repeat;
+  }
+}
+
+.savannah__guessed-list__item {
+  position: relative;
+  list-style-type: none;
+  color: #5ec962;
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 5px;
+    left: -30px;
+    width: 20px;
+    height: 20px;
+    background: url('../../../../assets/icons/savannah/statistic-guessed.svg') center (center / cover) no-repeat;
+  }
+}
+
+.savannah__guessed-word__title {
+  color: #4caf50;
+}
+
+.savannah__mistake-word__title {
+  color: #ff9100;
+}
+
+.savannah__stat__button__wrapper {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin-top: 30px;
+}
+
+.savannah__stat__button {
+  @include button;
+
+  color: $white_color;
+
+  @media (max-width: 630px) {
+    width: 40%;
+    font-size: 1.7rem;
+  }
+
+  @media (max-width: 475px) {
+    width: 100%;
+  }
+}
