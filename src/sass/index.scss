@@ -175,14 +175,15 @@ body {
     .game {
       margin: 0;
       img {
-        width: 320px;
-        height: 190px;
+        width: 300px;
+        height: 165px;
+        padding-top: 10px;
       }
     }
   }
-  .game__text {
-    width: 320px;
-    height: 120px;
-    margin: 0 auto;
-  }
+        .game__text {
+        width: 310px;
+        height: 120px;
+        margin: 0 auto;
+      }
 }
