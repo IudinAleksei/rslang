@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  min-height: 270px;
 }
 
 .image__wrapper {
@@ -12,22 +11,30 @@
 
 .word-list {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-evenly;
   width: 100%;
   padding: 0;
   color: #162114;
   font-size: 2rem;
-
   & li {
     list-style-position: inside;
     cursor: pointer;
+    margin: 25px 25px;
+    width: 200px;
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 10px 10px;
+    border-radius: 4px;
+    text-align: center;
+    &:hover {
+      transition: box-shadow 0.3s ease;
+      box-shadow: 0 0 1px rgba(255, 255, 255, 0.1), 0 11px 12px 0 rgba(14, 30, 37, 0.12)
+    }
   }
 }
-
 .right {
-  color: $color_text_button;
+  color: $button_hover_color;
 }
-
 .wrong {
   opacity: 0.5;
   color: red;
@@ -35,14 +42,15 @@
 
 .audiochallenge__button {
   @include button;
-
   outline: none;
   color: $white-color;
+  &:hover {
+    background-color: $button_hover_color;
+  }
 }
 
 .button-next {
   @include button;
-
   position: relative;
   outline: none;
   color: $white-color;
@@ -112,9 +120,25 @@
 .audiochallenge-image_active {
   display: block;
 }
-
-.audiochallenge-list {
-  width: 90%;
-  min-height: 63px;
-  margin: 0 auto 20px;
+@media screen and (max-width: $tablet_sreen) {
+  .word-list {
+    li {
+      margin: 16px 25px;
+      padding: 20px 20px;
+    }
+  }
+  .audiochallenge__button {
+    width: 200px;
+  }
+}
+@media screen and (max-width: $phone_screen) {
+  .word-list {
+    li {
+      margin: 16px 25px;
+      padding: 20px 20px;
+    }
+  }
+  .audiochallenge__button {
+    width: 200px;
+  }
 }
