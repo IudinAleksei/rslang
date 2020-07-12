@@ -2,7 +2,6 @@
 import {
   getWordsInfo, getWordInfoById, getWords, getRandomInteger,
 } from '../../../common/index';
-import changeBackground from './changeBackground';
 
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i -= 1) {
