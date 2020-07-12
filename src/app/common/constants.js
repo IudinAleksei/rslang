@@ -9,6 +9,7 @@ export const DEFAULT_LOCAL_DATA = Object.freeze({
   puzzleRepeatPlay: 'true',
   puzzleLevel: 0,
   puzzlePage: 0,
+  savannahLevel: 1,
 });
 
 export const API_KEYS = Object.freeze({
