@@ -21,6 +21,7 @@ export const DEFAULT_LOCAL_DATA = Object.freeze({
   playAudio: 'true',
   newWord: 10,
   cards: 20,
+  savannahLevel: 1,
 });
 
 export const API_KEYS = Object.freeze({

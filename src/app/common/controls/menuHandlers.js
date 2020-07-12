@@ -4,7 +4,11 @@ import gamePuzzle from '../../games/english_puzzle/index';
 import generatePageAboutUs from '../../main/about_team/index';
 import renderAudiochallengeStartPage from '../../games/audiochallenge/view/startPage';
 import generateSpeakit from '../../games/speakIt/index';
+<<<<<<< HEAD
 import gameTraining from '../../main/primary/index';
+=======
+import renderSavannahStartPage from '../../games/savannah/view/startPage';
+>>>>>>> develop
 
 export default {
   renderSettings,
@@ -13,5 +17,9 @@ export default {
   generateSpeakit,
   renderAudiochallengeStartPage,
   startSprintGame,
+<<<<<<< HEAD
   gameTraining,
+=======
+  renderSavannahStartPage,
+>>>>>>> develop
 };
