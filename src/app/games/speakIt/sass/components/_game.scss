@@ -1,0 +1,411 @@
+$img-width: 330px;
+$img-height: 220px;
+$font-size: 22px;
+$item-width: 200px;
+$item-height: 70px;
+
+@mixin game-speakit {
+  .game {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1140px;
+    min-height: calc(100vh - 80px);
+
+    &.hidden {
+      display: none;
+    }
+
+    .res {
+      display: flex;
+      justify-content: space-between;
+      height: 40px;
+      width: 100%;
+      margin: 20px auto 50px;
+    }
+
+    .points {
+      list-style: none;
+      display: flex;
+      padding: 15px 15px;
+      margin: 0;
+    }
+
+    .point {
+      position: relative;
+      width: 10px;
+      height: 10px;
+      padding: 10px;
+      margin-top: -10px;
+      border-radius: 50%;
+      background-color: $button_color;
+      background: radial-gradient($button_color 0%, $button_color 50%, transparent 50%, transparent 100%);
+      margin-right: 10px;
+      box-shadow: 0 0 0 2px transparent;
+      cursor: pointer;
+      transition: .5s;
+    }
+
+    .point:hover {
+      box-shadow: inset 0 0 0 2px transparent, inset 0 0 0 3px $button_color;
+    }
+
+    .point::before {
+      content: "";
+      width: 30px;
+      height: 2px;
+      position: absolute;
+      top: 9px;
+      right: 5px;
+      background-color: $button_color;
+    }
+
+    .point:nth-child(1)::before {
+      display: none;
+    }
+
+    .activePoint,
+    .activePoint:hover {
+      box-shadow: 0 0 0 2px $button_color,
+        inset 0 0 0 2px #ffffff,
+        inset 0 0 0 3px $button_color;
+    }
+
+    .score {
+      display: flex;
+      justify-content: flex-end;
+      height: 40px;
+    }
+
+    .star {
+      width: 40px;
+      height: 40px;
+      background-image: url('../../../../assets/img/speakit/star.svg');
+      background-size: 40px 40px;
+    }
+
+    .items {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .item {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      padding: 10px;
+      padding-left: 40px;
+      font-size: $font-size;
+      line-height: 1.4;
+      min-width: 200px;
+      min-height: 70px;
+      margin: 10px;
+      border: 1px solid rgb(206, 212, 218);
+      border-radius: 5px;
+      background-color: #fff;
+      transition: .3s;
+    }
+
+    .item:hover {
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, .1), 0 2px 4px 0 rgba(14, 30, 37, .12);
+    }
+
+    .activeItem {
+      border: 1px solid rgb(0, 173, 159);
+      background-color: rgba(0, 173, 159, .15);
+    }
+
+    .audio-icon {
+      position: absolute;
+      top: 18px;
+      left: 10px;
+      width: 34px;
+      height: 34px;
+
+      svg {
+        width: 34px;
+        height: 34px;
+        color: rgba(14, 30, 37, .7);
+      }
+    }
+
+    .word,
+    .translation {
+      color: #0e1e25;
+      font-size: $font-size;
+      padding: 0px 5px;
+      margin: 0;
+    }
+
+    .transcription {
+      color: rgba(14, 30, 37, .7);
+      font-size: $font-size;
+      padding: 0px 5px;
+      margin: 0;
+    }
+
+    .translation {
+      color: rgba(14, 30, 37, .7);
+      text-align: center;
+      min-height: 35px;
+      margin-bottom: 20px;
+    }
+
+    .img {
+      width: $img-width;
+      height: $img-height;
+      object-fit: cover;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      box-shadow: 5px 5px 25px rgba(118, 118, 118, .25);
+    }
+
+    .voice {
+      width: 660px;
+      margin: 0 30px;
+    }
+
+    .input {
+      display: block;
+      border: 0;
+      border-bottom: 1px solid rgb(206, 212, 218);
+      background-color: transparent;
+      padding: 5px 20px;
+      margin: 0 auto;
+      font-size: $font-size;
+      margin-bottom: 14px;
+      width: 100%;
+      min-height: 35px;
+      line-height: 30px;
+      color: rgba(14, 30, 37, .7);
+      text-align: center;
+      background-image: url('../../../../assets/img/speakit/microphone.svg');
+      background-repeat: no-repeat;
+      background-size: 15px;
+      background-position: 10px 15px;
+    }
+
+    .items .item .translation {
+      display: none;
+    }
+
+    .input:focus {
+      outline-color: #009179;
+    }
+
+    .none {
+      display: none;
+    }
+
+    @media (max-width:1200px) {
+      .res {
+        height: 30px;
+        margin: 10px auto 40px;
+      }
+
+      .img {
+        width: 0.75*$img-width;
+        height: 0.75*$img-height;
+      }
+
+      .translation {
+        font-size: 0.85*$font-size;
+        padding: 0px 2px;
+        margin-bottom: 5px;
+        min-height: 31px;
+      }
+
+      .input {
+        font-size: 0.85*$font-size;
+        padding: 0px 2px;
+        margin-bottom: 5px;
+        min-height: 25px;
+        background-size: 14px;
+        background-position: 10px 5px;
+      }
+
+      .items {
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-around;
+      }
+
+      .item {
+        min-width: $item-width - 5;
+        min-height: $item-height - 5;
+      }
+
+      .btns {
+        width: 100%;
+        margin-bottom: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+
+      .btn {
+        min-width: 170px;
+        margin-bottom: 20px;
+      }
+
+      .voice {
+        width: 48vw;
+        margin: 0 20px;
+        margin-bottom: 20px;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .res {
+        height: 30px;
+        margin: 10px auto 40px;
+      }
+
+      .img {
+        width: 0.75*$img-width;
+        height: 0.75*$img-height;
+      }
+
+      .translation {
+        font-size: 0.85*$font-size;
+        padding: 0px 2px;
+        margin-bottom: 5px;
+        min-height: 31px;
+      }
+
+      .input {
+        padding: 0px 2px;
+        margin-bottom: 5px;
+        font-size: 0.85*$font-size;
+        min-height: 25px;
+        background-size: 14px;
+        background-position: 10px 5px;
+      }
+
+      .items {
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-around;
+      }
+
+      .item {
+        min-width: $item-width - 5;
+        min-height: $item-height - 5;
+      }
+
+      .btns {
+        width: 100%;
+        margin-bottom: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+
+      .btn {
+        width: 195px;
+        margin: 0 auto;
+        margin-bottom: 20px;
+      }
+
+      .voice {
+        width: 32, 5vw;
+      }
+    }
+
+    @media (max-width:$tablet_sreen) {
+      .res {
+        height: 30px;
+        margin: 10px auto 40px;
+      }
+
+      .img {
+        width: 0.75*$img-width;
+        height: 0.75*$img-height;
+      }
+
+      .translation {
+        font-size: 0.85*$font-size;
+        padding: 0px 2px;
+        margin-bottom: 5px;
+        min-height: 25px;
+      }
+
+      .items {
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-around;
+      }
+
+      .item {
+        min-width: $item-width - 5;
+        min-height: $item-height - 5;
+      }
+
+      .btns {
+        width: 100%;
+        margin-bottom: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+
+      .btn {
+        width: 200px;
+        margin: 0 auto;
+        margin-bottom: 20px;
+      }
+    }
+
+    @media (max-width: $phone_screen) {
+
+      .res {
+        height: 30px;
+        margin: 10px auto 40px;
+      }
+
+      .img {
+        width: 0.5*$img-width;
+        height: 0.5*$img-height;
+      }
+
+      .translation {
+        font-size: 0.75*$font-size;
+        padding: 0px 2px;
+        margin-bottom: 5px;
+        min-height: 25px;
+      }
+
+      .items {
+        margin-bottom: 10px;
+        display: table-cell;
+      }
+
+      .item {
+        min-width: $item-width - 5;
+        min-height: $item-height - 5;
+      }
+
+      .btns {
+        margin-bottom: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+
+      .btn {
+        width: 200px;
+        margin: 0 auto;
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+}

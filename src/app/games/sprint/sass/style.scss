@@ -1,0 +1,466 @@
+@import "../../../../sass/abstract/constants";
+@import "../../../../sass/abstract/mixins";
+
+.body__spring-game-page {
+    background: linear-gradient(90deg, rgba(226, 242, 231, 0.3) 0%, rgba(251, 216, 216, 0.3) 89%), url('../../../../assets/img/sprintGame/sprintGameBg.jpg') center fixed;
+    background-repeat: repeat;
+    background-size: cover;
+}
+
+.sprint-game__start-page {
+    @include position();
+    @include flex();
+    @include background(url('../../../../assets/img/sprintGame/sprintGameStartPage.jpg'), $background-repeat: no-repeat);
+    h1 {
+      @include headingText();
+    }
+
+    p {
+      @include bodyText();
+      text-align: center;
+      line-height: 1.7rem;
+      margin-bottom: 50px;
+      font-size: 1.6rem;
+    }
+
+    .sprint-game__start-button {
+        @include button($color_text: $white_color);
+        position: relative;
+        margin-top: 40px;
+    }
+}
+
+.sprint-game__slider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 10px;
+    font-size: 1.2rem;
+    padding-right: 14px;
+}
+
+.sprint-game__slider__text {
+    width: 15rem;
+    .level {
+        font-family: $body_font;
+        margin-bottom: 20px;
+    }
+}
+
+.sprint-game__slider__input {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+}
+
+.sprint-game__range-slider {
+    width: 170px;
+    height: 2px;
+    -webkit-appearance: none;
+    outline: none;
+    border-radius: 2px;
+    background: #111111;
+    cursor: pointer;
+    &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: $button_color;
+    }
+    }
+
+.sprint-game__slider-value {
+    right: -14px;
+    width: 50px;
+    height: 25px;
+    box-sizing: border-box;
+    background: $button_color;
+    text-align: center;
+    position: relative;
+    border-radius: 8px;
+    margin: 0;
+    color: white;
+    line-height: 2.3rem;
+    &::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%) rotate(45deg);
+        left: -5px;
+        width: 12px;
+        height: 12px;
+        background: $button_color;
+        font-size: 1.3rem;
+        line-height: 2.2rem;
+    }
+}
+
+  .sprint-game__start-page.none {
+    display: none;
+  }
+
+.main-container {
+  width: 100vw;
+  min-height: calc(100vh - 80px);
+};
+
+.card-container.hidden {
+    display: none;
+}
+
+.card-container {
+    max-width: 484px;
+    margin: 100px auto 0;
+    border-radius: 8px;
+    border: 1px solid #fff;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.word-section {
+    padding: 28px 50px 10px;
+    position: relative;
+}
+
+.question-wrapper {
+    position: static;
+    padding: 0;
+    width: 100%;
+    min-height: 256px;
+    height: 330px;
+    border: none;
+}
+
+.sound-button {
+    top: 25px;
+    left: 26px;
+    background-image: url('../../../../assets/icons/springGame/sound.svg');
+    position: absolute;
+    min-width: auto;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+}
+
+.points {
+    font-family: $body_font;
+    width: 80px;
+    height: 40px;
+    display: inline-flex;
+    justify-content: center;
+    position: absolute;
+    top: -50px;
+    left: calc(50% - 40px);
+    font-size: 3rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.counter {
+    font-family: $body_font;
+    width: 80px;
+    height: 40px;
+    display: inline-flex;
+    justify-content: center;
+    position: absolute;
+    top: -30px;
+    left: calc(100% - 40px);
+    font-size: 3rem;
+    font-weight: 600;
+    color: #f50a0a;
+    transform: translate(-50%, -50%);
+    border: 1px solid;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1), 0 11px 12px 0 rgba(14, 30, 37, 0.12);
+    border-radius: 8px;
+}
+
+.sprint-game__start-page__counter {
+    display: inline-block;
+    font-family: "Open Sans", sans-serif;
+    border: 2px solid $heading_color;
+    width: 90px;
+    height: 90px;
+    transition-duration: 0.4s;
+    font-size: 4rem;
+    text-align: center;
+    border-radius: 50%;
+    visibility: visible;
+    opacity: 1;
+    color: $heading_color;
+    position: relative;
+    line-height: 8rem;
+    top: 25px;
+    display: none;
+}
+
+.extra-points {
+    font-family: $body_font;
+    color: #fff;
+    font-size: 1.3rem;
+}
+
+.sound {
+    width: 30px;
+    height: 30px;
+    background-image: url('../../../../assets/icons/springGame/music_on.svg');
+    background-position: 0;
+    background-repeat: no-repeat;
+    background-size: contain;
+    cursor: pointer;
+    position: absolute;
+    top: -43px;
+    left: 26px;
+}
+
+.sound-on {
+    background-image: url('../../../../assets/icons/springGame/music_on.svg');
+}
+
+.sound-off {
+    background-image: url('../../../../assets/icons/springGame/music_off.svg');
+}
+
+.progress {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+}
+
+.circles {
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    .circle {
+        background-position: 50%;
+        margin-left: 15px;
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 30px;
+        height: 30px;
+        background-image: url('../../../../assets/icons/springGame/whiteDot.svg');
+
+    }
+    .green-circle {
+        background-image: url('../../../../assets/icons/springGame/greenDot.svg');
+    }
+    .hidden-circle {
+        visibility: hidden;
+    }
+    }
+
+.birds {
+    display: inline-flex;
+    position: relative;
+    width: 204px;
+    height: 64px;
+    margin: 50px 0 30px;
+}
+
+.parrot {
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: absolute;
+}
+
+.parrot1 {
+    background-image: url('../../../../assets/icons/springGame/1bird.svg');
+    width: 54px;
+    height: 63px;
+    left: 0;
+    bottom: -2px;
+}
+
+.parrot2 {
+    background-image: url('../../../../assets/icons/springGame/2bird.svg');
+    width: 54px;
+    height: 63px;
+    left: 50px;
+    bottom: -4px;;
+    display: none;
+}
+
+.parrot3 {
+    background-image: url('../../../../assets/icons/springGame/3bird.svg');
+    width: 54px;
+    height: 63px;
+    left: 100px;
+    bottom: -4px;;
+    display: none;
+}
+
+.parrot4 {
+    background-image: url('../../../../assets/icons/springGame/4bird.svg');
+    width: 54px;
+    height: 63px;
+    left: 150px;
+    bottom: -4px;;
+    display: none;
+}
+
+.active-parrot {
+    display: inline;
+}
+
+.branch {
+    background-image: url('../../../../assets/icons/springGame/perch.svg');
+    width: 204px;
+    height: 6px;
+    position: absolute;
+    bottom: 6px;
+    left: 0;
+    right: 0;
+}
+
+.word {
+    font-size: 3rem;
+    font-weight: 400;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 2;
+    letter-spacing: normal;
+    text-align: center;
+    color: #fff;
+    font-family: $body_font;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.translation{
+    font-size: 2.5rem;
+    font-weight: 400;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: hsla(0,0%,100%,.6);
+    margin-top: 12px;
+    font-family: $body_font;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.buttons-section {
+    background-color: transparent;
+    min-height: 86px;
+    padding: 25px 28px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.sprint-game__wrong {
+    @include button($background-color: #ed593b, $color_text: $white_color);
+}
+
+.sprint-game__correct {
+    position: relative;
+    @include button($color_text: $white_color);
+}
+
+.arrows {
+    min-height: 40px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.arrowLeft {
+    background-image: url('../../../../assets/icons/springGame/arrowLeft.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 50px;
+}
+
+.arrowRight {
+    background-image: url('../../../../assets/icons/springGame/arrowRight.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 50px;
+}
+
+.sprint-game__statistic-block {
+    max-width: 484px;
+    margin: 100px auto 0;
+    border-radius: 8px;
+    border: 1px solid #fff;
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 20px;
+}
+
+.sprint-game__statistic-info__answers {
+    margin: auto;
+}
+
+.sprint-game__statistic-block.hidden {
+    display: none;
+}
+
+.sprint-game__statistic-info {
+    font-size: 3rem;
+    font-weight: 400;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 2;
+    letter-spacing: normal;
+    text-align: center;
+    color: #fff;
+    font-family: "Open Sans", sans-serif;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.play-again-btn {
+    position: relative;
+    @include button($color_text: $white_color);
+}
+
+@media screen and (max-width: $tablet_sreen) {
+    .card-container, .sprint-game__statistic-block {
+        margin: 50px 20px;
+    }
+}
+
+@media screen and (max-width: $phone_screen) {
+    .card-container {
+        margin: 50px 20px;
+    }
+    .buttons-section {
+        padding: 25px 10px;
+    }
+    .sprint-game__correct {
+        width: 110px;
+        font-size: 1.5rem;
+    }
+    .sprint-game__wrong {
+        width: 110px;
+        font-size: 1.5rem;
+    }
+    .word {
+        font-size: 2.5rem;
+    }
+    .translation {
+        font-size: 2rem;
+    }
+    .sprint-game__start-page {
+        h1 {
+            font-size: 3.3rem;
+        };
+    }
+    .sprint-game__slider{
+        padding: 5px 15px 0 0;
+          .sprint-game__range-slider {
+              width: 105px;
+          }
+      }
+      .sprint-game__slider__text {
+        width: 7rem;
+    }
+}

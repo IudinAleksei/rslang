@@ -1,81 +1,93 @@
-
 @import '../../../../sass/abstract/constants';
 @import '../../../../sass/abstract/mixins';
 
 .main__background-about-us {
   @include position($position: fixed);
-  @include background(url('../../../../assets/img/about-us/background.jpg'), $background-repeat: no-repeat);
-
+  @include background(url('../../../../assets/img/rs-lang.jpg') center fixed, $background-repeat: no-repeat);
 }
+
 .main__about-us {
   @include flex();
+
   .logo-about-us {
+    z-index: 1;
     height: 80px;
     margin-top: 10px;
+    color: $heading_color;
     font-family: $heading_font;
     font-size: 5rem;
-    text-transform: uppercase;
-    letter-spacing: 7px;
     font-weight: 700;
-    color: $heading_color;
+    letter-spacing: 7px;
     text-align: center;
-    z-index: 1000;
+    text-transform: uppercase;
   }
-};
+}
 
 .wrap-cards {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
 }
+
 .about-us__wrap {
   width: 335px;
-  height: 295px;
-  border-radius: 8px;
-  box-shadow: $button_shadow;
-  background: white;
-  margin: 50px;
-  cursor: pointer;
-  position: relative;
+  height: 325px;
   display: flex;
+  position: relative;
   flex-direction: column;
   align-items: center;
+  margin: 50px;
+  border-radius: 8px;
+  background: white;
+  box-shadow: $button_shadow;
+  cursor: pointer;
+
   .photo {
-    border-radius: 32px;
-    border: 2px solid white;
+    position: absolute;
+    z-index: 1;
+    top: -15%;
     width: 145px;
     height: 145px;
+    border: 2px solid white;
+    border-radius: 32px;
     object-fit: cover;
-    z-index: 1;
-    position: absolute;
-    top: -15%;
   }
+
   .wrap-name {
-    margin: 115px 15px 15px 15px;
+    margin: 115px 15px 4px 15px;
+
     .name {
       @include bodyText ();
       margin-bottom: 15px;
-      text-align: center;
       font-size: 1.8rem;
+      color: black;
+      font-family: $body_font;
       font-weight: 600;
+      text-align: center;
     }
+
     .text {
-      @include bodyText ();
-      text-align: justify;
+      height: 75px;
       font-size: 1.2rem;
-      margin: 0;
+      color: black;
+      font-family: $body_font;
+      font-weight: 400;
+      text-align: justify;
     }
   }
+
   .contact {
     display: flex;
-    .telegtam, .github {
-      box-shadow: $button_shadow;
-      padding: 5px 5px;
+
+    .telegtam,
+    .github {
       width: 40px;
       height: 40px;
-      border-radius: 8px;
       margin-left: 15px;
+      padding: 5px 5px;
+      border-radius: 8px;
+      box-shadow: $button_shadow;
     }
   }
-};
+}

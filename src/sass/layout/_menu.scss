@@ -1,145 +1,155 @@
-.menu__icon {
-    width: 37px;
-    height: 23px;
-    cursor: pointer;
-    position: relative;
+.menu {
+  position: relative;
+  z-index: 12;
+}
 
-.menu__icon__line {
+.menu__icon {
+  position: relative;
+  width: 37px;
+  height: 23px;
+  cursor: pointer;
+
+  .menu__icon__line {
     display: block;
-    width: 100%;
-    height: 8px;
-    background: $header_icons_color;
     position: absolute;
     left: 0;
-    transition: .3s all linear;
+    width: 100%;
+    height: 8px;
+    transition: 0.3s all linear;
     border-radius: 3px;
-}
+    background: $header_icons_color;
+  }
 
-.menu__icon__first-line {
+  .menu__icon__first-line {
     top: 0;
     height: 4px;
-}
+  }
 
-.menu__icon__second-line, .menu__icon__third-line {
+  .menu__icon__second-line,
+  .menu__icon__third-line {
     top: 50%;
-    transform: translateY(-50%);
     height: 4px;
-}
+    transform: translateY(-50%);
+  }
 
-.menu__icon__forth-line {
+  .menu__icon__forth-line {
     bottom: 0;
     height: 4px;
-}
+  }
 }
 
 .menu_active {
-.menu__icon__first-line, .menu__icon__forth-line {
+  .menu__icon__first-line,
+  .menu__icon__forth-line {
     opacity: 0;
-}
+  }
 
-.menu__icon__second-line {
+  .menu__icon__second-line {
     transform: translateY(-50%) rotate(45deg);
-}
+  }
 
-.menu__icon__third-line {
+  .menu__icon__third-line {
     transform: translateY(-50%) rotate(-45deg);
-}
+  }
 }
 
 .menu__items {
-    padding: 0;
-    position: absolute;
-    transition: 0.3s ease;
-    display: none;
+  display: none;
+  position: absolute;
+  padding: 0;
+  transition: 0.3s ease;
 
-.menu__items__settings-item {
+  .menu__items__settings-item {
     &::after {
-    position: relative;
-    content: url(/src/assets/icons/header/gear-fill.svg);
-    left: 5px;
-    top: 4px;
+      content: url("../assets/icons/header/gear-fill.svg");
+      position: relative;
+      top: 4px;
+      left: 5px;
     }
-}
+  }
 
-.menu__items__games-subMenu {
+  .menu__items__games-subMenu {
     padding-left: 25px;
-}
+  }
 
-.menu__items__item_active {
+  .menu__items__item_active {
     color: $button_hover_color;
-}
+  }
 
-.menu__items__games-subMenu__game {
+  .menu__items__games-subMenu__game {
     position: relative;
+
     &::before {
-    content: url(/src/assets/icons/header/dot.svg);
-    position: absolute;
-    top: 7px;
-    left: -25px;
+      content: url("../assets/icons/header/dot.svg");
+      position: absolute;
+      top: 7px;
+      left: -25px;
     }
-}
+  }
 }
 
 .menu__items li {
-    list-style: none;
-    padding: 11px 0;
-    white-space: nowrap;
-    color: $white_color;
-    text-decoration: none;
-    font-family: $body_font;
-    font-size: 1.4rem;
-    letter-spacing: 0.2rem;
-    text-transform: uppercase;
-    cursor: pointer;
-    &:hover {
+  padding: 11px 0;
+  color: $white_color;
+  font-family: $body_font;
+  font-size: 1.4rem;
+  letter-spacing: 0.2rem;
+  list-style: none;
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+
+  &:hover {
     color: $button_hover_color;
-}
+  }
 }
 
 .menu_active {
-    display: block;
+  display: block;
 }
 
 .menu-bg {
-    z-index: 1;
-    width: 0;
-    height: 0;
-    background: $menu_color;
-    box-shadow: 14px 17px 22px -9px rgba(0,0,0,0.51);
-    transition: 0.3s ease;
-    border-radius: 50%;
-    top: 41px;
-    left: 46px;
-    position: absolute;
+  position: absolute;
+  z-index: 1;
+  top: 41px;
+  left: 46px;
+  width: 0;
+  height: 0;
+  transition: 0.3s ease;
+  border-radius: 50%;
+  background: $menu_color;
+  box-shadow: 14px 17px 22px -9px rgba(0, 0, 0, 0.51);
 }
 
 .menu__bg_active {
-    width: 540px;
-    height: 600px;
-    transform: translate(-57%, -11%);
-    transition: .7s ease;
+  width: 540px;
+  height: 600px;
+  transform: translate(-57%, -11%);
+  transition: 0.7s ease;
 }
 
 .menu__elements {
-    top: 0;
-    left: 0;
-    position: relative;
-    z-index: 2;
+  position: relative;
+  z-index: 2;
+  top: 0;
+  left: 0;
 }
 
 .authorization {
-    .authorization__log-out {
+  .authorization__log-out {
     position: relative;
+    z-index: 3;
     color: $header_icons_color;
-    text-decoration: none;
     font-family: $body_font;
     font-size: 1.6rem;
-    z-index: 3;
+    text-decoration: none;
+
     &::before {
-        position: absolute;
-    content: url(/src/assets/icons/header/box-arrow-left.svg);
-    right: 60px;
-    top: 3px;
+      content: url("../assets/icons/header/box-arrow-left.svg");
+      position: absolute;
+      top: 3px;
+      right: 60px;
     }
-    }
+  }
 }

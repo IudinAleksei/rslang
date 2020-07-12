@@ -1,14 +1,16 @@
 @import "../../../../sass/abstract/constants";
 @import "../../../../sass/abstract/mixins";
 
-.authorization-form__body__background{
-  @include background(url('/src/assets/img/start-page-background..jpg'), $background-repeat: no-repeat);
-};
+.authorization-form__body__background {
+  @include background(url('../../../../assets/img/start-page-background.jpg'), $background-repeat: no-repeat);
+}
 
-.main-container__form{
+.main-container__form {
   height: 85vh;
+
   @include flex() ;
 }
+
 .authorization-form__wrapper,
 .authorization-form__label,
 .authorization-form__arrow,
@@ -16,73 +18,72 @@
 
 .authorization-form__wrapper { overflow: hidden; }
 
-
 .authorization-form__radio__input__signin:checked ~ .authorization-form__wrapper .authorization-form__arrow { left: 32px; }
 .authorization-form__radio__input__signin:checked ~ .authorization-form__button .authorization-form__button__item { transform: translate3d(0, -72px, 0); }
-
 
 .authorization-form__radio__input__signup:checked ~ .authorization-form__wrapper .authorization-form__arrow { left: 137px; }
 .authorization-form__radio__input__signup:checked ~ .authorization-form__button .authorization-form__button__item { transform: translate3d(0, -144px, 0); }
 
 .authorization-form {
   width: 450px;
-
 }
 
 .authorization-form__radio__input__signin,
 .authorization-form__radio__input__signup { display: none; }
 
 .authorization-form__label {
-  cursor: pointer;
   display: inline-block;
+  margin-bottom: 10px;
+  opacity: 0.5;
   font-size: 2.2rem;
   font-weight: 800;
-  opacity: 0.5;
-  margin-bottom: 10px;
   text-transform: uppercase;
+  cursor: pointer;
 }
 
 .authorization-form__label:hover {
   transition: all 0.3s cubic-bezier(0.6, 0, 0.4, 1);
   opacity: 1;
 }
+
 .authorization-form__label { margin-right: 20px; }
 
 input[type=radio]:checked + .authorization-form__label { opacity: 1; }
 
 .authorization-form__input {
-  background: #fff;
-  border: 1px solid #fff;
-  outline: none;
-  border-radius: 8px;
-  font-size: 2.7rem;
+  width: 98%;
   height: 72px;
-  width:98%;
   margin-bottom: 10px;
-  opacity: 1;
-  text-indent: 20px;
   transition: all 0.2s ease-in-out;
+  border: 1px solid #fff;
+  border-radius: 8px;
+  outline: none;
+  opacity: 1;
+  background: #fff;
+  font-size: 2.7rem;
+  text-indent: 20px;
 }
 
 .authorization-form__button {
-  background: $button_color;
-  border: none;
-  border-radius: 8px;
-  color: #fff;
-  cursor: pointer;
-  font-size: 2.7rem;
-  height: 72px;
   width: 99.5%;
+  height: 72px;
   margin-bottom: 10px;
   overflow: hidden;
   transition: all 0.3s cubic-bezier(0.6, 0, 0.4, 1);
+  border: none;
+  border-radius: 8px;
   outline: none;
+  background: $button_color;
+  color: #fff;
+  font-size: 2.7rem;
+  cursor: pointer;
+
   .authorization-form__button__item {
     display: block;
-    line-height: 72px;
     position: relative;
     top: 72px;
     transform: translate3d(0, 0, 0);
+    line-height: 72px;
   }
 
   &:hover {
@@ -91,13 +92,13 @@ input[type=radio]:checked + .authorization-form__label { opacity: 1; }
 }
 
 .authorization-form__arrow {
-  height: 0;
-  width: 0;
-  border-bottom: 10px solid #fff;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
   position: relative;
   left: 32px;
+  width: 0;
+  height: 0;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #fff;
+  border-left: 10px solid transparent;
 }
 
 .authorization-form__input:invalid:not(:placeholder-shown) {
@@ -107,35 +108,36 @@ input[type=radio]:checked + .authorization-form__label { opacity: 1; }
 .authorization-form__input:valid:not(:placeholder-shown) {
   border: 1px solid rgba(0, 128, 0, 0.5);
 }
+
 @media only screen
-   and (max-width : 500px) {
-  .authorization-form{
+  and (max-width: 500px) {
+  .authorization-form {
     width: 300px;
   }
 
-.authorization-form__input,
-.authorization-form__button{
-  height: 50px;
-  font-size: 2.3rem;
+  .authorization-form__input,
+  .authorization-form__button {
+    height: 50px;
+    font-size: 2.3rem;
+  }
+
+  .authorization-form__label {
+    font-size: 1.8rem;
+  }
+  .authorization-form__radio__input__signin:checked ~ .authorization-form__button .authorization-form__button__item { transform: translate3d(0, -85px, 0); }
+  .authorization-form__radio__input__signup:checked ~ .authorization-form__button .authorization-form__button__item { transform: translate3d(0, -157px, 0); }
 }
 
-.authorization-form__label {
-  font-size: 1.8rem;
-}
-.authorization-form__radio__input__signin:checked ~ .authorization-form__button .authorization-form__button__item { transform: translate3d(0, -85px, 0); }
-.authorization-form__radio__input__signup:checked ~ .authorization-form__button .authorization-form__button__item { transform: translate3d(0, -157px, 0); }
-}
-
-.error{
-  max-width: 280px;
+.error {
   position: fixed;
-  border-radius: 8px;
   top: 50%;  /* position the top  edge of the element at the middle of the parent */
   left: 50%; /* position the left edge of the element at the middle of the parent */
-  border: 1px solid rgba(255,0,0,0.5);
-  transform: translate(-50%, -50%);
+  max-width: 280px;
   padding: 10px;
-  background: rgba(0,0,0,0.5);
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(255, 0, 0, 0.5);
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.5);
   color: #fff;
   font-size: 2.5rem;
 }
