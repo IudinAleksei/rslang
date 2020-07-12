@@ -32,8 +32,7 @@ export default async function getWordsArray(loginResponse, level) {
     const allUserWord = await getAllAggregatedWords(token, userId, filter, null, allUserWordsCount);
 
     if (allUserWord[0].paginatedResults.length > 5) {
-      allUserWord[0].paginatedResults.map((el) => userWord
-        .push({ [el.word]: el.wordTranslate }));
+      userWord.push(...allUserWord[0].paginatedResults);
     }
   } else if (level <= 6) {
     backendWordArr = await getWords(level - 1, getRandomInteger(0, 29));
@@ -41,8 +40,6 @@ export default async function getWordsArray(loginResponse, level) {
   }
 
   shuffle(userWord);
-
-  console.log(userWord);
 
   return userWord;
 }

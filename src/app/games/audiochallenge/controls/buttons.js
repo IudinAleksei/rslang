@@ -26,7 +26,7 @@ export async function nextWord() {
   button.textContent = 'I don\'t know';
 }
 
-function clickButtons() {
+function clickButtons(loginResponse) {
   const button = document.querySelector('.button');
 
   if (button.classList.contains('button-next')) {
@@ -35,7 +35,7 @@ function clickButtons() {
     if (round === 10) {
       round = 1;
       createStatistic(stat);
-      statisticButton();
+      statisticButton(loginResponse);
 
       const arr = Object.keys(stat);
       arr.map((el) => delete stat[el]);
@@ -86,9 +86,9 @@ function keybordEnterKey(event) {
   }
 }
 
-export function buttonListener() {
+export function buttonListener(loginResponse) {
   const button = document.querySelector('.button');
   const body = document.querySelector('body');
-  button.addEventListener('click', clickButtons);
+  button.addEventListener('click', () => clickButtons(loginResponse));
   body.addEventListener('keydown', keybordEnterKey);
 }

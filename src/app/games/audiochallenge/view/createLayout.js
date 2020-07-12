@@ -1,4 +1,6 @@
 export default function createLayout() {
+  document.getElementById('audiochallenge').innerHTML = '';
+
   const assets = document.createElement('div');
   assets.classList.add('audiochallenge-assets');
 
