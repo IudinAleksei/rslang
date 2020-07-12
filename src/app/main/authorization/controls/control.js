@@ -1,6 +1,6 @@
 import {
   loginUser, createUser, upsertUserSettings, getAndInitLocalData,
-  getUserSettings,
+  getUserSettings, setLocalData,
 } from '../../../common/index';
 
 function showError() {
@@ -17,20 +17,29 @@ async function getSign(email, password) {
   let loginResponse = null;
   if (document.getElementById('signin').checked) {
     loginResponse = await loginUser({ email: `${email}`, password: `${password}` });
+    if (loginResponse) {
+      sessionStorage.setItem('authorized', JSON.stringify(loginResponse));
+      const settingsUser = await getUserSettings(loginResponse.token, loginResponse.userId);
+      console.log(settingsUser);
+      setLocalData(settingsUser.optional);
+    }
     return loginResponse;
   }
   if (document.getElementById('signup').checked) {
-    const result = createUser({ email: `${email}`, password: `${password}` });
+    const result = await createUser({ email: `${email}`, password: `${password}` });
+    console.log(result);
     if (result === null) {
       showError();
       return null;
     }
     loginResponse = await loginUser({ email: `${email}`, password: `${password}` });
-    upsertUserSettings(loginResponse.token, loginResponse.userId,
-      { optional: getAndInitLocalData() });
+    if (loginResponse) {
+      sessionStorage.setItem('authorized', JSON.stringify(loginResponse));
+      localStorage.clear();
+      upsertUserSettings(loginResponse.token, loginResponse.userId,
+        { optional: getAndInitLocalData() }).then((q) => console.log(q));
+    }
   }
-  const settingsUser = await getUserSettings(loginResponse.token, loginResponse.userId);
-  localStorage.setItem(settingsUser);
   return loginResponse;
 }
 export default function formHandling(nextPageFunction) {
