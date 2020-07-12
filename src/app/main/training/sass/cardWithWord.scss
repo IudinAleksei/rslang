@@ -72,6 +72,7 @@
   @include button();
   color: white;
   margin-bottom: 25px;
+  outline: none;
 }
 .show-answer {
   margin-right: 25px;
@@ -91,6 +92,7 @@
   visibility: visible;
   margin-left: 25px;
   background-repeat: no-repeat;
+  outline: none;
 }
 .delete-word:hover, .explanation:hover, .play-audio:hover{
   background: #1ab429;
