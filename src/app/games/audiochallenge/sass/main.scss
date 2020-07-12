@@ -4,7 +4,9 @@
 
 .audiochallenge__body {
   background-image: linear-gradient(to right bottom, #48985a, #6eb260, #97cb65, #c4e46a, #f5fb71);
+  animation: background-image 3s infinite alternate;
 }
+
 
 #audiochallenge {
   @include flex;
