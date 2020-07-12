@@ -40,6 +40,9 @@ export const ELEMENTS_CLASSES = Object.freeze({
   dictionaryBody: 'dictionary-body',
   dictionaryBtnContainer: 'dictionary__button-container',
   dictionaryBtn: 'dictionary__tab-button',
+  dictionaryTableContainer: 'dictionary__table-container',
+  dictionaryTable: 'dictionary__table',
+  dictionaryTableRow: 'dictionary__table__row',
   selectDictionaryBtn: 'dictionary__tab-button_selected',
 
 });
