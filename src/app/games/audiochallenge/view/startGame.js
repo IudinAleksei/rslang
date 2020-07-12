@@ -6,7 +6,7 @@ import {
 } from '../controls/listeners';
 import { createSpeakIcon, createImage, createTrueWord } from './createAssets';
 
-export default async function startAudiochallengeGame(arr, loginResponse) {
+export default async function startAudiochallengeGame(arr) {
   createLayout();
   createSpeakIcon();
   await getWord(arr);
@@ -16,6 +16,6 @@ export default async function startAudiochallengeGame(arr, loginResponse) {
   createTrueWord();
   audioIconListener();
   wordListlistener();
-  buttonListener(loginResponse);
+  buttonListener();
   keyboardListener();
 }

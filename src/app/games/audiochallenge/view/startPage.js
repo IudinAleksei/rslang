@@ -1,9 +1,13 @@
-import { setLocalData, getAndInitLocalData } from '../../../common/index';
+/* eslint-disable import/no-cycle */
+import { setLocalData, getAndInitLocalData, getSessionData } from '../../../common/index';
 import getWordsArray from './getWordsArray';
 import preload from './preload';
+import { keyboardEnterKey } from '../controls/buttons';
 import '../sass/main.scss';
 
-export default async function renderAudiochallengeStartPage(loginResponse) {
+export default async function renderAudiochallengeStartPage() {
+  document.removeEventListener('keydown', keyboardEnterKey);
+
   const bodyClass = document.querySelector('body').classList;
   document.querySelector('body').classList.remove(bodyClass[0], bodyClass[1]);
   document.querySelector('body').classList.add('audiochallenge__body');
@@ -94,6 +98,9 @@ export default async function renderAudiochallengeStartPage(loginResponse) {
 
   containerAudiochallenge.appendChild(wrapper);
 
+  const sessionData = getSessionData().authorized;
+  const loginResponse = JSON.parse(sessionData);
+
   let levelValue = getAndInitLocalData().audiochallengeLevel;
 
   let wordsArr = [];
@@ -126,7 +133,7 @@ export default async function renderAudiochallengeStartPage(loginResponse) {
     setLocalData({ audiochallengeLevel: levelValue });
 
     preload(wordsArr, loginResponse);
-  }, { once: true });
+  });
 
   document.addEventListener('keydown', (event) => {
     if (event.code === 'Enter') {

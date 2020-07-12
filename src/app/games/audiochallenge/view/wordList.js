@@ -41,7 +41,13 @@ export async function getWordArr() {
   if (searchRightWord.length === 0) {
     id = wordInfo[0].meanings[0].id;
   } else {
-    id = searchRightWord[0].meanings[0].id;
+    const searchRightTranslate = searchRightWord[0].meanings
+      .filter((el) => el.translation.text === wordTranslate);
+    if (searchRightTranslate.length === 0) {
+      id = searchRightWord[0].meanings[0].id;
+    } else {
+      id = searchRightTranslate[0].id;
+    }
   }
 
   const [wordObj] = await getWordInfoById(id);
@@ -51,6 +57,8 @@ export async function getWordArr() {
 
   const newArr = [];
   filterArr.map((el) => newArr.push(el.translation.text));
+  shuffle(newArr);
+
   const sliceArr = newArr.slice(0, 4);
   sliceArr.push(wordTranslate);
   shuffle(sliceArr);

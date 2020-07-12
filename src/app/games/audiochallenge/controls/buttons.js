@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import createAudio from '../view/createAudio';
 import { getWordArr } from '../view/wordList';
 import { createImage, createTrueWord } from '../view/createAssets';
@@ -28,7 +29,7 @@ export async function nextWord() {
   button.textContent = 'I don\'t know';
 }
 
-function clickButtons(loginResponse) {
+function clickButtons() {
   const button = document.querySelector('.button');
   const bodyBcg = document.querySelector('.audiochallenge__body');
 
@@ -38,7 +39,7 @@ function clickButtons(loginResponse) {
     if (round === 10) {
       round = 1;
       createStatistic(stat);
-      statisticButton(loginResponse);
+      statisticButton();
 
       const arr = Object.keys(stat);
       arr.map((el) => delete stat[el]);
@@ -91,9 +92,9 @@ function clickButtons(loginResponse) {
   }
 }
 
-function keybordEnterKey(event, loginResponse) {
+export function keyboardEnterKey(event) {
   if (event.key === 'Enter' && document.querySelector('.audiochallenge__button-again')) {
-    renderAudiochallengeStartPage(loginResponse);
+    renderAudiochallengeStartPage();
   } else if (document.querySelector('.audiochallenge__start-button')) {
     return false;
   } else if (event.code === 'Digit1' || event.code === 'Digit2' || event.code === 'Digit3' || event.code === 'Digit4' || event.code === 'Digit5' || event.code === 'Numpad1' || event.code === 'Numpad2' || event.code === 'Numpad3' || event.code === 'Numpad4' || event.code === 'Numpad5' || event.code === 'Enter') {
@@ -103,9 +104,9 @@ function keybordEnterKey(event, loginResponse) {
   return true;
 }
 
-export function buttonListener(loginResponse) {
+export function buttonListener() {
   const button = document.querySelector('.button');
   const body = document.querySelector('body');
-  button.addEventListener('click', () => clickButtons(loginResponse));
-  body.addEventListener('keydown', (event) => keybordEnterKey(event, loginResponse));
+  button.addEventListener('click', clickButtons);
+  body.addEventListener('keydown', keyboardEnterKey);
 }

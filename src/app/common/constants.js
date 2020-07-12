@@ -1,5 +1,6 @@
 export const DEFAULT_SESSION_DATA = Object.freeze({
   score: 0,
+  authorized: {},
 });
 
 export const DEFAULT_LOCAL_DATA = Object.freeze({

@@ -1,6 +1,6 @@
 import startAudiochallengeGame from './startGame';
 
-export default function preload(wordsArr, loginResponse) {
+export default function preload(wordsArr) {
   document.querySelector('#audiochallenge').innerHTML = '';
 
   const preloadWrapper = document.createElement('div');
@@ -35,6 +35,6 @@ export default function preload(wordsArr, loginResponse) {
 
   setTimeout(() => {
     clearInterval(intervalTimer);
-    startAudiochallengeGame(wordsArr, loginResponse);
+    startAudiochallengeGame(wordsArr);
   }, 3000);
 }
