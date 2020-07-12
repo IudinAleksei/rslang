@@ -135,6 +135,30 @@
   width: 25px;
 }
 
+.savannah__audio__wrapper {
+  position: absolute;
+  top: 10vh;
+  left: 5vw;
+  width: 30px;
+  height: 30px;
+  background: url('../../../../assets/icons/savannah/audio.svg') center center/cover no-repeat;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.savannah__audio__wrapper_off::before {
+  content: '';
+  position: absolute;
+  top: 58%;
+  left: 50%;
+  width: 3px;
+  height: 30px;
+  transform: translate(-50%, -50%) rotate(-45deg);
+  background: #000;
+}
+
 @keyframes move {
   50% {
     transform: translateY(20px);

@@ -16,11 +16,16 @@ export default class Game {
     this.statObj.right = 0;
     this.statObj.mistakes = 0;
     this.workAnimation = true;
+    this.audioPlay = true;
+    this.rightCount = 0;
   }
 
   renderLayout() {
     this.list = document.createElement('div');
     this.list.classList.add('savannah-list');
+
+    this.audioWrapper = document.createElement('div');
+    this.audioWrapper.classList.add('savannah__audio__wrapper');
 
     this.heartWrapper = document.createElement('div');
     this.heartWrapper.classList.add('heart__wrapper');
@@ -45,9 +50,11 @@ export default class Game {
 
     this.crystal.append(this.crystalImage);
 
-    document.getElementById('savannah').append(this.heartWrapper, this.list, this.crystal);
+    document.getElementById('savannah').append(this.audioWrapper, this.heartWrapper, this.list, this.crystal);
 
     this.list.addEventListener('click', (event) => this.clickHandler(event));
+
+    this.audioWrapper.addEventListener('click', () => this.isPlayAudio());
   }
 
   shuffle(array) {
@@ -141,6 +148,16 @@ export default class Game {
     this.audioElement.play();
   }
 
+  isPlayAudio() {
+    if (this.audioPlay) {
+      this.audioPlay = false;
+      this.audioWrapper.classList.add('savannah__audio__wrapper_off');
+    } else if (!this.audioPlay && this.audioWrapper.classList.contains('savannah__audio__wrapper_off')) {
+      this.audioPlay = true;
+      this.audioWrapper.classList.remove('savannah__audio__wrapper_off');
+    }
+  }
+
   animationWord() {
     if (document.querySelector('.savannah__true-word').classList.contains('savannah__true-word_right')) {
       document.querySelector('.savannah__true-word').classList.remove('savannah__true-word_right');
@@ -161,7 +178,9 @@ export default class Game {
 
       this.wordsArr.splice(0, 1);
 
-      this.playAudio('./assets/audio/savannah/savannah-wrong-word.mp3');
+      if (this.audioPlay) {
+        this.playAudio('./assets/audio/savannah/savannah-wrong-word.mp3');
+      }
 
       const rightWord = document.querySelector('[data-word]');
       rightWord.classList.add('savannah__right-word');
@@ -171,21 +190,30 @@ export default class Game {
         this.trueWordContainer.remove();
         this.play();
         this.workAnimation = false;
+        this.rightCount = 0;
       }, 300);
     }, 5000);
   }
 
   rightWordChoose(event) {
-    this.playAudio('./assets/audio/savannah/savannah-right-word.mp3');
+    if (this.audioPlay) {
+      this.playAudio('./assets/audio/savannah/savannah-right-word.mp3');
+    }
+
     this.bg += 5;
     event.target.classList.add('savannah__right-word');
     document.querySelector('.savannah__true-word').textContent = '';
     document.querySelector('.savannah__true-word').classList.add('savannah__true-word_right');
     document.querySelector('.savannah__body').style.backgroundPosition = `bottom ${this.bg}% right 50%`;
-    this.crystalScale += 0.1;
-    this.crystalImage.style.transform = '';
-    this.crystalImage.style.transform = `scale(${this.crystalScale})`;
+
+    if (this.rightCount % 3 === 0 && this.rightCount !== 0) {
+      this.crystalScale += 0.1;
+      this.crystalImage.style.transform = '';
+      this.crystalImage.style.transform = `scale(${this.crystalScale})`;
+    }
+
     this.level += 1;
+    this.rightCount += 1;
     this.statObj.right += 1;
     this.statObj[Object.values(this.wordsArr[0])[0]] = true;
 
@@ -199,13 +227,17 @@ export default class Game {
   }
 
   wrongWordChoose(event) {
-    this.playAudio('./assets/audio/savannah/savannah-wrong-word.mp3');
+    if (this.audioPlay) {
+      this.playAudio('./assets/audio/savannah/savannah-wrong-word.mp3');
+    }
+
     document.querySelector('.savannah__true-word').classList.add('savannah__true-word_false');
     event.target.classList.add('savannah__wrong-word');
 
     setTimeout(() => document.querySelector('[data-word]').classList.add('savannah__right-word'), 100);
     this.level += 1;
     this.life -= 1;
+    this.rightCount = 0;
     this.statObj.mistakes += 1;
     this.statObj[Object.values(this.wordsArr[0])[0]] = false;
     document.querySelector('.heart__list-item').remove();
@@ -231,16 +263,24 @@ export default class Game {
   }
 
   keyboardRightWord(element) {
-    this.playAudio('./assets/audio/savannah/savannah-right-word.mp3');
+    if (this.audioPlay) {
+      this.playAudio('./assets/audio/savannah/savannah-right-word.mp3');
+    }
+
     this.bg += 5;
     element.classList.add('savannah__right-word');
     document.querySelector('.savannah__true-word').textContent = '';
     document.querySelector('.savannah__true-word').classList.add('savannah__true-word_right');
     document.querySelector('.savannah__body').style.backgroundPosition = `bottom ${this.bg}% right 50%`;
-    this.crystalScale += 0.1;
-    this.crystalImage.style.transform = '';
-    this.crystalImage.style.transform = `scale(${this.crystalScale})`;
+
+    if (this.rightCount % 3 === 0 && this.rightCount !== 0) {
+      this.crystalScale += 0.1;
+      this.crystalImage.style.transform = '';
+      this.crystalImage.style.transform = `scale(${this.crystalScale})`;
+    }
+
     this.level += 1;
+    this.rightCount += 1;
     this.statObj.right += 1;
     this.statObj[Object.values(this.wordsArr[0])[0]] = true;
 
@@ -256,7 +296,10 @@ export default class Game {
   keyboardWrongWord(element) {
     const rightWord = document.querySelector('[data-word]');
 
-    this.playAudio('./assets/audio/savannah/savannah-wrong-word.mp3');
+    if (this.audioPlay) {
+      this.playAudio('./assets/audio/savannah/savannah-wrong-word.mp3');
+    }
+
     document.querySelector('.savannah__true-word').classList.add('savannah__true-word_false');
     element.classList.add('savannah__wrong-word');
 
@@ -264,6 +307,7 @@ export default class Game {
 
     this.level += 1;
     this.life -= 1;
+    this.rightCount = 0;
     this.statObj.mistakes += 1;
     this.statObj[Object.values(this.wordsArr[0])[0]] = false;
     document.querySelector('.heart__list-item').remove();
@@ -300,7 +344,10 @@ export default class Game {
 
   async play() {
     if (this.level === this.maxLevel || this.life <= 0) {
-      this.playAudio('./assets/audio/savannah/savannah-statistic.mp3');
+      if (this.audioPlay) {
+        this.playAudio('./assets/audio/savannah/savannah-statistic.mp3');
+      }
+
       renderStatistic(this.statObj, this.loginResponse);
     } else {
       this.createRightWord();
