@@ -33,11 +33,21 @@ export async function getWordArr() {
   } = audiochallengeGameWord;
 
   const wordInfo = await getWordsInfo(word);
-  const { id } = wordInfo[0].meanings[0];
+
+  const searchRightWord = wordInfo.filter((el) => el.text === word);
+
+  let id = '';
+
+  if (searchRightWord.length === 0) {
+    id = wordInfo[0].meanings[0].id;
+  } else {
+    id = searchRightWord[0].meanings[0].id;
+  }
+
   const [wordObj] = await getWordInfoById(id);
 
   const arr = wordObj.alternativeTranslations;
-  const filterArr = arr.filter((el) => !(/\s+/).test(el.translation.text));
+  const filterArr = arr.filter((el) => !(/\s+/).test(el.translation.text.trim()) && (/^[а-я]/).test(el.translation.text.trim()));
 
   const newArr = [];
   filterArr.map((el) => newArr.push(el.translation.text));
