@@ -112,3 +112,24 @@
   margin-right: 10px;
 }
 
+.select-level {
+  color: #000;
+}
+
+.choose-user-word {
+  margin: 0;
+  text-align: center;
+}
+
+.select-user-word {
+  color: #000;
+  font-size: 1.7rem;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.audiochallenge__start-button {
+  @include button;
+
+  color: $white-color;
+}

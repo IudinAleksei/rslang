@@ -8,5 +8,7 @@
 
 #audiochallenge {
   @include flex;
+
   justify-content: normal;
+  padding-top: 10vh;
 }
