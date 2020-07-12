@@ -107,11 +107,12 @@ body {
     width: 500px;
     height: 300px;
   }
-}
-.game__text {
+  .game__text {
   width: 450px;
   height: 120px;
 }
+}
+
 
 @media screen and (max-width: $tablet_sreen) {
   .wrap-landing-page__video {
