@@ -21,12 +21,12 @@ function mainGameHandling() {
     document.querySelector('.input-background').style.opacity = 0;
   }, false);
   document.querySelector('.main-container').addEventListener('keydown', (event) => {
-    document.querySelector('.input').focus();
     if (event.key === 'Enter') {
       event.preventDefault();
       compareWord();
     }
-  }, false);
+  });
+
   document.addEventListener('keydown', () => {
     document.querySelector('.input').focus();
   }, false);

@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 /* eslint-disable no-underscore-dangle */
 import fetchUrl from '../../common/network/backendWords/commonFetch';
 import {
@@ -44,6 +45,20 @@ const newWord = {
   ],
 };
 const filterUserWord = { $and: [{ 'userWord.difficulty': 'easy', 'userWord.optional.repeat': true, 'userWord.optional.delete': false }] };
+
+const filterUserWordInterval = {
+  $or: [{
+    $or: [{
+      "userWord.difficulty": "easy", "userWord.optional.repeat": true, "userWord.optional.delete": false, "userWord.optional.date": { $gte: (Date.now() - 30 * 60 * 1000), $lte: (Date.now() - 10 * 60 * 60 * 1000) },
+    }, {
+      "userWord.difficulty": "easy", "userWord.optional.repeat": true, "userWord.optional.delete": false, "userWord.optional.date": { $gte: (Date.now() - 3 * 60 * 1000), $lte: (Date.now() - 1 * 60 * 60 * 1000) },
+    }, {
+      "userWord.difficulty": "easy", "userWord.optional.repeat": true, "userWord.optional.delete": false, "userWord.optional.date": { $gte: (Date.now() - 48 * 60 * 60 * 1000), $lte: (Date.now() - 24 * 60 * 60 * 1000) },
+    }, {
+      "userWord.difficulty": "easy", "userWord.optional.repeat": true, "userWord.optional.delete": false, "userWord.optional.date": { $gte: (Date.now() - 96 * 60 * 60 * 1000), $lte: (Date.now() - 120 * 60 * 60 * 1000) },
+    }],
+  }],
+};
 
 export function playAudio(event) {
   return new Promise(((resolve) => {
@@ -174,7 +189,7 @@ async function mainGame() {
 
   if (quantityNewWords === '0') {
     arrayUserWords = await getAllAggregatedWords(tokens, usersId,
-      quantityCards, filterUserWord);
+      quantityCards, filterUserWordInterval);
 
     arrayCommon = arrayUserWords[0].paginatedResults.sort(() => Math.random() - 0.5);
   }
