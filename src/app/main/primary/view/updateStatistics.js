@@ -3,7 +3,7 @@ import { getUserStatistic, upsertUserStatistic } from '../../../common/index';
 
 export default async function updateStatistics(token, userId, countWords) {
   const today = new Date().toLocaleDateString();
-  console.log(Date.parse(today));
+  const timestamp = Date.parse(new Date());
   const statistic = await getUserStatistic(token, userId);
   if (statistic === null) {
     const newLearnedWords = {
@@ -11,7 +11,7 @@ export default async function updateStatistics(token, userId, countWords) {
       optional: {
         days: {
           learnedWords: [countWords],
-          date: [Date.parse(today)],
+          date: [timestamp],
         },
       },
     };
@@ -37,7 +37,7 @@ export default async function updateStatistics(token, userId, countWords) {
         optional: {
           days: {
             learnedWords: [...statistic.optional.days.learnedWords, countWords],
-            date: [...statistic.optional.days.date, Date.parse(today)],
+            date: [...statistic.optional.days.date, timestamp],
           },
         },
       };
