@@ -2,7 +2,7 @@ import createLayout from './createLayout';
 import createAudio from './createAudio';
 import { getWord, getWordArr } from './wordList';
 import {
-  wordListlistener, buttonListener, audioIconListener, keyboardListener,
+  wordListlistener, buttonListener, audioIconListener,
 } from '../controls/listeners';
 import { createSpeakIcon, createImage, createTrueWord } from './createAssets';
 
@@ -17,5 +17,4 @@ export default async function startAudiochallengeGame(arr) {
   audioIconListener();
   wordListlistener();
   buttonListener();
-  keyboardListener();
 }

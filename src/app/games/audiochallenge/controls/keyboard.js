@@ -1,6 +1,7 @@
+/* eslint-disable import/no-cycle */
 import { stat, wordListener } from './wordList';
 
-export function keyboardEvent(event) {
+export default function keyboardEvent(event) {
   const list = document.querySelectorAll('.audiochallenge__word-list__item');
   const image = document.querySelector('.audiochallenge-image');
   const button = document.querySelector('.button');
@@ -53,10 +54,4 @@ export function keyboardEvent(event) {
 
     return true;
   });
-}
-
-export default function keyboardListener() {
-  const body = document.querySelector('body');
-
-  body.addEventListener('keydown', keyboardEvent);
 }

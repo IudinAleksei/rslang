@@ -1,3 +1,6 @@
+/* eslint-disable import/no-cycle */
+import keyboardEvent from './keyboard';
+
 export const stat = { right: 0, mistakes: 0, dontKnow: 0 };
 
 export function wordListener(event) {
@@ -51,4 +54,5 @@ export function wordListener(event) {
 
 export function wordListlistener() {
   document.querySelector('.audiochallenge__word-list').addEventListener('click', wordListener);
+  document.addEventListener('keydown', keyboardEvent, { once: true });
 }

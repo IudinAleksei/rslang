@@ -117,8 +117,8 @@ export default async function renderAudiochallengeStartPage() {
   selectUserWord.addEventListener('click', async () => {
     wordsArr = await getWordsArray(loginResponse, false);
 
-    if (wordsArr.length < 5) {
-      alert('Sorry, you have less than 5 words in your vocabulary.\nPlease, choose level!');
+    if (wordsArr.length < 10) {
+      alert('Sorry, you have less than 10 words in your vocabulary.\nPlease, choose level!');
       wordsArr = await getWordsArray(loginResponse, levelValue);
     } else {
       selectUserWord.classList.add('audiochallenge__select-user-word_select');

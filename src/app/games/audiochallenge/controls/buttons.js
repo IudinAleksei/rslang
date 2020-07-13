@@ -5,7 +5,7 @@ import { createImage, createTrueWord } from '../view/createAssets';
 import createStatistic from '../view/statistic';
 import { stat, wordListener, wordListlistener } from './wordList';
 import statisticButton from './statisticButton';
-import { keyboardEvent } from './keyboard';
+import keyboardEvent from './keyboard';
 import renderAudiochallengeStartPage from '../view/startPage';
 
 let round = 1;
@@ -97,7 +97,7 @@ export function keyboardEnterKey(event) {
     renderAudiochallengeStartPage();
   } else if (document.querySelector('.audiochallenge__start-button')) {
     return false;
-  } else if (event.code === 'Digit1' || event.code === 'Digit2' || event.code === 'Digit3' || event.code === 'Digit4' || event.code === 'Digit5' || event.code === 'Numpad1' || event.code === 'Numpad2' || event.code === 'Numpad3' || event.code === 'Numpad4' || event.code === 'Numpad5' || event.code === 'Enter') {
+  } else if (event.code === 'Enter') {
     clickButtons();
   }
 
