@@ -15,9 +15,9 @@ function writeStatistic() {
 }
 
 function movingPuzzle(event) {
-  if (event.target.closest('.puzzle-game__puzzle-word') || event.target.closest('.puzzle-game__puzzle-word fon') || event.target.closest('.puzzle-game__puzzle-word fon fon-none')) {
-    event.target.closest('.puzzle-game__puzzle-word').remove(event.target);
-    document.getElementById('box').append(event.target.closest('.puzzle-game__puzzle-word'));
+  if (event.target.closest('.fon')) {
+    event.target.closest('.fon').remove(event.target);
+    document.getElementById('box').append(event.target.closest('.fon'));
     const len = document.getElementById('text').getElementsByTagName('*');
     if (len.length === 0) {
       document.getElementById('check').style.display = 'block';
@@ -176,7 +176,7 @@ function controlGamePuzzle(event) {
     for (let i = 0; i < elements.length; i += 1) {
       elements[i].setAttribute('draggable', 'false');
       elements[i].classList.remove('fon');
-      elements[i].classList.add('done');
+      elements[i].classList.add('english-puzzle__done');
       elements[i].style.borderColor = 'green';
     }
     document.getElementById('continue').style.display = 'block';
@@ -203,7 +203,7 @@ function controlGamePuzzle(event) {
         element[i].setAttribute('draggable', 'false');
         element[i].classList.remove('fon');
         element[i].classList.remove('puzzle-game__fon-none');
-        element[i].classList.add('done');
+        element[i].classList.add('english-puzzle__done');
         element[i].style.borderColor = 'green';
       }
       if (isLENGTH === 'true') {
