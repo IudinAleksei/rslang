@@ -1,7 +1,10 @@
 import menuHandlers from './menuHandlers';
 import renderSettings from '../../main/settings/index';
 import {
-  hideHeader, hideMain, clearBodyClasses, regenerateMainContainer,
+  hideHeader,
+  hideMain,
+  clearBodyClasses,
+  regenerateMainContainer,
 } from '../index';
 
 const CURRENT_STATE = {
@@ -24,7 +27,9 @@ function menuClickHandler(loginResponse) {
           menuHandlers[functionName](loginResponse);
           CURRENT_STATE.page = functionName;
           hideMain(false);
-        }, { once: true });
+        }, {
+          once: true,
+        });
       } else {
         // eslint-disable-next-line no-alert
         alert('эта страница еще не создана');
@@ -32,6 +37,13 @@ function menuClickHandler(loginResponse) {
     }
   });
 }
+
+function logoutClickHandler() {
+  document.querySelector('#authorization__log-out').addEventListener('click', () => {
+    console.log('logoutClickHandler');
+  });
+}
+
 const startMain = (loginResponse) => {
   hideMain(true);
   document.body.addEventListener('transitionend', () => {
@@ -40,8 +52,11 @@ const startMain = (loginResponse) => {
     hideMain(false);
     hideHeader(false);
     renderSettings();
-  }, { once: true });
+  }, {
+    once: true,
+  });
   menuClickHandler(loginResponse);
+  logoutClickHandler();
 };
 
 export default startMain;

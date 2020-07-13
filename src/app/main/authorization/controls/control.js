@@ -62,7 +62,7 @@ async function getSign(email, password) {
 }
 export default async function formHandling(nextPageFunction) {
   if (getSessionData().authorized) {
-    const loginResponse = getSessionData();
+    const loginResponse = JSON.parse(getSessionData().authorized);
     if (loginResponse) {
       nextPageFunction(loginResponse);
     }
