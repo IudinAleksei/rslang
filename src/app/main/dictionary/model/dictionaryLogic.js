@@ -6,17 +6,23 @@ export const readAllUserWords = async (loginResponse) => {
   const wordRequestArray = await Promise.all(idWordArray.map((id) => getWordById(id)));
 
   const resultArray = userWords.map((word, index) => {
-    const resultWord = Object.assign(word, wordRequestArray[index]);
+    const resultWord = {
+      userWord: word,
+      wordData: wordRequestArray[index],
+    };
+
     return resultWord;
   });
 
   return resultArray;
 };
 
-export const getDifficultUserWords = () => {
-
+export const getDifficultUserWords = (userWords) => {
+  const result = userWords.filter((word) => word.userWord.difficulty === 'hard');
+  return result;
 };
 
-export const getDeletedUserWords = () => {
-
+export const getDeletedUserWords = (userWords) => {
+  const result = userWords.filter((word) => word.userWord.optional.delete);
+  return result;
 };

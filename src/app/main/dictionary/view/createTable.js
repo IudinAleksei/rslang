@@ -1,25 +1,35 @@
 /* eslint-disable import/prefer-default-export */
 import { ELEMENTS_CLASSES, MESSAGES } from '../../../common/constants';
 
-const createTableRow = (wordObject) => {
+const createTableRow = (wordObject, needRecoverBtn = false) => {
   const row = document.createElement('div');
   row.classList.add(ELEMENTS_CLASSES.dictionaryTableRow);
 
   const wordContainer = document.createElement('div');
 
+  if (needRecoverBtn) {
+    const recoverButton = document.createElement('button');
+
+    recoverButton.innerText = 'Recover';
+
+    row.append(recoverButton);
+  }
+
   const playButton = document.createElement('button');
+  playButton.innerText = 'play';
+  playButton.classList.add(ELEMENTS_CLASSES.dictionaryPlayBtn);
 
   const audio = new Audio();
-  audio.src = `data:audio/mpeg;base64,${wordObject.audio}`;
+  audio.src = `data:audio/mpeg;base64,${wordObject.wordData.audio}`;
 
   const word = document.createElement('p');
-  word.innerText = wordObject.word;
+  word.innerText = wordObject.wordData.word;
 
   const wordTranslate = document.createElement('p');
-  wordTranslate.innerText = wordObject.wordTranslate;
+  wordTranslate.innerText = wordObject.wordData.wordTranslate;
 
   const transcription = document.createElement('p');
-  transcription.innerText = wordObject.transcription;
+  transcription.innerText = wordObject.wordData.transcription;
 
   wordContainer.append(playButton);
   wordContainer.append(audio);
@@ -30,10 +40,10 @@ const createTableRow = (wordObject) => {
   const sentenceContainer = document.createElement('div');
 
   const textExample = document.createElement('p');
-  textExample.innerHTML = wordObject.textExample;
+  textExample.innerHTML = wordObject.wordData.textExample;
 
   const textMeaning = document.createElement('p');
-  textMeaning.innerText = wordObject.textMeaning;
+  textMeaning.innerText = wordObject.wordData.textMeaning;
 
   sentenceContainer.append(textExample);
   sentenceContainer.append(textMeaning);
@@ -41,16 +51,16 @@ const createTableRow = (wordObject) => {
   const infoContainer = document.createElement('div');
 
   const repeat = document.createElement('p');
-  repeat.innerText = `${MESSAGES.dictionaryRepetitions}${wordObject.optional.counter}`;
+  repeat.innerText = `${MESSAGES.dictionaryRepetitions}${wordObject.userWord.optional.counter}`;
 
   const lastDate = document.createElement('p');
-  lastDate.innerText = `${MESSAGES.dictionaryLastDate}${wordObject.optional.date}`;
+  lastDate.innerText = `${MESSAGES.dictionaryLastDate}${wordObject.userWord.optional.date}`;
 
   infoContainer.append(repeat);
   infoContainer.append(lastDate);
 
   const image = new Image();
-  image.src = `data:image/jpg;base64,${wordObject.image}`;
+  image.src = `data:image/jpg;base64,${wordObject.wordData.image}`;
 
   row.append(image);
   row.append(wordContainer);
@@ -60,7 +70,14 @@ const createTableRow = (wordObject) => {
   return row;
 };
 
-export const createDictTable = (dictionary, wordArray) => {
+export const createDictTable = (wordArray, needRecoverBtn) => {
+  const dictionary = document.querySelector(`.${ELEMENTS_CLASSES.dictionary}`);
+  let prevTableContainer = document.querySelector(`.${ELEMENTS_CLASSES.dictionaryTableContainer}`);
+  if (prevTableContainer) {
+    prevTableContainer.remove();
+    prevTableContainer = null;
+  }
+
   const tableContainer = document.createElement('div');
   const table = document.createElement('table');
   const tbody = document.createElement('tbody');
@@ -69,7 +86,7 @@ export const createDictTable = (dictionary, wordArray) => {
   table.classList.add(ELEMENTS_CLASSES.dictionaryTable);
 
   wordArray.forEach((word) => {
-    const row = createTableRow(word);
+    const row = createTableRow(word, needRecoverBtn);
     tbody.append(row);
   });
 

@@ -34,6 +34,4 @@ export const renderDictionary = () => {
   dict.append(buttonContainer);
 
   mainContainer.append(dict);
-
-  return dict;
 };

@@ -57,6 +57,11 @@
   }
 }
 
+.dictionary__play-button {
+  width: 30px;
+  height: 30px;
+}
+
 @media (max-width: $tablet_sreen) {
   .dictionary__button-container {
     flex-direction: column;
