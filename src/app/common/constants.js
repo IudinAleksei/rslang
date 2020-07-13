@@ -56,4 +56,6 @@ export const MESSAGES = Object.freeze({
   trainingRightCards: 'Correct answer',
   trainingNewCards: 'New words',
   trainingCardSeries: 'The longest series of correct answers',
+  dictionaryRepetitions: 'repetitions: ',
+  dictionaryLastDate: ' last date: ',
 });
