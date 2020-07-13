@@ -2,7 +2,7 @@
 /* eslint-disable no-underscore-dangle */
 import fetchUrl from '../../common/network/backendWords/commonFetch';
 import {
-  createUserWord, updateUserWord, upsertUserSettings,
+  createUserWord, updateUserWord, upsertUserSettings, getAllUserWords,
 } from '../../common/network/backendWords/backendWords';
 import getMedia from '../../common/utils/githubMedia';
 import { getAndInitLocalData } from '../../common/index';
@@ -47,17 +47,17 @@ const newWord = {
 const filterUserWord = { $and: [{ 'userWord.difficulty': 'easy', 'userWord.optional.repeat': true, 'userWord.optional.delete': false }] };
 
 const filterUserWordInterval = {
+
   $or: [{
-    $or: [{
-      "userWord.difficulty": "easy", "userWord.optional.repeat": true, "userWord.optional.delete": false, "userWord.optional.date": { $gte: (Date.now() - 30 * 60 * 1000), $lte: (Date.now() - 10 * 60 * 60 * 1000) },
-    }, {
-      "userWord.difficulty": "easy", "userWord.optional.repeat": true, "userWord.optional.delete": false, "userWord.optional.date": { $gte: (Date.now() - 3 * 60 * 1000), $lte: (Date.now() - 1 * 60 * 60 * 1000) },
-    }, {
-      "userWord.difficulty": "easy", "userWord.optional.repeat": true, "userWord.optional.delete": false, "userWord.optional.date": { $gte: (Date.now() - 48 * 60 * 60 * 1000), $lte: (Date.now() - 24 * 60 * 60 * 1000) },
-    }, {
-      "userWord.difficulty": "easy", "userWord.optional.repeat": true, "userWord.optional.delete": false, "userWord.optional.date": { $gte: (Date.now() - 96 * 60 * 60 * 1000), $lte: (Date.now() - 120 * 60 * 60 * 1000) },
-    }],
+    "userWord.difficulty": "easy", "userWord.optional.repeat": true, "userWord.optional.delete": false, "userWord.optional.date": { $gte: (Date.now() - 96 * 60 * 60 * 1000), $lte: (Date.now() - 120 * 60 * 60 * 1000) },
+  }, {
+    "userWord.difficulty": "easy", "userWord.optional.repeat": true, "userWord.optional.delete": false, "userWord.optional.date": { $gte: (Date.now() - 48 * 60 * 60 * 1000), $lte: (Date.now() - 24 * 60 * 60 * 1000) },
+  }, {
+    "userWord.difficulty": "easy", "userWord.optional.repeat": true, "userWord.optional.delete": false, "userWord.optional.date": { $gte: (Date.now() - 4 * 60 * 60 * 1000), $lte: (Date.now() - 60 * 60 * 1000) },
+  }, {
+    "userWord.difficulty": "easy", "userWord.optional.repeat": true, "userWord.optional.delete": false, "userWord.optional.date": { $gte: (Date.now() - 30 * 60 * 1000), $lte: (Date.now() - 5 * 60 * 1000) },
   }],
+
 };
 
 export function playAudio(event) {
@@ -184,6 +184,7 @@ async function mainGame() {
   tokens = authorized.token;
   usersId = authorized.userId;
   counterCard = 0;
+  getAllUserWords(tokens, usersId).then((Q) => console.log(Q));
   upsertUserSettings(tokens, usersId,
     { optional: getAndInitLocalData() });
 
@@ -191,7 +192,7 @@ async function mainGame() {
     arrayUserWords = await getAllAggregatedWords(tokens, usersId,
       quantityCards, filterUserWordInterval);
 
-    arrayCommon = arrayUserWords[0].paginatedResults.sort(() => Math.random() - 0.5);
+    arrayCommon = arrayUserWords[0].paginatedResults;
   }
 
   if (quantityCards === quantityNewWords) {
