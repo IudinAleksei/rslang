@@ -7,7 +7,10 @@ export {
   getAggregatedWordsById,
 } from './network/backendWords/backendWords';
 
-export { setSessionData, getSessionData, getAndInitSessionData } from './utils/sessionStorage';
+export {
+  setSessionData, getSessionData, deleteSessionData,
+  getAndInitSessionData,
+} from './utils/sessionStorage';
 
 export { getWordsInfo, getWordInfoById } from './network/skyengApi/apiWords';
 

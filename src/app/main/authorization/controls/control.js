@@ -60,7 +60,8 @@ async function getSign(email, password) {
   }
   return loginResponse;
 }
-export default async function formHandling(nextPageFunction) {
+
+async function formHandling(nextPageFunction) {
   if (getSessionData().authorized) {
     const loginResponse = JSON.parse(getSessionData().authorized);
     if (loginResponse) {
@@ -78,3 +79,12 @@ export default async function formHandling(nextPageFunction) {
     });
   }
 }
+
+function checkAuthorization() {
+  return !!getSessionData().authorized;
+}
+
+export {
+  formHandling,
+  checkAuthorization,
+};

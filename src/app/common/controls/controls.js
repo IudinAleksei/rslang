@@ -5,7 +5,9 @@ import {
   hideMain,
   clearBodyClasses,
   regenerateMainContainer,
+  deleteSessionData,
 } from '../index';
+import authorization from '../../main/authorization/index';
 
 const CURRENT_STATE = {
   page: 'renderSettings',
@@ -38,12 +40,6 @@ function menuClickHandler(loginResponse) {
   });
 }
 
-function logoutClickHandler() {
-  document.querySelector('#authorization__log-out').addEventListener('click', () => {
-    console.log('logoutClickHandler');
-  });
-}
-
 const startMain = (loginResponse) => {
   hideMain(true);
   document.body.addEventListener('transitionend', () => {
@@ -56,7 +52,24 @@ const startMain = (loginResponse) => {
     once: true,
   });
   menuClickHandler(loginResponse);
+  // eslint-disable-next-line no-use-before-define
   logoutClickHandler();
 };
+
+function logoutClickHandler() {
+  document.querySelector('#authorization__log-out').addEventListener('click', () => {
+    hideMain(true);
+    document.body.addEventListener('transitionend', () => {
+      deleteSessionData('authorized');
+      clearBodyClasses();
+      regenerateMainContainer();
+      hideMain(false);
+      hideHeader(false);
+      authorization(startMain);
+    }, {
+      once: true,
+    });
+  });
+}
 
 export default startMain;
