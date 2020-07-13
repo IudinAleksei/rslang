@@ -5,6 +5,8 @@ import {
   getAndInitLocalData,
   getUserSettings,
   setLocalData,
+  setSessionData,
+  getSessionData,
 } from '../../../common/index';
 
 function showError() {
@@ -25,7 +27,9 @@ async function getSign(email, password) {
       password: `${password}`,
     });
     if (loginResponse) {
-      sessionStorage.setItem('authorized', JSON.stringify(loginResponse));
+      setSessionData({
+        authorized: JSON.stringify(loginResponse),
+      });
       const settingsUser = await getUserSettings(loginResponse.token, loginResponse.userId);
       setLocalData(settingsUser.optional);
     }
@@ -36,7 +40,6 @@ async function getSign(email, password) {
       email: `${email}`,
       password: `${password}`,
     });
-    console.log(result);
     if (result === null) {
       showError();
       return null;
@@ -46,7 +49,9 @@ async function getSign(email, password) {
       password: `${password}`,
     });
     if (loginResponse) {
-      sessionStorage.setItem('authorized', JSON.stringify(loginResponse));
+      setSessionData({
+        authorized: JSON.stringify(loginResponse),
+      });
       localStorage.clear();
       upsertUserSettings(loginResponse.token, loginResponse.userId, {
         optional: getAndInitLocalData(),
@@ -55,11 +60,9 @@ async function getSign(email, password) {
   }
   return loginResponse;
 }
-export default function formHandling(nextPageFunction) {
-  let loginResponse = sessionStorage.authorized;
-  console.log(sessionStorage.authorized);
-  if (sessionStorage.authorized) {
-    loginResponse = sessionStorage.authorized;
+export default async function formHandling(nextPageFunction) {
+  if (getSessionData().authorized) {
+    const loginResponse = getSessionData();
     if (loginResponse) {
       nextPageFunction(loginResponse);
     }
@@ -68,7 +71,7 @@ export default function formHandling(nextPageFunction) {
       event.preventDefault();
       const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;
-      loginResponse = await getSign(email, password);
+      const loginResponse = await getSign(email, password);
       if (loginResponse) {
         nextPageFunction(loginResponse);
       }
