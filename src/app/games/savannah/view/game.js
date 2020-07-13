@@ -28,24 +28,24 @@ export default class Game {
     this.audioWrapper.classList.add('savannah__audio__wrapper');
 
     this.heartWrapper = document.createElement('div');
-    this.heartWrapper.classList.add('heart__wrapper');
+    this.heartWrapper.classList.add('savannah__heart__wrapper');
 
     this.heartList = document.createElement('ul');
-    this.heartList.classList.add('heart__list');
+    this.heartList.classList.add('savannah__heart__list');
 
     for (let i = 0; i < 5; i += 1) {
       this.heartItem = document.createElement('li');
-      this.heartItem.classList.add('heart__list-item', `${i}`);
+      this.heartItem.classList.add('savannah__heart__list-item', `${i}`);
       this.heartList.append(this.heartItem);
     }
 
     this.heartWrapper.append(this.heartList);
 
     this.crystal = document.createElement('div');
-    this.crystal.classList.add('crystal__wrapper');
+    this.crystal.classList.add('savannah__crystal__wrapper');
 
     this.crystalImage = document.createElement('img');
-    this.crystalImage.classList.add('crystal__image');
+    this.crystalImage.classList.add('savannah__crystal__image');
     this.crystalImage.src = './assets/icons/savannah/crystal.png';
 
     this.crystal.append(this.crystalImage);
@@ -77,21 +77,27 @@ export default class Game {
 
   async getAlternativeWords() {
     this.alternateArr = await getWordsInfo(Object.keys(this.wordsArr[0]));
-    this.meanings = this.alternateArr[0].meanings;
-    this.id = 0;
-    this.meanings.map((el, i) => {
-      if (el.translation.text === Object.values(this.wordsArr[0])[0]) {
-        this.id = el.id;
-      } else if (i === 0) {
-        this.id = el.id;
-      }
 
-      return el;
-    });
+    this.searchRightWord = this.alternateArr
+      .filter((el) => el.text === Object.keys(this.wordsArr[0])[0]);
+
+    this.id = 0;
+
+    if (this.searchRightWord.length === 0) {
+      this.id = this.alternateArr[0].meanings[0].id;
+    } else {
+      this.searchRightTranslate = this.searchRightWord[0].meanings
+        .filter((el) => el.translation.text === Object.values(this.wordsArr[0])[0]);
+      if (this.searchRightTranslate.length === 0) {
+        this.id = this.searchRightWord[0].meanings[0].id;
+      } else {
+        this.id = this.searchRightTranslate[0].id;
+      }
+    }
 
     this.infoById = await getWordInfoById(this.id);
     this.alternativeWords = this.infoById[0].alternativeTranslations;
-    this.filterArr = this.alternativeWords.filter((el) => !(/\s+/).test(el.translation.text));
+    this.filterArr = this.alternativeWords.filter((el) => !(/\s+/).test(el.translation.text.trim()) && (/^[а-я]/).test(el.translation.text.trim()));
 
     this.newArr = [];
     this.filterArr.map((el) => this.newArr.push(el.translation.text));
@@ -122,7 +128,7 @@ export default class Game {
     this.wordArr = await this.getAlternativeWords();
 
     this.ol = document.createElement('ol');
-    this.ol.classList.add('word-list');
+    this.ol.classList.add('savannah__word-list');
     this.ol.innerHTML = '';
 
     for (let i = 0; i < this.wordArr.length; i += 1) {
@@ -174,7 +180,7 @@ export default class Game {
       this.life -= 1;
       this.statObj.mistakes += 1;
       this.statObj[Object.values(this.wordsArr[0])[0]] = false;
-      document.querySelector('.heart__list-item').remove();
+      document.querySelector('.savannah__heart__list-item').remove();
 
       this.wordsArr.splice(0, 1);
 
@@ -241,7 +247,7 @@ export default class Game {
     this.rightCount = 1;
     this.statObj.mistakes += 1;
     this.statObj[Object.values(this.wordsArr[0])[0]] = false;
-    document.querySelector('.heart__list-item').remove();
+    document.querySelector('.savannah__heart__list-item').remove();
 
     this.wordsArr.splice(0, 1);
 
@@ -312,7 +318,7 @@ export default class Game {
     this.rightCount = 1;
     this.statObj.mistakes += 1;
     this.statObj[Object.values(this.wordsArr[0])[0]] = false;
-    document.querySelector('.heart__list-item').remove();
+    document.querySelector('.savannah__heart__list-item').remove();
 
     this.wordsArr.splice(0, 1);
 
