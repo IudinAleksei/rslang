@@ -1,82 +1,82 @@
-.logo path:nth-child(2) {
+.audiochallenge__logo path:nth-child(2) {
   animation: letter-animation 2s ease forwards;
   stroke-dasharray: 274px;
   stroke-dashoffset: 274px;
 }
 
-.logo path:nth-child(3) {
+.audiochallenge__logo path:nth-child(3) {
   animation: letter-animation 2s ease forwards 0.2s;
   stroke-dasharray: 302px;
   stroke-dashoffset: 302px;
 }
 
-.logo path:nth-child(4) {
+.audiochallenge__logo path:nth-child(4) {
   animation: letter-animation 2s ease forwards 0.4s;
   stroke-dasharray: 325px;
   stroke-dashoffset: 325px;
 }
 
-.logo path:nth-child(5) {
+.audiochallenge__logo path:nth-child(5) {
   animation: letter-animation 2s ease forwards 0.6s;
   stroke-dasharray: 223px;
   stroke-dashoffset: 223px;
 }
 
-.logo path:nth-child(6) {
+.audiochallenge__logo path:nth-child(6) {
   animation: letter-animation 2s ease forwards 0.8s;
   stroke-dasharray: 317px;
   stroke-dashoffset: 317px;
 }
 
-.logo path:nth-child(7) {
+.audiochallenge__logo path:nth-child(7) {
   animation: letter-animation 2s ease forwards 1s;
   stroke-dasharray: 278px;
   stroke-dashoffset: 278px;
 }
 
-.logo path:nth-child(8) {
+.audiochallenge__logo path:nth-child(8) {
   animation: letter-animation 2s ease forwards 1.2s;
   stroke-dasharray: 335px;
   stroke-dashoffset: 335px;
 }
 
-.logo path:nth-child(9) {
+.audiochallenge__logo path:nth-child(9) {
   animation: letter-animation 2s ease forwards 1.4s;
   stroke-dasharray: 274px;
   stroke-dashoffset: 274px;
 }
 
-.logo path:nth-child(10) {
+.audiochallenge__logo path:nth-child(10) {
   animation: letter-animation 2s ease forwards 1.6s;
   stroke-dasharray: 200px;
   stroke-dashoffset: 200px;
 }
 
-.logo path:nth-child(11) {
+.audiochallenge__logo path:nth-child(11) {
   animation: letter-animation 2s ease forwards 1.8s;
   stroke-dasharray: 201px;
   stroke-dashoffset: 201px;
 }
 
-.logo path:nth-child(12) {
+.audiochallenge__logo path:nth-child(12) {
   animation: letter-animation 2s ease forwards 2s;
   stroke-dasharray: 352px;
   stroke-dashoffset: 352px;
 }
 
-.logo path:nth-child(13) {
+.audiochallenge__logo path:nth-child(13) {
   animation: letter-animation 2s ease forwards 2.2s;
   stroke-dasharray: 352px;
   stroke-dashoffset: 352px;
 }
 
-.logo path:nth-child(14) {
+.audiochallenge__logo path:nth-child(14) {
   animation: letter-animation 2s ease forwards 2.4s;
   stroke-dasharray: 357px;
   stroke-dashoffset: 357px;
 }
 
-.logo path:nth-child(15) {
+.audiochallenge__logo path:nth-child(15) {
   animation: letter-animation 2s ease forwards 2.6s;
   stroke-dasharray: 352px;
   stroke-dashoffset: 352px;
@@ -90,141 +90,193 @@
 
 .audiochallenge-subtitle {
   @include bodyText();
-  font-size: 2.5rem;
+
   margin-top: 25px;
+  color: #1ab429;
+  font-size: 2.5rem;
 }
 
 .audiochallenge-list {
   align-self: stretch;
-  min-height: 70px;
+  min-height: 140px;
+
+  @media (max-width: 1249px) {
+    min-height: 235px;
+  }
+
+  @media (max-width: 999px) {
+    min-height: 248px;
+  }
+
+  @media (max-width: 749px) {
+    min-height: 345px;
+  }
+
+  @media (max-width: 499px) {
+    min-height: 450px;
+  }
 }
 
-.select-level__form {
+.audiochallenge__select-level__form {
   @include bodyText();
-  font-size: 2rem;
-  margin-bottom: 25px;
+
   display: flex;
   align-items: center;
-  margin-bottom: 30px;
   margin-top: 30px;
+  margin-bottom: 25px;
+  margin-bottom: 30px;
+  font-size: 2rem;
 }
 
-.choose-level {
+.audiochallenge__choose-level {
   @include bodyText();
-  font-size: 2rem;
+
   display: inline-block;
   margin: 0 10px 0 0;
+  color: #1ab429;
+  font-size: 2rem;
 }
 
-.select-level {
-  color: #000;
+.audiochallenge__select-level {
   width: 50px;
   height: 30px;
-  border-radius: 4px;
-  border: none;
-  padding: 0 0 0 5px;
   margin: 0 10px 0 10px;
+  padding: 0 0 0 5px;
+  border: none;
+  border-radius: 4px;
+  color: #000;
 }
 
-.choose-user-word {
+.audiochallenge__choose-user-word {
   margin: 0;
+  color: #1ab429;
   text-align: center;
 }
 
-.select-user-word {
+.audiochallenge__select-user-word {
+  border-bottom: 2px solid #000;
   color: black;
   font-size: 2rem;
   cursor: pointer;
-  border-bottom: 2px solid white;
+
   &:hover {
     border-bottom: none;
-    color: white;
+    color: #1ab429;
   }
+}
+
+.audiochallenge__select-user-word_select {
+  border-bottom: none;
+  color: #1ab429;
 }
 
 .audiochallenge__start-button {
   @include button;
+
   color: $white-color;
+
   &:hover {
     background-color: $button_hover_color;
   }
 }
+
 .main-container__container-audiochallenge {
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: calc(100vh - 80px);
 }
+
 @media screen and (max-width: 800px) {
-  .logo {
+  .audiochallenge__logo {
     width: 600px;
   }
+
   .audiochallenge-subtitle {
     margin-top: 10px;
   }
-  .select-level__form {
-    margin-top: 0px;
+
+  .audiochallenge__select-level__form {
+    margin-top: 0;
   }
 }
+
 @media screen and (max-width: $tablet_sreen) {
-  .logo {
+  .audiochallenge__logo {
     width: 450px;
   }
+
   .audiochallenge-subtitle {
-    font-size: 2rem;
-    margin-top: 0px;
+    margin-top: 0;
+    font-size: 1.9rem;
   }
-  .choose-level {
+
+  .audiochallenge__choose-level {
     font-size: 1.8rem;
   }
-  .select-level__form {
+
+  .audiochallenge__select-level__form {
     margin-top: 5px;
   }
-  .select-level {
+
+  .audiochallenge__select-level {
     margin: 0 3px 0 3px;
   }
-  .choose-user-word {
+
+  .audiochallenge__choose-user-word {
     font-size: 1.8rem;
   }
-  .select-user-word {
+
+  .audiochallenge__select-user-word {
     font-size: 1.8rem;
   }
 }
+
 @media screen and (max-width: $phone_screen) {
-  .logo {
+  .audiochallenge__logo {
     width: 320px;
   }
-  .select-level__form {
+
+  .audiochallenge__select-level__form {
     display: block;
   }
-  .choose-level{
+
+  .audiochallenge__choose-level {
     margin-bottom: 15px;
   }
-  .select-level {
+
+  .audiochallenge__select-level {
     margin: 0 0 0 5px;
   }
-  .choose-user-word {
+
+  .audiochallenge__choose-user-word {
     margin-bottom: 30px;
   }
+
   .audiochallenge__start-button {
     width: 290px;
     height: 50px;
   }
 }
+
 @media screen and (max-width: 320px) {
-  .logo {
+  .audiochallenge__logo {
     width: 310px;
   }
-  .audiochallenge-subtitle {
+
+  .audiochallenge__audiochallenge-subtitle {
     font-size: 1.8rem;
   }
-  .select-level__form {
+
+  .audiochallenge__select-level__form {
     margin-top: 10px;
   }
-  .select-level {
+
+  .audiochallenge__select-level {
     width: 60px;
     height: 40px;
   }
+
   .audiochallenge__start-button {
     width: 300px;
     height: 50px;

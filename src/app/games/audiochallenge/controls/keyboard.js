@@ -1,11 +1,12 @@
+/* eslint-disable import/no-cycle */
 import { stat, wordListener } from './wordList';
 
-export function keyboardEvent(event) {
-  const list = document.querySelectorAll('.word-list__item');
+export default function keyboardEvent(event) {
+  const list = document.querySelectorAll('.audiochallenge__word-list__item');
   const image = document.querySelector('.audiochallenge-image');
   const button = document.querySelector('.button');
-  const trueWord = document.querySelector('.true-word');
-  const speakIcon = document.querySelector('.speak-icon');
+  const trueWord = document.querySelector('.audiochallenge__true-word');
+  const speakIcon = document.querySelector('.audiochallenge__speak-icon');
 
   list.forEach((el) => {
     if (el.dataset.key === event.key && el.dataset.word) {
@@ -14,9 +15,9 @@ export function keyboardEvent(event) {
 
       list.forEach((element) => {
         if (element.dataset.word) {
-          element.classList.add('right');
+          element.classList.add('audiochallenge__right');
         } else {
-          element.classList.add('wrong');
+          element.classList.add('audiochallenge__wrong');
         }
       });
     } else if (el.dataset.key === event.key && !el.dataset.word) {
@@ -31,9 +32,9 @@ export function keyboardEvent(event) {
         }
 
         if (element.dataset.word) {
-          element.classList.add('right');
+          element.classList.add('audiochallenge__right');
         } else {
-          element.classList.add('wrong');
+          element.classList.add('audiochallenge__wrong');
         }
       });
     } else {
@@ -41,22 +42,16 @@ export function keyboardEvent(event) {
     }
 
     image.classList.add('audiochallenge-image_active');
-    trueWord.classList.add('true-word_active');
-    speakIcon.classList.add('speak-icon_active');
+    trueWord.classList.add('audiochallenge__true-word_active');
+    speakIcon.classList.add('audiochallenge__speak-icon_active');
 
     button.classList.remove('audiochallenge__button');
     button.textContent = '';
 
-    button.classList.add('button-next');
+    button.classList.add('audiochallenge__button-next');
 
-    document.querySelector('.word-list').removeEventListener('click', wordListener);
+    document.querySelector('.audiochallenge__word-list').removeEventListener('click', wordListener);
 
     return true;
   });
-}
-
-export default function keyboardListener() {
-  const body = document.querySelector('body');
-
-  body.addEventListener('keydown', keyboardEvent);
 }
