@@ -57,6 +57,7 @@ export const ELEMENTS_CLASSES = Object.freeze({
   dictionaryTableRow: 'dictionary__table__row',
   selectDictionaryBtn: 'dictionary__tab-button_selected',
   dictionaryPlayBtn: 'dictionary__play-button',
+  dictionaryRecoveryBtn: 'dictionary__recovery-button',
 
 });
 

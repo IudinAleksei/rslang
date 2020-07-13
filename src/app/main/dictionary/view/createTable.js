@@ -1,18 +1,20 @@
 /* eslint-disable import/prefer-default-export */
 import { ELEMENTS_CLASSES, MESSAGES } from '../../../common/constants';
 
-const createTableRow = (wordObject, needRecoverBtn = false) => {
+const createTableRow = (wordObject, needRecoveryBtn = false) => {
   const row = document.createElement('div');
   row.classList.add(ELEMENTS_CLASSES.dictionaryTableRow);
+  row.dataset.wordId = wordObject.userWord.wordId;
 
   const wordContainer = document.createElement('div');
 
-  if (needRecoverBtn) {
-    const recoverButton = document.createElement('button');
+  if (needRecoveryBtn) {
+    const recoveryButton = document.createElement('button');
 
-    recoverButton.innerText = 'Recover';
+    recoveryButton.innerText = 'Recover';
+    recoveryButton.classList.add(ELEMENTS_CLASSES.dictionaryRecoveryBtn);
 
-    row.append(recoverButton);
+    row.append(recoveryButton);
   }
 
   const playButton = document.createElement('button');

@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import { ELEMENTS_CLASSES } from '../../../common/constants';
 
 const createTabButton = (name) => {
@@ -12,6 +11,12 @@ const createTabButton = (name) => {
   btn.innerText = name;
 
   return btn;
+};
+
+export const setActiveTabButton = (tab) => {
+  const selectedBtn = document.querySelector(`.${ELEMENTS_CLASSES.selectDictionaryBtn}`);
+  selectedBtn.classList.remove(ELEMENTS_CLASSES.selectDictionaryBtn);
+  tab.classList.add(ELEMENTS_CLASSES.selectDictionaryBtn);
 };
 
 export const renderDictionary = () => {

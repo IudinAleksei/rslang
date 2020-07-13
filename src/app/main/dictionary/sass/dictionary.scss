@@ -25,6 +25,7 @@
   width: 190px;
   margin-left: 5px;
   padding-bottom: 8px;
+  outline: 0;
   color: $white_color;
   user-select: none;
 
@@ -60,6 +61,10 @@
 .dictionary__play-button {
   width: 30px;
   height: 30px;
+}
+
+.dictionary__recovery-button {
+  border-radius: 50%;
 }
 
 @media (max-width: $tablet_sreen) {
