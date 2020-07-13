@@ -132,6 +132,8 @@
 
 @media screen and (max-width: $tablet_sreen) {
   .audiochallenge__word-list {
+    list-style-type: none;
+
     li {
       margin: 16px 25px;
       padding: 20px 20px;
