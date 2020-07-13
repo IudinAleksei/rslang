@@ -1,0 +1,27 @@
+.audiochallenge__timer {
+  color: #000;
+  font-size: 7rem;
+}
+
+.audiochallenge__preload__describe__wrapper {
+  position: fixed;
+  top: 50vh;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #000;
+  font-size: 1.5rem;
+
+  @media screen and (max-width: $tablet_sreen) {
+    display: none;
+  }
+}
+
+.audiochallenge__preload__keyboard-ico {
+  position: absolute;
+  top: -50px;
+  left: 50%;
+  width: 40px;
+  height: 35px;
+  transform: translateX(-50%);
+  background: url('../../../../assets/icons/audiochallenge/preload-keyboard.svg') center center/cover no-repeat;
+}

@@ -195,7 +195,13 @@ export default class Game {
         this.list.innerHTML = '';
         this.trueWordContainer.remove();
         this.play();
-        this.workAnimation = false;
+
+        if (this.workAnimation) {
+          this.workAnimation = false;
+        } else {
+          this.workAnimation = true;
+        }
+
         this.rightCount = 1;
       }, 300);
     }, 5000);
@@ -260,7 +266,12 @@ export default class Game {
 
   clickHandler(event) {
     clearTimeout(this.timeout);
-    this.workAnimation = false;
+
+    if (this.workAnimation) {
+      this.workAnimation = false;
+    } else {
+      this.workAnimation = true;
+    }
 
     if (event.target.dataset.word === Object.values(this.wordsArr[0])[0]) {
       this.rightWordChoose(event);

@@ -6,7 +6,6 @@ import preload from './preload';
 
 export default async function renderSavannahStartPage(loginResponse) {
   document.querySelector('body').classList.add('savannah__body');
-  document.querySelector('.savannah__body').style.backgroundPosition = 'bottom right 50%';
   document.querySelector('.main-container').innerHTML = '';
 
   const wrapper = document.createElement('div');
