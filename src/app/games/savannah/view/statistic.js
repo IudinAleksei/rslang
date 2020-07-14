@@ -10,32 +10,32 @@ export default function renderStatistic(obj, loginResponse) {
   stat.classList.add('savannah__statistic');
 
   const statWrapper = document.createElement('div');
-  statWrapper.classList.add('stat__wrapper');
+  statWrapper.classList.add('savannah__stat__wrapper');
 
   const guessed = document.createElement('div');
-  guessed.classList.add('guessed-words');
+  guessed.classList.add('savannah__guessed-words');
 
   const guessedTitle = document.createElement('h3');
   guessedTitle.classList.add('savannah__guessed-word__title');
   guessedTitle.textContent = `Guessed ${right}:`;
 
   const mistake = document.createElement('div');
-  mistake.classList.add('mistake-words');
+  mistake.classList.add('savannah__mistake-words');
 
   const mistakesTitle = document.createElement('h3');
   mistakesTitle.classList.add('savannah__mistake-word__title');
   mistakesTitle.textContent = `Mistakes ${mistakes}:`;
 
   const guessedList = document.createElement('ul');
-  guessedList.classList.add('guessed-list');
+  guessedList.classList.add('savannah__guessed-list');
 
   const mistakesList = document.createElement('ul');
-  mistakesList.classList.add('mistake-list');
+  mistakesList.classList.add('savannah__mistake-list');
 
   const objKey = Object.keys(obj);
 
   if (objKey.length > 17) {
-    statWrapper.classList.add('stat__wrapper_scroll');
+    statWrapper.classList.add('savannah__stat__wrapper_scroll');
   }
 
   objKey.map((el) => {

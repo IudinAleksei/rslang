@@ -13,36 +13,45 @@
   text-align: center;
 }
 
-.select-level__form {
+.savannah__select-level__form {
   margin-bottom: 25px;
   color: $white_color;
+  font-size: 1.8rem;
   font-size: 2rem;
+  text-align: center;
 }
 
-.choose-level {
+.savannah__choose-level {
   display: inline-block;
   margin: 0;
   margin-right: 10px;
+  color: $white_color;
 }
 
-.select-level {
+.savannah__select-level {
   color: #000;
 }
 
-.choose-user-word {
-  margin: 0;
+.savannah__choose-user-word {
+  display: inline-block;
+  margin: 0 0 30px 10px;
+  color: white;
   text-align: center;
 }
 
 .savannah__select-user-word {
-  font-size: 1.7rem;
-  text-decoration: underline;
+  border-bottom: 1px solid white;
   cursor: pointer;
+
+  &:hover {
+    border-bottom: none;
+    color: #6cffde;
+  }
 }
 
 .savannah__select-user-word_select {
+  border-bottom: none;
   color: #6cffde;
-  text-decoration: none;
 }
 
 .savannah__start-button {

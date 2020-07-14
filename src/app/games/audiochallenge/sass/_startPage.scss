@@ -94,6 +94,7 @@
   margin-top: 25px;
   color: #1ab429;
   font-size: 2.5rem;
+  text-align: center;
 }
 
 .audiochallenge-list {
@@ -187,7 +188,7 @@
   min-height: calc(100vh - 80px);
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 850px) {
   .audiochallenge__logo {
     width: 600px;
   }
@@ -207,7 +208,7 @@
   }
 
   .audiochallenge-subtitle {
-    margin-top: 0;
+    margin: 0 10px;
     font-size: 1.9rem;
   }
 

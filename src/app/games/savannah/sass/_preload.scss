@@ -24,3 +24,9 @@
   color: $white_color;
   font-size: 1.5rem;
 }
+
+@media screen and (max-width: 425px) {
+  .savannah__preload__describe__wrapper {
+    display: none;
+  }
+}

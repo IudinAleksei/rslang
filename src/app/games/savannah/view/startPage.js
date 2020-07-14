@@ -20,14 +20,14 @@ export default async function renderSavannahStartPage(loginResponse) {
   subtitle.textContent = 'Savannah game increase your vocabulary';
 
   const form = document.createElement('form');
-  form.classList.add('select-level__form');
+  form.classList.add('savannah__select-level__form');
 
   const choose = document.createElement('p');
-  choose.classList.add('choose-level');
+  choose.classList.add('savannah__choose-level');
   choose.textContent = 'You can choose level';
 
   const selectLevel = document.createElement('select');
-  selectLevel.classList.add('select-level');
+  selectLevel.classList.add('savannah__select-level');
 
   for (let i = 1; i <= 6; i += 1) {
     const option = document.createElement('option');
@@ -37,7 +37,7 @@ export default async function renderSavannahStartPage(loginResponse) {
 
   const chooseUserWord = document.createElement('p');
   chooseUserWord.textContent = 'or your ';
-  chooseUserWord.classList.add('choose-user-word');
+  chooseUserWord.classList.add('savannah__choose-user-word');
 
   const selectUserWord = document.createElement('span');
   selectUserWord.classList.add('savannah__select-user-word');
