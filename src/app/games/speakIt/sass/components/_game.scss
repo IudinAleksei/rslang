@@ -21,6 +21,7 @@ $item-height: 70px;
     }
 
     .res {
+      position: relative;
       display: flex;
       justify-content: space-between;
       height: 40px;
@@ -28,7 +29,8 @@ $item-height: 70px;
       margin: 20px auto 50px;
     }
 
-    .points {
+    .res_points {
+      position: relative;
       list-style: none;
       display: flex;
       padding: 15px 15px;
@@ -160,6 +162,8 @@ $item-height: 70px;
     }
 
     .img {
+      display: block;
+      margin: auto;
       width: $img-width;
       height: $img-height;
       object-fit: cover;
@@ -173,7 +177,7 @@ $item-height: 70px;
       margin: 0 30px;
     }
 
-    .input {
+    .speakit__input {
       display: block;
       border: 0;
       border-bottom: 1px solid rgb(206, 212, 218);
@@ -197,7 +201,7 @@ $item-height: 70px;
       display: none;
     }
 
-    .input:focus {
+    .speakit__input:focus {
       outline-color: #009179;
     }
 
@@ -212,6 +216,8 @@ $item-height: 70px;
       }
 
       .img {
+        display: block;
+        margin: 5px auto;
         width: 0.75*$img-width;
         height: 0.75*$img-height;
       }
@@ -223,7 +229,7 @@ $item-height: 70px;
         min-height: 31px;
       }
 
-      .input {
+      .speakit__input {
         font-size: 0.85*$font-size;
         padding: 0px 2px;
         margin-bottom: 5px;
@@ -270,6 +276,8 @@ $item-height: 70px;
       }
 
       .img {
+        display: block;
+        margin: 5px auto;
         width: 0.75*$img-width;
         height: 0.75*$img-height;
       }
@@ -281,7 +289,7 @@ $item-height: 70px;
         min-height: 31px;
       }
 
-      .input {
+      .speakit__input {
         padding: 0px 2px;
         margin-bottom: 5px;
         font-size: 0.85*$font-size;
@@ -321,12 +329,24 @@ $item-height: 70px;
     }
 
     @media (max-width:$tablet_sreen) {
+
       .res {
+        display: flex;
+        flex-direction: column;
         height: 30px;
         margin: 10px auto 40px;
       }
 
+      .star {
+        width: 30px;
+        height: 30px;
+        background-image: url('../../../../assets/img/speakit/star.svg');
+        background-size: 30px 30px;
+      }
+
       .img {
+        display: block;
+        margin: 5px auto;
         width: 0.75*$img-width;
         height: 0.75*$img-height;
       }
@@ -367,13 +387,24 @@ $item-height: 70px;
     @media (max-width: $phone_screen) {
 
       .res {
+        display: flex;
+        flex-direction: column;
         height: 30px;
         margin: 10px auto 40px;
       }
 
+      .star {
+        width: 30px;
+        height: 30px;
+        background-image: url('../../../../assets/img/speakit/star.svg');
+        background-size: 30px 30px;
+      }
+
       .img {
-        width: 0.5*$img-width;
-        height: 0.5*$img-height;
+        display: block;
+        margin: 5px auto;
+        width: 0.6*$img-width;
+        height: 0.6*$img-height;
       }
 
       .translation {

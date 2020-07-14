@@ -67,7 +67,7 @@ export default class Game {
   }
 
   isClickOnWords(event) {
-    if (this.game.querySelector('.input').classList.contains('none')) {
+    if (this.game.querySelector('.speakit__input').classList.contains('none')) {
       if (event.target.parentNode.classList.contains('item')) {
         this.wordActive = event.target.parentNode.querySelector('.word').textContent;
         this.translationActive = event.target.parentNode.querySelector('.translation').textContent;
@@ -112,10 +112,10 @@ export default class Game {
     if (!this.game.querySelector('.user-speach').classList.contains('activeBtn')) {
       this.resetGameContainer();
       this.game.querySelector('.translation').classList.add('none');
-      this.game.querySelector('.input').classList.remove('none');
+      this.game.querySelector('.speakit__input').classList.remove('none');
       this.game.querySelector('.user-speach').innerHTML = 'Stop speak';
       this.game.querySelector('.user-speach').classList.add('activeBtn');
-      this.game.querySelector('.input').value = '';
+      this.game.querySelector('.speakit__input').value = '';
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
       if (SpeechRecognition) {
         this.recognition = new SpeechRecognition();
@@ -128,7 +128,7 @@ export default class Game {
           .map((result) => result.transcript)
           .join('');
         let word = transcript.toLowerCase();
-        this.game.querySelector('.input').value = word;
+        this.game.querySelector('.speakit__input').value = word;
         if (word[word.length - 1] === '.') {
           word = word.substring(0, word.length - 1);
         }
@@ -138,7 +138,7 @@ export default class Game {
     } else {
       this.resetGameContainer();
       this.game.querySelector('.user-speach').innerHTML = 'Speak please';
-      this.game.querySelector('.input').value = '';
+      this.game.querySelector('.speakit__input').value = '';
       this.stopRecognition();
     }
   }
@@ -193,7 +193,7 @@ export default class Game {
 
   resetGameContainer() {
     this.game.querySelector('.translation').classList.remove('none');
-    this.game.querySelector('.input').classList.add('none');
+    this.game.querySelector('.speakit__input').classList.add('none');
     this.game.querySelector('.score').innerHTML = '';
     this.game.querySelector('.user-speach').innerHTML = 'Speak please';
     this.game.querySelector('.translation').innerHTML = '';
@@ -244,7 +244,7 @@ export default class Game {
     resultContainer.classList.add('res');
 
     const pointsContainer = document.createElement('ul');
-    pointsContainer.classList.add('points');
+    pointsContainer.classList.add('res_points');
     resultContainer.append(pointsContainer);
 
     for (let i = 0; i < this.maxPoint; i += 1) {
@@ -277,7 +277,7 @@ export default class Game {
 
     this.inputContainer = document.createElement('input');
     this.inputContainer.type = 'text';
-    this.inputContainer.classList.add('input');
+    this.inputContainer.classList.add('speakit__input');
     this.inputContainer.classList.add('none');
     this.inputContainer.readOnly = true;
     imagesContainer.append(this.inputContainer);
