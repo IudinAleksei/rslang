@@ -1,5 +1,6 @@
 export const DEFAULT_SESSION_DATA = Object.freeze({
   score: 0,
+  authorized: {},
 });
 
 export const DEFAULT_LOCAL_DATA = Object.freeze({
@@ -9,6 +10,7 @@ export const DEFAULT_LOCAL_DATA = Object.freeze({
   puzzleRepeatPlay: 'true',
   puzzleLevel: 0,
   puzzlePage: 0,
+  audiochallengeLevel: 1,
   showAnswer: 'true',
   deleteWord: 'true',
   hardWord: 'true',

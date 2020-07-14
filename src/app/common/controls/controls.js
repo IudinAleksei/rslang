@@ -1,8 +1,13 @@
 import menuHandlers from './menuHandlers';
 import renderSettings from '../../main/settings/index';
 import {
-  hideHeader, hideMain, clearBodyClasses, regenerateMainContainer,
+  hideHeader,
+  hideMain,
+  clearBodyClasses,
+  regenerateMainContainer,
+  deleteSessionData,
 } from '../index';
+import authorization from '../../main/authorization/index';
 
 const CURRENT_STATE = {
   page: 'renderSettings',
@@ -29,6 +34,7 @@ function menuClickHandler(loginResponse) {
     }
   });
 }
+
 const startMain = (loginResponse) => {
   hideMain(true);
   document.body.addEventListener('transitionend', () => {
@@ -37,8 +43,28 @@ const startMain = (loginResponse) => {
     hideMain(false);
     hideHeader(false);
     renderSettings();
-  }, { once: true });
+  }, {
+    once: true,
+  });
   menuClickHandler(loginResponse);
+  // eslint-disable-next-line no-use-before-define
+  logoutClickHandler();
 };
+
+function logoutClickHandler() {
+  document.querySelector('#authorization__log-out').addEventListener('click', () => {
+    hideMain(true);
+    document.body.addEventListener('transitionend', () => {
+      deleteSessionData('authorized');
+      clearBodyClasses();
+      regenerateMainContainer();
+      hideMain(false);
+      hideHeader(false);
+      authorization(startMain);
+    }, {
+      once: true,
+    });
+  });
+}
 
 export default startMain;
