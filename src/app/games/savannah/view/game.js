@@ -1,5 +1,5 @@
 /* eslint-disable import/no-cycle */
-import { getWordsInfo, getWordInfoById } from '../../../common/index';
+import { getWordsInfo, getWordInfoById, getSessionData } from '../../../common/index';
 import renderStatistic from './statistic';
 import renderSavannahStartPage from './startPage';
 
@@ -361,23 +361,38 @@ export default class Game {
     }
   }
 
+  savannahStartPage(event) {
+    if (event.code === 'Enter') {
+      if (document.querySelector('.savannah__stat__button')) {
+        const sessionData = getSessionData().authorized;
+        const loginResponse = JSON.parse(sessionData);
+
+        renderSavannahStartPage(loginResponse);
+      }
+    }
+
+    return this;
+  }
+
   async play() {
-    if (this.level === this.maxLevel || this.life <= 0) {
+    if (this.level === this.maxLevel + 1 || this.life <= 0) {
       if (this.audioPlay) {
         this.playAudio('./assets/audio/savannah/savannah-statistic.mp3');
       }
 
       renderStatistic(this.statObj, this.loginResponse);
+
+      document.addEventListener('keydown', this.savannahStartPage, { once: true });
     } else {
       this.createRightWord();
 
       await this.createWordList();
 
       this.animationWord();
-    }
 
-    if (this.workAnimation) {
-      document.addEventListener('keydown', (event) => this.keyboardHandler(event), { once: true });
+      if (this.workAnimation) {
+        document.addEventListener('keydown', (event) => this.keyboardHandler(event), { once: true });
+      }
     }
   }
 }
