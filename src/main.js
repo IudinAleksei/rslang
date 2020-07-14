@@ -6,7 +6,5 @@ import authorization from './app/main/authorization/index';
 window.onload = () => {
   menuHandling();
   errorHandling();
-  showForm();
-  formHandling(startMain);
   authorization(startMain);
 };
