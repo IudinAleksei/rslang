@@ -1,13 +1,16 @@
 export { default as getMedia } from './utils/githubMedia';
 
 export {
-  getWords, getCountWords, getWordById, createUser, loginUser, deleteUser,
+  getWords, getCountWords, getWordById, createUser, loginUser, deleteUser, refreshToken,
   createUserWord, getAllUserWords, getUserWordById, deleteUserWordById, updateUserWord,
   getUserStatistic, upsertUserStatistic, getUserSettings, upsertUserSettings, getAllAggregatedWords,
   getAggregatedWordsById,
 } from './network/backendWords/backendWords';
 
-export { setSessionData, getSessionData, getAndInitSessionData } from './utils/sessionStorage';
+export {
+  setSessionData, getSessionData, deleteSessionData,
+  getAndInitSessionData,
+} from './utils/sessionStorage';
 
 export { getWordsInfo, getWordInfoById } from './network/skyengApi/apiWords';
 
