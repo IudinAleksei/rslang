@@ -141,7 +141,7 @@ $phone-sсreen: 450px;
       margin: 0;
       font-size: $font-size - 2px;
       padding: 10px 15px;
-      min-width: 160px;
+      width: 200px;
       color: rgba(14, 30, 37, .7);
       background: transparent;
       border: 1px solid rgba(14, 30, 37, .7);
@@ -287,16 +287,12 @@ $phone-sсreen: 450px;
           }
         }
 
-        .btn {
-          width: 120px;
-          height: 40px;
-        }
-
         .btn-res {
           margin: 0;
           font-size: 12px;
           padding: 5px 15px;
-          width: 120px;
+          width: 100px;
+          height: 40px;
         }
       }
     }

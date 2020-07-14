@@ -1,10 +1,16 @@
+import addErrorMessage from '../../utils/errorMessage';
+
 export default async function fetchUrl(url, options) {
   try {
     const response = await fetch(url, options);
-    const content = (response.status === 200) ? await response.json() : null;
+    if (response.status !== 200) {
+      addErrorMessage();
+      return null;
+    }
+    const content = await response.json();
     return content;
   } catch (error) {
-    console.warn(error);
+    addErrorMessage();
     return null;
   }
 }

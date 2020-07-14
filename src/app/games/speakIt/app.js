@@ -7,15 +7,13 @@ import {
   spinnerOn,
   spinnerOff,
 } from './components/loader';
-import {
-  getWords,
-} from '../../common/index';
+import { getWords, setLocalData, getLocalData } from '../../common/index';
 
 export default class App {
   constructor() {
     this.intro = new Intro(this.transitionIntroToGame.bind(this));
-    this.game = new Game(spinnerOn, spinnerOff,
-      this.transitionGameToResults.bind(this), App.getRandomWords, App.getRandomArbitrary);
+    this.game = new Game(spinnerOn, spinnerOff, this.transitionGameToResults.bind(this),
+      App.getRandomWords, setLocalData, getLocalData);
     this.results = new Results(this.game.clickOnButtonRestart.bind(this.game),
       this.game.newGame.bind(this.game), this.transitionResultsToGame.bind(this));
     this.group = 0;
@@ -33,7 +31,7 @@ export default class App {
     spinnerOn();
     this.arrayWords = await App.getRandomWords(this.group);
     this.main.prepend(this.intro.getIntro());
-    this.main.append(this.game.render(this.arrayWords));
+    this.main.append(this.game.render(this.arrayWords, getLocalData));
     this.main.append(this.results.render(this.arrayWords));
     spinnerOff();
   }

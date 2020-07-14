@@ -25,6 +25,7 @@ body {
   @include game-speakit;
   @include intro-speakit;
   @include results-speakit;
+  position: relative;
 
   .btns {
     display: flex;
