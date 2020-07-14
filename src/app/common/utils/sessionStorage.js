@@ -33,6 +33,13 @@ export const getSessionData = () => {
   return result;
 };
 
+export const deleteSessionData = (data = '') => {
+  if (data) {
+    window.sessionStorage.removeItem(data);
+  }
+  return !!data;
+};
+
 export const getAndInitSessionData = () => {
   if (!hasSavedSessionData()) {
     setDefaultSessionData();
