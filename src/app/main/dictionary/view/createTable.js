@@ -1,5 +1,13 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable import/prefer-default-export */
-import { ELEMENTS_CLASSES, MESSAGES } from '../../../common/constants';
+import { ELEMENTS_CLASSES, MESSAGES, INTERVALS } from '../../../common/constants';
+
+const toDateAndTime = (ms) => {
+  const date = new Date(ms);
+  const result = date.toLocaleTimeString();
+
+  return result;
+};
 
 const createTableRow = (wordObject, needRecoveryBtn = false) => {
   const row = document.createElement('div');
@@ -45,7 +53,7 @@ const createTableRow = (wordObject, needRecoveryBtn = false) => {
   textExample.innerHTML = wordObject.wordData.textExample;
 
   const textMeaning = document.createElement('p');
-  textMeaning.innerText = wordObject.wordData.textMeaning;
+  textMeaning.innerHTML = wordObject.wordData.textMeaning;
 
   sentenceContainer.append(textExample);
   sentenceContainer.append(textMeaning);
@@ -56,10 +64,18 @@ const createTableRow = (wordObject, needRecoveryBtn = false) => {
   repeat.innerText = `${MESSAGES.dictionaryRepetitions}${wordObject.userWord.optional.counter}`;
 
   const lastDate = document.createElement('p');
-  lastDate.innerText = `${MESSAGES.dictionaryLastDate}${wordObject.userWord.optional.date}`;
+  const lastDateValue = toDateAndTime(wordObject.userWord.optional.date);
+  lastDate.innerText = `${MESSAGES.dictionaryLastDate}${lastDateValue}`;
+
+  const nextDate = document.createElement('p');
+  nextDate.innerText = `${MESSAGES.dictionaryLastDate}${wordObject.userWord.optional.date}`;
+
+  const indicator = document.createElement('div');
 
   infoContainer.append(repeat);
   infoContainer.append(lastDate);
+  infoContainer.append(nextDate);
+  infoContainer.append(indicator);
 
   const image = new Image();
   image.src = `data:image/jpg;base64,${wordObject.wordData.image}`;

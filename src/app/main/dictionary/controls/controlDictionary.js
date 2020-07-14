@@ -1,5 +1,7 @@
+/* eslint-disable no-unused-vars */
 import { ELEMENTS_CLASSES } from '../../../common/constants';
-import { renderDictionary, setActiveTabButton } from '../view/renderDictionary';
+import { hideMain, regenerateMainContainer } from '../../../common/index';
+import { renderDictionaryPreloader, renderDictionary, setActiveTabButton } from '../view/renderDictionary';
 import { createDictTable } from '../view/createTable';
 import {
   readAllUserWords,
@@ -88,11 +90,17 @@ const tabClickHandler = (userWords) => {
 };
 
 const initDictionary = async (loginResponse) => {
-  renderDictionary();
+  renderDictionaryPreloader();
   const userWords = await readAllUserWords(loginResponse);
-  tabClickHandler(userWords);
-  createDictTable(userWords);
-  buttonHandler(userWords);
+  hideMain(true);
+  document.body.addEventListener('transitionend', () => {
+    regenerateMainContainer();
+    renderDictionary();
+    hideMain(false);
+    tabClickHandler(userWords);
+    createDictTable(userWords);
+    buttonHandler(userWords);
+  }, { once: true });
 };
 
 export default initDictionary;

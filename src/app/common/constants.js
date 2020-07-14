@@ -73,3 +73,10 @@ export const MESSAGES = Object.freeze({
   dictionaryRepetitions: 'repetitions: ',
   dictionaryLastDate: ' last date: ',
 });
+
+export const INTERVALS = Object.freeze({
+  1: 120,
+  2: 600,
+  3: 3600,
+  4: 18000,
+});

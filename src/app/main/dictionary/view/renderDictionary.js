@@ -19,11 +19,17 @@ export const setActiveTabButton = (tab) => {
   tab.classList.add(ELEMENTS_CLASSES.selectDictionaryBtn);
 };
 
+export const renderDictionaryPreloader = () => {
+  const mainContainer = document.querySelector(`.${ELEMENTS_CLASSES.mainContainer}`);
+  document.body.classList.add(ELEMENTS_CLASSES.dictionaryBody);
+  const preloaderMarkup = '<div class="dictionary__lds-ripple"><div></div><div></div></div>';
+
+  mainContainer.innerHTML = preloaderMarkup;
+};
+
 export const renderDictionary = () => {
   const mainContainer = document.querySelector(`.${ELEMENTS_CLASSES.mainContainer}`);
   const TAB_BUTTONS_NAME = ['Studied words', 'Difficult words', 'Deleted words'];
-
-  document.body.classList.add(ELEMENTS_CLASSES.dictionaryBody);
 
   const dict = document.createElement('div');
   dict.classList.add(ELEMENTS_CLASSES.dictionary);
