@@ -57,10 +57,15 @@ export const ELEMENTS_CLASSES = Object.freeze({
   dictionaryTableContainer: 'dictionary__table-container',
   dictionaryTable: 'dictionary__table',
   dictionaryTableRow: 'dictionary__table__row',
+  dictionaryRowWord: 'dictionary__table__row__word',
+  dictionaryRowImage: 'dictionary__table__row__image',
+  dictionaryRowTextContainer: 'dictionary__table__row__text-container',
+  dictionaryRowSentence: 'dictionary__table__row__text-container__sentence',
+  dictionaryHideTableRow: 'dictionary__table__row_hidden',
   selectDictionaryBtn: 'dictionary__tab-button_selected',
   dictionaryPlayBtn: 'dictionary__play-button',
   dictionaryRecoveryBtn: 'dictionary__recovery-button',
-
+  dictionaryWordIndicator: 'dictionary__row__indicator',
 });
 
 export const MESSAGES = Object.freeze({
@@ -72,11 +77,14 @@ export const MESSAGES = Object.freeze({
   trainingRightCards: 'Correct answer',
   trainingNewCards: 'New words',
   trainingCardSeries: 'The longest series of correct answers',
-  dictionaryRepetitions: 'repetitions: ',
-  dictionaryLastDate: ' last date: ',
+  dictionaryRepetitions: 'repeat: ',
+  dictionaryLastDate: 'last: ',
+  dictionaryNextDate: 'next: ',
+  dictionaryNextDateNearest: 'soon',
 });
 
 export const INTERVALS = Object.freeze({
+  total: 5,
   1: 120,
   2: 600,
   3: 3600,

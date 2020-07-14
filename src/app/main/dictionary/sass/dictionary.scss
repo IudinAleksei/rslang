@@ -41,9 +41,11 @@
 
 .dictionary__table-container {
   width: 80%;
+  max-width: 1200px;
   height: calc(100% - 82px);
   margin: 0 auto;
   overflow-y: auto;
+  border-top: 2px solid green;
 }
 
 .dictionary__table {
@@ -51,16 +53,63 @@
 }
 
 .dictionary__table__row {
-  display: flex;
-  // justify-content: space-between;
-  height: 150px;
-  border-top: 2px solid green;
+  @include bodyText();
 
-  img {
-    display: block;
-    width: 222px;
-    object-fit: contain;
+  display: flex;
+  max-width: 100%;
+  height: 150px;
+  transition: all 0.5s ease;
+  border-bottom: 2px solid green;
+  font-size: 1.6rem;
+
+  .dictionary__table__row__word {
+    font-size: 1.8rem;
+    font-weight: 700;
   }
+
+  &_hidden {
+    height: 0;
+    transform: scaleY(0);
+  }
+
+  p {
+    margin: 0 5px;
+  }
+}
+
+.dictionary__table__row__image {
+  display: block;
+  width: 222px;
+  margin-right: 10px;
+  object-fit: contain;
+}
+
+.dictionary__table__row__text-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+
+  div {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+  }
+}
+
+.dictionary__table__row__text-container__sentence {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start !important;
+  justify-content: flex-start;
+}
+
+.dictionary__row__indicator {
+  width: 50px;
+  height: 18px;
+  border: 1px solid #666;
+  border-radius: 3px;
 }
 
 .dictionary__play-button {
@@ -74,34 +123,80 @@
   &:hover {
     background-size: 40px;
   }
+
+  &:active {
+    filter: brightness(70%);
+  }
 }
 
 .dictionary__recovery-button {
   @include button();
 
-  width: 100px;
-  margin-left: 5px;
+  width: 60px;
+  margin: auto 5px;
   padding-bottom: 8px;
+  transition: all 0.3s;
   outline: 0;
+  background: url("../../../../assets/icons/dictionary/undo.svg") center no-repeat,;
   color: $white_color;
   user-select: none;
+
+  &:hover {
+    background-size: 40px;
+  }
+
+  &:active {
+    background-position: -300%;
+  }
+}
+
+@media (max-width: 1023px) {
+  .dictionary__table-container {
+    width: calc(100% - 10px);
+  }
 }
 
 @media (max-width: $tablet_sreen) {
+  .dictionary__table__row {
+    height: 150px;
+    font-size: 1.4rem;
+    letter-spacing: -0.02rem;
+
+    .dictionary__table__row__word {
+      font-size: 1.6rem;
+      font-weight: 700;
+    }
+
+    p {
+      margin: 0 2px;
+    }
+  }
+
+  .dictionary__table__row__image {
+    display: none;
+  }
+
   .dictionary__button-container {
-    flex-direction: column;
-    align-items: center;
+    justify-content: space-around;
     width: 100%;
-    height: unset;
+    height: 60px;
   }
 
   .dictionary__tab-button {
-    margin-top: 5px;
-    margin-left: 5px;
+    width: 100px;
+    height: 68px;
+    margin: 0;
     padding: 0;
   }
 
-  .dictionary__table-container {
-    width: calc(100% - 10px);
+  .dictionary__row__indicator {
+    display: none !important;
+  }
+
+  .dictionary__recovery-button {
+    width: 30px;
+    height: 30px;
+    margin: auto;
+    background-size: 26px;
   }
 }

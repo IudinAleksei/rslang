@@ -59,7 +59,7 @@ function logoutClickHandler() {
       clearBodyClasses();
       regenerateMainContainer();
       hideMain(false);
-      hideHeader(false);
+      hideHeader(true);
       authorization(startMain);
     }, {
       once: true,

@@ -2,7 +2,7 @@
 import { ELEMENTS_CLASSES } from '../../../common/constants';
 import { hideMain, regenerateMainContainer } from '../../../common/index';
 import { renderDictionaryPreloader, renderDictionary, setActiveTabButton } from '../view/renderDictionary';
-import { createDictTable } from '../view/createTable';
+import { createDictTable, hideTableRow } from '../view/createTable';
 import {
   readAllUserWords,
   getDifficultUserWords,
@@ -28,6 +28,7 @@ const playNearestAudio = (tgt) => {
 
 const buttonClick = (event, userWords) => {
   const tgt = event.target;
+  const tgtRow = tgt.closest(`.${ELEMENTS_CLASSES.dictionaryTableRow}`);
   if (tgt.classList.contains(ELEMENTS_CLASSES.dictionaryPlayBtn) && !currentState.isAudioPlayed) {
     playNearestAudio(tgt);
     return;
@@ -37,10 +38,12 @@ const buttonClick = (event, userWords) => {
     const clickedWordId = clickedRow.dataset.wordId;
     const clickedWordObject = findByWordId(userWords, clickedWordId);
     if (currentState.tab === 'difficult words') {
+      hideTableRow(tgtRow);
       setWordEasy(clickedWordObject);
       return;
     }
     if (currentState.tab === 'deleted words') {
+      hideTableRow(tgtRow);
       undeleteWord(clickedWordObject);
     }
   }
