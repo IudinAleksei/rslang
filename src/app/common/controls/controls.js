@@ -25,9 +25,6 @@ function menuClickHandler(loginResponse) {
           CURRENT_STATE.page = functionName;
           hideMain(false);
         }, { once: true });
-      } else {
-        // eslint-disable-next-line no-alert
-        alert('эта страница еще не создана');
       }
     }
   });

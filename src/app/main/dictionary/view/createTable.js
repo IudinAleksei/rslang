@@ -26,7 +26,6 @@ const createTableRow = (wordObject, needRecoveryBtn = false) => {
   }
 
   const playButton = document.createElement('button');
-  playButton.innerText = 'play';
   playButton.classList.add(ELEMENTS_CLASSES.dictionaryPlayBtn);
 
   const audio = new Audio();

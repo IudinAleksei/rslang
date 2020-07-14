@@ -41,14 +41,13 @@
 
 .dictionary__table-container {
   width: 80%;
-  height: 80vh;
+  height: calc(100% - 82px);
   margin: 0 auto;
   overflow-y: auto;
 }
 
 .dictionary__table {
   width: 100%;
-
 }
 
 .dictionary__table__row {
@@ -65,8 +64,16 @@
 }
 
 .dictionary__play-button {
+  display: inline-block;
   width: 30px;
   height: 30px;
+  border: 0;
+  outline: 0;
+  background: url("../../../../assets/icons/dictionary/sound.svg") center / contain;
+
+  &:hover {
+    background-size: 40px;
+  }
 }
 
 .dictionary__recovery-button {
