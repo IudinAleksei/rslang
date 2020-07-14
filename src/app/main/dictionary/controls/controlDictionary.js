@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { ELEMENTS_CLASSES } from '../../../common/constants';
 import { hideMain, regenerateMainContainer } from '../../../common/index';
 import { renderDictionaryPreloader, renderDictionary, setActiveTabButton } from '../view/renderDictionary';
