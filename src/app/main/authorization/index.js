@@ -1,5 +1,15 @@
 import './sass/form.scss';
 import showForm from './view/showForm';
-import formHandling from './controls/control';
+import {
+  formHandling,
+  checkAuthorization,
+} from './controls/control';
 
-export { showForm, formHandling };
+export default function authorization(nextPageFunction) {
+  if (checkAuthorization()) {
+    formHandling(nextPageFunction);
+  } else {
+    showForm();
+    formHandling(nextPageFunction);
+  }
+}
