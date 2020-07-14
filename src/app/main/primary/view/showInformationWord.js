@@ -1,4 +1,11 @@
 export default function showInformationWord() {
+  if (localStorage.getItem('trainingSound') === 'true') {
+    document.querySelector('.sounds').classList.add('main-game_sound-on');
+    document.querySelector('.sounds').classList.remove('main-game_sound-off');
+  } else {
+    document.querySelector('.sounds').classList.remove('main-game_sound-on');
+    document.querySelector('.sounds').classList.add('main-game_sound-off');
+  }
   if (localStorage.getItem('showAnswer') === 'true') {
     document.querySelector('.show-answer').style.display = 'block';
   } else {

@@ -45,6 +45,23 @@
   align-items: center;
   margin-bottom: 25px;
 }
+.sounds{
+width: 36px;
+height: 36px;
+position: absolute;
+bottom: 10px;
+right: 10px;
+cursor: pointer;
+}
+.main-game_sound-on{
+  background-image: url(../../../../assets/icons/card/musics_on.svg);
+  background-repeat: no-repeat;
+}
+
+.main-game_sound-off{
+  background-image: url(../../../../assets/icons/card/musics_off.svg);
+  background-repeat: no-repeat;
+}
 .explanation-word, .transcript, .translate-word, .meaning-word, .translate-sentense, .container-context {
   font-family: $body_font;
   font-size: 1.5rem;
@@ -192,6 +209,51 @@ input:active, input:focus{
 .wrap-buttons__check-word {
   display: flex;
   z-index: 1;
+}
+.container-not-word__wrapper {
+  display: flex;
+  position: absolute;
+  z-index: 10;
+  top: 80px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s ease;
+  opacity: 1;
+  background:rgba(100, 100, 100, 0.5);
+
+  &_hidden {
+    opacity: 0;
+  }
+}
+.container-not-word {
+  @include flex();
+  margin:  auto ;
+  box-sizing: border-box;
+  justify-content: space-around;
+  width: 50%;
+  height: 50%;
+  padding: 10px;
+  border-radius: 10px;
+  background: $background_liner_gradient;
+  box-shadow: $button_shadow;
+}
+.container-not-word__heading {
+  @include headingText(3rem);
+
+  margin: 0;
+  padding: 10px 0;
+  letter-spacing: -0.01rem;
+}
+.container-not-word__button {
+  @include button();
+
+  width: 280px;
+  margin: 5px auto;
+  color: $white_color;
+  outline:none;
 }
 
 @media screen and (max-width: $tablet_sreen) {

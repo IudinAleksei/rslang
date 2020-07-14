@@ -23,6 +23,7 @@ export const DEFAULT_LOCAL_DATA = Object.freeze({
   playAudio: 'true',
   newWord: 10,
   cards: 20,
+  trainingSound: 'true',
   savannahLevel: 1,
 });
 

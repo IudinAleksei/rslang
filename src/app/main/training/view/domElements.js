@@ -29,6 +29,10 @@ const CREATE_DOM_ELEMENTS = () => {
   SENTENSE.className = ('sentense');
   DIV_CARD.appendChild(SENTENSE);
 
+  const SOUND = document.createElement('div');
+  SOUND.className = ('sounds main-game_sound-on');
+  DIV_CARD.appendChild(SOUND);
+
   CREATE_CHECK_WORDS_BUTONS(DIV_WRAP);
 
   const DIV_PROGRESS = document.createElement('progress');
