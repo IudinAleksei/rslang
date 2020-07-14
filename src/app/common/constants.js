@@ -4,6 +4,7 @@ export const DEFAULT_SESSION_DATA = Object.freeze({
 });
 
 export const DEFAULT_LOCAL_DATA = Object.freeze({
+  activePoint: 0,
   puzzleAutoPlaySound: 'true',
   puzzleShowImage: 'true',
   puzzleShowTranslation: 'true',

@@ -1,17 +1,27 @@
 export default class Game {
-  constructor(spinnerOn, spinnerOff,
-    transitionGameToResults, getRandomWords) {
+  constructor(spinnerOn, spinnerOff, transitionGameToResults,
+    getRandomWords, setLocalData, getLocalData) {
     this.spinnerOn = spinnerOn;
     this.spinnerOff = spinnerOff;
     this.transitionGameToResults = transitionGameToResults;
     this.getRandomWords = getRandomWords;
+    this.setLocalData = setLocalData;
     this.activeArray = [];
     this.maxPoint = 6;
-    this.activePoint = 0;
+    if (getLocalData().activePoint) {
+      this.activePoint = getLocalData().activePoint;
+    } else {
+      this.activePoint = 0;
+    }
     this.src = 'https://raw.githubusercontent.com/irinainina/rslang/rslang-data/data/';
   }
 
-  render(arrayWords) {
+  render(arrayWords, getLocalData) {
+    if (getLocalData().activePoint) {
+      this.activePoint = getLocalData().activePoint;
+    } else {
+      this.activePoint = 0;
+    }
     this.activeArray = arrayWords;
     this.game = document.createElement('div');
     this.game.classList.add('game');
@@ -55,7 +65,7 @@ export default class Game {
   }
 
   static isClickOnPoints(event) {
-    return event.target.parentNode.classList.contains('points');
+    return event.target.parentNode.classList.contains('res_points');
   }
 
   async clickOnPoints(event) {
@@ -251,7 +261,7 @@ export default class Game {
       const pointContainer = document.createElement('li');
       pointContainer.classList.add('point');
       pointsContainer.append(pointContainer);
-      if (i === this.activePoint) {
+      if (i === +this.activePoint) {
         pointContainer.classList.add('activePoint');
       }
     }
@@ -317,6 +327,10 @@ export default class Game {
       if (point.classList.contains('activePoint')) {
         resIndex = index;
       }
+    });
+    this.activePoint = resIndex;
+    this.setLocalData({
+      activePoint: resIndex,
     });
     return resIndex;
   }
