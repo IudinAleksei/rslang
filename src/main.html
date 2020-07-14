@@ -8,8 +8,16 @@
   <!-- don't add links to fonts, they must be in assets/fonts and imported via styles -->
   <!-- don't plug favicon, webpack will do this -->
 </head>
-
 <body>
+  <div class="page-message-wrapper page-message-hidden">
+    <div class="page-message--error">
+      <div class="page-message">
+        <div class="fetch-error">Something went wrong </div>
+        <button class="button-reset">reload this page.</button>
+        </div>
+        <div class="close-icon"></div>
+      </div>
+    </div>
   <header class="header">
     <div class="header-container header-container_hidden">
       <div class="menu" id="menu">
@@ -53,5 +61,4 @@
   </main>
   <!-- don't plug styles and scripts, webpack will do this -->
 </body>
-
 </html>
