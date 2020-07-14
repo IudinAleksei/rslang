@@ -26,6 +26,13 @@ body {
     margin-bottom: 0;
     margin-left: 50px;
     color: $white_color;
+    position: relative;
+    .github-link {
+      content: url("../assets/icons/landing/github.svg");
+      position: absolute;
+      top: -8px;
+      cursor: pointer;
+    }
   }
 }
 .main-container__background-landing-page {
@@ -141,6 +148,7 @@ body {
     .navigation-menu__button-menu {
       margin-right: 25px;
       margin-top: 33px;
+      width: 65px;
     }
   }
   .wrap-landing-page__video{
