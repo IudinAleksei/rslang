@@ -7,7 +7,6 @@ import {
   regenerateMainContainer,
   deleteSessionData,
 } from '../index';
-import authorization from '../../main/authorization/index';
 
 const CURRENT_STATE = {
   page: 'renderSettings',
@@ -37,12 +36,6 @@ function menuClickHandler(loginResponse) {
   });
 }
 
-const selectSettings = () => {
-  const menuItems = document.querySelector('.menu__items');
-  menuItems.querySelectorAll('.menu__items__item').forEach((element) => element.classList.remove('menu__items__item_active'));
-  menuItems.querySelector('.menu__items__item').classList.add('menu__items__item_active');
-};
-
 const startMain = (loginResponse) => {
   hideMain(true);
   document.body.addEventListener('transitionend', () => {
@@ -50,8 +43,6 @@ const startMain = (loginResponse) => {
     regenerateMainContainer();
     hideMain(false);
     hideHeader(false);
-    CURRENT_STATE.page = 'renderSettings';
-    selectSettings();
     renderSettings();
   }, {
     once: true,
@@ -67,11 +58,7 @@ function logoutClickHandler(loginResponse) {
     document.body.addEventListener('transitionend', () => {
       setSettingsBackend(loginResponse);
       deleteSessionData('authorized');
-      clearBodyClasses();
-      regenerateMainContainer();
-      hideMain(false);
-      hideHeader(true);
-      authorization(startMain);
+      window.location.reload();
     }, {
       once: true,
     });
