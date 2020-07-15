@@ -1,5 +1,5 @@
 import menuHandlers from './menuHandlers';
-import renderSettings from '../../main/settings/index';
+import { renderSettings, setSettingsBackend } from '../../main/settings/index';
 import {
   hideHeader,
   hideMain,
@@ -29,7 +29,9 @@ function menuClickHandler(loginResponse) {
           menuHandlers[functionName](loginResponse);
           CURRENT_STATE.page = functionName;
           hideMain(false);
-        }, { once: true });
+        }, {
+          once: true,
+        });
       }
     }
   });
@@ -48,13 +50,14 @@ const startMain = (loginResponse) => {
   });
   menuClickHandler(loginResponse);
   // eslint-disable-next-line no-use-before-define
-  logoutClickHandler();
+  logoutClickHandler(loginResponse);
 };
 
-function logoutClickHandler() {
+function logoutClickHandler(loginResponse) {
   document.querySelector('#authorization__log-out').addEventListener('click', () => {
     hideMain(true);
     document.body.addEventListener('transitionend', () => {
+      setSettingsBackend(loginResponse);
       deleteSessionData('authorized');
       clearBodyClasses();
       regenerateMainContainer();
