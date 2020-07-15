@@ -111,8 +111,8 @@ cursor: pointer;
   background-repeat: no-repeat;
   outline: none;
 }
-.delete-word:hover, .explanation:hover, .play-audio:hover{
-  background: #1ab429;
+.delete-word:hover, .explanation:hover, .play-audio:hover, .wrap-card__button-hard-word:hover{
+  background-color: #1ab429;
   color: aliceblue;
 }
 .conrtols-bar{
@@ -192,8 +192,8 @@ input:active, input:focus{
 }
 .wrap-card__button-hard-word {
   border: 1px solid #1ab429;
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
   background: white;
   background-image: url(../../../../assets/icons/card/school-black-18dp.svg);
   background-repeat: no-repeat;
@@ -201,8 +201,8 @@ input:active, input:focus{
   border-radius: 8px;
   margin: 0;
   position: absolute;
-  top: -5%;
-  right: -5%;
+  top: -3%;
+  right: -3%;
   cursor: pointer;
   z-index: 1;
 }
@@ -268,6 +268,14 @@ input:active, input:focus{
   }
   .delete-word {
     margin: 0 15px 0 15px;
+  }
+  .container-not-word {
+    width: calc(100% - 20px);
+    height: 50%;
+  }
+
+  .container-not-word__heading {
+    font-size: 2.5rem;
   }
 }
 @media screen and (max-width: 530px) {
