@@ -87,6 +87,7 @@ export const MESSAGES = Object.freeze({
 
 export const INTERVALS = Object.freeze({
   total: 5,
+  0: 0,
   1: 0,
   2: 600,
   3: 3600,
