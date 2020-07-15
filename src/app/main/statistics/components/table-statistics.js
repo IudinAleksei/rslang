@@ -63,7 +63,7 @@ export default class TableStatistics {
     if (arrayWords.length === 0) {
       const infoText = document.createElement('span');
       infoText.classList.add('infoText');
-      infoText.innerHTML = 'No data';
+      infoText.innerHTML = 'No data yet';
       tBody.append(infoText);
     }
     arrayWords.forEach((word) => {

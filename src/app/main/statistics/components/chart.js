@@ -7,7 +7,7 @@ export default class Chart {
     if (statisticsChart === null) {
       const infoText = document.createElement('span');
       infoText.classList.add('infoText');
-      infoText.innerHTML = 'No data';
+      infoText.innerHTML = 'No data yet';
       return infoText;
     }
     const countWords = statisticsChart.learnedWords.reduce(
