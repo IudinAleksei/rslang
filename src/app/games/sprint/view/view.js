@@ -1,5 +1,6 @@
 export default function renderStartPage() {
   const mainContainer = document.querySelector('.main-container');
+  mainContainer.classList.add('sprint-game__main-container');
   mainContainer.innerHTML = `<div class="sprint-game__start-page">
 <h1>Welcome to Sprint Game!</h1>
 <div class="sprint-game__slider">
@@ -61,7 +62,7 @@ export function renderGame() {
 export function renderStatisticModal(correctAnswersStat, inCorrectAnswersStat, points) {
   const statisticBlock = document.querySelector('.sprint-game__statistic-block');
   statisticBlock.innerHTML = `<div class="sprint-game__statistic-info">
-    <p class="sprint-game__statistic-info__answers">You got ${correctAnswersStat} correct answers out of 
+    <p class="sprint-game__statistic-info__answers">You got ${correctAnswersStat} correct answers out of
     ${correctAnswersStat + inCorrectAnswersStat}!</p>
     <p class="sprint-game__statistic-info__points">${points} points!</p>
     <button class="play-again-btn">Play Again</button>
