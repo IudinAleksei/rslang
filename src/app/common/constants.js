@@ -82,11 +82,12 @@ export const MESSAGES = Object.freeze({
   dictionaryLastDate: 'last: ',
   dictionaryNextDate: 'next: ',
   dictionaryNextDateNearest: 'soon',
+  dictionaryNextDateNever: 'never',
 });
 
 export const INTERVALS = Object.freeze({
   total: 5,
-  1: 120,
+  1: 0,
   2: 600,
   3: 3600,
   4: 18000,
