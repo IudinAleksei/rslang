@@ -36,6 +36,12 @@ function clickButtons() {
   if (button.classList.contains('audiochallenge__button-next')) {
     document.querySelector('.audiochallenge__word-list').innerHTML = '';
 
+    if (bodyPosition === 90) {
+      bodyPosition = 0;
+    } else {
+      bodyPosition += 10;
+    }
+
     if (round === 10) {
       round = 1;
       createStatistic(stat);
@@ -50,19 +56,15 @@ function clickButtons() {
 
       const body = document.querySelector('body');
 
+      bodyBcg.removeAttribute('style');
+
       body.removeEventListener('keydown', keyboardEvent);
     } else {
       round += 1;
       nextWord();
-    }
 
-    if (bodyPosition === 90) {
-      bodyPosition = 0;
-    } else {
-      bodyPosition += 10;
+      bodyBcg.style.backgroundPosition = `${bodyPosition}% ${bodyPosition}%`;
     }
-
-    bodyBcg.style.backgroundPosition = `${bodyPosition}% ${bodyPosition}%`;
   } else if (button.classList.contains('audiochallenge__button')) {
     document.querySelector('.audiochallenge__word-list').removeEventListener('click', wordListener);
     const audioTranslate = document.querySelector('.audiochallenge__word-audio').dataset.translate;

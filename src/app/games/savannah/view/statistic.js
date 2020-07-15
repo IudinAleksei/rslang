@@ -34,7 +34,7 @@ export default function renderStatistic(obj, loginResponse) {
 
   const objKey = Object.keys(obj);
 
-  if (objKey.length > 17) {
+  if (objKey.length > 16) {
     statWrapper.classList.add('savannah__stat__wrapper_scroll');
   }
 
@@ -71,7 +71,7 @@ export default function renderStatistic(obj, loginResponse) {
   stat.append(statWrapper, buttonWrapper);
   document.querySelector(('#savannah')).append(stat);
 
-  document.querySelector('.savannah__body').style = '';
+  document.querySelector('.savannah__body').removeAttribute('style');
 
   againButton.addEventListener('click', () => renderSavannahStartPage(loginResponse), { once: true });
 }

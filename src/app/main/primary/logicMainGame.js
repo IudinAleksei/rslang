@@ -1,4 +1,6 @@
 /* eslint-disable no-underscore-dangle */
+/* eslint-disable import/no-cycle */
+
 import fetchUrl from '../../common/network/backendWords/commonFetch';
 import {
   createUserWord, updateUserWord, upsertUserSettings,
@@ -9,6 +11,8 @@ import createCardWord from '../training/view/cardWithWord';
 import showInformationWord from './view/showInformationWord';
 import renderFinalPage from '../training/view/renderFinal';
 import updateStatistics from './view/updateStatistics';
+import renderSettings from '../settings/index';
+import { renderDictionaryPreloader } from '../dictionary/view/renderDictionary';
 
 export async function getAllAggregatedWords(token, userId, wordsPerPage, filter) {
   const urlWords = `https://afternoon-falls-25894.herokuapp.com/users/${userId}/aggregatedWords?wordsPerPage=${wordsPerPage}&filter=${encodeURIComponent(JSON.stringify(filter))}`;
@@ -43,7 +47,20 @@ const newWord = {
     { userWord: null },
   ],
 };
-const filterUserWord = { $and: [{ 'userWord.difficulty': 'easy', 'userWord.optional.repeat': true, 'userWord.optional.delete': false }] };
+
+const filterUserWordInterval = {
+
+  $or: [{
+    'userWord.difficulty': 'easy', 'userWord.optional.repeat': true, 'userWord.optional.delete': false, 'userWord.optional.counter': { $lte: 4 }, 'userWord.optional.date': { $lte: (Date.now() - 5 * 60 * 60 * 1000) },
+  }, {
+    'userWord.difficulty': 'easy', 'userWord.optional.repeat': true, 'userWord.optional.delete': false, 'userWord.optional.counter': { $lte: 3 }, 'userWord.optional.date': { $gte: (Date.now() - 5 * 60 * 60 * 1000), $lte: (Date.now() - 1 * 60 * 60 * 1000) },
+  }, {
+    'userWord.difficulty': 'easy', 'userWord.optional.repeat': true, 'userWord.optional.delete': false, 'userWord.optional.counter': { $lte: 2 }, 'userWord.optional.date': { $gte: (Date.now() - 1 * 60 * 60 * 1000), $lte: (Date.now() - 10 * 60 * 1000) },
+  }, {
+    'userWord.difficulty': 'easy', 'userWord.optional.repeat': true, 'userWord.optional.delete': false, 'userWord.optional.counter': { $lte: 1 }, 'userWord.optional.date': { $gte: (Date.now() - 10 * 60 * 1000), $lte: Date.now() },
+  }],
+
+};
 
 export function playAudio(event) {
   return new Promise(((resolve) => {
@@ -60,9 +77,7 @@ export async function showCardWord(array) {
   document.querySelector('.main-container').innerHTML = '';
   isCorrectAnswer = true;
   counterCard += 1;
-  console.log(array);
   word = array.shift();
-  console.log(word);
 
   objectUserWord = {
     difficulty: word.userWord === undefined ? 'easy' : word.userWord.difficulty,
@@ -78,7 +93,6 @@ export async function showCardWord(array) {
     },
   };
 
-  console.log(array);
   const reg1 = '(.*?)<b>';
   const reg2 = '</b>(.*?)+';
   const startSentence = word.textExample.match(reg1);
@@ -107,44 +121,75 @@ export async function showCardWord(array) {
 }
 
 export function nextWord() {
-  console.log('next');
   document.querySelector('.show-answer').disabled = 'true';
   document.querySelector('.enter').disabled = 'true';
+  document.querySelector('.enter').classList.add('block-enter');
 
-  playAudio(word.audio)
-    .then(() => (localStorage.getItem('example') === 'true' ? playAudio(word.audioExample) : false))
-    .then(() => (localStorage.getItem('explanation') === 'true' ? playAudio(word.audioMeaning) : false))
-    .then(() => {
+  if (localStorage.getItem('trainingSound') === 'true') {
+    playAudio(word.audio)
+      .then(() => (localStorage.getItem('example') === 'true' ? playAudio(word.audioExample) : false))
+      .then(() => (localStorage.getItem('explanation') === 'true' ? playAudio(word.audioMeaning) : false))
+      .then(() => {
+        document.querySelector('.input-background').style.opacity = 0;
+        document.querySelector('.meaning-word i').style.opacity = 0;
+
+        setTimeout(() => {
+          if (word.userWord) {
+            updateUserWord(tokens, usersId, word._id, objectUserWord);
+          } else {
+            createUserWord(tokens, usersId, word._id, objectUserWord);
+          }
+
+          if (arrayCommon.length === 0) {
+            arrayCorrectAnswer.push(counterSeriesCorrectAnswer);
+
+            const statsValues = {
+              trainingAllCards: counterCard,
+              trainingRightCards: counterCorrectAnswer,
+              trainingNewCards: +(localStorage.getItem('newWord')),
+              trainingCardSeries: Math.max.apply(null, arrayCorrectAnswer),
+            };
+
+            document.querySelector('.main-container').innerHTML = '';
+            renderFinalPage(statsValues);
+          } else {
+            document.querySelector('.show-answer').disabled = 'false';
+            document.querySelector('.enter').disabled = 'false';
+            document.querySelector('.enter').classList.remove('block-enter');
+            showCardWord(arrayCommon);
+          }
+        }, 1000);
+      });
+  } else {
+    if (word.userWord) {
+      updateUserWord(tokens, usersId, word._id, objectUserWord);
+    } else {
+      createUserWord(tokens, usersId, word._id, objectUserWord);
+    }
+    setTimeout(() => {
       document.querySelector('.input-background').style.opacity = 0;
       document.querySelector('.meaning-word i').style.opacity = 0;
 
-      setTimeout(() => {
-        if (word.userWord) {
-          updateUserWord(tokens, usersId, word._id, objectUserWord).then((q) => console.log(q));
-        } else {
-          createUserWord(tokens, usersId, word._id, objectUserWord).then((q) => console.log(q));
-        }
+      if (arrayCommon.length === 0) {
+        arrayCorrectAnswer.push(counterSeriesCorrectAnswer);
 
-        if (arrayCommon.length === 0) {
-          arrayCorrectAnswer.push(counterSeriesCorrectAnswer);
+        const statsValues = {
+          trainingAllCards: counterCard,
+          trainingRightCards: counterCorrectAnswer,
+          trainingNewCards: +(localStorage.getItem('newWord')),
+          trainingCardSeries: Math.max.apply(null, arrayCorrectAnswer),
+        };
 
-          const statsValues = {
-            trainingAllCards: +(localStorage.getItem('cards')),
-            trainingRightCards: counterCorrectAnswer,
-            trainingNewCards: +(localStorage.getItem('newWord')),
-            trainingCardSeries: Math.max.apply(null, arrayCorrectAnswer),
-          };
-
-          document.querySelector('.main-container').innerHTML = '';
-          renderFinalPage(statsValues);
-        } else {
-          document.querySelector('.show-answer').disabled = 'false';
-          document.querySelector('.enter').disabled = 'false';
-
-          showCardWord(arrayCommon);
-        }
-      }, 1000);
-    });
+        document.querySelector('.main-container').innerHTML = '';
+        renderFinalPage(statsValues);
+      } else {
+        document.querySelector('.show-answer').disabled = 'false';
+        document.querySelector('.enter').disabled = 'false';
+        document.querySelector('.enter').classList.remove('block-enter');
+        showCardWord(arrayCommon);
+      }
+    }, 5000);
+  }
 }
 export function updateWord(event) {
   if (event.target.closest('.delete-word')) {
@@ -159,22 +204,46 @@ export function updateWord(event) {
   if (event.target.closest('.explanation')) {
     playAudio(word.audioMeaning);
   }
+  if (event.target.className === 'container-not-word__button') {
+    renderSettings();
+  }
+}
+
+function notWord() {
+  document.querySelector('.main-container').innerHTML = '';
+  const wrapper = document.createElement('div');
+  wrapper.className = 'container-not-word__wrapper';
+  document.querySelector('.main-container').append(wrapper);
+  const container = document.createElement('div');
+  container.className = 'container-not-word';
+  wrapper.append(container);
+  const heading = document.createElement('h3');
+  heading.className = 'container-not-word__heading';
+  heading.innerText = 'There are no words to repeat or an error has occurred. Try changing the settings.';
+  container.append(heading);
+  const button = document.createElement('button');
+  button.className = 'container-not-word__button';
+  button.innerText = 'go settings';
+  container.append(button);
 }
 
 async function mainGame() {
   document.querySelector('.main-container').outerHTML = document.querySelector('.main-container').outerHTML;
+  renderDictionaryPreloader();
   quantityNewWords = localStorage.getItem('newWord');
   quantityCards = localStorage.getItem('cards');
   const authorized = JSON.parse(sessionStorage.getItem('authorized'));
   tokens = authorized.token;
   usersId = authorized.userId;
   counterCard = 0;
+  counterCorrectAnswer = 0;
+  counterSeriesCorrectAnswer = 0;
   upsertUserSettings(tokens, usersId,
     { optional: getAndInitLocalData() });
 
   if (quantityNewWords === '0') {
     arrayUserWords = await getAllAggregatedWords(tokens, usersId,
-      quantityCards, filterUserWord);
+      quantityCards, filterUserWordInterval);
 
     arrayCommon = arrayUserWords[0].paginatedResults.sort(() => Math.random() - 0.5);
   }
@@ -191,13 +260,16 @@ async function mainGame() {
       quantityNewWords, newWord);
 
     arrayUserWords = await getAllAggregatedWords(tokens, usersId,
-      quantityCards - quantityNewWords, filterUserWord);
+      quantityCards - quantityNewWords, filterUserWordInterval);
 
     arrayCommon = arrayNewWords[0].paginatedResults.concat(arrayUserWords[0].paginatedResults)
       .sort(() => Math.random() - 0.5);
   }
-
-  showCardWord(arrayCommon);
+  if (arrayCommon.length === 0) {
+    notWord();
+  } else {
+    await showCardWord(arrayCommon);
+  }
 }
 
 export function compareWord() {
@@ -250,8 +322,9 @@ export function compareWord() {
     errorLitter.forEach((e) => {
       e.style.color = counterLitter > (arrayWord.length / 2) ? 'red' : 'orange';
     });
-
-    playAudio(word.audio);
+    if (localStorage.getItem('trainingSound') === 'true') {
+      playAudio(word.audio);
+    }
   }
 }
 

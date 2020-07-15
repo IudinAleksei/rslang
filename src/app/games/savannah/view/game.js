@@ -15,9 +15,11 @@ export default class Game {
     this.bg = 0;
     this.statObj.right = 0;
     this.statObj.mistakes = 0;
-    this.workAnimation = true;
     this.audioPlay = true;
     this.rightCount = 1;
+    this.handler = (e) => {
+      this.keyboardHandler(e);
+    };
   }
 
   renderLayout() {
@@ -52,9 +54,9 @@ export default class Game {
 
     document.getElementById('savannah').append(this.audioWrapper, this.heartWrapper, this.list, this.crystal);
 
-    this.list.addEventListener('click', (event) => this.clickHandler(event));
+    this.list.addEventListener('click', this.clickHandler.bind(this));
 
-    this.audioWrapper.addEventListener('click', () => this.isPlayAudio());
+    this.audioWrapper.addEventListener('click', this.isPlayAudio.bind(this));
   }
 
   shuffle(array) {
@@ -196,12 +198,6 @@ export default class Game {
         this.trueWordContainer.remove();
         this.play();
 
-        if (this.workAnimation) {
-          this.workAnimation = false;
-        } else {
-          this.workAnimation = true;
-        }
-
         this.rightCount = 1;
       }, 300);
     }, 5000);
@@ -219,7 +215,10 @@ export default class Game {
     document.querySelector('.savannah__body').style.backgroundPosition = `bottom ${this.bg}% right 50%`;
 
     if (this.rightCount % 3 === 0) {
-      this.playAudio('./assets/audio/savannah/savannah-crystal-scale.mp3');
+      if (this.audioPlay) {
+        this.playAudio('./assets/audio/savannah/savannah-crystal-scale.mp3');
+      }
+
       this.crystalScale += 0.1;
       this.crystalImage.style.transform = '';
       this.crystalImage.style.transform = `scale(${this.crystalScale})`;
@@ -267,12 +266,6 @@ export default class Game {
   clickHandler(event) {
     clearTimeout(this.timeout);
 
-    if (this.workAnimation) {
-      this.workAnimation = false;
-    } else {
-      this.workAnimation = true;
-    }
-
     if (event.target.dataset.word === Object.values(this.wordsArr[0])[0]) {
       this.rightWordChoose(event);
     } else if (event.target.dataset.falseword === 'true') {
@@ -292,7 +285,10 @@ export default class Game {
     document.querySelector('.savannah__body').style.backgroundPosition = `bottom ${this.bg}% right 50%`;
 
     if (this.rightCount % 3 === 0) {
-      this.playAudio('./assets/audio/savannah/savannah-crystal-scale.mp3');
+      if (this.audioPlay) {
+        this.playAudio('./assets/audio/savannah/savannah-crystal-scale.mp3');
+      }
+
       this.crystalScale += 0.1;
       this.crystalImage.style.transform = '';
       this.crystalImage.style.transform = `scale(${this.crystalScale})`;
@@ -341,8 +337,6 @@ export default class Game {
   }
 
   keyboardHandler(event) {
-    this.workAnimation = true;
-
     if (event.code === 'Digit1' || event.code === 'Digit2' || event.code === 'Digit3' || event.code === 'Digit4' || event.code === 'Numpad1' || event.code === 'Numpad2' || event.code === 'Numpad3' || event.code === 'Numpad4') {
       clearTimeout(this.timeout);
 
@@ -374,7 +368,17 @@ export default class Game {
     return this;
   }
 
+  keyboardHandlerAdd() {
+    document.addEventListener('keydown', this.handler);
+  }
+
+  keyboardHandlerRemove() {
+    document.removeEventListener('keydown', this.handler);
+  }
+
   async play() {
+    this.keyboardHandlerRemove();
+
     if (this.level === this.maxLevel + 1 || this.life <= 0) {
       if (this.audioPlay) {
         this.playAudio('./assets/audio/savannah/savannah-statistic.mp3');
@@ -382,7 +386,7 @@ export default class Game {
 
       renderStatistic(this.statObj, this.loginResponse);
 
-      document.addEventListener('keydown', this.savannahStartPage, { once: true });
+      document.addEventListener('keydown', this.savannahStartPage);
     } else {
       this.createRightWord();
 
@@ -390,9 +394,7 @@ export default class Game {
 
       this.animationWord();
 
-      if (this.workAnimation) {
-        document.addEventListener('keydown', (event) => this.keyboardHandler(event), { once: true });
-      }
+      this.keyboardHandlerAdd();
     }
   }
 }
