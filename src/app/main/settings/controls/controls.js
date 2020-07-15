@@ -34,8 +34,6 @@ export default function sliderSettingsPageHandling() {
   sliderCards.addEventListener('input', getSliderHandler(sliderCounterCards));
 
   function onPlayButtonClick() {
-    document.querySelector('.menu__items').querySelectorAll('.menu__items__item').forEach((element) => element.classList.remove('menu__items__item_active'));
-    trainingMenuElement.classList.add('menu__items__item_active');
     trainingMenuElement.click();
   }
 
