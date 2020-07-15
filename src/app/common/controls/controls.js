@@ -44,6 +44,7 @@ const startMain = (loginResponse) => {
     regenerateMainContainer();
     hideMain(false);
     hideHeader(false);
+    CURRENT_STATE.page = 'renderSettings';
     renderSettings();
   }, {
     once: true,
