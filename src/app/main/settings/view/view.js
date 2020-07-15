@@ -1,4 +1,5 @@
 export default function addSettingsHtml() {
+  document.querySelector('.main-container').outerHTML = document.querySelector('.main-container').outerHTML;
   const mainContainer = document.querySelector('.main-container');
   mainContainer.innerHTML = `<div class="settings-select">
     <div class="settings-info" id="settings-info">

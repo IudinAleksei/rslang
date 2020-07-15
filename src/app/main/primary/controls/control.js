@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import { compareWord, nextWord, updateWord } from '../logicMainGame';
 
 function mainGameHandling() {
@@ -5,6 +6,17 @@ function mainGameHandling() {
     updateWord(event);
     if (event.target.className === 'enter') {
       compareWord();
+    }
+    if (event.target.closest('.sounds')) {
+      if (localStorage.getItem('trainingSound') === 'true') {
+        localStorage.setItem('trainingSound', 'false');
+        document.querySelector('.sounds').classList.toggle('main-game_sound-on');
+        document.querySelector('.sounds').classList.toggle('main-game_sound-off');
+      } else {
+        localStorage.setItem('trainingSound', 'true');
+        document.querySelector('.sounds').classList.toggle('main-game_sound-on');
+        document.querySelector('.sounds').classList.toggle('main-game_sound-off');
+      }
     }
     if (event.target.className === 'show-answer') {
       document.querySelector('.input-background').style.opacity = 1;
@@ -21,14 +33,15 @@ function mainGameHandling() {
     document.querySelector('.input-background').style.opacity = 0;
   }, false);
   document.querySelector('.main-container').addEventListener('keydown', (event) => {
-    document.querySelector('.input').focus();
-    if (event.key === 'Enter') {
-      event.preventDefault();
+    if (event.key === 'Enter' && !document.querySelector('.block-enter')) {
       compareWord();
     }
-  }, false);
+  });
+
   document.addEventListener('keydown', () => {
-    document.querySelector('.input').focus();
+    if (document.querySelector('.input')) {
+      document.querySelector('.input').focus();
+    }
   }, false);
 }
 
