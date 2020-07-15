@@ -14,6 +14,9 @@ const toDateAndTime = (ms) => {
 };
 
 const getNextDate = (ms, counter) => {
+  if (typeof INTERVALS[counter] !== 'number') {
+    return MESSAGES.dictionaryNextDateNever;
+  }
   const nextMs = +ms + (+INTERVALS[counter] * 1000);
   const MsInMinute = 60000;
 

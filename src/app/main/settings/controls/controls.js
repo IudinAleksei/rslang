@@ -14,8 +14,23 @@ export default function sliderSettingsPageHandling() {
   body.className = 'body__settings-page';
   function getSliderHandler(element) {
     const slider = element;
-    return function assignInnerHtml(event) {
-      slider.innerHTML = event.target.value;
+
+    return function assignInnerHtml() {
+      if (slider === sliderCounterNewWords) {
+        if (+sliderNewWords.value > +sliderCards.value) {
+          sliderCards.value = sliderNewWords.value;
+        }
+      }
+
+      if (slider === sliderCounterCards) {
+        if (+sliderNewWords.value > +sliderCards.value) {
+          sliderNewWords.value = sliderCards.value;
+        }
+      }
+
+      sliderCounterCards.innerHTML = sliderCards.value;
+      sliderCounterNewWords.innerHTML = sliderNewWords.value;
+
       if (sliderCounterCards) {
         localStorage.setItem('cards', sliderCards.value);
       }
@@ -25,6 +40,7 @@ export default function sliderSettingsPageHandling() {
       if (+sliderNewWords.value > +sliderCards.value) {
         playButton.disabled = true;
       }
+
       if (+sliderNewWords.value <= +sliderCards.value) {
         playButton.disabled = false;
       }
