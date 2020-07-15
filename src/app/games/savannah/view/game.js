@@ -219,7 +219,10 @@ export default class Game {
     document.querySelector('.savannah__body').style.backgroundPosition = `bottom ${this.bg}% right 50%`;
 
     if (this.rightCount % 3 === 0) {
-      this.playAudio('./assets/audio/savannah/savannah-crystal-scale.mp3');
+      if (this.audioPlay) {
+        this.playAudio('./assets/audio/savannah/savannah-crystal-scale.mp3');
+      }
+
       this.crystalScale += 0.1;
       this.crystalImage.style.transform = '';
       this.crystalImage.style.transform = `scale(${this.crystalScale})`;
@@ -292,7 +295,10 @@ export default class Game {
     document.querySelector('.savannah__body').style.backgroundPosition = `bottom ${this.bg}% right 50%`;
 
     if (this.rightCount % 3 === 0) {
-      this.playAudio('./assets/audio/savannah/savannah-crystal-scale.mp3');
+      if (this.audioPlay) {
+        this.playAudio('./assets/audio/savannah/savannah-crystal-scale.mp3');
+      }
+
       this.crystalScale += 0.1;
       this.crystalImage.style.transform = '';
       this.crystalImage.style.transform = `scale(${this.crystalScale})`;
