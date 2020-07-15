@@ -245,7 +245,7 @@ async function mainGame() {
     arrayUserWords = await getAllAggregatedWords(tokens, usersId,
       quantityCards, filterUserWordInterval);
 
-    arrayCommon = arrayUserWords[0].paginatedResults;
+    arrayCommon = arrayUserWords[0].paginatedResults.sort(() => Math.random() - 0.5);
   }
 
   if (quantityCards === quantityNewWords) {
