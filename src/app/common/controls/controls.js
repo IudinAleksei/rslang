@@ -37,6 +37,12 @@ function menuClickHandler(loginResponse) {
   });
 }
 
+const selectSettings = () => {
+  const menuItems = document.querySelector('.menu__items');
+  menuItems.querySelectorAll('.menu__items__item').forEach((element) => element.classList.remove('menu__items__item_active'));
+  menuItems.querySelector('.menu__items__item').classList.add('menu__items__item_active');
+};
+
 const startMain = (loginResponse) => {
   hideMain(true);
   document.body.addEventListener('transitionend', () => {
@@ -45,6 +51,7 @@ const startMain = (loginResponse) => {
     hideMain(false);
     hideHeader(false);
     CURRENT_STATE.page = 'renderSettings';
+    selectSettings();
     renderSettings();
   }, {
     once: true,
