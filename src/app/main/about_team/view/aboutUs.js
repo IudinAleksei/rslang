@@ -39,7 +39,7 @@ const generatePageAboutUs = () => {
   {
     img: 'assets/img/about-us/cats/photo_2020-07-12_23-22-42.jpg',
     name: 'Kate Prokofieva',
-    text: 'Developed: Sprint game, burger menu, settings for Training game game, content for landing page.',
+    text: 'Developed: Sprint game, burger menu, settings for Training game, content for landing page.',
     telegramLink: 'https://t.me/KatherineProkofieva',
     githubLink: 'https://github.com/KatherineP',
   },

@@ -3,7 +3,7 @@
   align-self: stretch;
 }
 
-.word-list {
+.savannah__word-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -72,6 +72,10 @@
   font-size: 4.8rem;
   letter-spacing: 5vw;
   user-select: none;
+
+  @media screen and (max-width: 425px) {
+    letter-spacing: 2vw;
+  }
 }
 
 .savannah__true-word_fall {
@@ -95,16 +99,20 @@
   transition: all 0.3s linear;
   opacity: 0;
   letter-spacing: 5vw;
+
+  @media screen and (max-width: 425px) {
+    letter-spacing: 2vw;
+  }
 }
 
-.heart__wrapper {
+.savannah__heart__wrapper {
   position: absolute;
   top: 8vh;
   right: 5vw;
   width: 150px;
 }
 
-.heart__list {
+.savannah__heart__list {
   display: flex;
   justify-content: flex-end;
   width: 100%;
@@ -112,31 +120,32 @@
   list-style-type: none;
 }
 
-.heart__list-item {
+.savannah__heart__list-item {
   width: 15px;
   height: 10px;
   margin-left: 10px;
 }
 
-.heart__list-item::before {
+.savannah__heart__list-item::before {
   content: url('../../../../assets/icons/savannah/heart.svg');
   position: absolute;
   width: 15px;
   height: 10px;
 }
 
-.crystal__wrapper {
+.savannah__crystal__wrapper {
   position: absolute;
   bottom: 10vh;
   animation: move 1.5s linear infinite;
 }
 
-.crystal__image {
+.savannah__crystal__image {
   width: 25px;
 }
 
 .savannah__audio__wrapper {
   position: absolute;
+  z-index: 10;
   top: 10vh;
   left: 5vw;
   width: 30px;

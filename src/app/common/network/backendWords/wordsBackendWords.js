@@ -2,7 +2,7 @@ import fetchUrl from './commonFetch';
 
 export async function getWords(group, page) {
   const urlWords = `https://afternoon-falls-25894.herokuapp.com/words?page=${page}&group=${group}`;
-  const content = fetchUrl(urlWords, {});
+  const content = await fetchUrl(urlWords, {});
   return content;
 }
 

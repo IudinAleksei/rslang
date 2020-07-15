@@ -4,6 +4,7 @@ export const DEFAULT_SESSION_DATA = Object.freeze({
 });
 
 export const DEFAULT_LOCAL_DATA = Object.freeze({
+  activePoint: 0,
   puzzleAutoPlaySound: 'true',
   puzzleShowImage: 'true',
   puzzleShowTranslation: 'true',
@@ -51,6 +52,22 @@ export const ELEMENTS_CLASSES = Object.freeze({
   trainingShortStatsString: 'training-final-page__short-stats__string',
   trainingShortStatsDescription: 'training-final-page__short-stats__string__description',
   trainingShortStatsValue: 'training-final-page__short-stats__string__value',
+  dictionary: 'dictionary',
+  dictionaryBody: 'dictionary-body',
+  dictionaryBtnContainer: 'dictionary__button-container',
+  dictionaryBtn: 'dictionary__tab-button',
+  dictionaryTableContainer: 'dictionary__table-container',
+  dictionaryTable: 'dictionary__table',
+  dictionaryTableRow: 'dictionary__table__row',
+  dictionaryRowWord: 'dictionary__table__row__word',
+  dictionaryRowImage: 'dictionary__table__row__image',
+  dictionaryRowTextContainer: 'dictionary__table__row__text-container',
+  dictionaryRowSentence: 'dictionary__table__row__text-container__sentence',
+  dictionaryHideTableRow: 'dictionary__table__row_hidden',
+  selectDictionaryBtn: 'dictionary__tab-button_selected',
+  dictionaryPlayBtn: 'dictionary__play-button',
+  dictionaryRecoveryBtn: 'dictionary__recovery-button',
+  dictionaryWordIndicator: 'dictionary__row__indicator',
 });
 
 export const MESSAGES = Object.freeze({
@@ -62,4 +79,16 @@ export const MESSAGES = Object.freeze({
   trainingRightCards: 'Correct answer',
   trainingNewCards: 'New words',
   trainingCardSeries: 'The longest series of correct answers',
+  dictionaryRepetitions: 'repeat: ',
+  dictionaryLastDate: 'last: ',
+  dictionaryNextDate: 'next: ',
+  dictionaryNextDateNearest: 'soon',
+});
+
+export const INTERVALS = Object.freeze({
+  total: 5,
+  1: 120,
+  2: 600,
+  3: 3600,
+  4: 18000,
 });
