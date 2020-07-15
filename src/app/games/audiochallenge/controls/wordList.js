@@ -54,5 +54,5 @@ export function wordListener(event) {
 
 export function wordListlistener() {
   document.querySelector('.audiochallenge__word-list').addEventListener('click', wordListener);
-  document.addEventListener('keydown', keyboardEvent, { once: true });
+  document.addEventListener('keydown', keyboardEvent);
 }
