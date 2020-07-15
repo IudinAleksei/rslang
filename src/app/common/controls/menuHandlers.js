@@ -1,4 +1,4 @@
-import renderSettings from '../../main/settings/index';
+import { renderSettings } from '../../main/settings/index';
 import startSprintGame from '../../games/sprint/index';
 import gamePuzzle from '../../games/english_puzzle/index';
 import generatePageAboutUs from '../../main/about_team/index';

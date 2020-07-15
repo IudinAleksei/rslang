@@ -7,7 +7,6 @@ import {
   regenerateMainContainer,
   deleteSessionData,
 } from '../index';
-import authorization from '../../main/authorization/index';
 
 const CURRENT_STATE = {
   page: 'renderSettings',
@@ -59,11 +58,7 @@ function logoutClickHandler(loginResponse) {
     document.body.addEventListener('transitionend', () => {
       setSettingsBackend(loginResponse);
       deleteSessionData('authorized');
-      clearBodyClasses();
-      regenerateMainContainer();
-      hideMain(false);
-      hideHeader(true);
-      authorization(startMain);
+      window.location.reload();
     }, {
       once: true,
     });

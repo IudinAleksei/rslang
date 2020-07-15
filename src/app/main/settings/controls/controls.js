@@ -1,6 +1,3 @@
-/* eslint-disable import/no-cycle */
-import gameTraining from '../../primary/index';
-
 export default function sliderSettingsPageHandling() {
   const sliderNewWords = document.querySelector('.range-slider__words');
   const sliderCounterNewWords = document.querySelector('.range-value__words');
@@ -51,8 +48,6 @@ export default function sliderSettingsPageHandling() {
   sliderCards.addEventListener('input', getSliderHandler(sliderCounterCards));
 
   function onPlayButtonClick() {
-    document.querySelector('.menu__items').querySelectorAll('.menu__items__item').forEach((element) => element.classList.remove('menu__items__item_active'));
-    trainingMenuElement.classList.add('menu__items__item_active');
     trainingMenuElement.click();
   }
 
@@ -67,8 +62,9 @@ export default function sliderSettingsPageHandling() {
   inputs.forEach((input) => {
     input.addEventListener('change', checkSelectedCheckboxes);
   });
-  playButton.addEventListener('click', () => gameTraining());
+
   playButton.addEventListener('click', onPlayButtonClick);
+
   document.querySelector('.main-container').addEventListener('change', () => {
     if (document.getElementById('show-answer').checked) {
       localStorage.setItem('showAnswer', true);

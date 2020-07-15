@@ -65,7 +65,6 @@ async function getWords(levels, pages) {
   const url = `https://afternoon-falls-25894.herokuapp.com/words?group=${levels}&page=${pages}&wordsPerExampleSentenceLTE=10&wordsPerPage=10`;
   const res = await fetch(url);
   const data = await res.json();
-  console.log(data);
   return data;
 }
 
@@ -108,7 +107,6 @@ export async function showPuzzle(level, page) {
 export async function getWord(level, page) {
   heightWord = 400;
   getWords(level, page).then(async (word) => {
-    console.log(level, page);
     document.querySelector('.main-container').innerHTML = '';
     arrayWords = word;
     await showGamePage(paintings, level);
