@@ -34,7 +34,7 @@ export default function renderStatistic(obj, loginResponse) {
 
   const objKey = Object.keys(obj);
 
-  if (objKey.length > 17) {
+  if (objKey.length > 16) {
     statWrapper.classList.add('savannah__stat__wrapper_scroll');
   }
 
