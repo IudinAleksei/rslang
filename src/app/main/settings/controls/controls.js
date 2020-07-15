@@ -8,6 +8,7 @@ export default function sliderSettingsPageHandling() {
   const body = document.querySelector('body');
   const inputs = document.querySelectorAll('.settings-checkbox:required');
   const playButton = document.querySelector('.settings__play-button');
+  const trainingMenuElement = Array.from(document.querySelector('.menu__items').querySelectorAll('.menu__items__item'))[3];
 
   body.className = 'body__settings-page';
   function getSliderHandler(element) {
@@ -32,6 +33,12 @@ export default function sliderSettingsPageHandling() {
   sliderNewWords.addEventListener('input', getSliderHandler(sliderCounterNewWords));
   sliderCards.addEventListener('input', getSliderHandler(sliderCounterCards));
 
+  function onPlayButtonClick() {
+    document.querySelector('.menu__items').querySelectorAll('.menu__items__item').forEach((element) => element.classList.remove('menu__items__item_active'));
+    trainingMenuElement.classList.add('menu__items__item_active');
+    trainingMenuElement.click();
+  }
+
   function checkSelectedCheckboxes() {
     playButton.disabled = true;
     inputs.forEach((input) => {
@@ -44,6 +51,7 @@ export default function sliderSettingsPageHandling() {
     input.addEventListener('change', checkSelectedCheckboxes);
   });
   playButton.addEventListener('click', () => gameTraining());
+  playButton.addEventListener('click', onPlayButtonClick);
   document.querySelector('.main-container').addEventListener('change', () => {
     if (document.getElementById('show-answer').checked) {
       localStorage.setItem('showAnswer', true);
