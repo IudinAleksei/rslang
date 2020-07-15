@@ -36,10 +36,10 @@ export default function sliderSettingsPageHandling() {
       if (sliderNewWords) {
         localStorage.setItem('newWord', sliderNewWords.value);
       }
-      if (sliderNewWords.value > sliderCards.value) {
+      if (+sliderNewWords.value > +sliderCards.value) {
         playButton.disabled = true;
       }
-      if (sliderNewWords.value < sliderCards.value) {
+      if (+sliderNewWords.value < +sliderCards.value) {
         playButton.disabled = false;
       }
     };
