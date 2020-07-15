@@ -1,0 +1,115 @@
+.audiochallenge__statistic {
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 70vw;
+  min-width: 300px;
+  max-width: 600px;
+  min-height: 50vh;
+  padding: 30px;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1), 0 11px 12px 0 rgba(14, 30, 37, 0.12);
+  color: #000;
+  font-size: 2rem;
+}
+
+.audiochallenge__stat__wrapper {
+  h3 {
+    margin-bottom: 5px;
+  }
+
+  ul {
+    margin: 0;
+  }
+}
+
+.audiochallenge__guessed-word__title {
+  color: #1ab429;
+}
+
+.audiochallenge__guessed-list__item {
+  position: relative;
+  list-style-type: none;
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 4px;
+    left: -25px;
+    width: 16px;
+    height: 16px;
+    background: url('../../../../assets/icons/audiochallenge/guessed.png') center (center / cover) no-repeat;
+  }
+}
+
+.audiochallenge__mistake-word__title {
+  color: #f00;
+}
+
+.audiochallenge__mistakes-list__item {
+  position: relative;
+  list-style-type: none;
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 4px;
+    left: -25px;
+    width: 16px;
+    height: 16px;
+    background: url('../../../../assets/icons/audiochallenge/mistake.png') center (center / cover) no-repeat;
+  }
+}
+
+.audiochallenge__dont-know-word__title {
+  color: #00f;
+}
+
+.audiochallenge__dont-know-list__item {
+  position: relative;
+  list-style-type: none;
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 4px;
+    left: -25px;
+    width: 16px;
+    height: 16px;
+    background: url('../../../../assets/icons/audiochallenge/dontKnow.png') center (center / cover) no-repeat;
+  }
+}
+
+.audiochallenge__button__wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.audiochallenge__button-again {
+  @include button;
+
+  margin: 15px 15px;
+  color: $white-color;
+
+  &:hover {
+    background-color: $button_hover_color;
+  }
+}
+
+@media screen and (max-width: $tablet_sreen) {
+  .audiochallenge__button-again {
+    width: 250px;
+    margin: 10px 10px;
+  }
+}

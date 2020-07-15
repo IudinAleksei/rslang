@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RSLang</title>
+  <!-- don't add links to fonts, they must be in assets/fonts and imported via styles -->
+  <!-- don't plug favicon, webpack will do this -->
+</head>
+<body>
+  <header class="header">
+    <div class="header-container">
+      <!-- there may be static menu markup -->
+      <div class="header-container__navigation-menu">
+        <h1>RS Lang
+         <a href="https://github.com/IudinAleksei/rslang" class="github-link" target="_blank"></a> 
+        </h1>
+        <form action="./main.html">
+         <button class="navigation-menu__button-menu" >Go!</button>
+        </form>
+      </div>
+    </div>
+  </header>
+  <main class="main">
+    <div class="main-container">
+      <!-- don't add markup here, you should create markup with js functions! -->
+      <div class="main-container__background-landing-page">
+      </div>
+      <div class="main-container__wrap-landing-page">
+        <div class="wrap-landing-page__video">
+          <h2>presentation</h2>
+          <video width="520" height="440" controls poster="./assets/img/landing-page/thumbnail.png">
+            <source src='./assets/img/landing-page/presentation-video.mp4' type="video/mp4">
+          </video>
+        </div>
+        <div class="wrap-landing-page__games">
+          <h2>games</h2>
+          <div class="games-wrap">
+            <div class="game">
+              <div class="game__text">
+                <h3>Training</h3>
+                <p>The training based on the spaced repetition method. Just take a new word, repeat it 4 times: in 2, 10 minutes and in 1 and 5 hours. And never forget vocabulary ever again!</p>
+              </div>
+              <img class="training-image" src='./assets/img/landing-page/mainGame.png'>
+            </div>
+            <div class="game">
+              <div class="game__text">
+                <h3>audio challenge</h3>
+                <p>Improves your listening skills in English.</p>
+              </div>
+              <img src='./assets/img/landing-page/audioChallenge.png'>
+            </div>
+            <div class="game">
+              <div class="game__text">
+                <h3>speak it</h3>
+                <p>Helps you to  improve your speaking skills.</p>
+              </div>
+              <img src='./assets/img/landing-page/speakIt.png'>
+            </div>
+            <div class="game">
+              <div class="game__text">
+                <h3>english puzzle</h3>
+                <p>Helps you learn how to translate into English and improves your writing skills.</p>
+              </div>
+              <img src='./assets/img/landing-page/puzzle.png'>
+            </div>
+            <div class="game">
+              <div class="game__text">
+                <h3>savanna</h3>
+                <p>Hones listening comprehension and translation skills.</p>
+              </div>
+              <img src='./assets/img/landing-page/savanna.png'>
+            </div>
+            <div class="game">
+              <div class="game__text">
+                <h3>sprint</h3>
+                <p>Learn how to quickly translate from English into your native language.</p>
+              </div>
+              <img src='./assets/img/landing-page/sprint.png'>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <!-- don't plug styles and scripts, webpack will do this -->
+</body>
+</html>

@@ -1,0 +1,107 @@
+@import '../../../../sass/abstract/constants';
+@import '../../../../sass/abstract/mixins';
+
+.main__background-about-us {
+  @include position($position: fixed);
+  @include background(url('../../../../assets/img/rs-lang.jpg') center fixed, $background-repeat: no-repeat);
+}
+
+.main__about-us {
+  @include flex();
+
+  .logo-about-us {
+    z-index: 1;
+    height: 80px;
+    margin-top: 10px;
+    color: $heading_color;
+    font-family: $heading_font;
+    font-size: 5rem;
+    font-weight: 700;
+    letter-spacing: 7px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+}
+
+.wrap-cards {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-us__wrap {
+  width: 335px;
+  height: 325px;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  margin: 50px;
+  border-radius: 8px;
+  background: white;
+  box-shadow: $button_shadow;
+  cursor: pointer;
+
+  .photo {
+    position: absolute;
+    z-index: 1;
+    top: -15%;
+    width: 145px;
+    height: 145px;
+    border: 2px solid white;
+    border-radius: 32px;
+    object-fit: cover;
+  }
+
+  .wrap-name {
+    margin: 115px 15px 4px 15px;
+
+    .name {
+      @include bodyText ();
+      margin-bottom: 15px;
+      font-size: 1.8rem;
+      color: black;
+      font-family: $body_font;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .text {
+      height: 75px;
+      font-size: 1.2rem;
+      color: black;
+      font-family: $body_font;
+      font-weight: 400;
+      text-align: justify;
+    }
+  }
+
+  .contact {
+    display: flex;
+
+    .telegtam,
+    .github {
+      width: 40px;
+      height: 40px;
+      margin-left: 15px;
+      padding: 5px 5px;
+      border-radius: 8px;
+      box-shadow: $button_shadow;
+    }
+  }
+}
+@media screen and (max-width: 320px) {
+  .about-us__wrap {
+    width: 292px;
+    height: 337px;
+    margin-bottom: 70px;
+  }
+  .about-us__wrap{
+    .wrap-name {
+      .text {
+        height: 90px;
+      }
+    }
+  }
+}
