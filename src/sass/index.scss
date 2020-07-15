@@ -102,7 +102,7 @@ body {
     }
     .game__text {
       width: 450px;
-      height: 120px;
+      height: 142px;
     }
   }
 }
@@ -165,6 +165,9 @@ body {
   .games-wrap {
     .game {
        margin: 0;
+      .training-image {
+        margin-top: 60px;
+      }
       img {
         width: 300px;
         height: 180px;
