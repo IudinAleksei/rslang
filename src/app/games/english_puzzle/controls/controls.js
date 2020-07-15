@@ -10,8 +10,8 @@ let level;
 
 function writeStatistic() {
   const time = new Date();
+  // eslint-disable-next-line no-unused-vars
   const roundStatic = [time, level, page, wordKnow.length, wordNotKnow.length];
-  console.log(roundStatic);
 }
 
 function movingPuzzle(event) {

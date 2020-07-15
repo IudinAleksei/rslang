@@ -55,7 +55,7 @@ async function getSign(email, password) {
       localStorage.clear();
       upsertUserSettings(loginResponse.token, loginResponse.userId, {
         optional: getAndInitLocalData(),
-      }).then((q) => console.log(q));
+      });
     }
   }
   return loginResponse;

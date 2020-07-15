@@ -1,4 +1,3 @@
-/* eslint-disable import/no-cycle */
 import './sass/style.scss';
 import addSettingsHtml from './view/view';
 import {
