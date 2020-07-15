@@ -1,6 +1,6 @@
 import { getWords } from '../../common/network/backendWords/backendWords';
 import getMedia from '../../common/utils/githubMedia';
-import getRandomInteger from '../../common/utils/randomInteger';
+// import getRandomInteger from '../../common/utils/randomInteger';
 import renderStartPage, {
   renderGame, renderStatisticModal, setCardData, removeCircleClasses,
 } from './view/view';
@@ -23,7 +23,8 @@ export async function sprintGamePageHandling(level) {
   const levelUpSound = new Audio('./assets/audio/sprintGame/levelUp.mp3');
   const group = level;
   const cardContainer = document.querySelector('.card-container');
-  let page = getRandomInteger(1, 22);
+  // let page = getRandomInteger(1, 22);
+  let page = 29;
   body.className = 'body__spring-game-page';
 
   const pointsConfig = [10, 20, 40, 80];
@@ -119,9 +120,13 @@ export async function sprintGamePageHandling(level) {
   async function nextWord() {
     if (gameStates.words.length === 0) {
       await loadNewWords();
-    } else if (gameStates.words.length === 3) {
+    } else if (gameStates.words.length === 3 && (page <= 28)) {
       page += 1;
       await loadNewWords();
+    } else if (page === 30) {
+      // eslint-disable-next-line no-use-before-define
+      finishTheGame();
+      return;
     }
     incrementCurrentWord();
     setCardData(gameStates.currentWord.word, gameStates.currentWord.wordTranslate);
@@ -200,26 +205,30 @@ export async function sprintGamePageHandling(level) {
     addEventListenerForStartPage();
   }
 
+  function finishTheGame() {
+    cardContainer.classList.add('hidden');
+    const correct = gameStates.correctAnswersStatistic;
+    const inCorrect = gameStates.incorrectAnswersStatistic;
+    renderStatisticModal(correct, inCorrect, points.innerText);
+    document.body.removeEventListener('keydown', pressOnLeftArrow);
+    document.body.removeEventListener('keydown', pressOnRightArrow);
+    correctButton.removeEventListener('click', onCorrectButtonClick);
+    incorrectButton.removeEventListener('click', onIncorrectButtonClick);
+    document.querySelector('.play-again-btn').addEventListener('click', onPlayAgain);
+    document.body.addEventListener('keydown', (event) => {
+      if (event.keyCode === 13) {
+        onPlayAgain();
+      }
+    }, { once: true });
+  }
+
   let seconds = 60;
   setInterval(() => {
     seconds -= 1;
     if (seconds > 0) {
       counter.innerHTML = seconds;
     } else if (seconds === 0) {
-      cardContainer.classList.add('hidden');
-      const correct = gameStates.correctAnswersStatistic;
-      const inCorrect = gameStates.incorrectAnswersStatistic;
-      renderStatisticModal(correct, inCorrect, points.innerText);
-      document.body.removeEventListener('keydown', pressOnLeftArrow);
-      document.body.removeEventListener('keydown', pressOnRightArrow);
-      correctButton.removeEventListener('click', onCorrectButtonClick);
-      incorrectButton.removeEventListener('click', onIncorrectButtonClick);
-      document.querySelector('.play-again-btn').addEventListener('click', onPlayAgain);
-      document.body.addEventListener('keydown', (event) => {
-        if (event.keyCode === 13) {
-          onPlayAgain();
-        }
-      }, { once: true });
+      finishTheGame();
     }
   }, 1000);
 

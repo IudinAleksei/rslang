@@ -67,7 +67,7 @@ export default function sliderSettingsPageHandling() {
   inputs.forEach((input) => {
     input.addEventListener('change', checkSelectedCheckboxes);
   });
-  playButton.addEventListener('click', () => gameTraining());
+  // playButton.addEventListener('click', () => gameTraining());
   playButton.addEventListener('click', onPlayButtonClick);
   document.querySelector('.main-container').addEventListener('change', () => {
     if (document.getElementById('show-answer').checked) {
