@@ -1,0 +1,175 @@
+.savannah-list {
+  z-index: 1;
+  align-self: stretch;
+}
+
+.savannah__word-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  color: $white_color;
+  font-size: 2.4rem;
+
+  & li {
+    margin-bottom: 25px;
+    padding: 10px;
+    list-style-position: inside;
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer;
+
+    @media (max-width: 1050px) {
+      width: 40%;
+    }
+
+    @media (max-width: 690px) {
+      width: 100%;
+      list-style-type: none;
+    }
+  }
+
+  @media (max-width: 640px) {
+    width: 64%;
+  }
+
+  @media (max-width: 475px) {
+    width: 87%;
+  }
+
+  @media (max-width: 400px) {
+    width: 100%;
+  }
+}
+
+.savannah__right-word {
+  background: rgba($color: #6cffde, $alpha: 0.1);
+}
+
+.savannah__wrong-word {
+  background: rgba($color: #b80000, $alpha: 0.3);
+}
+
+.savannah__true-word__container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 85vw;
+  height: 100%;
+  transform: translate(-50%, -50%);
+}
+
+.savannah__true-word {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%);
+  opacity: 0;
+  color: $white_color;
+  font-size: 4.8rem;
+  letter-spacing: 5vw;
+  user-select: none;
+
+  @media screen and (max-width: 425px) {
+    letter-spacing: 2vw;
+  }
+}
+
+.savannah__true-word_fall {
+  transform: translate(-50%, 50vh);
+  transition: transform 5s linear, letter-spacing 0.5s linear, opacity 0.3s ease-in;
+  opacity: 1;
+  letter-spacing: normal;
+}
+
+.savannah__true-word_right {
+  width: 5px;
+  height: 30px;
+  transform: translate(-50%, 90vh);
+  transition: transform 0.5s linear;
+  border-radius: 40%;
+  background: $white_color;
+}
+
+.savannah__true-word_false {
+  transform: translate(-50%, 20vh);
+  transition: all 0.3s linear;
+  opacity: 0;
+  letter-spacing: 5vw;
+
+  @media screen and (max-width: 425px) {
+    letter-spacing: 2vw;
+  }
+}
+
+.savannah__heart__wrapper {
+  position: absolute;
+  top: 8vh;
+  right: 5vw;
+  width: 150px;
+}
+
+.savannah__heart__list {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  padding: 0;
+  list-style-type: none;
+}
+
+.savannah__heart__list-item {
+  width: 15px;
+  height: 10px;
+  margin-left: 10px;
+}
+
+.savannah__heart__list-item::before {
+  content: url('../../../../assets/icons/savannah/heart.svg');
+  position: absolute;
+  width: 15px;
+  height: 10px;
+}
+
+.savannah__crystal__wrapper {
+  position: absolute;
+  bottom: 10vh;
+  animation: move 1.5s linear infinite;
+}
+
+.savannah__crystal__image {
+  width: 25px;
+}
+
+.savannah__audio__wrapper {
+  position: absolute;
+  z-index: 10;
+  top: 10vh;
+  left: 5vw;
+  width: 30px;
+  height: 30px;
+  background: url('../../../../assets/icons/savannah/audio.svg') center center/cover no-repeat;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.savannah__audio__wrapper_off::before {
+  content: '';
+  position: absolute;
+  top: 58%;
+  left: 50%;
+  width: 3px;
+  height: 30px;
+  transform: translate(-50%, -50%) rotate(-45deg);
+  background: #000;
+}
+
+@keyframes move {
+  50% {
+    transform: translateY(20px);
+  }
+}
